@@ -104,7 +104,7 @@
 | cpa * (todos)                              | CC       | Corinsa CPA             |
 | ult * (todos)                              | UL       | UltimateLabs2.0         |
 | doctor fe, doctor api                      | ED       | Emsula Doctor           |
-| nai * (todos)                              | CIT      | CITStuffs               |
+<!-- nai * no tiene proyecto Jira asignado — usar CIT solo si se indica explícitamente -->
 
 ## Workspaces
 
