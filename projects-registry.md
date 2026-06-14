@@ -90,6 +90,22 @@
 | nai teams          | agent-teams-lite         | —          | Agentes teams        |
 | nai gga            | gga                      | —          | GGA                  |
 
+## Jira Projects
+<!-- cithn.atlassian.net | cloudId: 70102692-578c-4758-a88b-ffb5a3c535cb -->
+<!-- Edita esta sección para agregar o corregir mappings -->
+
+| Alias / Grupo                              | Jira Key | Proyecto Jira           |
+|--------------------------------------------|----------|-------------------------|
+| yalo bo, yalo bo api, yalo pos api, yalo reporteria, yalo signalr, yalo stripe, yalo whastapp, yalo pos fe, yalo dashboard, yalo external, yalo external leg, yalo spc delasa, yalo console, yalo console api, yalo invoice, yalo pos encoder, yalo monitor, yalo monitor api | YAL | YALOCobro |
+| yalo vendo                                 | YV       | YaloVendo               |
+| yalo agendo, yalo agendo api               | YALOAG   | YaloAgendo              |
+| bodega * (todos)                           | LBO      | LaBodega                |
+| bi fe, bi api                              | CBI      | CorinsaBI               |
+| cpa * (todos)                              | CC       | Corinsa CPA             |
+| ult * (todos)                              | UL       | UltimateLabs2.0         |
+| doctor fe, doctor api                      | ED       | Emsula Doctor           |
+| nai * (todos)                              | CIT      | CITStuffs               |
+
 ## Workspaces
 
 | Workspace           | Proyectos                                              | Descripción                    |
