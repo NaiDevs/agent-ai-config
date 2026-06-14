@@ -14,19 +14,19 @@
 | yalo agendo api  | YALO-Agendo-API            | C#/.NET    | API agendamiento        |
 | yalo monitor     | YALO_APP_MonitorPedidos    | Node/TS    | Monitor pedidos UI      |
 | yalo monitor api | YALO_API_MonitorPedidos    | C#/.NET    | Monitor pedidos API     |
-| yalo cobro api   | YaloCobroApiNew            | C#/.NET    | API cobros              |
-| yalo reports api | YALO-API-DataReporteria    | C#/.NET    | API reportería          |
-| yalo ext api     | YALO-API-ExternalService   | C#/.NET    | API servicio externo    |
+| yalo pos api     | YaloCobroApiNew            | C#/.NET    | API cobros              |
+| yalo reporteria  | YALO-API-DataReporteria    | C#/.NET    | API reportería          |
+| yalo external leg| YALO-API-ExternalService   | C#/.NET    | API servicio externo    |
 | yalo signalr     | YALO-API-SignalR           | C#/.NET    | API tiempo real         |
 | yalo stripe      | YALO-API-Stripe            | C#/.NET    | API pagos Stripe        |
-| yalo ws          | YALO-API-WS                | C#/.NET    | API WebSockets          |
-| yalo cap         | YALO-APP-CAP               | Node/TS    | App CAP                 |
-| yalo dash api    | YALO-Dashboard-API         | C#/.NET    | Dashboard API           |
-| yalo ext         | YALO-ExternalService       | C#/.NET    | Servicio externo        |
-| yalo delasa      | yalo-spc-delasa            | C#/.NET    | Integración Delasa      |
+| yalo whastapp    | YALO-API-WS                | C#/.NET    | API WebSockets          |
+| yalo pos fe      | YALO-APP-CAP               | Node/TS    | App CAP                 |
+| yalo dashboard   | YALO-Dashboard-API         | C#/.NET    | Dashboard API           |
+| yalo external    | YALO-ExternalService       | C#/.NET    | Servicio externo        |
+| yalo spc delasa  | yalo-spc-delasa            | C#/.NET    | Integración Delasa      |
 | yalo console     | YaloConsole                | Node/TS    | Consola Yalo            |
-| yalo ve          | YaloVendoEntrego           | C#/.NET    | Vendo y Entrego         |
-| yalo admin api   | YALO_API_Administrator     | Node/TS    | API administrador       |
+| yalo vendo       | YaloVendoEntrego           | C#/.NET    | Vendo y Entrego         |
+| yalo console api | YALO_API_Administrator     | Node/TS    | API administrador       |
 | yalo invoice     | fx-create-invoice          | —          | Generador facturas      |
 | yalo pos encoder | esc-pos-encoder-previewer  | Node/TS    | Encoder ESC/POS         |
 
@@ -36,10 +36,10 @@
 |---------------------|------------------------|--------------|--------------------|
 | bodega bo           | LaBodegaBackoffice     | Node/TS      | Backoffice admin   |
 | bodega bo api       | LaBodegaBOAPI          | Node/Express | API de backoffice  |
-| bodega ecom         | LaBodegaEcommerce      | Node/TS      | E-commerce web     |
-| bodega ecom mb      | labodega-ecommerceMB   | Node/TS      | E-commerce móvil   |
+| bodega ecommerce    | LaBodegaEcommerce      | Node/TS      | E-commerce web     |
+| bodega app          | labodega-ecommerceMB   | Node/TS      | E-commerce móvil   |
 | bodega mobile       | LaBodegaMobile         | Node/TS      | App móvil          |
-| bodega svc          | LaBodegaServices       | Node/TS      | Microservicios     |
+| bodega services     | LaBodegaServices       | Node/TS      | Microservicios     |
 | bodega ruleta       | APP-Ruleta             | Angular/TS   | App ruleta         |
 | bodega cobro ruleta | yalocobro-ruleta       | Node/TS      | Pagos ruleta       |
 | bodega visual       | labodega-visual-search | TS           | Búsqueda visual    |
@@ -49,10 +49,10 @@
 
 | Alias            | Carpeta                        | Stack      | Descripción     |
 |------------------|--------------------------------|------------|-----------------|
-| corinsa bi fe    | CORINSA BI/CMProject           | Angular/TS | Frontend BI     |
-| corinsa bi api   | CORINSA BI/CMWebApi            | C#/.NET    | API BI          |
+| bi fe            | CORINSA BI/CMProject           | Angular/TS | Frontend BI     |
+| bi api           | CORINSA BI/CMWebApi            | C#/.NET    | API BI          |
 | cpa api          | CORINSA CPA/UCC API V2         | C#/.NET    | API principal   |
-| cpa reports api  | CORINSA CPA/UCCv2ReportsAPI    | C#/.NET    | API reportería  |
+| cpa reporteria   | CORINSA CPA/UCCv2ReportsAPI    | C#/.NET    | API reportería  |
 | cpa web api      | CORINSA CPA/UCCv2WebApi        | C#/.NET    | Web API         |
 | cpa fe           | CORINSA CPA/UCCv2WebApp        | Angular/TS | Frontend        |
 | cpa ventas       | CORINSA CPA/ventas-corinsa-cpa | C#/.NET    | Módulo ventas   |
@@ -94,7 +94,7 @@
 
 | Workspace           | Proyectos                                              | Descripción                    |
 |---------------------|--------------------------------------------------------|--------------------------------|
-| yalo pos            | yalo bo, yalo bo api                                   | POS frontend + backend         |
+| yalo bo             | yalo bo, yalo bo api                                   | POS frontend + backend         |
 | yalo pedidos        | yalo monitor, yalo monitor api                         | Monitor de pedidos full stack  |
 | yalo full           | yalo bo, yalo bo api, yalo signalr                     | POS con tiempo real            |
 | bodega shop         | bodega ecom, bodega bo api                             | E-commerce web + API           |

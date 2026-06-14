@@ -21,22 +21,21 @@ Base path: `C:\Users\naide\OneDrive\Documentos\Proyectos\YALO\`
 | yalo agendo api  | YALO-Agendo-API            | C#/.NET    | API agendamiento        |
 | yalo monitor     | YALO_APP_MonitorPedidos    | Node/TS    | Monitor pedidos UI      |
 | yalo monitor api | YALO_API_MonitorPedidos    | C#/.NET    | Monitor pedidos API     |
-| yalo cobro api   | YaloCobroApiNew            | C#/.NET    | API cobros              |
-| yalo reports api | YALO-API-DataReporteria    | C#/.NET    | API reportería          |
-| yalo ext api     | YALO-API-ExternalService   | C#/.NET    | API servicio externo    |
+| yalo pos api     | YaloCobroApiNew            | C#/.NET    | API cobros              |
+| yalo reporteria  | YALO-API-DataReporteria    | C#/.NET    | API reportería          |
+| yalo external leg| YALO-API-ExternalService   | C#/.NET    | API servicio externo    |
 | yalo signalr     | YALO-API-SignalR           | C#/.NET    | API tiempo real         |
 | yalo stripe      | YALO-API-Stripe            | C#/.NET    | API pagos Stripe        |
-| yalo ws          | YALO-API-WS                | C#/.NET    | API WebSockets          |
-| yalo cap         | YALO-APP-CAP               | Node/TS    | App CAP                 |
-| yalo dash api    | YALO-Dashboard-API         | C#/.NET    | Dashboard API           |
-| yalo ext         | YALO-ExternalService       | C#/.NET    | Servicio externo        |
-| yalo delasa      | yalo-spc-delasa            | C#/.NET    | Integración Delasa      |
+| yalo whastapp    | YALO-API-WS                | C#/.NET    | API WebSockets          |
+| yalo pos fe      | YALO-APP-CAP               | Node/TS    | App CAP                 |
+| yalo dashboard   | YALO-Dashboard-API         | C#/.NET    | Dashboard API           |
+| yalo external    | YALO-ExternalService       | C#/.NET    | Servicio externo        |
+| yalo spc delasa  | yalo-spc-delasa            | C#/.NET    | Integración Delasa      |
 | yalo console     | YaloConsole                | Node/TS    | Consola Yalo            |
-| yalo ve          | YaloVendoEntrego           | C#/.NET    | Vendo y Entrego         |
-| yalo admin api   | YALO_API_Administrator     | Node/TS    | API administrador       |
+| yalo vendo       | YaloVendoEntrego           | C#/.NET    | Vendo y Entrego         |
+| yalo console api | YALO_API_Administrator     | Node/TS    | API administrador       |
 | yalo invoice     | fx-create-invoice          | —          | Generador facturas      |
 | yalo pos encoder | esc-pos-encoder-previewer  | Node/TS    | Encoder ESC/POS         |
 
-Workspaces comunes: `yalo pos` (bo + bo api), `yalo pedidos` (monitor + monitor api), `yalo full` (bo + bo api + signalr).
-Ver tabla completa de workspaces en [[projects-workspaces]].
-Ver registry editable en `~/.claude/projects-registry.md`.
+Workspaces: `yalo bo` (bo + bo api), `yalo pedidos` (monitor + monitor api), `yalo full` (bo + bo api + signalr).
+Ver tabla completa en [[projects-workspaces]] y `~/.claude/projects-registry.md`.

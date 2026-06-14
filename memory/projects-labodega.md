@@ -16,14 +16,14 @@ Base path: `C:\Users\naide\OneDrive\Documentos\Proyectos\LA BODEGA\`
 |---------------------|------------------------|--------------|--------------------|
 | bodega bo           | LaBodegaBackoffice     | Node/TS      | Backoffice admin   |
 | bodega bo api       | LaBodegaBOAPI          | Node/Express | API de backoffice  |
-| bodega ecom         | LaBodegaEcommerce      | Node/TS      | E-commerce web     |
-| bodega ecom mb      | labodega-ecommerceMB   | Node/TS      | E-commerce móvil   |
+| bodega ecommerce    | LaBodegaEcommerce      | Node/TS      | E-commerce web     |
+| bodega app          | labodega-ecommerceMB   | Node/TS      | E-commerce móvil   |
 | bodega mobile       | LaBodegaMobile         | Node/TS      | App móvil          |
-| bodega svc          | LaBodegaServices       | Node/TS      | Microservicios     |
+| bodega services     | LaBodegaServices       | Node/TS      | Microservicios     |
 | bodega ruleta       | APP-Ruleta             | Angular/TS   | App ruleta         |
 | bodega cobro ruleta | yalocobro-ruleta       | Node/TS      | Pagos ruleta       |
 | bodega visual       | labodega-visual-search | TS           | Búsqueda visual    |
 | bodega geo          | hn-geo                 | —            | Geodatos HN        |
 
-Workspaces: `bodega shop` (ecom + bo api), `bodega full` (ecom + ecom mb + bo api + svc).
+Workspaces: `bodega shop` (bodega ecommerce + bodega bo api), `bodega full` (ecommerce + app + bo api + services).
 Ver [[projects-workspaces]] y `~/.claude/projects-registry.md`.
