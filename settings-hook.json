@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if git -C \"$PWD\" rev-parse --git-dir > /dev/null 2>&1; then git -C \"$PWD\" fetch --all --quiet 2>/dev/null; fi"
+          }
+        ]
+      }
+    ]
+  }
+}
