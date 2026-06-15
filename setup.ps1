@@ -15,6 +15,28 @@ Write-Host "Claude home:   $ClaudeHome"
 Write-Host "Proyectos:     $ProjectsRoot"
 Write-Host ""
 
+# 0. Leer mcp.env si existe y cargar variables de entorno del sistema
+$EnvFile = "$ScriptDir\mcp.env"
+if (Test-Path $EnvFile) {
+    Write-Host "0. Cargando tokens desde mcp.env..." -ForegroundColor Yellow
+    $loaded = 0
+    Get-Content $EnvFile | Where-Object { $_ -notmatch '^\s*#' -and $_ -match '=' } | ForEach-Object {
+        $parts = $_ -split '=', 2
+        $key   = $parts[0].Trim()
+        $value = $parts[1].Trim()
+        if ($key -and $value -notmatch 'your_|_here$') {
+            [System.Environment]::SetEnvironmentVariable($key, $value, "User")
+            $loaded++
+        }
+    }
+    Write-Host "   OK -> $loaded variable(s) cargadas como env vars del sistema" -ForegroundColor Green
+} else {
+    Write-Host "0. mcp.env no encontrado — copialo desde mcp.env.example y llena los valores" -ForegroundColor DarkYellow
+    Write-Host "   cp $ScriptDir\mcp.env.example $ScriptDir\mcp.env"
+    Write-Host ""
+}
+
+
 # 1. Comandos custom — instalar en commands/ (ubicación correcta de Claude Code)
 Write-Host "1. Instalando comandos custom..." -ForegroundColor Yellow
 New-Item -ItemType Directory -Force "$ClaudeHome\commands" | Out-Null
