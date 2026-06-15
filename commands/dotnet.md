@@ -6,6 +6,21 @@ description: Generador y asistente para proyectos .NET / ASP.NET Core — endpoi
 
 Asistente para proyectos .NET y ASP.NET Core. Detecta si es .NET moderno (8/9) o legacy (.NET Framework 4.6.1) y genera código siguiendo la arquitectura real del proyecto (capas, EF Core, Serilog, Swagger).
 
+## Estándar de documentación Swagger — SIEMPRE incluir
+
+Todo controller y endpoint generado con `/dotnet gen controller` o `/dotnet gen endpoint` DEBE incluir la documentación Swagger completa siguiendo el estándar de **YaloVendo API**:
+
+- XML `/// <summary>` en la clase y en cada acción
+- `[SwaggerOperation(Summary, Description en markdown con ejemplos JSON, OperationId)]`
+- `[ProducesResponseType(typeof(SuccessResponse<T>), StatusCode)]` para respuestas 2xx
+- `[ProducesResponseType(typeof(ApiErrorResponseDto<object>), StatusCode)]` para errores
+- Códigos HTTP mínimos por verbo: ver tabla en `/swagger`
+- `[Tags("NombreRecurso")]` en la clase del controller
+- `[Produces("application/json")]` en la clase
+- `OperationId` en PascalCase: VerbRecurso (ej: `GetProductos`, `CreatePedido`)
+
+Ver `/swagger annotate controller` para el patrón completo y `/swagger response` para los modelos `SuccessResponse<T>` y `ApiErrorResponseDto`.
+
 ## Uso
 
 ```
