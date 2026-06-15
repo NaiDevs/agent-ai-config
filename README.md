@@ -1,8 +1,11 @@
-# claude-config
+# agent-ai-config
 
 Configuración personal para **Claude Code** y/o **Codex** — proyectos, aliases, workspaces, skills, MCPs y memoria persistente.
 
 Un solo repo, un solo `setup.ps1`, compatible con ambas herramientas.
+
+> **Ubicación**: `C:\Users\{username}\OneDrive\Documentos\Proyectos\Nai\agent-ai-config`
+> Está en la carpeta NAI para que tanto Claude Code como Codex lo accedan vía el filesystem MCP sin configuración extra.
 
 ---
 
@@ -26,8 +29,9 @@ Un solo repo, un solo `setup.ps1`, compatible con ambas herramientas.
 ### Paso 1 — Clonar el repo
 
 ```powershell
-git clone https://github.com/NaiDevs/claude-config.git "$env:USERPROFILE\.claude\claude-config"
-cd "$env:USERPROFILE\.claude\claude-config"
+$repoPath = "$env:USERPROFILE\OneDrive\Documentos\Proyectos\Nai\agent-ai-config"
+git clone https://github.com/NaiDevs/agent-ai-config.git $repoPath
+cd $repoPath
 ```
 
 ### Paso 2 — Crear `mcp.env` con los tokens y conexiones
@@ -66,7 +70,7 @@ O forzar una herramienta específica:
 .\setup.ps1 -Tool both     # Claude Code + Codex
 ```
 
-Con un path de proyectos diferente:
+Con un path de proyectos diferente al default:
 ```powershell
 .\setup.ps1 -ProjectsRoot "D:\MisProyectos"
 ```
@@ -94,7 +98,7 @@ Cerrar y reabrir Claude Code y/o Codex. Los skills, MCPs y memoria quedan dispon
 
 | Qué | Dónde queda |
 |---|---|
-| 26 skills | `~/.codex/skills/<nombre>/SKILL.md` |
+| 26 skills + `openai.yaml` | `~/.codex/skills/<nombre>/SKILL.md` + `agents/openai.yaml` |
 | Reglas globales | Agrega a `~/.codex/engram-instructions.md` (sin sobreescribir) |
 | MCPs (DBs, GitHub, filesystem) | `~/.codex/config.toml` → `[mcp_servers.*]` |
 
@@ -102,6 +106,7 @@ Cerrar y reabrir Claude Code y/o Codex. Los skills, MCPs y memoria quedan dispon
 
 - Los tokens del `mcp.env` se cargan como **variables de entorno del sistema** — ambas herramientas los leen automáticamente
 - Si **engram** está instalado, ambas comparten la misma memoria
+- El repo vive en `Proyectos/Nai/` — accesible vía filesystem MCP por ambas herramientas
 
 ---
 
@@ -151,7 +156,7 @@ YALO_SS=Server=localhost,1433;Database=yalo;User Id=sa;Password=pass;TrustServer
 NUEVO_PROYECTO_DEV=postgresql://postgres:password@localhost:5432/nuevo_db
 ```
 
-**Paso 2** — Agregar en `mcp-config.json` (referencia del repo) y correr `.\setup.ps1` de nuevo.
+**Paso 2** — Correr `.\setup.ps1` de nuevo (agrega el MCP automáticamente).
 
 O agregar manualmente:
 
@@ -194,46 +199,47 @@ Reiniciar la herramienta después de cada cambio.
 
 ---
 
-## Skills disponibles (`/comando`)
+## Skills disponibles
 
-Los skills se activan **automáticamente por contexto** — no siempre es necesario escribir el comando. Claude/Codex detecta la tecnología y activa el skill correspondiente.
+Los skills se activan **automáticamente por contexto** — no siempre es necesario escribir el comando.
 
-| Skill | Para qué |
-|---|---|
-| `/proyecto` | Navegar entre proyectos y workspaces con git sync |
-| `/scan` | Ver qué cambió hoy, qué hizo [autor], repos pendientes |
-| `/commit` | Generar commits descriptivos en español |
-| `/pr` | Crear Pull Requests descriptivos |
-| `/jira` | Crear epics, historias y tareas en Jira |
-| `/notify` | Notificar cambios a compañeros por Slack |
-| `/angular` | Componentes, servicios, guards Angular |
-| `/material` | Tablas, dialogs, formularios Angular Material |
-| `/tailwind` | Layouts, componentes, temas Tailwind CSS |
-| `/nestjs` | Módulos, controllers, DTOs, guards NestJS |
-| `/dotnet` | Endpoints, DTOs, migrations .NET |
-| `/nextjs` | Páginas, componentes, stores Next.js |
-| `/efcore` | DbContext, migrations, queries EF Core |
-| `/typeorm` | Entidades, repos, migrations TypeORM |
-| `/postgres` | Queries, índices, migrations PostgreSQL |
-| `/sqlserver` | T-SQL, stored procedures, migrations SQL Server |
-| `/zustand` | Stores con persist, devtools, slices |
-| `/jwt` | Auth JWT y API Key en NestJS y .NET |
-| `/aws` | Secrets Manager, S3, SES, DynamoDB |
-| `/firebase` | Push notifications FCM, Firebase Admin |
-| `/azure` | MSAL Angular, Azure AD, Azure Pipelines |
-| `/supabase` | Storage, queries, realtime Supabase |
-| `/swagger` | Documentación OpenAPI estándar YaloVendo |
-| `/testing` | Unit tests, e2e, mocks por framework |
-| `/linting` | ESLint, Prettier, TSLint |
-| `/docs` | PDFs con QuestPDF, Excel con ClosedXML/ExcelJS |
+| Claude Code | Codex | Para qué |
+|---|---|---|
+| `/proyecto` | `$proyecto` | Navegar entre proyectos y workspaces con git sync |
+| `/scan` | `$scan` | Ver qué cambió hoy, qué hizo [autor], repos pendientes |
+| `/commit` | `$commit` | Generar commits descriptivos en español |
+| `/pr` | `$pr` | Crear Pull Requests descriptivos |
+| `/jira` | `$jira` | Crear epics, historias y tareas en Jira |
+| `/notify` | `$notify` | Notificar cambios a compañeros por Slack |
+| `/angular` | `$angular` | Componentes, servicios, guards Angular |
+| `/material` | `$material` | Tablas, dialogs, formularios Angular Material |
+| `/tailwind` | `$tailwind` | Layouts, componentes, temas Tailwind CSS |
+| `/nestjs` | `$nestjs` | Módulos, controllers, DTOs, guards NestJS |
+| `/dotnet` | `$dotnet` | Endpoints, DTOs, migrations .NET |
+| `/nextjs` | `$nextjs` | Páginas, componentes, stores Next.js |
+| `/efcore` | `$efcore` | DbContext, migrations, queries EF Core |
+| `/typeorm` | `$typeorm` | Entidades, repos, migrations TypeORM |
+| `/postgres` | `$postgres` | Queries, índices, migrations PostgreSQL |
+| `/sqlserver` | `$sqlserver` | T-SQL, stored procedures, migrations SQL Server |
+| `/zustand` | `$zustand` | Stores con persist, devtools, slices |
+| `/jwt` | `$jwt` | Auth JWT y API Key en NestJS y .NET |
+| `/aws` | `$aws` | Secrets Manager, S3, SES, DynamoDB |
+| `/firebase` | `$firebase` | Push notifications FCM, Firebase Admin |
+| `/azure` | `$azure` | MSAL Angular, Azure AD, Azure Pipelines |
+| `/supabase` | `$supabase` | Storage, queries, realtime Supabase |
+| `/swagger` | `$swagger` | Documentación OpenAPI estándar YaloVendo |
+| `/testing` | `$testing` | Unit tests, e2e, mocks por framework |
+| `/linting` | `$linting` | ESLint, Prettier, TSLint |
+| `/docs` | `$docs` | PDFs con QuestPDF, Excel con ClosedXML/ExcelJS |
 
 ---
 
 ## Actualizar en otro dispositivo
 
 ```powershell
-git -C "$env:USERPROFILE\.claude\claude-config" pull
-cd "$env:USERPROFILE\.claude\claude-config"
+$repoPath = "$env:USERPROFILE\OneDrive\Documentos\Proyectos\Nai\agent-ai-config"
+git -C $repoPath pull
+cd $repoPath
 .\setup.ps1
 # Reiniciar Claude Code y/o Codex
 ```
@@ -241,13 +247,15 @@ cd "$env:USERPROFILE\.claude\claude-config"
 ## Editar aliases o workspaces
 
 ```powershell
+$repoPath = "$env:USERPROFILE\OneDrive\Documentos\Proyectos\Nai\agent-ai-config"
+
 # Editar la fuente de verdad
 code "$env:USERPROFILE\.claude\projects-registry.md"
 
 # Sincronizar al repo
-git -C "$env:USERPROFILE\.claude\claude-config" add projects-registry.md
-git -C "$env:USERPROFILE\.claude\claude-config" commit -m "update aliases"
-git -C "$env:USERPROFILE\.claude\claude-config" push
+git -C $repoPath add projects-registry.md
+git -C $repoPath commit -m "update aliases"
+git -C $repoPath push
 ```
 
 ## Estructura de aliases de proyectos

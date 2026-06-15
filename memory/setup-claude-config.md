@@ -1,30 +1,34 @@
 ---
 name: setup-claude-config
-description: "claude-config repo location and structure — portable config with project aliases, workspaces and /proyecto skill"
+description: "agent-ai-config repo location and structure — portable config for Claude Code and Codex with skills, MCPs and memory"
 metadata: 
   node_type: memory
   type: reference
   originSessionId: baa97b0f-6550-4a98-92f2-501e6aea9d37
 ---
 
-El sistema de configuración de proyectos está en `C:\Users\naide\.claude\claude-config\` como repo git.
+El sistema de configuración está en `C:\Users\naide\OneDrive\Documentos\Proyectos\Nai\agent-ai-config\` como repo git.
+Repo GitHub: **NaiDevs/agent-ai-config** — `https://github.com/NaiDevs/agent-ai-config`
+
+Ubicado en la carpeta NAI para que ambas herramientas (Claude Code y Codex) lo accedan vía filesystem MCP.
 
 Estructura del repo:
 - `projects-registry.md` — fuente de verdad de aliases y workspaces (editable)
-- `skills/proyecto.md` — definición del skill `/proyecto`
+- `commands/*.md` — 26 skills para Claude Code y Codex
 - `memory/` — archivos de memoria por cliente
-- `setup.ps1` — instalador para nuevo dispositivo
-- `settings-hook.json` — fragmento para hook de git fetch automático
+- `CLAUDE.md` — reglas globales y auto-activación de skills
+- `setup.ps1` — instalador multi-tool (detecta Claude Code y/o Codex)
+- `mcp.env.example` → copiar a `mcp.env` con tokens reales (gitignored)
+- `mcp-config.json` — referencia de MCPs locales
 
-Archivos instalados en runtime:
-- `~/.claude/projects-registry.md` — copia del registry (edita aquí para cambios rápidos)
-- `~/.claude/skills/proyecto.md` — skill activo
-- `~/.claude/projects/C--Users-naide/memory/*.md` — memoria activa
+Instalación en nuevo dispositivo:
+1. Clonar: `git clone https://github.com/NaiDevs/agent-ai-config.git $repoPath`
+2. Copiar y llenar: `mcp.env.example → mcp.env`
+3. Correr: `.\setup.ps1` (auto-detecta Claude Code y/o Codex)
+4. Reiniciar la herramienta
 
-Para sincronizar cambios del registry a otro dispositivo:
-1. Editar `~/.claude/projects-registry.md`
-2. Copiar de vuelta al repo: `cp ~/.claude/projects-registry.md ~/.claude/claude-config/`
+Para sincronizar cambios:
+1. Editar `~/.claude/projects-registry.md` o los commands
+2. Copiar de vuelta al repo en Proyectos/Nai/agent-ai-config/
 3. Hacer commit y push
-4. En otro dispositivo: `git pull` + `.\setup.ps1`
-
-Para subir el repo a GitHub: crear repo privado y hacer `git remote add origin <url> && git push -u origin master`.
+4. En otro dispositivo: `git pull && .\setup.ps1`
