@@ -282,6 +282,79 @@ if ($hasEngram -and $installClaude -and $installCodex) {
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
+# FASE 5 — Auto-update: hook en Claude Code + tareas programadas en Windows
+# ─────────────────────────────────────────────────────────────────────────────
+Write-Host ""
+Write-Host "[ 5 ] Configurando auto-update..." -ForegroundColor Yellow
+
+$autoUpdateScript = "$ScriptDir\auto-update.ps1"
+
+# ── Claude Code: SessionStart hook ──────────────────────────────────────────
+if ($installClaude) {
+    $SettingsPath = "$ClaudeHome\settings.json"
+    $cfg = Get-Content $SettingsPath -Raw | ConvertFrom-Json
+
+    $hookCmd = "& '$autoUpdateScript' -Tool claude -Silent"
+
+    # Agregar hooks si no existe la sección
+    if (-not $cfg.PSObject.Properties['hooks']) {
+        $cfg | Add-Member -NotePropertyName hooks -NotePropertyValue ([PSCustomObject]@{
+            SessionStart = @(
+                [PSCustomObject]@{
+                    hooks = @(
+                        [PSCustomObject]@{
+                            type    = "command"
+                            command = $hookCmd
+                            shell   = "powershell"
+                            async   = $true
+                        }
+                    )
+                }
+            )
+        }) -Force
+        $cfg | ConvertTo-Json -Depth 10 | Set-Content $SettingsPath -Encoding utf8
+        Write-Host "  OK → SessionStart hook agregado a Claude Code settings.json" -ForegroundColor Green
+    } else {
+        Write-Host "  OK → Claude Code ya tiene hooks configurados (verificar manualmente si falta SessionStart)" -ForegroundColor DarkYellow
+    }
+}
+
+# ── Windows Task Scheduler: diario + al inicio de sesión ────────────────────
+$toolArg = if ($installClaude -and $installCodex) { "both" } elseif ($installClaude) { "claude" } else { "codex" }
+
+# Tarea diaria a las 8am
+$dailyAction  = New-ScheduledTaskAction `
+    -Execute "powershell.exe" `
+    -Argument "-NonInteractive -WindowStyle Hidden -File `"$autoUpdateScript`" -Tool $toolArg -Silent"
+$dailyTrigger = New-ScheduledTaskTrigger -Daily -At "08:00"
+$dailySettings = New-ScheduledTaskSettingsSet -ExecutionTimeLimit (New-TimeSpan -Minutes 5) -StartWhenAvailable
+
+Register-ScheduledTask `
+    -TaskName   "AgentAIConfig-DailyUpdate" `
+    -Action     $dailyAction `
+    -Trigger    $dailyTrigger `
+    -Settings   $dailySettings `
+    -Description "Actualiza agent-ai-config diariamente a las 8am" `
+    -Force | Out-Null
+Write-Host "  OK → Tarea diaria registrada (08:00 AM)" -ForegroundColor Green
+
+# Tarea al inicio de sesión de Windows (para Codex y como respaldo)
+$logonAction  = New-ScheduledTaskAction `
+    -Execute "powershell.exe" `
+    -Argument "-NonInteractive -WindowStyle Hidden -File `"$autoUpdateScript`" -Tool $toolArg -Silent"
+$logonTrigger = New-ScheduledTaskTrigger -AtLogOn -User $env:USERNAME
+$logonSettings = New-ScheduledTaskSettingsSet -ExecutionTimeLimit (New-TimeSpan -Minutes 3) -StartWhenAvailable
+
+Register-ScheduledTask `
+    -TaskName   "AgentAIConfig-OnLogon" `
+    -Action     $logonAction `
+    -Trigger    $logonTrigger `
+    -Settings   $logonSettings `
+    -Description "Actualiza agent-ai-config al iniciar sesión en Windows" `
+    -Force | Out-Null
+Write-Host "  OK → Tarea al inicio de sesión registrada" -ForegroundColor Green
+
+# ─────────────────────────────────────────────────────────────────────────────
 # RESUMEN
 # ─────────────────────────────────────────────────────────────────────────────
 Write-Host ""
