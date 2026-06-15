@@ -81,9 +81,48 @@ if ($toAdd.Count -gt 0) {
     Write-Host "   OK -> MEMORY.md ya estaba actualizado" -ForegroundColor Green
 }
 
-# 6. Hook de git fetch (mostrar fragmento para agregar manualmente)
+# 6. MCPs locales — instalar paquetes npm
+Write-Host "6. Instalando paquetes de MCPs locales..." -ForegroundColor Yellow
+npm install -g @modelcontextprotocol/server-github @modelcontextprotocol/server-filesystem @modelcontextprotocol/server-memory mcp-server-postgres brave-search-mcp --silent 2>$null
+Write-Host "   OK -> paquetes MCP instalados globalmente" -ForegroundColor Green
+
+# 7. MCPs — agregar a settings.json
+Write-Host "7. Configurando MCPs en settings.json..." -ForegroundColor Yellow
+$SettingsPath = "$ClaudeHome\settings.json"
+$username = $env:USERNAME
+$proyectosPath = "C:/Users/$username/OneDrive/Documentos/Proyectos"
+$claudePath    = "C:/Users/$username/.claude"
+
+if (Test-Path $SettingsPath) {
+    $settings = Get-Content $SettingsPath -Raw | ConvertFrom-Json
+} else {
+    $settings = [PSCustomObject]@{}
+}
+
+# Agregar permiso Write para settings.json si no existe
+$writePermission = "Write($SettingsPath)"
+if (-not ($settings.permissions.allow -contains $writePermission)) {
+    $settings.permissions.allow += $writePermission
+}
+
+# Agregar mcpServers si no existe ya
+if (-not $settings.PSObject.Properties['mcpServers']) {
+    $settings | Add-Member -NotePropertyName mcpServers -NotePropertyValue ([PSCustomObject]@{
+        github          = [PSCustomObject]@{ command="npx"; args=@("-y","@modelcontextprotocol/server-github"); shell="powershell" }
+        postgres        = [PSCustomObject]@{ command="npx"; args=@("-y","mcp-server-postgres"); shell="powershell" }
+        filesystem      = [PSCustomObject]@{ command="npx"; args=@("-y","@modelcontextprotocol/server-filesystem",$proyectosPath,$claudePath); shell="powershell" }
+        "brave-search"  = [PSCustomObject]@{ command="npx"; args=@("-y","brave-search-mcp"); shell="powershell" }
+        memory          = [PSCustomObject]@{ command="npx"; args=@("-y","@modelcontextprotocol/server-memory"); shell="powershell" }
+    }) -Force
+    $settings | ConvertTo-Json -Depth 10 | Set-Content $SettingsPath -Encoding utf8
+    Write-Host "   OK -> MCPs configurados en settings.json" -ForegroundColor Green
+} else {
+    Write-Host "   OK -> MCPs ya estaban configurados" -ForegroundColor Green
+}
+
+# 8. Hook de git fetch (mostrar fragmento para agregar manualmente)
 Write-Host ""
-Write-Host "6. Hook de git fetch (opcional)" -ForegroundColor Yellow
+Write-Host "8. Hook de git fetch (opcional)" -ForegroundColor Yellow
 Write-Host "   Para tener info del remoto actualizada automaticamente, agrega esto"
 Write-Host "   a $ClaudeHome\settings.json en la seccion 'hooks':"
 Write-Host ""
@@ -93,8 +132,10 @@ Write-Host ""
 Write-Host "=== Instalacion completa ===" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Proximos pasos:"
-Write-Host "  1. Reinicia Claude Code"
-Write-Host "  2. Usa /proyecto para ver todos los proyectos"
-Write-Host "  3. Usa /proyecto yalo bo para activar un proyecto"
-Write-Host "  4. Edita $ClaudeHome\projects-registry.md para personalizar aliases"
+Write-Host "  1. Configura variables de entorno para MCPs (ver mcp-secrets-guide.md):"
+Write-Host "     GITHUB_PERSONAL_ACCESS_TOKEN, DATABASE_URL, BRAVE_API_KEY"
+Write-Host "  2. Reinicia Claude Code"
+Write-Host "  3. Usa /proyecto para ver todos los proyectos"
+Write-Host "  4. Usa /proyecto yalo bo para activar un proyecto"
+Write-Host "  5. Edita $ClaudeHome\projects-registry.md para personalizar aliases"
 Write-Host ""
