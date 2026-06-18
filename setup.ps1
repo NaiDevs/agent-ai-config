@@ -267,6 +267,12 @@ interface:
     [System.IO.File]::WriteAllText($instrFile, $instrExisting, [System.Text.Encoding]::UTF8)
     Write-Host "  OK → engram-instructions.md actualizado (UTF-8 correcto)" -ForegroundColor Green
 
+    # Expresiones hondureñas — copiar a ~/.codex/ para que Codex las tenga disponibles
+    if (Test-Path "$ScriptDir\expressions.md") {
+        Copy-Item "$ScriptDir\expressions.md" "$CodexHome\expressions.md" -Force
+        Write-Host "  OK → expressions.md copiado a ~/.codex/" -ForegroundColor Green
+    }
+
     # MCPs en config.toml — agregar secciones de DB si no existen
     Write-Host "  Configurando MCPs en config.toml..." -ForegroundColor Yellow
     $configPath = "$CodexHome\config.toml"
