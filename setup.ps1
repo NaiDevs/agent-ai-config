@@ -162,6 +162,24 @@ if ($UseObsidian -eq "yes") {
     Write-Host ""
 }
 
+# P7/P8 — API Keys (solo check/aviso, no bloqueante)
+$anthropicKey = [System.Environment]::GetEnvironmentVariable("ANTHROPIC_API_KEY", "User")
+$openaiKey    = [System.Environment]::GetEnvironmentVariable("OPENAI_API_KEY",    "User")
+if (($Tool -eq "claude" -or $Tool -eq "both") -and -not $anthropicKey) {
+    Write-Host "  ! ANTHROPIC_API_KEY no encontrada" -ForegroundColor Yellow
+    Write-Host "    Claude Code la necesita para funcionar. Configurala en:" -ForegroundColor DarkYellow
+    Write-Host "    claude.ai/settings → API Keys → copia la key y ejecuta:" -ForegroundColor DarkYellow
+    Write-Host "    [System.Environment]::SetEnvironmentVariable('ANTHROPIC_API_KEY','sk-ant-...','User')" -ForegroundColor DarkGray
+    Write-Host ""
+}
+if (($Tool -eq "codex" -or $Tool -eq "both") -and -not $openaiKey) {
+    Write-Host "  ! OPENAI_API_KEY no encontrada" -ForegroundColor Yellow
+    Write-Host "    Codex la necesita para funcionar. Configurala en:" -ForegroundColor DarkYellow
+    Write-Host "    platform.openai.com/api-keys → copia la key y ejecuta:" -ForegroundColor DarkYellow
+    Write-Host "    [System.Environment]::SetEnvironmentVariable('OPENAI_API_KEY','sk-...','User')" -ForegroundColor DarkGray
+    Write-Host ""
+}
+
 $toolLabel = switch ($Tool) { "claude" { "Claude Code" } "codex" { "Codex" } default { "Claude Code + Codex" } }
 Write-Host "  Herramienta  : $toolLabel" -ForegroundColor Cyan
 Write-Host "  Proyectos    : $ProjectsRoot" -ForegroundColor Cyan
@@ -724,11 +742,24 @@ if ($installClaude) {
     }
 
     # Construir hooks object — SessionStart siempre; PostToolUse solo si usa Obsidian
+    $syncCmd = "& '$autoUpdateScript' -Silent"
+
     $sessionStartHook = [PSCustomObject]@{
         hooks = @(
             [PSCustomObject]@{
                 type    = "command"
                 command = $hookCmd
+                shell   = "powershell"
+                async   = $true
+            }
+        )
+    }
+
+    $stopHook = [PSCustomObject]@{
+        hooks = @(
+            [PSCustomObject]@{
+                type    = "command"
+                command = $syncCmd
                 shell   = "powershell"
                 async   = $true
             }
@@ -766,13 +797,15 @@ if ($installClaude) {
                 }
             )
             SessionStart = @($sessionStartHook)
+            Stop         = @($stopHook)
         }
-        Write-Host "  OK → hooks configurados (SessionStart auto-update + PostToolUse commit→Obsidian)" -ForegroundColor Green
+        Write-Host "  OK → hooks configurados (SessionStart + PostToolUse Obsidian + Stop sync)" -ForegroundColor Green
     } else {
         $hooksObj = [PSCustomObject]@{
             SessionStart = @($sessionStartHook)
+            Stop         = @($stopHook)
         }
-        Write-Host "  OK → hooks configurados (SessionStart auto-update)" -ForegroundColor Green
+        Write-Host "  OK → hooks configurados (SessionStart auto-update + Stop sync)" -ForegroundColor Green
     }
     $cfg | Add-Member -NotePropertyName hooks -NotePropertyValue $hooksObj -Force
     $cfg | ConvertTo-Json -Depth 15 | Set-Content $SettingsPath -Encoding utf8
@@ -843,6 +876,67 @@ if ($IsWin) {
         Write-Host "  OK → Cron job ya existe" -ForegroundColor Green
     }
 }
+
+# ─────────────────────────────────────────────────────────────────────────────
+# FASE 6 — Doctor: verificación final de salud
+# ─────────────────────────────────────────────────────────────────────────────
+Write-Host ""
+Write-Host "[ 6 ] Doctor — verificando que todo esté en orden..." -ForegroundColor Yellow
+
+$ok  = { param($msg) Write-Host "  ✓ $msg" -ForegroundColor Green  }
+$bad = { param($msg) Write-Host "  ✗ $msg" -ForegroundColor Red    }
+$wrn = { param($msg) Write-Host "  ! $msg" -ForegroundColor Yellow }
+
+# Herramientas
+if ($installClaude) {
+    if (Get-Command claude -ErrorAction SilentlyContinue) { & $ok  "Claude Code instalado — $(claude --version 2>$null)" }
+    else                                                  { & $bad "Claude Code no responde — reinstalá: npm i -g @anthropic-ai/claude-code" }
+}
+if ($installCodex) {
+    if (Get-Command codex -ErrorAction SilentlyContinue) { & $ok  "Codex instalado — $(codex --version 2>$null)" }
+    else                                                 { & $bad "Codex no responde — reinstalá: npm i -g @openai/codex" }
+}
+
+# API Keys
+$anthKey   = [System.Environment]::GetEnvironmentVariable("ANTHROPIC_API_KEY", "User")
+$openaiKey = [System.Environment]::GetEnvironmentVariable("OPENAI_API_KEY",    "User")
+if ($installClaude) {
+    if ($anthKey)   { & $ok  "ANTHROPIC_API_KEY configurada" }
+    else            { & $bad "ANTHROPIC_API_KEY falta — Claude Code no funcionará" }
+}
+if ($installCodex) {
+    if ($openaiKey) { & $ok  "OPENAI_API_KEY configurada" }
+    else            { & $bad "OPENAI_API_KEY falta — Codex no funcionará" }
+}
+
+# Obsidian
+if ($UseObsidian -eq "yes") {
+    $vaultOk = $ObsidianVault -and (Test-Path $ObsidianVault)
+    if ($vaultOk)  { & $ok  "Vault de Obsidian accesible: $ObsidianVault" }
+    else           { & $wrn "Vault de Obsidian no encontrado: $ObsidianVault" }
+    $hookOk = Test-Path (Join-Path (Join-Path $ClaudeHome "hooks") "on-git-commit.ps1")
+    if ($hookOk)   { & $ok  "Hook on-git-commit.ps1 desplegado" }
+    else           { & $bad "Hook on-git-commit.ps1 falta en ~/.claude/hooks/" }
+}
+
+# mcp.env
+if (Test-Path "$ScriptDir\mcp.env") {
+    & $ok "mcp.env encontrado ($($envVars.Count) variable(s) cargadas)"
+} else {
+    & $wrn "mcp.env no encontrado — copia mcp.env.example y llena los valores"
+}
+
+# sync.ps1
+if (Test-Path "$ScriptDir\sync.ps1") { & $ok "sync.ps1 presente — auto-sync activo" }
+else                                  { & $bad "sync.ps1 falta en el repo" }
+
+# Engram
+if ($UseEngram -eq "yes") {
+    if (Get-Command engram -ErrorAction SilentlyContinue) { & $ok "Engram disponible" }
+    else                                                  { & $bad "Engram no encontrado — instalalo manualmente" }
+}
+
+Write-Host ""
 
 # ─────────────────────────────────────────────────────────────────────────────
 # RESUMEN

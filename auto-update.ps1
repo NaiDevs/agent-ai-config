@@ -50,3 +50,6 @@ if ([int]$behind -gt 0) {
         Write-Host "[agent-ai-config] Al día ✓" -ForegroundColor DarkGray
     }
 }
+
+# Siempre sincronizar cambios locales de vuelta al repo (projects-registry, memoria)
+& "$repo\sync.ps1" -Silent
