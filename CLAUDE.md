@@ -101,6 +101,7 @@ Cuando el usuario pida algo relacionado con alguna de estas tecnologías o accio
 | notificar / avisar / mandar mensaje Slack / DM / canal Slack | `/notify` |
 | abrir proyecto / activar workspace / ir a [alias] / status del repo | `/proyecto` |
 | qué cambió / qué hizo [persona] / commits de hoy / repos pendientes | `/scan` |
+| replicar / copiar patrón de un repo a otro / cómo está hecho X en Y / comparar repos | `/replicate` |
 
 ---
 
