@@ -132,28 +132,24 @@ if ($installClaude) {
     if ($toAdd) { $toAdd -join "`n" | Add-Content $MemIdx -Encoding utf8 }
     Write-Host "  OK → MEMORY.md actualizado" -ForegroundColor Green
 
-    # mcp.json — DBs separadas, deshabilitadas por defecto
+    # mcp.json — DBs auto-detectadas desde mcp.env, siempre reescribir
     $mcpJsonPath = "$ClaudeHome\mcp.json"
-    if (-not (Test-Path $mcpJsonPath)) {
-        $mcpJson = @'
-{
-  "mcpServers": {
-    "pg-labodega":     { "command": "powershell", "args": ["-Command", "npx -y mcp-server-postgres $env:LABODEGA_DEV"] },
-    "pg-yalo":         { "command": "powershell", "args": ["-Command", "npx -y mcp-server-postgres $env:YALO_DEV"] },
-    "pg-corinsa":      { "command": "powershell", "args": ["-Command", "npx -y mcp-server-postgres $env:CORINSA_DEV"] },
-    "pg-ultimatelabs": { "command": "powershell", "args": ["-Command", "npx -y mcp-server-postgres $env:ULTIMATELABS_DEV"] },
-    "pg-emsula":       { "command": "powershell", "args": ["-Command", "npx -y mcp-server-postgres $env:EMSULA_DEV"] },
-    "ss-corinsa":      { "command": "powershell", "args": ["-Command", "npx -y mssql-mcp $env:CORINSA_SS"] },
-    "ss-emsula":       { "command": "powershell", "args": ["-Command", "npx -y mssql-mcp $env:EMSULA_SS"] },
-    "ss-yalo":         { "command": "powershell", "args": ["-Command", "npx -y mssql-mcp $env:YALO_SS"] }
-  }
-}
-'@
-        $mcpJson | Set-Content $mcpJsonPath -Encoding utf8
-        Write-Host "  OK → mcp.json creado con DBs deshabilitadas por defecto" -ForegroundColor Green
-    } else {
-        Write-Host "  OK → mcp.json ya existe" -ForegroundColor Green
+    $dbServers = [ordered]@{}
+    foreach ($key in ($envVars.Keys | Sort-Object)) {
+        if ($key -match '^(.+)_DEV$') {
+            $mcpName = "pg-$($matches[1].ToLower() -replace '_','-')"
+            $dbServers[$mcpName] = [PSCustomObject]@{ command="powershell"; args=@("-Command","npx -y mcp-server-postgres `$env:$key") }
+        } elseif ($key -match '^(.+)_SS$') {
+            $mcpName = "ss-$($matches[1].ToLower() -replace '_','-')"
+            $dbServers[$mcpName] = [PSCustomObject]@{ command="powershell"; args=@("-Command","npx -y mssql-mcp `$env:$key") }
+        }
     }
+    $mcpJsonObj = [PSCustomObject]@{ mcpServers = [PSCustomObject]@{} }
+    foreach ($name in $dbServers.Keys) {
+        $mcpJsonObj.mcpServers | Add-Member -NotePropertyName $name -NotePropertyValue $dbServers[$name]
+    }
+    $mcpJsonObj | ConvertTo-Json -Depth 5 | Set-Content $mcpJsonPath -Encoding utf8
+    Write-Host "  OK → mcp.json reescrito con $($dbServers.Count) DB(s) detectadas desde mcp.env" -ForegroundColor Green
 
     # NPM packages de MCPs
     Write-Host "  Instalando paquetes MCP..." -ForegroundColor Yellow
@@ -393,27 +389,40 @@ if ($installClaude) {
 
     $hookCmd = "& '$autoUpdateScript' -Tool claude -Silent"
 
-    # Agregar hooks si no existe la sección
-    if (-not $cfg.PSObject.Properties['hooks']) {
-        $cfg | Add-Member -NotePropertyName hooks -NotePropertyValue ([PSCustomObject]@{
-            SessionStart = @(
-                [PSCustomObject]@{
-                    hooks = @(
-                        [PSCustomObject]@{
-                            type    = "command"
-                            command = $hookCmd
-                            shell   = "powershell"
-                            async   = $true
-                        }
-                    )
-                }
-            )
-        }) -Force
-        $cfg | ConvertTo-Json -Depth 10 | Set-Content $SettingsPath -Encoding utf8
-        Write-Host "  OK → SessionStart hook agregado a Claude Code settings.json" -ForegroundColor Green
-    } else {
-        Write-Host "  OK → Claude Code ya tiene hooks configurados (verificar manualmente si falta SessionStart)" -ForegroundColor DarkYellow
+    # Construir hooks canónicos (SessionStart + PostToolUse para commits)
+    $commitHookPrompt = "Se acaba de ejecutar un git commit. El JSON en `$ARGUMENTS contiene tool_input.command (el comando) y tool_response (el output). Extrae: directorio del proyecto (inferir del path o del output), rama actual, mensaje del commit, archivos cambiados si aparecen en el output. Luego: 1) Guarda en el servidor MCP 'memory' una observación con create_entities o add_observations: entidad tipo 'Commit', atributos proyecto/rama/mensaje/fecha. 2) Escribe en C:/Users/naide/OneDrive/Documentos/Obsidian/Daily/<YYYY-MM-DD>.md una línea al final: '- [HH:MM] commit en <proyecto> (<rama>): <mensaje>'. Si el archivo daily no existe, créalo con encabezado '# <YYYY-MM-DD>'."
+
+    $hooksObj = [PSCustomObject]@{
+        PostToolUse = @(
+            [PSCustomObject]@{
+                matcher = "Bash"
+                hooks   = @(
+                    [PSCustomObject]@{
+                        type          = "agent"
+                        if            = "Bash(git commit *)"
+                        prompt        = $commitHookPrompt
+                        timeout       = 60
+                        statusMessage = "Guardando commit en memoria..."
+                    }
+                )
+            }
+        )
+        SessionStart = @(
+            [PSCustomObject]@{
+                hooks = @(
+                    [PSCustomObject]@{
+                        type    = "command"
+                        command = $hookCmd
+                        shell   = "powershell"
+                        async   = $true
+                    }
+                )
+            }
+        )
     }
+    $cfg | Add-Member -NotePropertyName hooks -NotePropertyValue $hooksObj -Force
+    $cfg | ConvertTo-Json -Depth 15 | Set-Content $SettingsPath -Encoding utf8
+    Write-Host "  OK → hooks configurados (SessionStart auto-update + PostToolUse commit→memoria)" -ForegroundColor Green
 }
 
 # ── Windows Task Scheduler: diario + al inicio de sesión ────────────────────
