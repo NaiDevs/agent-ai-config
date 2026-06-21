@@ -4,7 +4,7 @@
 - [Perfil de usuario](user-profile.md) — Naidelyn, dev full-stack, 6 clientes, 58 repos
 - [Log de cambios](changes-log.md) — historial de commits y PRs por proyecto (auto-actualizado por /commit y /pr)
 - [Jira cithn.atlassian.net](reference-jira.md) — cloudId + mapping alias→key para YAL, YV, YALOAG, LBO, CBI, CC, UL, ED, CIT
-- [Config claude-config](setup-claude-config.md) — Repo portable de configuración, cómo sincronizar entre dispositivos
+- [Config agent-config](setup-claude-config.md) — Repo portable de configuración, cómo sincronizar entre dispositivos
 - [Proyectos YALO](projects-yalo.md) — 22 subproyectos POS/pagos, aliases `yalo *`
 - [Proyectos La Bodega](projects-labodega.md) — 10 subproyectos ecommerce, aliases `bodega *`
 - [Proyectos CORINSA](projects-corinsa.md) — 7 subproyectos BI/CPA, aliases `corinsa *` y `cpa *`

@@ -21,6 +21,6 @@ Workspaces son grupos de proyectos que se trabajan simultáneamente. Al activar 
 | doctor full         | doctor fe, doctor api                                  | Sistema médico completo        |
 | ult full            | ult fe, ult api                                        | Ultimate Labs full stack        |
 
-Para agregar un workspace: editar `~/.claude/projects-registry.md`, sección Workspaces, y hacer commit/push al repo `claude-config`.
+Para agregar un workspace: editar `~/.claude/projects-registry.md`, sección Workspaces, y hacer commit/push al repo `agent-config`.
 
 Ver aliases individuales en [[projects-yalo]], [[projects-labodega]], [[projects-corinsa]], [[projects-ultimatelabs]], [[projects-otros]].

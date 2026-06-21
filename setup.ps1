@@ -1,4 +1,4 @@
-﻿# setup.ps1 — Instalar claude-config en este dispositivo
+﻿# setup.ps1 — Instalar agent-config en este dispositivo
 # Detecta automáticamente Claude Code y/o Codex e instala en ambos
 # Compatible con Windows, macOS y Linux (requiere PowerShell 7+ en Mac/Linux)
 #
@@ -70,7 +70,7 @@ if (-not $ObsidianVault) {
 
 Write-Host ""
 Write-Host "╔══════════════════════════════════════╗" -ForegroundColor Cyan
-Write-Host "║      claude-config — Setup           ║" -ForegroundColor Cyan
+Write-Host "║      agent-config — Setup            ║" -ForegroundColor Cyan
 Write-Host "╚══════════════════════════════════════╝" -ForegroundColor Cyan
 $osSuffix = if ($IsWin) { "Windows" } elseif ($IsMac) { "macOS" } else { "Linux" }
 Write-Host "Sistema:  $osSuffix  |  Usuario: $Username"
@@ -404,7 +404,7 @@ if ($installClaude) {
         "- [Perfil de usuario](user-profile.md) — Naidelyn, dev full-stack, 6 clientes, 58 repos",
         "- [Log de cambios](changes-log.md) — historial de commits y PRs por proyecto",
         "- [Jira cithn.atlassian.net](reference-jira.md) — cloudId + mapping alias→key",
-        "- [Config claude-config](setup-claude-config.md) — Repo portable de configuración",
+        "- [Config agent-config](setup-claude-config.md) — Repo portable de configuración",
         "- [Proyectos YALO](projects-yalo.md) — 22 subproyectos POS/pagos, aliases ``yalo *``",
         "- [Proyectos La Bodega](projects-labodega.md) — 10 subproyectos ecommerce, aliases ``bodega *``",
         "- [Proyectos CORINSA](projects-corinsa.md) — 7 subproyectos BI/CPA, aliases ``corinsa *`` y ``cpa *``",
