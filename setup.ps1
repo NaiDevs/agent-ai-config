@@ -3,18 +3,26 @@
 # Compatible con Windows, macOS y Linux (requiere PowerShell 7+ en Mac/Linux)
 #
 # Uso:
-#   .\setup.ps1                          → auto-detecta herramientas
-#   .\setup.ps1 -Tool claude             → solo Claude Code
-#   .\setup.ps1 -Tool codex              → solo Codex
-#   .\setup.ps1 -Tool both               → ambos
-#   .\setup.ps1 -ProjectsRoot "D:\Proyectos"
-#   .\setup.ps1 -ObsidianVault "~/Documents/Obsidian"   → si tu vault no está en la ubicación default
+#   .\setup.ps1                                          → wizard interactivo
+#   .\setup.ps1 -Tool claude                             → solo Claude Code (sin preguntar)
+#   .\setup.ps1 -Tool codex                              → solo Codex (sin preguntar)
+#   .\setup.ps1 -Tool both                               → ambos (sin preguntar)
+#   .\setup.ps1 -ProjectsRoot "D:\Proyectos"             → carpeta de proyectos (sin preguntar)
+#   .\setup.ps1 -UseEngram yes|no                        → engram (sin preguntar)
+#   .\setup.ps1 -UseObsidian yes|no                      → obsidian (sin preguntar)
+#   .\setup.ps1 -ObsidianVault "~/Documents/Obsidian"   → vault path (sin preguntar)
+#   .\setup.ps1 -SkipRegistryOverwrite                   → no sobreescribir projects-registry.md
 
 param(
     [string]$ProjectsRoot  = "",
     [string]$ObsidianVault = "",
     [ValidateSet("auto","claude","codex","both")]
-    [string]$Tool = "auto"
+    [string]$Tool = "auto",
+    [ValidateSet("","yes","no")]
+    [string]$UseEngram   = "",
+    [ValidateSet("","yes","no")]
+    [string]$UseObsidian = "",
+    [switch]$SkipRegistryOverwrite
 )
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -65,10 +73,103 @@ Write-Host "╔═════════════════════�
 Write-Host "║      claude-config — Setup           ║" -ForegroundColor Cyan
 Write-Host "╚══════════════════════════════════════╝" -ForegroundColor Cyan
 $osSuffix = if ($IsWin) { "Windows" } elseif ($IsMac) { "macOS" } else { "Linux" }
-Write-Host "Sistema:    $osSuffix"
-Write-Host "Usuario:    $Username"
-Write-Host "Proyectos:  $ProjectsRoot"
-Write-Host "Obsidian:   $ObsidianVault"
+Write-Host "Sistema:  $osSuffix  |  Usuario: $Username"
+Write-Host ""
+
+# ─────────────────────────────────────────────────────────────────────────────
+# WIZARD — Preguntas de configuración
+# ─────────────────────────────────────────────────────────────────────────────
+$_hasClaude = (Test-Path $ClaudeHome) -or [bool](Get-Command claude -ErrorAction SilentlyContinue)
+$_hasCodex  = (Test-Path $CodexHome)  -or [bool](Get-Command codex  -ErrorAction SilentlyContinue)
+$_hasEngram = [bool](Get-Command engram -ErrorAction SilentlyContinue)
+
+Write-Host "┌─ Configuración ─────────────────────────────┐" -ForegroundColor Cyan
+Write-Host "│  Presioná Enter para aceptar el default [X] │" -ForegroundColor DarkGray
+Write-Host "└──────────────────────────────────────────────┘" -ForegroundColor Cyan
+Write-Host ""
+
+# P1 — Herramienta
+if ($Tool -eq "auto") {
+    $suggested = if ($_hasClaude -and $_hasCodex) { "c" } elseif ($_hasClaude) { "a" } elseif ($_hasCodex) { "b" } else { "c" }
+    $clLabel   = if ($_hasClaude) { " (detectado)" } else { "" }
+    $coLabel   = if ($_hasCodex)  { " (detectado)" } else { "" }
+    Write-Host "  1. ¿Qué herramienta querés configurar?"
+    Write-Host "     a) Claude Code$clLabel"
+    Write-Host "     b) Codex$coLabel"
+    Write-Host "     c) Ambas"
+    do {
+        $ans = (Read-Host "     Opción [$suggested]").Trim().ToLower()
+        if (-not $ans) { $ans = $suggested }
+    } while ($ans -notin @("a","b","c"))
+    $Tool = switch ($ans) { "a" { "claude" } "b" { "codex" } default { "both" } }
+    Write-Host ""
+}
+
+# P2 — Carpeta de proyectos
+Write-Host "  2. ¿Dónde está tu carpeta raíz de proyectos?"
+$ans = (Read-Host "     [$ProjectsRoot]").Trim()
+if ($ans) { $ProjectsRoot = $ans }
+Write-Host ""
+
+# P3 — Project registry
+if (-not $SkipRegistryOverwrite) {
+    $existsReg = Test-Path (Join-Path $ClaudeHome "projects-registry.md")
+    $suggestReg = if ($existsReg) { "s" } else { "n" }
+    Write-Host "  3. ¿Ya tenés un projects-registry.md propio configurado?"
+    Write-Host "     s → conservar el tuyo (no sobreescribir)"
+    Write-Host "     n → copiar la plantilla del repo"
+    $ans = (Read-Host "     (s/n) [$suggestReg]").Trim().ToLower()
+    if (-not $ans) { $ans = $suggestReg }
+    if ($ans -eq "s") { $SkipRegistryOverwrite = $true }
+    Write-Host ""
+}
+
+# P4 — Engram
+if ($UseEngram -eq "") {
+    $engramStatus = if ($_hasEngram) { "(detectado)" } else { "(no encontrado)" }
+    $suggestEngram = if ($_hasEngram) { "s" } else { "n" }
+    Write-Host "  4. ¿Vas a usar Engram? $engramStatus"
+    Write-Host "     Engram permite memoria compartida entre Claude Code y Codex"
+    $ans = (Read-Host "     (s/n) [$suggestEngram]").Trim().ToLower()
+    if (-not $ans) { $ans = $suggestEngram }
+    $UseEngram = if ($ans -eq "s") { "yes" } else { "no" }
+    Write-Host ""
+}
+if ($UseEngram -eq "yes" -and -not $_hasEngram) {
+    Write-Host "  ! Engram no está instalado — instalalo manualmente y volvé a correr setup:" -ForegroundColor Yellow
+    Write-Host "    Seguí las instrucciones de tu equipo para instalar engram" -ForegroundColor DarkYellow
+    $UseEngram = "no"
+    Write-Host ""
+}
+
+# P5 — Obsidian
+if ($UseObsidian -eq "") {
+    $vaultOk   = $ObsidianVault -and (Test-Path $ObsidianVault)
+    $obsStatus = if ($vaultOk) { "(vault encontrado)" } else { "(vault no encontrado)" }
+    $suggestObs = if ($vaultOk) { "s" } else { "n" }
+    Write-Host "  5. ¿Vas a usar Obsidian para guardar commits en daily notes? $obsStatus"
+    $ans = (Read-Host "     (s/n) [$suggestObs]").Trim().ToLower()
+    if (-not $ans) { $ans = $suggestObs }
+    $UseObsidian = if ($ans -eq "s") { "yes" } else { "no" }
+    Write-Host ""
+}
+
+# P6 — Vault path (solo si usa Obsidian)
+if ($UseObsidian -eq "yes") {
+    Write-Host "  6. Ruta del vault de Obsidian:"
+    $ans = (Read-Host "     [$ObsidianVault]").Trim()
+    if ($ans) { $ObsidianVault = $ans }
+    Write-Host ""
+}
+
+$toolLabel = switch ($Tool) { "claude" { "Claude Code" } "codex" { "Codex" } default { "Claude Code + Codex" } }
+Write-Host "  Herramienta  : $toolLabel" -ForegroundColor Cyan
+Write-Host "  Proyectos    : $ProjectsRoot" -ForegroundColor Cyan
+Write-Host "  Registry     : $(if ($SkipRegistryOverwrite) { 'conservar el tuyo' } else { 'copiar plantilla' })" -ForegroundColor Cyan
+Write-Host "  Engram       : $UseEngram" -ForegroundColor Cyan
+Write-Host "  Obsidian     : $UseObsidian$(if ($UseObsidian -eq 'yes') { " ($ObsidianVault)" })" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "─────────────────────────────────────────────────────────────────" -ForegroundColor DarkGray
 Write-Host ""
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -108,41 +209,49 @@ if (-not (Get-Command npm -ErrorAction SilentlyContinue)) {
 }
 
 # ── Claude Code ──────────────────────────────────────────────────────────────
-if (-not (Get-Command claude -ErrorAction SilentlyContinue)) {
-    if (Get-Command npm -ErrorAction SilentlyContinue) {
-        Write-Host "  ~ claude — instalando..." -ForegroundColor Yellow
-        npm install -g @anthropic-ai/claude-code --silent 2>$null
-        if (Get-Command claude -ErrorAction SilentlyContinue) {
-            Write-Host "  ✓ Claude Code instalado" -ForegroundColor Green
+if ($Tool -eq "claude" -or $Tool -eq "both") {
+    if (-not (Get-Command claude -ErrorAction SilentlyContinue)) {
+        if (Get-Command npm -ErrorAction SilentlyContinue) {
+            Write-Host "  ~ claude — instalando..." -ForegroundColor Yellow
+            npm install -g @anthropic-ai/claude-code --silent 2>$null
+            if (Get-Command claude -ErrorAction SilentlyContinue) {
+                Write-Host "  ✓ Claude Code instalado" -ForegroundColor Green
+            } else {
+                Write-Host "  ✗ Claude Code — npm install falló, instala manualmente:" -ForegroundColor Red
+                Write-Host "      npm install -g @anthropic-ai/claude-code" -ForegroundColor DarkYellow
+                Write-Host "      o descarga: https://claude.ai/download" -ForegroundColor DarkYellow
+                $warnings += "Claude Code no pudo instalarse automáticamente"
+            }
         } else {
-            Write-Host "  ✗ Claude Code — npm install falló, instala manualmente:" -ForegroundColor Red
-            Write-Host "      npm install -g @anthropic-ai/claude-code" -ForegroundColor DarkYellow
-            Write-Host "      o descarga: https://claude.ai/download" -ForegroundColor DarkYellow
-            $warnings += "Claude Code no pudo instalarse automáticamente"
+            Write-Host "  ✗ Claude Code — no se puede instalar sin npm" -ForegroundColor Red
+            $warnings += "Instala Node.js primero, luego: npm install -g @anthropic-ai/claude-code"
         }
     } else {
-        Write-Host "  ✗ Claude Code — no se puede instalar sin npm" -ForegroundColor Red
-        $warnings += "Instala Node.js primero, luego: npm install -g @anthropic-ai/claude-code"
+        Write-Host "  ✓ Claude Code  $(claude --version 2>$null)"  -ForegroundColor Green
     }
 } else {
-    Write-Host "  ✓ Claude Code  $(claude --version 2>$null)"  -ForegroundColor Green
+    Write-Host "  ~ claude — omitido (no seleccionado)" -ForegroundColor DarkGray
 }
 
 # ── Codex ─────────────────────────────────────────────────────────────────────
-if (-not (Get-Command codex -ErrorAction SilentlyContinue)) {
-    if (Get-Command npm -ErrorAction SilentlyContinue) {
-        Write-Host "  ~ codex — instalando..." -ForegroundColor Yellow
-        npm install -g @openai/codex --silent 2>$null
-        if (Get-Command codex -ErrorAction SilentlyContinue) {
-            Write-Host "  ✓ Codex instalado" -ForegroundColor Green
-        } else {
-            Write-Host "  ✗ Codex — npm install falló, instala manualmente:" -ForegroundColor Red
-            Write-Host "      npm install -g @openai/codex" -ForegroundColor DarkYellow
-            $warnings += "Codex no pudo instalarse automáticamente"
+if ($Tool -eq "codex" -or $Tool -eq "both") {
+    if (-not (Get-Command codex -ErrorAction SilentlyContinue)) {
+        if (Get-Command npm -ErrorAction SilentlyContinue) {
+            Write-Host "  ~ codex — instalando..." -ForegroundColor Yellow
+            npm install -g @openai/codex --silent 2>$null
+            if (Get-Command codex -ErrorAction SilentlyContinue) {
+                Write-Host "  ✓ Codex instalado" -ForegroundColor Green
+            } else {
+                Write-Host "  ✗ Codex — npm install falló, instala manualmente:" -ForegroundColor Red
+                Write-Host "      npm install -g @openai/codex" -ForegroundColor DarkYellow
+                $warnings += "Codex no pudo instalarse automáticamente"
+            }
         }
+    } else {
+        Write-Host "  ✓ Codex  $(codex --version 2>$null)"  -ForegroundColor Green
     }
 } else {
-    Write-Host "  ✓ Codex  $(codex --version 2>$null)"  -ForegroundColor Green
+    Write-Host "  ~ codex — omitido (no seleccionado)" -ForegroundColor DarkGray
 }
 
 # ── PowerShell 7 en Mac/Linux (necesario para el hook) ───────────────────────
@@ -160,15 +269,19 @@ if (-not $IsWin) {
 }
 
 # ── Obsidian vault ────────────────────────────────────────────────────────────
-if (-not (Test-Path $ObsidianVault)) {
-    Write-Host "  ! Obsidian vault — NO encontrado en: $ObsidianVault" -ForegroundColor Yellow
-    Write-Host "    Opciones:" -ForegroundColor Yellow
-    Write-Host "      a) Crea la carpeta manualmente y abre ese vault en Obsidian" -ForegroundColor DarkYellow
-    Write-Host "      b) Pasa la ruta correcta: .\setup.ps1 -ObsidianVault 'ruta/a/tu/vault'" -ForegroundColor DarkYellow
-    Write-Host "      c) Define OBSIDIAN_VAULT en mcp.env" -ForegroundColor DarkYellow
-    $warnings += "Vault de Obsidian no encontrado — el hook escribirá pero los archivos Daily no se verán en Obsidian hasta que abras ese vault"
+if ($UseObsidian -eq "yes") {
+    if (-not (Test-Path $ObsidianVault)) {
+        Write-Host "  ! Obsidian vault — NO encontrado en: $ObsidianVault" -ForegroundColor Yellow
+        Write-Host "    Opciones:" -ForegroundColor Yellow
+        Write-Host "      a) Crea la carpeta manualmente y abre ese vault en Obsidian" -ForegroundColor DarkYellow
+        Write-Host "      b) Pasa la ruta correcta: .\setup.ps1 -ObsidianVault 'ruta/a/tu/vault'" -ForegroundColor DarkYellow
+        Write-Host "      c) Define OBSIDIAN_VAULT en mcp.env" -ForegroundColor DarkYellow
+        $warnings += "Vault de Obsidian no encontrado — el hook escribirá pero los archivos Daily no se verán en Obsidian hasta que abras ese vault"
+    } else {
+        Write-Host "  ✓ Vault de Obsidian encontrado" -ForegroundColor Green
+    }
 } else {
-    Write-Host "  ✓ Vault de Obsidian encontrado" -ForegroundColor Green
+    Write-Host "  ~ Obsidian — omitido (no seleccionado)" -ForegroundColor DarkGray
 }
 
 if (-not $prereqOk) {
@@ -229,17 +342,13 @@ if (Test-Path $EnvFile) {
 Write-Host ""
 Write-Host "[ 1 ] Detectando herramientas instaladas..." -ForegroundColor Yellow
 
-$hasClaude = (Test-Path $ClaudeHome) -or (Get-Command claude -ErrorAction SilentlyContinue)
-$hasCodex  = (Test-Path $CodexHome)  -or (Get-Command codex  -ErrorAction SilentlyContinue)
-$hasEngram = [bool](Get-Command engram -ErrorAction SilentlyContinue)
+$hasClaude = (Test-Path $ClaudeHome) -or [bool](Get-Command claude -ErrorAction SilentlyContinue)
+$hasCodex  = (Test-Path $CodexHome)  -or [bool](Get-Command codex  -ErrorAction SilentlyContinue)
+# hasEngram: respeta la elección del wizard (UseEngram=yes solo si también está instalado)
+$hasEngram = ($UseEngram -eq "yes") -and [bool](Get-Command engram -ErrorAction SilentlyContinue)
 
-if ($Tool -eq "auto") {
-    $installClaude = $hasClaude
-    $installCodex  = $hasCodex
-} else {
-    $installClaude = ($Tool -eq "claude" -or $Tool -eq "both")
-    $installCodex  = ($Tool -eq "codex"  -or $Tool -eq "both")
-}
+$installClaude = ($Tool -eq "claude" -or $Tool -eq "both")
+$installCodex  = ($Tool -eq "codex"  -or $Tool -eq "both")
 
 Write-Host "     Claude Code : $(if ($hasClaude) { '✓ detectado' } else { '✗ no encontrado' })"
 Write-Host "     Codex       : $(if ($hasCodex)  { '✓ detectado' } else { '✗ no encontrado' })"
@@ -274,8 +383,12 @@ if ($installClaude) {
     Write-Host "  OK → CLAUDE.md" -ForegroundColor Green
 
     # Registry de proyectos
-    Copy-Item "$ScriptDir\projects-registry.md" "$ClaudeHome\projects-registry.md" -Force
-    Write-Host "  OK → projects-registry.md" -ForegroundColor Green
+    if (-not $SkipRegistryOverwrite) {
+        Copy-Item "$ScriptDir\projects-registry.md" "$ClaudeHome\projects-registry.md" -Force
+        Write-Host "  OK → projects-registry.md (plantilla copiada)" -ForegroundColor Green
+    } else {
+        Write-Host "  ~ projects-registry.md conservado (no sobreescrito)" -ForegroundColor DarkGray
+    }
 
     # Memoria (engram)
     $EncodedHome = $env:USERPROFILE -replace "^([A-Za-z]):\\", '$1--' -replace "\\", "-"
@@ -549,27 +662,29 @@ interface:
     Write-Host "  OK → $pluginsAdded plugin(s) agregados (Slack requiere auth manual la primera vez)" -ForegroundColor Green
 
     # Hook PostToolUse commit → Obsidian Daily (equivalente al hook de Claude Code)
-    Write-Host "  Configurando hook PostToolUse (commit → Obsidian)..." -ForegroundColor Yellow
     $configRaw = [System.IO.File]::ReadAllText($configPath, [System.Text.Encoding]::UTF8)
-
-    # Remover [[PostToolUse]] existente (siempre al final del archivo)
+    # Remover [[PostToolUse]] existente siempre (para no duplicar)
     $configRaw = $configRaw -replace '(?s)\r?\n\[\[PostToolUse\]\].*$', ''
     $configRaw = $configRaw.TrimEnd()
 
-    # Path al script — TOML literal strings (comillas simples): no necesitan escapar nada
-    $hookScriptWin  = Join-Path (Join-Path $ClaudeHome "hooks") "on-git-commit.ps1"
-    $hookScriptUnix = $hookScriptWin -replace '\\', '/'
+    if ($UseObsidian -eq "yes") {
+        Write-Host "  Configurando hook PostToolUse (commit → Obsidian)..." -ForegroundColor Yellow
+        $hookScriptWin  = Join-Path (Join-Path $ClaudeHome "hooks") "on-git-commit.ps1"
+        $hookScriptUnix = $hookScriptWin -replace '\\', '/'
 
-    $hookBlock  = "`n`n[[PostToolUse]]`n[[PostToolUse.hooks]]`n"
-    $hookBlock += "type = `"command`"`n"
-    $hookBlock += "commandWindows = 'powershell.exe -NonInteractive -File `"$hookScriptWin`"'`n"
-    $hookBlock += "command = 'pwsh -NonInteractive -File `"$hookScriptUnix`"'`n"
-    $hookBlock += "timeout = 15`n"
-    $hookBlock += "statusMessage = `"Guardando en Obsidian...`""
+        $hookBlock  = "`n`n[[PostToolUse]]`n[[PostToolUse.hooks]]`n"
+        $hookBlock += "type = `"command`"`n"
+        $hookBlock += "commandWindows = 'powershell.exe -NonInteractive -File `"$hookScriptWin`"'`n"
+        $hookBlock += "command = 'pwsh -NonInteractive -File `"$hookScriptUnix`"'`n"
+        $hookBlock += "timeout = 15`n"
+        $hookBlock += "statusMessage = `"Guardando en Obsidian...`""
 
-    $configRaw += $hookBlock
+        $configRaw += $hookBlock
+        Write-Host "  OK → hook PostToolUse configurado en config.toml" -ForegroundColor Green
+    } else {
+        Write-Host "  ~ hook PostToolUse Obsidian — omitido" -ForegroundColor DarkGray
+    }
     [System.IO.File]::WriteAllText($configPath, $configRaw, [System.Text.Encoding]::UTF8)
-    Write-Host "  OK → hook PostToolUse configurado en config.toml" -ForegroundColor Green
 
     Write-Host "└─────────────────────────────────────────────┘" -ForegroundColor Magenta
 }
@@ -597,65 +712,70 @@ if ($installClaude) {
 
     $hookCmd = "& '$autoUpdateScript' -Tool claude -Silent"
 
-    # Desplegar script de hook a ~/.claude/hooks/
+    # Desplegar script de hook a ~/.claude/hooks/ (solo si usa Obsidian)
     $hooksDir     = Join-Path $ClaudeHome "hooks"
     $commitScript = Join-Path $hooksDir "on-git-commit.ps1"
-    New-Item -ItemType Directory -Force $hooksDir | Out-Null
-    Copy-Item (Join-Path (Join-Path $ScriptDir "hooks") "on-git-commit.ps1") $commitScript -Force
-
-    # Pasar el vault de Obsidian al env del usuario para que el hook lo use
-    if ($ObsidianVault) {
-        [System.Environment]::SetEnvironmentVariable("OBSIDIAN_VAULT", $ObsidianVault, "User")
+    if ($UseObsidian -eq "yes") {
+        New-Item -ItemType Directory -Force $hooksDir | Out-Null
+        Copy-Item (Join-Path (Join-Path $ScriptDir "hooks") "on-git-commit.ps1") $commitScript -Force
+        if ($ObsidianVault) {
+            [System.Environment]::SetEnvironmentVariable("OBSIDIAN_VAULT", $ObsidianVault, "User")
+        }
     }
 
-    # En Mac/Linux el hook usa pwsh; en Windows usa powershell
-    $hookShell = if ($IsWin) { "powershell" } else { "powershell" }  # Claude Code siempre usa "powershell" como shell key
+    # Construir hooks object — SessionStart siempre; PostToolUse solo si usa Obsidian
+    $sessionStartHook = [PSCustomObject]@{
+        hooks = @(
+            [PSCustomObject]@{
+                type    = "command"
+                command = $hookCmd
+                shell   = "powershell"
+                async   = $true
+            }
+        )
+    }
 
-    $hooksObj = [PSCustomObject]@{
-        PostToolUse = @(
-            [PSCustomObject]@{
-                matcher = "Bash"
-                hooks   = @(
-                    [PSCustomObject]@{
-                        type          = "command"
-                        if            = "Bash(git *)"
-                        shell         = "powershell"
-                        command       = "& '$commitScript'"
-                        timeout       = 15
-                        statusMessage = "Guardando en Obsidian..."
-                    }
-                )
-            },
-            [PSCustomObject]@{
-                matcher = "PowerShell"
-                hooks   = @(
-                    [PSCustomObject]@{
-                        type          = "command"
-                        if            = "PowerShell(git *)"
-                        shell         = "powershell"
-                        command       = "& '$commitScript'"
-                        timeout       = 15
-                        statusMessage = "Guardando en Obsidian..."
-                    }
-                )
-            }
-        )
-        SessionStart = @(
-            [PSCustomObject]@{
-                hooks = @(
-                    [PSCustomObject]@{
-                        type    = "command"
-                        command = $hookCmd
-                        shell   = "powershell"
-                        async   = $true
-                    }
-                )
-            }
-        )
+    if ($UseObsidian -eq "yes") {
+        $hooksObj = [PSCustomObject]@{
+            PostToolUse = @(
+                [PSCustomObject]@{
+                    matcher = "Bash"
+                    hooks   = @(
+                        [PSCustomObject]@{
+                            type          = "command"
+                            if            = "Bash(git *)"
+                            shell         = "powershell"
+                            command       = "& '$commitScript'"
+                            timeout       = 15
+                            statusMessage = "Guardando en Obsidian..."
+                        }
+                    )
+                },
+                [PSCustomObject]@{
+                    matcher = "PowerShell"
+                    hooks   = @(
+                        [PSCustomObject]@{
+                            type          = "command"
+                            if            = "PowerShell(git *)"
+                            shell         = "powershell"
+                            command       = "& '$commitScript'"
+                            timeout       = 15
+                            statusMessage = "Guardando en Obsidian..."
+                        }
+                    )
+                }
+            )
+            SessionStart = @($sessionStartHook)
+        }
+        Write-Host "  OK → hooks configurados (SessionStart auto-update + PostToolUse commit→Obsidian)" -ForegroundColor Green
+    } else {
+        $hooksObj = [PSCustomObject]@{
+            SessionStart = @($sessionStartHook)
+        }
+        Write-Host "  OK → hooks configurados (SessionStart auto-update)" -ForegroundColor Green
     }
     $cfg | Add-Member -NotePropertyName hooks -NotePropertyValue $hooksObj -Force
     $cfg | ConvertTo-Json -Depth 15 | Set-Content $SettingsPath -Encoding utf8
-    Write-Host "  OK → hooks configurados (SessionStart auto-update + PostToolUse commit→Obsidian)" -ForegroundColor Green
 }
 
 # ── Tareas programadas para auto-update ──────────────────────────────────────
