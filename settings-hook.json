@@ -5,8 +5,23 @@
         "matcher": "Bash",
         "hooks": [
           {
+            "type": "agent",
+            "if": "Bash(git commit *)",
+            "prompt": "Se acaba de ejecutar un git commit. El JSON en $ARGUMENTS contiene tool_input.command (el comando) y tool_response (el output). Extrae: directorio del proyecto (inferir del path o del output), rama actual, mensaje del commit, archivos cambiados si aparecen en el output. Luego: 1) Guarda en el servidor MCP 'memory' una observación con create_entities o add_observations: entidad tipo 'Commit', atributos proyecto/rama/mensaje/fecha. 2) Escribe en C:/Users/naide/OneDrive/Documentos/Obsidian/Daily/<YYYY-MM-DD>.md una línea al final: '- [HH:MM] commit en <proyecto> (<rama>): <mensaje>'. Si el archivo daily no existe, créalo con encabezado '# <YYYY-MM-DD>'.",
+            "timeout": 60,
+            "statusMessage": "Guardando commit en memoria..."
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
             "type": "command",
-            "command": "if git -C \"$PWD\" rev-parse --git-dir > /dev/null 2>&1; then git -C \"$PWD\" fetch --all --quiet 2>/dev/null; fi"
+            "command": "& 'C:\\Users\\naide\\OneDrive\\Documentos\\Proyectos\\Nai\\agent-ai-config\\auto-update.ps1' -Tool claude -Silent",
+            "shell": "powershell",
+            "async": true
           }
         ]
       }

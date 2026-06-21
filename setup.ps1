@@ -32,6 +32,7 @@ Write-Host ""
 # ─────────────────────────────────────────────────────────────────────────────
 Write-Host "[ 0 ] Cargando tokens desde mcp.env..." -ForegroundColor Yellow
 $EnvFile = "$ScriptDir\mcp.env"
+$envVars = @{}   # hashtable con todas las vars reales del archivo (sin placeholders)
 if (Test-Path $EnvFile) {
     $loaded = 0
     Get-Content $EnvFile | Where-Object { $_ -notmatch '^\s*#' -and $_ -match '=' } | ForEach-Object {
@@ -40,6 +41,7 @@ if (Test-Path $EnvFile) {
         $value = $parts[1].Trim()
         if ($key -and $value -notmatch 'your_|_here$|password$') {
             [System.Environment]::SetEnvironmentVariable($key, $value, "User")
+            $envVars[$key] = $value
             $loaded++
         }
     }
@@ -292,34 +294,60 @@ interface:
         Write-Host "  OK → expressions.md copiado a ~/.codex/" -ForegroundColor Green
     }
 
-    # MCPs en config.toml — agregar secciones de DB si no existen
+    # MCPs en config.toml — reemplazar TODAS las secciones [mcp_servers.*] con las canónicas
     Write-Host "  Configurando MCPs en config.toml..." -ForegroundColor Yellow
     $configPath = "$CodexHome\config.toml"
     $configRaw  = if (Test-Path $configPath) { Get-Content $configPath -Raw } else { "" }
 
-    $mcpEntries = @{
-        "github"          = "command = `"npx`"`nargs = [`"-y`", `"@modelcontextprotocol/server-github`"]"
-        "filesystem"      = "command = `"npx`"`nargs = [`"-y`", `"@modelcontextprotocol/server-filesystem`", `"$($ProjectsRoot -replace '\\','/')`", `"$($CodexHome -replace '\\','/')`"]"
-        "pg-labodega"     = "command = `"powershell`"`nargs = [`"-Command`", `"npx -y mcp-server-postgres `$env:LABODEGA_DEV`"]"
-        "pg-yalo"         = "command = `"powershell`"`nargs = [`"-Command`", `"npx -y mcp-server-postgres `$env:YALO_DEV`"]"
-        "pg-corinsa"      = "command = `"powershell`"`nargs = [`"-Command`", `"npx -y mcp-server-postgres `$env:CORINSA_DEV`"]"
-        "pg-ultimatelabs" = "command = `"powershell`"`nargs = [`"-Command`", `"npx -y mcp-server-postgres `$env:ULTIMATELABS_DEV`"]"
-        "pg-emsula"       = "command = `"powershell`"`nargs = [`"-Command`", `"npx -y mcp-server-postgres `$env:EMSULA_DEV`"]"
-        "ss-corinsa"      = "command = `"powershell`"`nargs = [`"-Command`", `"npx -y mssql-mcp `$env:CORINSA_SS`"]"
-        "ss-emsula"       = "command = `"powershell`"`nargs = [`"-Command`", `"npx -y mssql-mcp `$env:EMSULA_SS`"]"
-        "ss-yalo"         = "command = `"powershell`"`nargs = [`"-Command`", `"npx -y mssql-mcp `$env:YALO_SS`"]"
+    # Borrar todos los bloques [mcp_servers.*] existentes (incluyendo sus claves hasta el siguiente [)
+    $lines = $configRaw -split "`n"
+    $inMcpSection = $false
+    $cleanedLines = @()
+    foreach ($line in $lines) {
+        if ($line -match '^\[mcp_servers\.[^\]]+\]') {
+            $inMcpSection = $true
+        } elseif ($line -match '^\[') {
+            $inMcpSection = $false
+        }
+        if (-not $inMcpSection) { $cleanedLines += $line }
+    }
+    $configRaw = ($cleanedLines -join "`n").TrimEnd()
+
+    # MCPs fijos — solo los que no dependen de mcp.env
+    $mcpEntries = [ordered]@{
+        "engram"     = "command = `"engram`"`nargs = [`"mcp`"]"
+        "figma"      = "url = `"https://mcp.figma.com/mcp`""
+        "resend"     = if ($envVars["RESEND_API_KEY"]) { "command = `"npx`"`nargs = [`"-y`", `"resend-mcp`"]`nenv = { RESEND_API_KEY = `"$($envVars['RESEND_API_KEY'])`" }" } else { $null }
+        "github"     = "command = `"npx`"`nargs = [`"-y`", `"@modelcontextprotocol/server-github`"]"
+        "filesystem" = "command = `"npx`"`nargs = [`"-y`", `"@modelcontextprotocol/server-filesystem`", `"$($ProjectsRoot -replace '\\','/')`", `"$($CodexHome -replace '\\','/')`"]"
     }
 
-    $addedCount = 0
-    foreach ($name in $mcpEntries.Keys) {
-        $section = "[mcp_servers.$name]"
-        if ($configRaw -notmatch [regex]::Escape($section)) {
-            $configRaw += "`n`n$section`n$($mcpEntries[$name])"
-            $addedCount++
+    # engram solo si está disponible; resend solo si RESEND_API_KEY existe en mcp.env
+    if (-not $hasEngram) { $mcpEntries.Remove("engram") }
+    $nullKeys = @($mcpEntries.Keys | Where-Object { $null -eq $mcpEntries[$_] })
+    foreach ($k in $nullKeys) { $mcpEntries.Remove($k) }
+
+    # MCPs de DB — detectados automáticamente desde mcp.env
+    # Convención: NOMBRE_DEV → pg-nombre (postgres), NOMBRE_SS → ss-nombre (SQL Server)
+    $dbCount = 0
+    foreach ($key in ($envVars.Keys | Sort-Object)) {
+        if ($key -match '^(.+)_DEV$') {
+            $mcpName = "pg-$($matches[1].ToLower() -replace '_','-')"
+            $mcpEntries[$mcpName] = "command = `"powershell`"`nargs = [`"-Command`", `"npx -y mcp-server-postgres `$env:$key`"]`nstartup_timeout_sec = 90"
+            $dbCount++
+        } elseif ($key -match '^(.+)_SS$') {
+            $mcpName = "ss-$($matches[1].ToLower() -replace '_','-')"
+            $mcpEntries[$mcpName] = "command = `"powershell`"`nargs = [`"-Command`", `"npx -y mssql-mcp `$env:$key`"]`nstartup_timeout_sec = 90"
+            $dbCount++
         }
     }
+    Write-Host "  $dbCount MCP(s) de DB detectados desde mcp.env" -ForegroundColor DarkGray
+
+    foreach ($name in $mcpEntries.Keys) {
+        $configRaw += "`n`n[mcp_servers.$name]`n$($mcpEntries[$name])"
+    }
     $configRaw | Set-Content $configPath -Encoding utf8
-    Write-Host "  OK → $addedCount MCP(s) agregados a config.toml" -ForegroundColor Green
+    Write-Host "  OK → $($mcpEntries.Count) MCPs escritos (reemplazando configuración anterior)" -ForegroundColor Green
 
     # Plugins de Codex
     Write-Host "  Habilitando plugins de Codex..." -ForegroundColor Yellow

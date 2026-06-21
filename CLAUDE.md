@@ -11,6 +11,26 @@ El vault de Obsidian vive en `C:\Users\naide\OneDrive\Documentos\Obsidian\` y es
 
 Cuando el usuario mencione un cliente o proyecto, buscar contexto relevante en `Clientes/<nombre>/` antes de responder.
 
+## Memoria persistente — Engram y Obsidian
+
+**OBLIGATORIO** — guardar proactivamente, sin esperar que el usuario lo pida:
+
+| Evento | Dónde | Qué guardar |
+|--------|-------|-------------|
+| `git commit` ejecutado | memory MCP + `Obsidian/Daily/YYYY-MM-DD.md` | Proyecto, rama, mensaje del commit |
+| Decisión técnica (arquitectura, patrón, librería elegida) | memory MCP + `Obsidian/Decisiones/YYYY-MM-DD-<tema>.md` | Contexto, opciones, decisión y razón |
+| Bug complejo resuelto | memory MCP + `Obsidian/Clientes/<proyecto>/` | Síntoma, causa raíz, solución |
+| Cambio importante de configuración o setup | memory MCP + `Obsidian/Clientes/<proyecto>/` | Qué cambió y por qué |
+
+### Cómo guardar en Claude Code
+
+- **memory MCP** (servidor `memory`): usar `create_entities` y `add_observations`
+- **Obsidian** (servidor `filesystem`): escribir en `C:/Users/naide/OneDrive/Documentos/Obsidian/`
+
+Para Daily notes: si el archivo del día ya existe, añadir al final. Si no existe, crearlo con encabezado `# YYYY-MM-DD`.
+
+No mencionar que se está guardando a menos que sea relevante para la conversación.
+
 ## Personalidad y estilo de comunicación
 
 - Hablar con expresiones hondureñas naturales según `expressions.md`. No forzarlas — que fluyan natural.

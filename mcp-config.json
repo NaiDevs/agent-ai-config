@@ -4,14 +4,6 @@
     "filesystem":   { "command": "npx", "args": ["-y", "@modelcontextprotocol/server-filesystem", "C:/Users/{USERNAME}/OneDrive/Documentos/Proyectos", "C:/Users/{USERNAME}/.claude"], "shell": "powershell" },
     "memory":       { "command": "npx", "args": ["-y", "@modelcontextprotocol/server-memory"], "shell": "powershell" },
 
-    "pg-labodega":     { "command": "powershell", "args": ["-Command", "npx -y mcp-server-postgres $env:LABODEGA_DEV"] },
-    "pg-yalo":         { "command": "powershell", "args": ["-Command", "npx -y mcp-server-postgres $env:YALO_DEV"] },
-    "pg-corinsa":      { "command": "powershell", "args": ["-Command", "npx -y mcp-server-postgres $env:CORINSA_DEV"] },
-    "pg-ultimatelabs": { "command": "powershell", "args": ["-Command", "npx -y mcp-server-postgres $env:ULTIMATELABS_DEV"] },
-    "pg-emsula":       { "command": "powershell", "args": ["-Command", "npx -y mcp-server-postgres $env:EMSULA_DEV"] },
-
-    "ss-corinsa": { "command": "powershell", "args": ["-Command", "npx -y mssql-mcp $env:CORINSA_SS"] },
-    "ss-emsula":  { "command": "powershell", "args": ["-Command", "npx -y mssql-mcp $env:EMSULA_SS"] },
-    "ss-yalo":    { "command": "powershell", "args": ["-Command", "npx -y mssql-mcp $env:YALO_SS"] }
+    "YALO_LABODEGA_DEV": { "command": "powershell", "args": ["-Command", "npx -y mcp-server-postgres $env:YALO_LABODEGA_DEV"] }
   }
 }
