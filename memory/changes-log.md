@@ -11,3 +11,6 @@ Registro cronológico de cambios. Cada entrada: `fecha | alias | tipo | descripc
 Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese límite.
 
 <!-- formato: - YYYY-MM-DD | alias | commit/pr | descripción -->
+
+- 2026-06-21 | engram | config | Integración de agente Engram en hook Stop — sincronización automática de sesiones
+- 2026-06-21 | engram | bug-fix | Hooks no guardaban correctamente en Engram — agregado agente de persistencia
