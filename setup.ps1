@@ -395,6 +395,9 @@ if ($installClaude) {
         } elseif ($key -match '^(.+)_SS$') {
             $mcpName = "ss-$($matches[1].ToLower() -replace '_','-')"
             $dbServers[$mcpName] = [PSCustomObject]@{ command="powershell"; args=@("-Command","npx -y mssql-mcp `$env:$key") }
+        } elseif ($key -match '^(.+)_REDIS$') {
+            $mcpName = "redis-$($matches[1].ToLower() -replace '_','-')"
+            $dbServers[$mcpName] = [PSCustomObject]@{ command="powershell"; args=@("-Command","npx -y mcp-server-redis `$env:$key") }
         }
     }
     $mcpJsonObj = [PSCustomObject]@{ mcpServers = [PSCustomObject]@{} }
@@ -406,7 +409,7 @@ if ($installClaude) {
 
     # NPM packages de MCPs
     Write-Host "  Instalando paquetes MCP..." -ForegroundColor Yellow
-    npm install -g @modelcontextprotocol/server-github @modelcontextprotocol/server-filesystem @modelcontextprotocol/server-memory mcp-server-postgres mssql-mcp --silent 2>$null
+    npm install -g @modelcontextprotocol/server-github @modelcontextprotocol/server-filesystem @modelcontextprotocol/server-memory mcp-server-postgres mssql-mcp mcp-server-redis @playwright/mcp --silent 2>$null
     Write-Host "  OK → paquetes MCP instalados" -ForegroundColor Green
 
     # settings.json — MCPs + permiso Write
@@ -606,6 +609,7 @@ interface:
         "resend"     = if ($envVars["RESEND_API_KEY"]) { "command = `"npx`"`nargs = [`"-y`", `"resend-mcp`"]`nenv = { RESEND_API_KEY = `"$($envVars['RESEND_API_KEY'])`" }" } else { $null }
         "github"     = "command = `"npx`"`nargs = [`"-y`", `"@modelcontextprotocol/server-github`"]"
         "filesystem" = "command = `"npx`"`nargs = [`"-y`", `"@modelcontextprotocol/server-filesystem`", `"$($ProjectsRoot -replace '\\','/')`", `"$($CodexHome -replace '\\','/')`"]"
+        "playwright" = "command = `"npx`"`nargs = [`"-y`", `"@playwright/mcp`"]"
     }
 
     # engram solo si está disponible; resend solo si RESEND_API_KEY existe en mcp.env
@@ -614,7 +618,7 @@ interface:
     foreach ($k in $nullKeys) { $mcpEntries.Remove($k) }
 
     # MCPs de DB — detectados automáticamente desde mcp.env
-    # Convención: NOMBRE_DEV → pg-nombre (postgres), NOMBRE_SS → ss-nombre (SQL Server)
+    # Convención: NOMBRE_DEV → pg-nombre, NOMBRE_SS → ss-nombre, NOMBRE_REDIS → redis-nombre
     $dbCount = 0
     foreach ($key in ($envVars.Keys | Sort-Object)) {
         if ($key -match '^(.+)_DEV$') {
@@ -625,9 +629,13 @@ interface:
             $mcpName = "ss-$($matches[1].ToLower() -replace '_','-')"
             $mcpEntries[$mcpName] = "command = `"powershell`"`nargs = [`"-Command`", `"npx -y mssql-mcp `$env:$key`"]`nstartup_timeout_sec = 90"
             $dbCount++
+        } elseif ($key -match '^(.+)_REDIS$') {
+            $mcpName = "redis-$($matches[1].ToLower() -replace '_','-')"
+            $mcpEntries[$mcpName] = "command = `"powershell`"`nargs = [`"-Command`", `"npx -y mcp-server-redis `$env:$key`"]`nstartup_timeout_sec = 30"
+            $dbCount++
         }
     }
-    Write-Host "  $dbCount MCP(s) de DB detectados desde mcp.env" -ForegroundColor DarkGray
+    Write-Host "  $dbCount MCP(s) de datos detectados desde mcp.env (DBs + Redis)" -ForegroundColor DarkGray
 
     foreach ($name in $mcpEntries.Keys) {
         $configRaw += "`n`n[mcp_servers.$name]`n$($mcpEntries[$name])"

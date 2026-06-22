@@ -208,6 +208,94 @@ if (Get-Command engram -ErrorAction SilentlyContinue) {
 
 Write-Host ""
 
+# ─── MCPs locales ─────────────────────────────────────────────────────────────
+Write-Host "[ MCPs locales ]" -ForegroundColor Blue
+
+# Playwright — MCP para automatizacion de browser y pruebas UI
+if (Get-Command playwright -ErrorAction SilentlyContinue) {
+    ok "playwright CLI instalado"
+} elseif (Get-Command npx -ErrorAction SilentlyContinue) {
+    warn "playwright CLI no encontrado. El MCP @playwright/mcp usa npx, deberia funcionar igual."
+} else {
+    warn "playwright — npx no disponible. El MCP de Playwright no podra iniciarse."
+}
+
+# Codex — verificar Playwright en config.toml
+if ($checkCodex -and (Test-Path "$CodexHome\config.toml")) {
+    $tomlRaw = Get-Content "$CodexHome\config.toml" -Raw -ErrorAction SilentlyContinue
+    if ($tomlRaw -match '\[mcp_servers\.playwright\]') {
+        ok "Playwright MCP configurado en Codex"
+    } else {
+        warn "Playwright MCP no esta en ~/.codex/config.toml. Corre setup.ps1."
+    }
+}
+
+# Redis — verificar si hay variables configuradas
+$redisVars = [System.Environment]::GetEnvironmentVariables("User").Keys | Where-Object { $_ -match '_REDIS$' }
+if ($redisVars) {
+    ok "$(@($redisVars).Count) variable(s) Redis configuradas ($(@($redisVars) -join ', '))"
+    # Verificar MCPs Redis en Codex
+    if ($checkCodex -and (Test-Path "$CodexHome\config.toml")) {
+        $tomlRaw = Get-Content "$CodexHome\config.toml" -Raw -ErrorAction SilentlyContinue
+        if ($tomlRaw -match '\[mcp_servers\.redis-') {
+            ok "MCP(s) Redis configurados en Codex"
+        } else {
+            warn "Hay variables Redis pero no hay MCPs redis-* en config.toml. Corre setup.ps1."
+        }
+    }
+    # Verificar MCPs Redis en Claude Code mcp.json
+    if ($checkClaude -and (Test-Path "$ClaudeHome\mcp.json")) {
+        $mcpJson = Get-Content "$ClaudeHome\mcp.json" -Raw -ErrorAction SilentlyContinue | ConvertFrom-Json -ErrorAction SilentlyContinue
+        if ($mcpJson -and ($mcpJson.mcpServers.PSObject.Properties.Name | Where-Object { $_ -match '^redis-' })) {
+            ok "MCP(s) Redis configurados en Claude Code (mcp.json)"
+        } else {
+            warn "Hay variables Redis pero no hay MCPs redis-* en ~/.claude/mcp.json. Corre setup.ps1."
+        }
+    }
+} else {
+    warn "No hay variables *_REDIS en env. Si usas Redis, agrega NOMBRE_REDIS en mcp.env."
+}
+
+# Docker — informativo
+if (Get-Command docker -ErrorAction SilentlyContinue) {
+    $dockerInfo = docker --version 2>$null
+    ok "Docker disponible — $dockerInfo"
+    warn "MCP de Docker no se auto-instala. Documentado en README si lo necesitas."
+} else {
+    warn "Docker no encontrado. Si lo usas, instala Docker Desktop."
+}
+
+# Firebase Admin — informativo
+$fbProjectId = [System.Environment]::GetEnvironmentVariable("FIREBASE_PROJECT_ID", "User")
+if ($fbProjectId) {
+    ok "FIREBASE_PROJECT_ID configurada (oculto)"
+    $fbEmail = [System.Environment]::GetEnvironmentVariable("FIREBASE_CLIENT_EMAIL", "User")
+    $fbKey   = [System.Environment]::GetEnvironmentVariable("FIREBASE_PRIVATE_KEY",  "User")
+    if (-not $fbEmail -or -not $fbKey) {
+        warn "Firebase: FIREBASE_CLIENT_EMAIL o FIREBASE_PRIVATE_KEY faltantes — MCP no funcionara."
+    }
+} else {
+    warn "FIREBASE_PROJECT_ID no configurada. Si usas Firebase Admin/FCM, agrega las vars en mcp.env."
+}
+
+# AWS — informativo
+$awsKey = [System.Environment]::GetEnvironmentVariable("AWS_ACCESS_KEY_ID", "User")
+if ($awsKey) {
+    ok "AWS_ACCESS_KEY_ID configurada (oculto)"
+} else {
+    warn "AWS_ACCESS_KEY_ID no configurada. Si usas AWS (Secrets Manager, S3, SES), agrega las vars en mcp.env."
+}
+
+# Azure — informativo
+$azTenant = [System.Environment]::GetEnvironmentVariable("AZURE_TENANT_ID", "User")
+if ($azTenant) {
+    ok "AZURE_TENANT_ID configurada (oculto)"
+} else {
+    warn "AZURE_TENANT_ID no configurada. Si usas Azure AD u otros servicios Azure, agrega las vars en mcp.env."
+}
+
+Write-Host ""
+
 # ─── Resumen ──────────────────────────────────────────────────────────────────
 $total = $ok + $warn + $err
 Write-Host "─────────────────────────────────────────────" -ForegroundColor DarkGray

@@ -8,6 +8,9 @@ mcp.env
 *.local.json
 .last-update.log
 
+# ─── Hooks obsoletos (removidos del tracking, no volver a incluir) ────────────
+hooks/on-session-stop.ps1
+
 # ─── Directorios temporales ───────────────────────────────────────────────────
 tmp/
 temp/

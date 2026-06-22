@@ -251,10 +251,110 @@ Los MCPs quedan disponibles en Claude Code (`settings.json → mcpServers`) y Co
 |---|---|---|---|
 | **github** | Buscar código en repos, PRs, issues | ✅ | ✅ |
 | **memory** | Knowledge graph Engram | ✅ | — |
+| **filesystem** | Acceso a archivos del proyecto | ✅ | ✅ |
+| **playwright** | Automatización de browser y pruebas UI | — (plugin) | ✅ |
 | **pg-\*** | PostgreSQL — auto-detectado desde `mcp.env` | ✅ | ✅ |
 | **ss-\*** | SQL Server — auto-detectado desde `mcp.env` | ✅ | ✅ |
+| **redis-\*** | Redis — auto-detectado desde `mcp.env` | ✅ | ✅ |
 
 > Los MCPs cloud (Jira, Slack, Microsoft 365, Figma) van por claude.ai — no requieren configuración aquí.
+
+---
+
+## Conectores Claude cloud vs MCPs locales
+
+Hay dos tipos de integración: **conectores cloud** (disponibles en claude.ai sin instalar nada) y **MCPs locales** (se instalan en este repo y sirven para Claude Code y Codex).
+
+| Servicio | Claude cloud | MCP local | Motivo |
+|---|---|---|---|
+| **Atlassian (Jira/Confluence)** | ✅ | ❌ no necesario | Solo lectura/escritura desde la web — no hay acceso a instancias locales |
+| **Figma** | ✅ | ❌ no necesario | El conector cloud tiene acceso completo a la API |
+| **Microsoft 365** | ✅ | ❌ no necesario | Outlook, Teams y SharePoint cloud-only |
+| **Microsoft Learn** | ✅ | ❌ no necesario | Documentación pública, sin estado local |
+| **Slack** | ✅ | ❌ no necesario | API Slack opera sobre canales remotos |
+| **GitHub** | ✅ cloud | ⚙️ opcional local | El conector cloud cubre PRs y búsqueda. El MCP local es útil si Codex necesita git local desde CLI |
+| **Google Drive** | ✅ | ❌ no necesario | Archivos en la nube, no locales |
+| **Notion** | ✅ | ❌ no necesario | Base de conocimiento cloud |
+| **Supabase** | ✅ cloud | ⚙️ opcional local | Cloud cubre storage y queries remotos. Local útil si tienes instancia propia |
+| **Vercel** | ✅ cloud | ⚙️ opcional local | Cloud cubre deploys. Local útil si tienes mucho CI/CD vía CLI |
+| **Cloudflare** | ✅ | ❌ no necesario | Workers y DNS son cloud-only |
+| **Stripe / PayPal / Brex** | ✅ | ❌ no necesario | APIs de pagos cloud, sin estado local |
+| **Calendly / Intercom / Webflow / Canva / Lovable** | ✅ | ❌ no necesario | SaaS cloud, no hay instancias locales |
+| **tldraw** | ✅ | ❌ no necesario | Diagramas en la nube |
+| **Linear** | ✅ | ❌ no necesario | Issue tracker cloud |
+| **PostgreSQL** | ❌ | ✅ obligatorio | DB local o VPN — requiere conexión directa |
+| **SQL Server** | ❌ | ✅ obligatorio | DB local o VPN — requiere conexión directa |
+| **Redis** | ❌ | ✅ recomendado | Cache local — requiere conexión directa |
+| **Playwright** | ✅ plugin (Claude) | ✅ MCP (Codex) | Para automatización UI y tests locales |
+| **filesystem** | ❌ | ✅ obligatorio | Acceso a archivos del proyecto en disco |
+| **Docker** | ❌ | ⚙️ opcional | Útil para inspeccionar contenedores locales |
+| **Firebase Admin** | ❌ | ⚙️ opcional | Si tienes proyectos FCM activos |
+| **AWS** | ❌ | ⚙️ opcional | Si usas Secrets Manager, S3, SES directamente |
+| **Azure** | ❌ | ⚙️ opcional | Si tienes servicios Azure que Codex necesita consultar |
+| **Engram/memory** | ❌ | ✅ obligatorio | Memoria persistente entre sesiones |
+
+---
+
+## MCPs recomendados para flujo FullStack
+
+Según el stack (NestJS + Angular + TypeScript + TypeORM + PostgreSQL + SQL Server):
+
+```
+# Obligatorios
+filesystem          — acceso a archivos del proyecto
+postgres (pg-*)     — TypeORM, queries, migraciones
+sqlserver (ss-*)    — reportes, BI, datos legados
+
+# Recomendados
+redis (redis-*)     — caché, sesiones, queues con Bull
+playwright          — pruebas E2E, automatización UI, debugging visual
+github              — code review, búsqueda en repos, PRs
+memory/engram       — memoria entre sesiones de trabajo
+
+# Opcionales — configurar si los usas activamente
+firebase-admin      — FCM, push notifications, Cloud Messaging
+aws                 — Secrets Manager, S3, SES
+azure               — Azure AD, servicios Microsoft
+docker              — inspeccionar contenedores, logs de servicios
+```
+
+### Cómo agregar Redis
+
+1. Agregar en `mcp.env`:
+```env
+YALO_REDIS=redis://localhost:6379
+```
+2. Correr `.\setup.ps1` — genera MCP `redis-yalo` automáticamente.
+
+### Cómo agregar Playwright (Codex)
+
+Se instala automáticamente con `.\setup.ps1`. No requiere configuración extra.
+
+### Firebase Admin, AWS, Azure
+
+Estos MCPs requieren credenciales específicas. Agregar las variables en `mcp.env` (ver `mcp.env.example`) y luego extender `setup.ps1` manualmente para configurarlos — no se auto-detectan por seguridad.
+
+---
+
+## Qué NO duplicar localmente si ya está en Claude cloud
+
+Si ya tenés estos conectores en claude.ai, **no tiene sentido instalarlos como MCP local** salvo que Codex o un script CLI realmente necesite operar contra esos servicios sin la interfaz web:
+
+- **Atlassian** (Jira, Confluence) — el conector cloud ya tiene acceso completo
+- **Figma** — el plugin de Figma en Claude Code es superior al MCP local
+- **Microsoft 365** — Outlook, Teams, SharePoint son cloud-only
+- **Microsoft Learn** — documentación pública, el conector cloud está optimizado
+- **Slack** — los mensajes y canales están en la nube
+- **Google Drive** — archivos en Drive no son archivos locales
+- **Notion** — base de conocimiento cloud
+- **tldraw** — diagramas en la nube
+- **Canva, Webflow, Lovable** — editores cloud sin estado local
+- **Intercom, Calendly** — SaaS cloud puro
+- **Brex, Stripe, PayPal** — APIs de pagos, nunca con acceso directo local
+- **Cloudflare** — Workers y DNS son 100% cloud
+- **Linear** — issue tracker cloud (usa Jira igual)
+
+> **Regla práctica**: si la herramienta no tiene datos locales ni necesita acceso desde CLI fuera del browser, el conector cloud es suficiente. Los MCPs locales son para bases de datos, archivos, herramientas de desarrollo y servicios con instancias locales.
 
 ---
 
