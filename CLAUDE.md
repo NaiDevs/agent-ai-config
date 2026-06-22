@@ -11,35 +11,23 @@ El vault de Obsidian vive en `C:\Users\naide\OneDrive\Documentos\Obsidian\` y es
 
 Cuando el usuario mencione un cliente o proyecto, buscar contexto relevante en `Clientes/<nombre>/` antes de responder.
 
-## Memoria persistente — Engram + Obsidian
+## Memoria persistente — Engram
 
-Dos sistemas en paralelo. Usarlos en conjunto, no como alternativas.
-
-| Sistema | Para qué | Cuándo |
-|---------|----------|--------|
-| **Engram** (MCP `memory`) | Knowledge graph estructurado: proyectos, clientes, decisiones, bugs | Cuando yo (Claude) necesito recordar algo entre sesiones |
-| **Obsidian** (MCP `filesystem`) | Journal humano legible: daily notes, detalles narrativos, ADRs | Para que Naidelyn pueda leer el historial |
-
-> Los git commits, resúmenes de sesión y updates de Engram se registran automáticamente vía hooks — no hace falta hacerlo manualmente en esos casos.
+> Los git commits y resúmenes de sesión se registran automáticamente vía hooks — no hace falta hacerlo manualmente en esos casos.
 
 ### Cuándo guardar manualmente (OBLIGATORIO, sin esperar que el usuario lo pida)
 
-| Evento | Engram | Obsidian |
-|--------|--------|----------|
-| Decisión técnica importante | `create_entities` entityType=`decision` | `Obsidian/Decisiones/YYYY-MM-DD-<tema>.md` |
-| Bug complejo resuelto | `add_observations` al entity del proyecto | `Obsidian/Clientes/<proyecto>/` |
-| Cambio de config o setup | `add_observations` entityType=`config` | `Obsidian/Clientes/<proyecto>/` |
-| Nuevo proyecto/cliente identificado | `create_entities` entityType=`proyecto` o `cliente` | — |
+| Evento | Acción |
+|--------|--------|
+| Decisión técnica importante | Write en `memory/` con tipo `decision` |
+| Bug complejo resuelto | Write/Edit en `memory/changes-log.md` |
+| Cambio de config o setup | Write/Edit en `memory/changes-log.md` |
+| Nuevo proyecto/cliente identificado | Crear archivo en `memory/projects-<cliente>.md` |
 
 ### Cómo guardar
 
-- **Engram (sesión activa)**: Write/Edit en `C:/Users/naide/.claude/projects/C--Users-naide/memory/` — siempre disponible
-- **Engram (MCP, si disponible)**: `mcp__memory__create_entities` / `mcp__memory__add_observations` — estructura adicional
-- **Obsidian**: Write en `C:/Users/naide/OneDrive/Documentos/Obsidian/` via `mcp__filesystem__write_file`
-
-Prioridad: si el MCP memory está disponible, usarlo. Si no, escribir directo a los archivos de memory.
-
-Para Daily notes: si el archivo del día ya existe, añadir al final. Si no existe, crearlo con encabezado `# YYYY-MM-DD`.
+- **Engram (siempre disponible)**: Write/Edit en `C:/Users/naide/.claude/projects/C--Users-naide/memory/`
+- **Engram (MCP, si disponible)**: `mcp__memory__create_entities` / `mcp__memory__add_observations`
 
 No mencionar que se está guardando a menos que sea relevante para la conversación.
 

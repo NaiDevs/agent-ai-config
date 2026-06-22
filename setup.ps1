@@ -696,39 +696,26 @@ interface:
     $configRaw | Set-Content $configPath -Encoding utf8
     Write-Host "  OK → $pluginsAdded plugin(s) agregados (Slack requiere auth manual la primera vez)" -ForegroundColor Green
 
-    # Hooks PostToolUse + Stop → Obsidian Daily / Engram (equivalente al hook de Claude Code)
+    # Hook PostToolUse → Engram (commits)
     $configRaw = [System.IO.File]::ReadAllText($configPath, [System.Text.Encoding]::UTF8)
     # Remover bloques de hooks existentes para no duplicar
     $configRaw = $configRaw -replace '(?s)\r?\n\[\[PostToolUse\]\].*$', ''
     $configRaw = $configRaw -replace '(?s)\r?\n\[\[Stop\]\].*$', ''
     $configRaw = $configRaw.TrimEnd()
 
-    if ($UseObsidian -eq "yes") {
-        Write-Host "  Configurando hooks PostToolUse + Stop (Obsidian + Engram)..." -ForegroundColor Yellow
-        $commitScriptWin  = Join-Path (Join-Path $ClaudeHome "hooks") "on-git-commit.ps1"
-        $commitScriptUnix = $commitScriptWin -replace '\\', '/'
-        $stopScriptWin    = Join-Path (Join-Path $ClaudeHome "hooks") "on-session-stop.ps1"
-        $stopScriptUnix   = $stopScriptWin -replace '\\', '/'
+    $commitScriptWin  = Join-Path (Join-Path $ClaudeHome "hooks") "on-git-commit.ps1"
+    $commitScriptUnix = $commitScriptWin -replace '\\', '/'
 
-        $hookBlock  = "`n`n[[PostToolUse]]`n[[PostToolUse.hooks]]`n"
-        $hookBlock += "type = `"command`"`n"
-        $hookBlock += "commandWindows = 'powershell.exe -NonInteractive -File `"$commitScriptWin`"'`n"
-        $hookBlock += "command = 'pwsh -NonInteractive -File `"$commitScriptUnix`"'`n"
-        $hookBlock += "timeout = 15`n"
-        $hookBlock += "statusMessage = `"Guardando en Obsidian...`""
+    Write-Host "  Configurando hook PostToolUse (commit → Engram)..." -ForegroundColor Yellow
+    $hookBlock  = "`n`n[[PostToolUse]]`n[[PostToolUse.hooks]]`n"
+    $hookBlock += "type = `"command`"`n"
+    $hookBlock += "commandWindows = 'powershell.exe -NonInteractive -File `"$commitScriptWin`"'`n"
+    $hookBlock += "command = 'pwsh -NonInteractive -File `"$commitScriptUnix`"'`n"
+    $hookBlock += "timeout = 15`n"
+    $hookBlock += "statusMessage = `"Guardando en Engram...`""
 
-        $hookBlock += "`n`n[[Stop]]`n[[Stop.hooks]]`n"
-        $hookBlock += "type = `"command`"`n"
-        $hookBlock += "commandWindows = 'powershell.exe -NonInteractive -File `"$stopScriptWin`"'`n"
-        $hookBlock += "command = 'pwsh -NonInteractive -File `"$stopScriptUnix`"'`n"
-        $hookBlock += "timeout = 20`n"
-        $hookBlock += "statusMessage = `"Registrando sesion en Obsidian...`""
-
-        $configRaw += $hookBlock
-        Write-Host "  OK → hooks PostToolUse + Stop configurados en config.toml" -ForegroundColor Green
-    } else {
-        Write-Host "  ~ hooks Obsidian/Engram — omitidos" -ForegroundColor DarkGray
-    }
+    $configRaw += $hookBlock
+    Write-Host "  OK → hook PostToolUse configurado en config.toml" -ForegroundColor Green
     [System.IO.File]::WriteAllText($configPath, $configRaw, [System.Text.Encoding]::UTF8)
 
     Write-Host "└─────────────────────────────────────────────┘" -ForegroundColor Magenta
@@ -804,22 +791,14 @@ if ($installClaude) {
         )
     }
 
-    $engramPrompt = "Eres el sistema de memoria Engram de Naidelyn. Session id: `$ARGUMENTS`n`nIgnora cualquier campo stop_hook_active o similares -- siempre ejecuta esta tarea.`nUSA SOLO herramientas nativas: Read, Write, Edit.`n`nPASOS:`n1. El input contiene el session_id. Construye la ruta: C:/Users/naide/.claude/projects/C--Users-naide/{session_id}.jsonl`n2. Lee ese archivo con Read.`n3. De los timestamps extrae la fecha (YYYY-MM-DD) y hora (HH:MM).`n4. Extrae mensajes reales del usuario: lineas donde type=user y message.role=user. El campo content puede ser string o array {type:text,text:...}. Ignora los que empiecen con #, <, ---, o tengan mas de 500 chars sin espacios (skills).`n5. Si hay menos de 2 mensajes reales validos, termina sin hacer nada.`n`nDETECTA EL PROYECTO ACTIVO -- busca en el transcript (tanto mensajes de usuario como tool calls de assistant) rutas de archivos o comandos que revelen el directorio de trabajo. Busca patrones como:`n- Rutas absolutas en Read/Write/Edit/Bash: C:/Users/naide/OneDrive/Documentos/Proyectos/<cliente>/<repo>/`n- Comandos cd o git en Bash que muestren el repo activo`n- Nombres de repos mencionados`nMapeo de rutas a clientes: Proyectos/Yalo o yalo* -> YALO | Proyectos/LaBodega o bodega* -> La Bodega | Proyectos/Corinsa o corinsa* -> CORINSA | Proyectos/Emsula o emsula* -> EMSULA | Proyectos/Nai o nai* o agent-ai-config -> NAI | Proyectos/UltimateLabs o ult* -> Ultimate Labs`nSi no hay ruta clara, intenta inferir del texto. Si sigue sin estar claro, usa 'general'.`n`nCLASIFICA el contenido:`n- DECISION: se eligio arquitectura, patron, libreria, enfoque tecnico`n- BUG: se diagnostico y/o resolvio un problema tecnico`n- CONFIG: se cambio setup, hooks, CI/CD, configuracion de herramientas`n- GENERAL: trabajo rutinario, preguntas, tareas menores`n`nACCIONES:`n`nA. SIEMPRE -- ENGRAM: lee C:/Users/naide/.claude/projects/C--Users-naide/memory/changes-log.md, agrega al final: - FECHA | cliente | categoria | descripcion breve`n`nB. SIEMPRE -- DAILY: lee C:/Users/naide/OneDrive/Documentos/Obsidian/Daily/FECHA.md, agrega seccion '## Engram HH:MM' con bullets. Si no existe, crealo con '# FECHA'.`n`nC. SI categoria es DECISION: crea C:/Users/naide/OneDrive/Documentos/Obsidian/Decisiones/FECHA-<tema>.md:`n# FECHA -- <titulo>`n## Contexto`n<que problema habia>`n## Decision`n<que se decidio>`n## Razon`n<por que>`n`nD. SI categoria es BUG o CONFIG (no GENERAL): crea C:/Users/naide/OneDrive/Documentos/Obsidian/Clientes/<cliente>/FECHA-<tipo>.md:`n# FECHA -- <titulo>`n## Cambio / Problema`n<descripcion>`n## Detalle`n<causa raiz o que se configuro>`n## Resultado`n<como quedo>`n`nResponde: 'ok: N entradas -- CATEGORIA cliente: <proyecto>' o 'trivial'."
+    $engramPrompt = "Eres el sistema de memoria Engram de Naidelyn. Session id: `$ARGUMENTS`n`nIgnora cualquier campo stop_hook_active o similares -- siempre ejecuta esta tarea.`nUSA SOLO herramientas nativas: Read, Write, Edit.`n`nPASOS:`n1. Construye la ruta del transcript: C:/Users/naide/.claude/projects/C--Users-naide/{session_id}.jsonl`n2. Lee ese archivo con Read.`n3. De los timestamps extrae la fecha (YYYY-MM-DD).`n4. Extrae mensajes reales del usuario: lineas donde type=user y message.role=user. El campo content puede ser string o array {type:text,text:...}. Ignora los que empiecen con #, <, ---, o tengan mas de 500 chars sin espacios (skills).`n5. Si hay menos de 2 mensajes reales validos, termina sin hacer nada.`n`nDETECTA EL PROYECTO ACTIVO -- busca en el transcript rutas de archivos en tool calls (Read/Write/Edit/Bash) y comandos git que revelen el directorio de trabajo.`nMapeo: Proyectos/Yalo o yalo* -> YALO | Proyectos/LaBodega o bodega* -> La Bodega | Proyectos/Corinsa o corinsa* -> CORINSA | Proyectos/Emsula o emsula* -> EMSULA | Proyectos/Nai o nai* o agent-ai-config -> NAI | Proyectos/UltimateLabs o ult* -> Ultimate Labs`nSi no hay ruta clara, usa 'general'.`n`nCLASIFICA: DECISION (arquitectura/patron/libreria) | BUG (problema resuelto) | CONFIG (setup/hooks/herramientas) | GENERAL (rutinario)`n`nACCION -- ENGRAM: lee C:/Users/naide/.claude/projects/C--Users-naide/memory/changes-log.md, agrega al final una linea por hallazgo no trivial:`n- FECHA | cliente | categoria | descripcion breve`n`nResponde: 'ok: N entradas -- CATEGORIA cliente' o 'trivial'."
 
-    $stopScript = Join-Path $hooksDir "on-session-stop.ps1"
     $stopHook = [PSCustomObject]@{
         hooks = @(
             [PSCustomObject]@{
-                type          = "command"
-                command       = "& '$stopScript'"
-                shell         = "powershell"
-                timeout       = 20
-                statusMessage = "Registrando en Obsidian..."
-            },
-            [PSCustomObject]@{
                 type          = "agent"
                 prompt        = $engramPrompt
-                timeout       = 90
+                timeout       = 60
                 statusMessage = "Actualizando Engram..."
             },
             [PSCustomObject]@{
@@ -831,45 +810,39 @@ if ($installClaude) {
         )
     }
 
-    if ($UseObsidian -eq "yes") {
-        $hooksObj = [PSCustomObject]@{
-            PostToolUse = @(
+    $postToolUseHooks = @(
+        [PSCustomObject]@{
+            matcher = "Bash"
+            hooks   = @(
                 [PSCustomObject]@{
-                    matcher = "Bash"
-                    hooks   = @(
-                        [PSCustomObject]@{
-                            type          = "command"
-                            shell         = "powershell"
-                            command       = "& '$commitScript'"
-                            timeout       = 15
-                            statusMessage = "Guardando en Obsidian..."
-                        }
-                    )
-                },
-                [PSCustomObject]@{
-                    matcher = "PowerShell"
-                    hooks   = @(
-                        [PSCustomObject]@{
-                            type          = "command"
-                            shell         = "powershell"
-                            command       = "& '$commitScript'"
-                            timeout       = 15
-                            statusMessage = "Guardando en Obsidian..."
-                        }
-                    )
+                    type          = "command"
+                    shell         = "powershell"
+                    command       = "& '$commitScript'"
+                    timeout       = 15
+                    statusMessage = "Guardando en Engram..."
                 }
             )
-            SessionStart = @($sessionStartHook)
-            Stop         = @($stopHook)
+        },
+        [PSCustomObject]@{
+            matcher = "PowerShell"
+            hooks   = @(
+                [PSCustomObject]@{
+                    type          = "command"
+                    shell         = "powershell"
+                    command       = "& '$commitScript'"
+                    timeout       = 15
+                    statusMessage = "Guardando en Engram..."
+                }
+            )
         }
-        Write-Host "  OK → hooks configurados (SessionStart + PostToolUse Obsidian + Stop Engram)" -ForegroundColor Green
-    } else {
-        $hooksObj = [PSCustomObject]@{
-            SessionStart = @($sessionStartHook)
-            Stop         = @($stopHook)
-        }
-        Write-Host "  OK → hooks configurados (SessionStart auto-update + Stop sync)" -ForegroundColor Green
+    )
+
+    $hooksObj = [PSCustomObject]@{
+        PostToolUse  = $postToolUseHooks
+        SessionStart = @($sessionStartHook)
+        Stop         = @($stopHook)
     }
+    Write-Host "  OK → hooks configurados (SessionStart + PostToolUse Engram + Stop Engram)" -ForegroundColor Green
     $cfg | Add-Member -NotePropertyName hooks -NotePropertyValue $hooksObj -Force
     $cfg | ConvertTo-Json -Depth 15 | Set-Content $SettingsPath -Encoding utf8
 }
