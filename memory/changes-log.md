@@ -20,3 +20,10 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-06-21 | agent-ai-config | refactor | Elimina integracion Obsidian de hooks — Engram (changes-log.md) queda como unico sistema automatico
 - 2026-06-21 | NAI | config | Configuración de agent Stop hook para Engram — sincronización de cambios con memoria de Obsidian
 - 2026-06-21 | NAI | config | Engram detecta proyecto activo por rutas del transcript — escanea tool calls (Read/Write/Edit/Bash) para mapear a clientes
+- 2026-06-21 | agent-ai-config | commit | chore(tooling): auditoria completa — doctor, uninstall, tests, readme, fixes
+- 2026-06-21 | NAI | config | Setup audit completo: doctor.ps1, uninstall.ps1, setup.validation.tests.ps1, CHANGELOG, README refactor, .gitattributes
+- 2026-06-21 | NAI | bug | Corregido bug de triplicación en MEMORY.md — setup.ps1 no hace append posterior al Copy-Item
+- 2026-06-21 | NAI | config | Cleanup de archivos obsoletos: hooks/on-session-stop.ps1, tmp/hook-test.txt, .last-update.log removidos del tracking
+- 2026-06-21 | agent-ai-config | commit | feat(mcps): agrega Redis, Playwright y tabla cloud vs local
+- 2026-06-21 | NAI | config | setup.ps1: auto-detección Redis NOMBRE_REDIS → MCP redis-nombre en mcp.json + config.toml; Playwright agregado como @playwright/mcp
+- 2026-06-21 | NAI | config | mcp.env.example: plantillas limpias con convención _DEV/_SS/_REDIS; README: tabla 22 servicios + MCPs obligatorios/recomendados/opcionales; doctor.ps1: validación local sin exponer secretos
