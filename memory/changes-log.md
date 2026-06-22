@@ -12,6 +12,8 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 
 <!-- formato: - YYYY-MM-DD | alias | commit/pr | descripción -->
 
+- 2026-06-22 | YALO | bug | Identificado error en ejecución SQL: scaffold de EF Core ejecutó ALTER TABLE en tabla incorrecta (pro_categoriavariaciones); el target correcto es pro_categoriaproducto que mapea a ProCategoriaproducto.cs — solución: `ALTER TABLE pro_categoriaproducto ADD COLUMN activoecommerce boolean DEFAULT true;`
+- 2026-06-22 | YALO | bug | EF Core scaffold chain issue: YaloCobroEntities sobrescribía ProCategoriaproducto.cs eliminando Activoecommerce; YaloAUTHEntities fallaba al buildear; solución: ALTER TABLE pro_categoriaproducto ADD COLUMN activoecommerce bool NULL (debe ejecutarse en BD DEV)
 - 2026-06-22 | YALO | bug | DbContext namespace corregido (context.ps1: $namespace.DB.$contextName); YaloCobroEntities.cs y ProCategoriaproducto.cs restaurados; build limpio
 - 2026-06-22 | YALO | bug | EF Core scaffold sobrescribió ProCategoriaproducto.cs borrando campo Activoecommerce; build falló con 6 errores — diagnosticado con Select-String para aislar errores vs warnings
 - 2026-06-22 | YALO | config | Scaffolding EF Core: YaloApi/context.ps1 — agregado `--schema public` para excluir schemas problemáticos (aws_sqlserver_ext, pgmail)
@@ -32,3 +34,10 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-06-21 | agent-ai-config | commit | feat(mcps): agrega Redis, Playwright y tabla cloud vs local
 - 2026-06-21 | NAI | config | setup.ps1: auto-detección Redis NOMBRE_REDIS → MCP redis-nombre en mcp.json + config.toml; Playwright agregado como @playwright/mcp
 - 2026-06-21 | NAI | config | mcp.env.example: plantillas limpias con convención _DEV/_SS/_REDIS; README: tabla 22 servicios + MCPs obligatorios/recomendados/opcionales; doctor.ps1: validación local sin exponer secretos
+- 2026-06-22 | YALO | decision | Refactoring componentes ion-toggle → yalo-switch con margin-top: 16px para separación visual
+- 2026-06-22 | YALO | config | ExternalService.CategoriesController: agregado filtro `category.Activoecommerce != false` en GetCategories para incluir categorías con NULL además de true (compatibilidad con datos pre-ALTER)
+- 2026-06-22 | YALO | decision | Arquitectura de features ecommerce: requirement analysis — 3 funcionalidades (desactivar categorías en ecommerce, upload icono, desactivar productos); exploración de entidades ProCategoriaproducto y ProProducto; sistema S3 base64 documentado
+- 2026-06-22 | YALO | decision | Componente categoria-detail: refactor final de checkboxes — uso de `yalo-checkbox` para Activo y ActivoEcommerce con margin-top 16px de separación visual; comentarios HTML para claridad ("Este producto está a la venta")
+- 2026-06-22 | YALO | decision | Patrón de filtrado ecommerce: `!= false` en lugar de `== true` — permite que productos/categorías con NULL (creadas antes del ALTER) sigan visibles en ecommerce; solo se excluyen explícitamente los que tengan `activoecommerce = false`
+- 2026-06-22 | YALO | feat | ProductsListService: aplicado filtro ecommerce idéntico a categorías — `query.Where(p => p.Activoecommerce != false)` post GetProductsQuery; manteniendo backward compatibility con datos legacy
+- 2026-06-22 | YALO | feat | ProProducto.cs (ExternalService): agregada columna `public bool? Activoecommerce` para deshabilitar productos exclusivamente en ecommerce; nullable bool para datos pre-ALTER
