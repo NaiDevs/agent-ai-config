@@ -11,6 +11,7 @@ Registro cronológico de cambios. Cada entrada: `fecha | alias | tipo | descripc
 Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese límite.
 
 <!-- formato: - YYYY-MM-DD | alias | commit/pr | descripción -->
+- 2026-06-26 | bodega ecommerce | commit | feat(labodega-tv): agrega hub completo, banners por sección y corrige redirección del botón
 
 - 2026-06-22 | YALO | bug | Identificado error en ejecución SQL: scaffold de EF Core ejecutó ALTER TABLE en tabla incorrecta (pro_categoriavariaciones); el target correcto es pro_categoriaproducto que mapea a ProCategoriaproducto.cs — solución: `ALTER TABLE pro_categoriaproducto ADD COLUMN activoecommerce boolean DEFAULT true;`
 - 2026-06-22 | YALO | bug | EF Core scaffold chain issue: YaloCobroEntities sobrescribía ProCategoriaproducto.cs eliminando Activoecommerce; YaloAUTHEntities fallaba al buildear; solución: ALTER TABLE pro_categoriaproducto ADD COLUMN activoecommerce bool NULL (debe ejecutarse en BD DEV)
