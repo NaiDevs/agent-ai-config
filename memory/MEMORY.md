@@ -11,3 +11,4 @@
 - [Proyectos Ultimate Labs](projects-ultimatelabs.md) — 6 subproyectos labs, aliases `ult *`
 - [Proyectos EMSULA + NAI](projects-otros.md) — 12 subproyectos médicos y personales
 - [Workspaces](projects-workspaces.md) — Grupos de repos para trabajo simultáneo con git sync
+- [YaloConsole currentUser admin](feedback-yaloconsole-currentuser.md) — currentUser mock siempre admin con acceso total, permisos después
