@@ -12,3 +12,4 @@
 - [Proyectos EMSULA + NAI](projects-otros.md) — 12 subproyectos médicos y personales
 - [Workspaces](projects-workspaces.md) — Grupos de repos para trabajo simultáneo con git sync
 - [YaloConsole currentUser admin](feedback-yaloconsole-currentuser.md) — currentUser mock siempre admin con acceso total, permisos después
+- [Drag-drop nativo en YaloConsole](decision-yaloconsole-dragdrop.md) — usar DnD HTML5 nativo (no CDK) al portar kanban de yalo-sales-flow
