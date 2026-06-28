@@ -99,6 +99,9 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-06-27 | yalo console | commit | feat(sales): agrega comunicación rápida en pipeline, restyling CS y nav (commit 52a520f, push a feat/naidelyn/ventas)
 - 2026-06-27 | yalo console | commit | feat(maintenance): porta módulo Config Ventas de React a Angular (commit 5cc2c24, branch feat/naidelyn/ventas)
 - 2026-06-27 | yalo console | commit | feat(sales-config): agrega 4 tabs faltantes del port React→Angular (commit b3f58e3, branch feat/naidelyn/ventas)
+- 2026-06-27 | yalo console | commit | feat(onboarding): porta módulo Onboarding de React a Angular (commit 0f8e4e2, branch feat/naidelyn/ventas)
 - 2026-06-27 | YALO | feat | YaloConsole sales-config: remover max-w-6xl del contenedor principal para que los 10 tabs calipen en una sola línea; componente completado y optimizado para layout responsivo
 
 - 2026-06-27 | YALO | decision | Análisis de gaps en YaloConsole admin: 3 gaps funcionales (Países: edición inline de todos campos, Trial/Onboarding: Card 3 checklist con drag-drop, Planes: rubros recomendados + calcAnnual) + gaps menores (Productos: textarea descripción + botón desactivar en card, Add-ons: botón desactivar en tabla, Procesadores: advertencia bank_transfer + textarea descripción)
+- 2026-06-27 | YALO | refactor | onboarding module elevado a ruta padre independiente (modules/onboarding) desacoplado de maintenance — módulo standalone con rutas propias (onboarding.routes.ts), integrado en app.routes.ts con loadChildren, movido en navigation.data.ts de Mantenimientos a Ventas (id 105)
+- 2026-06-27 | YALO | general | Refactor visual kanban component: `:host` con height 100% + min-height 0 para llenar altura disponible; drawer overlay con bg-black/20 + backdrop-blur-[1px] cuando abierto; ring azul visible en card seleccionada (ej. Heladería Polar); borde rojo en cards fuera de SLA (Baleadas Express, Panadería La Esperanza, Sabro Cafeterías)
