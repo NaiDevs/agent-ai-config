@@ -114,3 +114,10 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-06-29 | yalo console | commit | feat(sales-config): elimina pestana Equipo de configuracion de ventas (commit 8cf7a0d, push a feat/naidelyn/ventas)
 - 2026-06-29 | yalo console | commit | feat(sales-config): agrega módulos CRM de catálogos y pestaña de países (commit aeca06f, push a feat/naidelyn/ventas)
 - 2026-06-29 | yalo admin api | commit | feat(crm): agrega módulos CRM de catálogos, territorios y países (commit 8121466, push a feat/naidelyn/permisos)
+- 2026-06-29 | yalo admin api | feat | Trial/Onboarding: 3 módulos NestJS nuevos (crm-trial-config, crm-alerts-config, crm-onboarding-steps) con upsert para configs globales y bulk sync para checklist
+- 2026-06-29 | yalo console | feat | Trial/Onboarding mapeado al API real: signals trialConfig/alertsConfig/onboardingSteps en CrmCatalogsService; effects en constructor sincronizan señales locales; saveTrialSettings/saveSlaSettings/saveChecklist usan endpoints reales
+- 2026-06-29 | yalo admin api | commit | feat(crm): agrega módulos trial config, alerts config y onboarding steps (commit 600a121, push a feat/naidelyn/permisos)
+- 2026-06-29 | yalo console | commit | feat(sales-config): mapea trial, alertas y checklist al API real (commit 86c50b3, push a feat/naidelyn/ventas)
+- 2026-06-29 | yalo admin api | feat | crm-commissions-config: módulo NestJS con GET + PATCH upsert, entidad CrmCommissionsConfig (7 campos numéricos), registrado en app.module.ts
+- 2026-06-29 | yalo console | feat | Comisiones mapeadas al API real: interface CrmCommissionsConfig + signal commissionsConfig en servicio; effect sincroniza señales locales; saveCommSettings usa endpoint real
+- 2026-06-29 | yalo console | decision | Trial/Onboarding tab: 3 tablas en Crm-* — "Crm-trial-config" (trialInitialDays, trialExtensionDays, trialAdminApprovalThreshold), "Crm-alerts-config" (organicContactSlaHours, zombieTrialDays, dealAgingWarningDays, dealAgingCriticalDays, onboardingSlaDays), "Crm-onboarding-steps" (stepKey unique, stepLabel, stepOrder, active). Scripts SQL listos, entidades API pendientes.
