@@ -112,3 +112,5 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-06-27 | yalo console | commit | feat(dashboards): porta módulo Dashboards con cockpit y reportes de React a Angular (commit ae89e04, push a feat/naidelyn/ventas)
 - 2026-06-29 | yalo vendo entrego | commit | feat(customer): expone las ultimas 3 compras en el detalle del cliente (commit 4620cb4, push a fix/naidelyn/entrego)
 - 2026-06-29 | yalo console | commit | feat(sales-config): elimina pestana Equipo de configuracion de ventas (commit 8cf7a0d, push a feat/naidelyn/ventas)
+- 2026-06-29 | yalo console | commit | feat(sales-config): agrega módulos CRM de catálogos y pestaña de países (commit aeca06f, push a feat/naidelyn/ventas)
+- 2026-06-29 | yalo admin api | commit | feat(crm): agrega módulos CRM de catálogos, territorios y países (commit 8121466, push a feat/naidelyn/permisos)
