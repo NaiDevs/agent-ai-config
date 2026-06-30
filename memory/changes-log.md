@@ -11,26 +11,6 @@ Registro cronológico de cambios. Cada entrada: `fecha | alias | tipo | descripc
 Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese límite.
 
 <!-- formato: - YYYY-MM-DD | alias | commit/pr | descripción -->
-- 2026-06-26 | bodega ecommerce | commit | feat(labodega-tv): agrega hub completo, banners por sección y corrige redirección del botón
-- 2026-06-22 | YALO | bug | EF Core scaffold sobrescribió ProCategoriaproducto.cs borrando campo Activoecommerce; build falló con 6 errores — diagnosticado con Select-String para aislar errores vs warnings
-- 2026-06-22 | YALO | config | Scaffolding EF Core: YaloApi/context.ps1 — agregado `--schema public` para excluir schemas problemáticos (aws_sqlserver_ext, pgmail)
-- 2026-06-22 | YALO | config | Scaffolding EF Core: YaloApi/context.ps1 genera YaloCobroEntities y YaloAUTHEntities con todas las tablas, credenciales dev integradas; .gitignore actualizado
-- 2026-06-22 | YALO | feat | Feature ecommerce exclusivo: columnas activoecommerce (nullable BIT) en pro_categoriaproducto y pro_producto; entidades C# con bool?; disable categorías y productos solo para ecommerce
-- 2026-06-21 | engram | config | Integración de agente Engram en hook Stop — sincronización automática de sesiones
-- 2026-06-21 | engram | bug-fix | Hooks no guardaban correctamente en Engram — agregado agente de persistencia
-- 2026-06-21 | agent-ai-config | feat | Hook Stop completo: on-session-stop.ps1 + agent Engram + fix filtros PostToolUse sin 'if'
-- 2026-06-21 | agent-ai-config | feat | setup.ps1 actualizado: despliega stop hook para Claude Code y Codex, CLAUDE.md sincronizado
-- 2026-06-21 | agent-ai-config | feat | Engram agent hook: rutea a Clientes/ y Decisiones/ segun tipo de sesion (DECISION/BUG/CONFIG)
-- 2026-06-21 | agent-ai-config | refactor | Elimina integracion Obsidian de hooks — Engram (changes-log.md) queda como unico sistema automatico
-- 2026-06-21 | NAI | config | Configuración de agent Stop hook para Engram — sincronización de cambios con memoria de Obsidian
-- 2026-06-21 | NAI | config | Engram detecta proyecto activo por rutas del transcript — escanea tool calls (Read/Write/Edit/Bash) para mapear a clientes
-- 2026-06-21 | agent-ai-config | commit | chore(tooling): auditoria completa — doctor, uninstall, tests, readme, fixes
-- 2026-06-21 | NAI | config | Setup audit completo: doctor.ps1, uninstall.ps1, setup.validation.tests.ps1, CHANGELOG, README refactor, .gitattributes
-- 2026-06-21 | NAI | bug | Corregido bug de triplicación en MEMORY.md — setup.ps1 no hace append posterior al Copy-Item
-- 2026-06-21 | NAI | config | Cleanup de archivos obsoletos: hooks/on-session-stop.ps1, tmp/hook-test.txt, .last-update.log removidos del tracking
-- 2026-06-21 | agent-ai-config | commit | feat(mcps): agrega Redis, Playwright y tabla cloud vs local
-- 2026-06-21 | NAI | config | setup.ps1: auto-detección Redis NOMBRE_REDIS → MCP redis-nombre en mcp.json + config.toml; Playwright agregado como @playwright/mcp
-- 2026-06-21 | NAI | config | mcp.env.example: plantillas limpias con convención _DEV/_SS/_REDIS; README: tabla 22 servicios + MCPs obligatorios/recomendados/opcionales; doctor.ps1: validación local sin exponer secretos
 - 2026-06-22 | YALO | decision | Refactoring componentes ion-toggle → yalo-switch con margin-top: 16px para separación visual
 - 2026-06-22 | YALO | config | ExternalService.CategoriesController: agregado filtro `category.Activoecommerce != false` en GetCategories para incluir categorías con NULL además de true (compatibilidad con datos pre-ALTER)
 - 2026-06-22 | YALO | decision | Arquitectura de features ecommerce: requirement analysis — 3 funcionalidades (desactivar categorías en ecommerce, upload icono, desactivar productos); exploración de entidades ProCategoriaproducto y ProProducto; sistema S3 base64 documentado
@@ -127,3 +107,6 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-06-29 | La Bodega | config | PowerTranz secrets refactor: endpoint configurado en secrets.types.ts (antes hardcoded); onModuleInit valida y normaliza trailing slash; inicialización de sale, payment, void endpoints desde secret
 - 2026-06-29 | La Bodega | bug | PowerTranz void endpoint corregido: ahora <base>/void en lugar de URL rota /api/void sin /spi/
 - 2026-06-29 | La Bodega | config | PowerTranz endpoint mapping en AWS Secrets Manager: refactor de hardcoded URLs a configuración dinámica en secrets.types.ts::PowerTranzConfig con endpoint base (ej. https://staging.ptranz.com/api/spi); service normaliza trailing slash y construye sale/payment/void endpoints; id y password desde secrets; validación en onModuleInit
+- 2026-06-30 | YALO | bug | CustomerDetailDto refactor: eliminado campo `LatesSales`, `CustomerInvoiceSummaryDto.Number` ahora `string` (antes `long`); GetDetailAsync sin bloque latestSalesDtos, lastInvoices usa `sale.Numerofactura ?? sale.Codfactura.ToString()` directamente; GetBulkSyncDetailAsync `.NumberInvoice.ToString()` para compilación
+- 2026-06-30 | YALO | refactor | customer: elimina lastSales del detalle y expone numero de factura real — CustomerDetailDto.cs quita LatesSales, Number en CustomerInvoiceSummaryDto pasa de long a string; CustomerRepository.cs elimina construcción de latestSalesDtos, lastInvoices usa Numerofactura directamente sin ParseInvoiceNumber
+- 2026-06-30 | yalo vendo | commit | refactor(customer): elimina lastSales del detalle y expone numero de factura real (commit ef23ce1, push a fix/naidelyn/entrego)
