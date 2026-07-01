@@ -116,3 +116,8 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-01 | yalo stripe api | feat | CuponesController: GET/POST/DELETE /api/Stripe/Cupones + CrearCuponStripeDto (nombre, tipoDescuento percent/fixed, duracion once/repeating/forever, aplicaAProductos, venceEl)
 - 2026-07-01 | yalo admin api | feat | crm-stripe: GET/POST/DELETE /api/crm-stripe/cupones proxy a YALO-API-Stripe; CrearCuponStripeDto con validaciones class-validator
 - 2026-07-01 | yalo console | feat | sc-promociones: reemplaza mock por cupones Stripe reales; Promotion interface nueva (nombre/tipoDescuento/duracion/aplicaAProductos/venceEl/activo); stripeCupones signal + load/create/delete en CrmCatalogsService; fix referencias viejas en nuevo-deal-modal, drawer-promotion-section, comisiones, reports, sales-pipeline
+- 2026-07-01 | yalo stripe api | commit | feat(stripe): agrega endpoints GET/POST/DELETE para cupones de Stripe (af679c6, feat/naidelyn/stripe)
+- 2026-07-01 | yalo admin api | commit | feat(crm-stripe): agrega endpoints de promociones y renombra rutas de cupones (a478b64, feat/naidelyn/permisos)
+- 2026-07-01 | yalo console | commit | feat(promociones): integra cupones Stripe como promociones en YaloConsole (1d59306, feat/naidelyn/ventas)
+- 2026-07-01 | yalo console | commit | refactor(sales): descompone comisiones y customer-success en sub-componentes (b66d7f5, feat/naidelyn/ventas)
+- 2026-07-01 | yalo console | feat | nuevo-deal-modal: auto-calcula MRR con plan+promo; desglose precio (base/descuento/final/setupFee); promociones reales desde CrmCatalogsService.stripeCupones; rutas renombradas /cupones→/promociones en NestJS + Angular service
