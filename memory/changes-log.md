@@ -113,3 +113,6 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-01 | yalo stripe api | commit | feat(stripe): agrega endpoints POST crear addons/planes y PATCH actualizar precio (8ab6b88, feat/naidelyn/stripe)
 - 2026-07-01 | yalo admin api | commit | feat(crm-stripe): agrega endpoints POST crear addons/planes y PATCH actualizar precio (d92ba73, feat/naidelyn/permisos)
 - 2026-07-01 | yalo console | commit | feat(sales-config): descompone en 8 sub-componentes y conecta Stripe al API real (c9a7265, feat/naidelyn/ventas)
+- 2026-07-01 | yalo stripe api | feat | CuponesController: GET/POST/DELETE /api/Stripe/Cupones + CrearCuponStripeDto (nombre, tipoDescuento percent/fixed, duracion once/repeating/forever, aplicaAProductos, venceEl)
+- 2026-07-01 | yalo admin api | feat | crm-stripe: GET/POST/DELETE /api/crm-stripe/cupones proxy a YALO-API-Stripe; CrearCuponStripeDto con validaciones class-validator
+- 2026-07-01 | yalo console | feat | sc-promociones: reemplaza mock por cupones Stripe reales; Promotion interface nueva (nombre/tipoDescuento/duracion/aplicaAProductos/venceEl/activo); stripeCupones signal + load/create/delete en CrmCatalogsService; fix referencias viejas en nuevo-deal-modal, drawer-promotion-section, comisiones, reports, sales-pipeline
