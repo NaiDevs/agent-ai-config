@@ -126,3 +126,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-02 | bodega ecommerce | commit | feat(card-producto): rediseño de sección de puntos de lealtad
 - 2026-07-02 | bodega ecommerce | commit | feat(ecommerce): multiples fixes UX — registro post-signup sin redirect (auth.ts+AuthContext), toast pedidos muestra razón de fallo (useSendInvoice+server-error RFC 7807), flechas hero banner reducidas (HeroCarouselClient 16→10px), SVG inline 8px en BannersAndSwiper, LivesFeaturedPlayer multi-plataforma con lazy play (commit aa0a7358, branch fix/naidelyn/bodegatv)
 - 2026-07-02 | bodega ecommerce | commit | fix(productos): corrige espacios en blanco en grid al expandir card de puntos (e76beeb7)
+- 2026-07-02 | bodega ecommerce | commit | feat(lives): integra endpoints de calendario y boton Recordarme multicanal (805677a1)
