@@ -121,5 +121,7 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-01 | yalo console | commit | feat(promociones): integra cupones Stripe como promociones en YaloConsole (1d59306, feat/naidelyn/ventas)
 - 2026-07-01 | yalo console | commit | refactor(sales): descompone comisiones y customer-success en sub-componentes (b66d7f5, feat/naidelyn/ventas)
 - 2026-07-01 | yalo console | feat | nuevo-deal-modal: auto-calcula MRR con plan+promo; desglose precio (base/descuento/final/setupFee); promociones reales desde CrmCatalogsService.stripeCupones; rutas renombradas /cupones→/promociones en NestJS + Angular service
+- 2026-07-02 | bodega ecommerce | fix | overflow-x-auto clipeaba dropdown de ordenamiento en ProductList — agregado lg:overflow-visible
+- 2026-07-02 | bodega ecommerce | fix | listado de productos en checkout (OrderItemsList) sin scroll — agregado max-h-[420px] overflow-y-auto
 - 2026-07-02 | bodega ecommerce | commit | feat(card-producto): rediseño de sección de puntos de lealtad
 - 2026-07-02 | bodega ecommerce | commit | feat(ecommerce): multiples fixes UX — registro post-signup sin redirect (auth.ts+AuthContext), toast pedidos muestra razón de fallo (useSendInvoice+server-error RFC 7807), flechas hero banner reducidas (HeroCarouselClient 16→10px), SVG inline 8px en BannersAndSwiper, LivesFeaturedPlayer multi-plataforma con lazy play (commit aa0a7358, branch fix/naidelyn/bodegatv)
