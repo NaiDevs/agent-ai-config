@@ -13,3 +13,4 @@
 - [Workspaces](projects-workspaces.md) — Grupos de repos para trabajo simultáneo con git sync
 - [YaloConsole currentUser admin](feedback-yaloconsole-currentuser.md) — currentUser mock siempre admin con acceso total, permisos después
 - [Drag-drop nativo en YaloConsole](decision-yaloconsole-dragdrop.md) — usar DnD HTML5 nativo (no CDK) al portar kanban de yalo-sales-flow
+- [Perf GET /api/organizations](decision-yaloconsole-organizations-perf.md) — dblink agregando fac_facturas era el 94%; fix con MV remota + pg_cron
