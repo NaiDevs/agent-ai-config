@@ -970,6 +970,10 @@ if (Test-Path "$ScriptDir\mcp.env") {
 if (Test-Path "$ScriptDir\sync.ps1") { & $ok "sync.ps1 presente — auto-sync activo" }
 else                                  { & $bad "sync.ps1 falta en el repo" }
 
+# scaffold-guard.ps1
+if (Test-Path "$ScriptDir\scaffold-guard.ps1") { & $ok "scaffold-guard.ps1 presente" }
+else                                            { & $bad "scaffold-guard.ps1 falta en el repo" }
+
 # YALO Skills
 if ($InstallYaloSkills -ne "no") {
     $yaloCmd  = Join-Path $ClaudeHome "commands\yalo-components.md"
