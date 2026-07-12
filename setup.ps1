@@ -742,7 +742,8 @@ if ($installClaude) {
     Copy-Item (Join-Path (Join-Path $ScriptDir "hooks") "on-git-commit.ps1") $commitScript -Force
 
     # Construir hooks object
-    $syncCmd = "& '$autoUpdateScript' -Silent"
+    $syncCmd     = "& '$autoUpdateScript' -Silent"
+    $syncScript  = "$ScriptDir\sync.ps1"
 
     $sessionStartHook = [PSCustomObject]@{
         hooks = @(
@@ -761,9 +762,16 @@ if ($installClaude) {
         hooks = @(
             [PSCustomObject]@{
                 type          = "agent"
+                model         = "claude-haiku-4-5-20251001"
                 prompt        = $engramPrompt
                 timeout       = 60
                 statusMessage = "Actualizando Engram..."
+            },
+            [PSCustomObject]@{
+                type    = "command"
+                command = "& '$syncScript' -Silent"
+                shell   = "powershell"
+                async   = $true
             },
             [PSCustomObject]@{
                 type    = "command"
@@ -774,16 +782,35 @@ if ($installClaude) {
         )
     }
 
+    $analyzePrompt = "Acabas de ejecutar un git commit. Primero verifica la rama actual con ``git branch --show-current``. Si la rama NO empieza con feat/ ni fix/, termina sin hacer nada. Si si aplica: obtén el diff con ``git diff HEAD~1...HEAD``, lee los archivos afectados con Read, y analiza bugs/seguridad/performance/calidad. Muestra el veredicto (APROBADO o CAMBIOS REQUERIDOS), resumen del cambio, riesgos detectados y checklist para revisión manual. Todo directo en la respuesta, sin generar archivos."
+
     $postToolUseHooks = @(
         [PSCustomObject]@{
             matcher = "Bash"
             hooks   = @(
                 [PSCustomObject]@{
                     type          = "command"
+                    if            = "Bash(git commit *)"
                     shell         = "powershell"
                     command       = "& '$commitScript'"
                     timeout       = 15
                     statusMessage = "Guardando en Engram..."
+                },
+                [PSCustomObject]@{
+                    type          = "command"
+                    if            = "Bash(git commit *)"
+                    shell         = "powershell"
+                    command       = "`$b = git branch --show-current; if (`$b -match '^(feat|fix)/') { git push }"
+                    timeout       = 30
+                    statusMessage = "Auto-push en rama feat/fix..."
+                },
+                [PSCustomObject]@{
+                    type          = "agent"
+                    model         = "claude-haiku-4-5-20251001"
+                    if            = "Bash(git commit *)"
+                    prompt        = $analyzePrompt
+                    timeout       = 120
+                    statusMessage = "Revisando código del commit..."
                 }
             )
         },
@@ -792,10 +819,27 @@ if ($installClaude) {
             hooks   = @(
                 [PSCustomObject]@{
                     type          = "command"
+                    if            = "PowerShell(git commit *)"
                     shell         = "powershell"
                     command       = "& '$commitScript'"
                     timeout       = 15
                     statusMessage = "Guardando en Engram..."
+                },
+                [PSCustomObject]@{
+                    type          = "command"
+                    if            = "PowerShell(git commit *)"
+                    shell         = "powershell"
+                    command       = "`$b = git branch --show-current; if (`$b -match '^(feat|fix)/') { git push }"
+                    timeout       = 30
+                    statusMessage = "Auto-push en rama feat/fix..."
+                },
+                [PSCustomObject]@{
+                    type          = "agent"
+                    model         = "claude-haiku-4-5-20251001"
+                    if            = "PowerShell(git commit *)"
+                    prompt        = $analyzePrompt
+                    timeout       = 120
+                    statusMessage = "Revisando código del commit..."
                 }
             )
         }
