@@ -974,6 +974,10 @@ else                                  { & $bad "sync.ps1 falta en el repo" }
 if (Test-Path "$ScriptDir\scaffold-guard.ps1") { & $ok "scaffold-guard.ps1 presente" }
 else                                            { & $bad "scaffold-guard.ps1 falta en el repo" }
 
+# contract-check.ps1
+if (Test-Path "$ScriptDir\contract-check.ps1") { & $ok "contract-check.ps1 presente" }
+else                                            { & $bad "contract-check.ps1 falta en el repo" }
+
 # YALO Skills
 if ($InstallYaloSkills -ne "no") {
     $yaloCmd  = Join-Path $ClaudeHome "commands\yalo-components.md"
