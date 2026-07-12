@@ -29,6 +29,8 @@
 | yalo console api | YALO_API_Administrator     | Node/TS    | API administrador       |
 | yalo invoice     | fx-create-invoice          | —          | Generador facturas      |
 | yalo pos encoder | esc-pos-encoder-previewer  | Node/TS    | Encoder ESC/POS         |
+| yalo trackeo     | yalo-trackeo               | Node/TS    | App trackeo interno     |
+| yalo auth lambda | fx-auth-login              | Node/TS    | Lambda login JWT        |
 
 ## LA BODEGA | C:\Users\naide\OneDrive\Documentos\Proyectos\LA BODEGA
 
