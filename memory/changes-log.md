@@ -11,6 +11,7 @@ Registro cronológico de cambios. Cada entrada: `fecha | alias | tipo | descripc
 Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese límite.
 
 <!-- formato: - YYYY-MM-DD | alias | commit/pr | descripción -->
+- 2026-07-11 | yalo bo api + yalo bo | commit | feat(pedidos, rutas): agrega timeline de historial en pedidos y filtro de territorio en rutas
 - 2026-07-11 | yalo bo api | fix | Pedidos: filtro de fechas corregido — WHERE y SELECT usaban Fechamodificacion ?? Fechacreacion, ahora usan solo Fechacreacion. También FechaCreacionPedido separado del campo FechaCreacion (que sigue con fechamod para "Fecha y hora")
 - 2026-07-11 | yalo bo api + yalo bo | feat | Rutas: filtro de territorio entre motorista y pedidos listos para entrega. API: nuevo param CodTerritorioCliente en GET /Rutas/Clientes filtra CliClientes.Codterritoriocliente. FE: select de territorio (GET /TerritorioClientes) que desbloquea el select de pedidos; al cambiar motorista se resetea el territorio
 - 2026-07-11 | yalo bo api + yalo bo | feat | Pedidos drawer: timeline Creación → Facturación → Liquidación. API: FechaFacturacion (FacFactura.Fechacreacion via PedPedido.Codfactura), FechaLiquidacion (PedLiquidacione.Fechacreacion via PedLiquidacionesDetalle) agregados a OrdenesModel. FE: 3 mini-queries post-fetch en GetPedidosId; timeline visual con dot verde cuando tiene fecha
