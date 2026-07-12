@@ -10,7 +10,7 @@
             "shell": "powershell",
             "command": "& 'C:\\Users\\naide\\.claude\\hooks\\on-git-commit.ps1'",
             "timeout": 15,
-            "statusMessage": "Guardando en Obsidian..."
+            "statusMessage": "Guardando en Engram..."
           }
         ]
       },
@@ -23,7 +23,7 @@
             "shell": "powershell",
             "command": "& 'C:\\Users\\naide\\.claude\\hooks\\on-git-commit.ps1'",
             "timeout": 15,
-            "statusMessage": "Guardando en Obsidian..."
+            "statusMessage": "Guardando en Engram..."
           }
         ]
       }
