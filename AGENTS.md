@@ -50,6 +50,7 @@ Activa el skill correspondiente cuando detectes estas palabras clave:
 | review, code review, revisar código | `/review` |
 | seguridad, OWASP, SQL injection, IDOR | `/security` |
 | validar proyecto, dependencias faltantes, .env | `/doctor` |
+| analiza el código, revisa si está bien, qué tiene el PR, está bien este código | `/analiza-codigo` |
 
 ## Memoria Engram
 
@@ -60,6 +61,25 @@ Los archivos de memoria están en `~/.codex/memory/`. Consultar antes de respond
 - `projects-labodega.md` — proyectos La Bodega (ecommerce)
 - `projects-corinsa.md` — proyectos CORINSA (BI/CPA)
 - `user-profile.md` — perfil de la usuaria
+
+## Loops de desarrollo
+
+### React → Angular Port loop
+```
+Identificar componente React origen → mapear estructura (estado/props/eventos/hooks)
+→ crear standalone Angular con signals equivalentes
+→ reemplazar librerías (dnd-kit → CDK o HTML5 nativo, sx/styled → Tailwind si aplica)
+→ verificar encapsulación SCSS (styleUrl en cada sub-componente, no solo en el padre)
+→ ng build --configuration production → commit
+```
+
+### Multi-repo change loop
+```
+Identificar todos los repos afectados → ordenar por dependencia (BD → API → BE → FE)
+→ implementar en orden, compilar cada uno antes de avanzar al siguiente
+→ verificar contratos entre repos (shapes de request/response compatibles)
+→ commit por repo con referencia cruzada → push todos antes de abrir PR
+```
 
 ## Estilo de respuesta
 
