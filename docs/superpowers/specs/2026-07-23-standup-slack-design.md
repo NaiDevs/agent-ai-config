@@ -53,10 +53,10 @@ Skill nuevo `commands/standup.md` en el repo `agent-config`, desplegado a `~/.cl
                  (sprint abierto primero si aplica; máx ~5 issues)
   4. BLOCKERS    preguntar a la usuaria; si no hay, se omite la sección
   5. ENSAMBLAR   mensaje Slack (mrkdwn) con tono hondureño natural, por secciones
-  6. PREVIEW     mostrar el mensaje armado y pedir confirmación
-                 (este es el momento de meter/ajustar blockers)
+  6. PREVIEW     solo con flag `preview`: mostrar el mensaje y terminar (NO envía).
+                 Sin `preview`: no se pide confirmación (destino = DM propio, sin riesgo).
   7. ENVIAR      Slack MCP (slack_send_message) al self-DM de Naidelyn
-                 salvo que se haya invocado en modo `preview` (no envía)
+                 (salvo modo `preview`)
 ```
 
 **Resolución de alcance:** los alias se resuelven con `projects-registry.md` (nivel cliente como `yalo`/`bodega`, o repo específico). Para filtrar Jira, cada cliente en alcance se mapea a sus Jira keys con `memory/reference-jira.md` (yalo→YAL/YV/YALOAG, bodega→LBO, cpa→CC, bi→CBI, doctor→ED, ult→UL). Si un cliente en alcance no tiene Jira (ej. `nai`), se omite de las secciones de Jira pero sí entra en "Hecho".

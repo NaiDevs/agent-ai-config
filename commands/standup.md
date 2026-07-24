@@ -84,8 +84,9 @@ Construir el mensaje en formato Slack mrkdwn, con tono hondureño natural. Omiti
 
 Si no hubo NADA (0 commits y 0 issues), no ensamblar: responder "No hay nada para el standup de hoy" y terminar.
 
-### Paso 6 — PREVIEW / CONFIRMAR
-Mostrar el mensaje ensamblado en la conversación. Si el modo es `preview`, terminar acá (NO enviar) e indicar "modo preview — no se envió". Si no, pedir confirmación explícita antes de enviar.
+### Paso 6 — PREVIEW (opcional)
+Solo si se invocó con el flag `preview`: mostrar el mensaje ensamblado en la conversación, terminar acá (NO enviar) e indicar "modo preview — no se envió".
+Si NO es preview, seguir directo al envío **sin pedir confirmación**: el destino es siempre tu propio DM (privado, sin riesgo de destinatario equivocado).
 
 ### Paso 7 — ENVIAR
 1. Resolver el self-DM: con el MCP Slack, identificar al usuario propio y abrir/usar el DM consigo misma (canal directo del propio usuario).
