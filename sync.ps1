@@ -57,17 +57,47 @@ try {
     if ($changed) {
         $gitOut = git -C $ScriptDir status --porcelain 2>$null
         if ($gitOut) {
+            # Pre-check: no commitear secretos (esto es lo que trababa el push en silencio)
+            $scanFiles = @(Join-Path $ScriptDir "projects-registry.md")
+            $scanFiles += (Get-ChildItem "$ScriptDir\memory\*.md" -ErrorAction SilentlyContinue | ForEach-Object { $_.FullName })
+            $secretPatterns = @('AKIA[0-9A-Z]{16}', 'ghp_[0-9A-Za-z]{36}', 'xox[baprs]-[0-9A-Za-z-]+', '-----BEGIN [A-Z ]*PRIVATE KEY-----')
+            $hits = @()
+            foreach ($f in $scanFiles) {
+                if (Test-Path $f) {
+                    $m = Select-String -Path $f -Pattern $secretPatterns -ErrorAction SilentlyContinue
+                    if ($m) { $hits += $m }
+                }
+            }
+            if ($hits.Count -gt 0) {
+                $where = (($hits | ForEach-Object { "$([System.IO.Path]::GetFileName($_.Path)):$($_.LineNumber)" }) | Select-Object -Unique) -join ', '
+                $warn  = "sync ABORTADO: posible secreto en $where. Enmascaralo antes de sincronizar."
+                Add-Content "$ScriptDir\.sync-errors.log" "$(Get-Date -Format 'u') | $warn" -Encoding utf8
+                Write-Host "  x $warn" -ForegroundColor Red
+                Write-Output (@{ systemMessage = "[agent-ai-config] $warn" } | ConvertTo-Json -Compress)
+                exit 0
+            }
+
             git -C $ScriptDir add "projects-registry.md" "memory/*.md" 2>$null
             $date = Get-Date -Format "yyyy-MM-dd HH:mm"
             git -C $ScriptDir commit -m "sync: actualiza config local [$date]" --quiet 2>$null
-            git -C $ScriptDir push origin master --quiet 2>$null
-            if (-not $Silent) { Write-Host "  OK - Cambios pusheados a GitHub" -ForegroundColor Cyan }
+
+            # Push CON visibilidad de error (antes se tragaba con --quiet 2>$null y acumulaba commits)
+            $pushOut = git -C $ScriptDir push origin master 2>&1
+            if ($LASTEXITCODE -ne 0) {
+                $msg = "sync: PUSH FALLO (exit $LASTEXITCODE) - hay commits locales sin subir. $($pushOut -join ' ')"
+                Add-Content "$ScriptDir\.sync-errors.log" "$(Get-Date -Format 'u') | $msg" -Encoding utf8
+                Write-Host "  x $msg" -ForegroundColor Red
+                Write-Output (@{ systemMessage = "[agent-ai-config] $msg" } | ConvertTo-Json -Compress)
+            } elseif (-not $Silent) {
+                Write-Host "  OK - Cambios pusheados a GitHub" -ForegroundColor Cyan
+            }
         }
     } elseif (-not $Silent) {
         Write-Host "  sync: sin cambios locales" -ForegroundColor DarkGray
     }
 
 } catch {
+    if ($ScriptDir) { Add-Content "$ScriptDir\.sync-errors.log" "$(Get-Date -Format 'u') | sync EXCEPCION: $($_.Exception.Message)" -Encoding utf8 }
     exit 0
 }
 
