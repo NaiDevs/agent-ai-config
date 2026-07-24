@@ -19,14 +19,6 @@
             "command": "$b = git branch --show-current; if ($b -match '^(feat|fix)/') { git push }",
             "timeout": 30,
             "statusMessage": "Auto-push en rama feat/fix..."
-          },
-          {
-            "type": "agent",
-            "model": "claude-haiku-4-5-20251001",
-            "if": "Bash(git commit *)",
-            "prompt": "Acabas de ejecutar un git commit. Primero verifica la rama actual con `git branch --show-current`. Si la rama NO empieza con feat/ ni fix/, termina sin hacer nada. Si sí aplica: obtén el diff con `git diff HEAD~1...HEAD`, lee los archivos afectados con Read, y analiza bugs/seguridad/performance/calidad. Muestra el veredicto (APROBADO o CAMBIOS REQUERIDOS), resumen del cambio, riesgos detectados y checklist para revisión manual. Todo directo en la respuesta, sin generar archivos.",
-            "timeout": 120,
-            "statusMessage": "Revisando código del commit..."
           }
         ]
       },
@@ -48,14 +40,6 @@
             "command": "$b = git branch --show-current; if ($b -match '^(feat|fix)/') { git push }",
             "timeout": 30,
             "statusMessage": "Auto-push en rama feat/fix..."
-          },
-          {
-            "type": "agent",
-            "model": "claude-haiku-4-5-20251001",
-            "if": "PowerShell(git commit *)",
-            "prompt": "Acabas de ejecutar un git commit. Primero verifica la rama actual con `git branch --show-current`. Si la rama NO empieza con feat/ ni fix/, termina sin hacer nada. Si sí aplica: obtén el diff con `git diff HEAD~1...HEAD`, lee los archivos afectados con Read, y analiza bugs/seguridad/performance/calidad. Muestra el veredicto (APROBADO o CAMBIOS REQUERIDOS), resumen del cambio, riesgos detectados y checklist para revisión manual. Todo directo en la respuesta, sin generar archivos.",
-            "timeout": 120,
-            "statusMessage": "Revisando código del commit..."
           }
         ]
       }

@@ -667,26 +667,93 @@ interface:
     $configRaw | Set-Content $configPath -Encoding utf8
     Write-Host "  OK → $pluginsAdded plugin(s) agregados (Slack requiere auth manual la primera vez)" -ForegroundColor Green
 
-    # Hook PostToolUse → Engram (commits)
+    # ── Hooks de Codex (equivalentes a Claude Code) ──────────────────────────
+    # NOTA: Codex solo soporta hooks type=command (no agent) y su matcher filtra
+    # por nombre de herramienta, no por comando. Por eso los hooks de git corren
+    # tras cada Bash pero los scripts no hacen nada si el output no trae un commit.
+    # Requiere [features].codex_hooks = true (el motor de hooks esta apagado por default).
+
+    # Desplegar scripts de hook compartidos a ~/.claude/hooks/
+    $hooksDir = Join-Path $ClaudeHome "hooks"
+    New-Item -ItemType Directory -Force $hooksDir | Out-Null
+    Copy-Item (Join-Path (Join-Path $ScriptDir "hooks") "on-git-commit.ps1") (Join-Path $hooksDir "on-git-commit.ps1") -Force
+    Copy-Item (Join-Path (Join-Path $ScriptDir "hooks") "on-git-push.ps1")   (Join-Path $hooksDir "on-git-push.ps1")   -Force
+
     $configRaw = [System.IO.File]::ReadAllText($configPath, [System.Text.Encoding]::UTF8)
-    # Remover bloques de hooks existentes para no duplicar
+
+    # Remover bloques de hooks previos (schema viejo [[PostToolUse]] y nuevo [[hooks.*]])
     $configRaw = $configRaw -replace '(?s)\r?\n\[\[PostToolUse\]\].*$', ''
     $configRaw = $configRaw -replace '(?s)\r?\n\[\[Stop\]\].*$', ''
+    $configRaw = $configRaw -replace '(?s)\r?\n#? *─* *Hooks[^\n]*\r?\n\[\[hooks\..*$', ''
+    $configRaw = $configRaw -replace '(?s)\r?\n\[\[hooks\..*$', ''
     $configRaw = $configRaw.TrimEnd()
 
-    $commitScriptWin  = Join-Path (Join-Path $ClaudeHome "hooks") "on-git-commit.ps1"
-    $commitScriptUnix = $commitScriptWin -replace '\\', '/'
+    # Activar el motor de hooks (apagado por default en Codex)
+    if ($configRaw -notmatch '(?m)^\s*codex_hooks\s*=') {
+        if ($configRaw -match '(?m)^\[features\]') {
+            $configRaw = $configRaw -replace '(?m)^\[features\]', "[features]`ncodex_hooks = true"
+        } else {
+            $configRaw += "`n`n[features]`ncodex_hooks = true"
+        }
+    }
+    $configRaw = $configRaw.TrimEnd()
 
-    Write-Host "  Configurando hook PostToolUse (commit → Engram)..." -ForegroundColor Yellow
-    $hookBlock  = "`n`n[[PostToolUse]]`n[[PostToolUse.hooks]]`n"
-    $hookBlock += "type = `"command`"`n"
-    $hookBlock += "commandWindows = 'powershell.exe -NonInteractive -File `"$commitScriptWin`"'`n"
-    $hookBlock += "command = 'pwsh -NonInteractive -File `"$commitScriptUnix`"'`n"
-    $hookBlock += "timeout = 15`n"
-    $hookBlock += "statusMessage = `"Guardando en Engram...`""
+    # Rutas de scripts (Windows + Unix)
+    $commitWin  = Join-Path $hooksDir "on-git-commit.ps1"
+    $commitUnix = $commitWin -replace '\\', '/'
+    $pushWin    = Join-Path $hooksDir "on-git-push.ps1"
+    $pushUnix   = $pushWin -replace '\\', '/'
+    $syncWin    = "$ScriptDir\sync.ps1"
+    $syncUnix   = $syncWin -replace '\\', '/'
+    $updWin     = "$ScriptDir\auto-update.ps1"
+    $updUnix    = $updWin -replace '\\', '/'
+
+    Write-Host "  Configurando hooks de Codex (PostToolUse + SessionStart + Stop)..." -ForegroundColor Yellow
+
+    $hookBlock = @"
+
+
+# ─── Hooks (equivalentes a Claude Code, portados a Codex) ───
+[[hooks.PostToolUse]]
+matcher = "^Bash`$"
+[[hooks.PostToolUse.hooks]]
+type = "command"
+command_windows = 'powershell.exe -NonInteractive -File "$commitWin"'
+command = 'pwsh -NonInteractive -File "$commitUnix"'
+timeout = 15
+statusMessage = "Guardando en Engram..."
+[[hooks.PostToolUse.hooks]]
+type = "command"
+command_windows = 'powershell.exe -NonInteractive -File "$pushWin"'
+command = 'pwsh -NonInteractive -File "$pushUnix"'
+timeout = 30
+statusMessage = "Auto-push en rama feat/fix..."
+[[hooks.SessionStart]]
+matcher = "startup|resume"
+[[hooks.SessionStart.hooks]]
+type = "command"
+command_windows = 'powershell.exe -NonInteractive -File "$updWin" -Tool codex -Silent'
+command = 'pwsh -NonInteractive -File "$updUnix" -Tool codex -Silent'
+timeout = 120
+statusMessage = "Buscando updates de agent-ai-config..."
+[[hooks.Stop]]
+[[hooks.Stop.hooks]]
+type = "command"
+command_windows = 'powershell.exe -NonInteractive -File "$syncWin" -Silent'
+command = 'pwsh -NonInteractive -File "$syncUnix" -Silent'
+timeout = 60
+statusMessage = "Sincronizando memoria..."
+[[hooks.Stop.hooks]]
+type = "command"
+command_windows = 'powershell.exe -NonInteractive -File "$updWin" -Silent'
+command = 'pwsh -NonInteractive -File "$updUnix" -Silent'
+timeout = 120
+statusMessage = "Buscando updates..."
+"@
 
     $configRaw += $hookBlock
-    Write-Host "  OK → hook PostToolUse configurado en config.toml" -ForegroundColor Green
+    Write-Host "  OK → hooks configurados (PostToolUse Engram+push, SessionStart, Stop sync+update)" -ForegroundColor Green
+    Write-Host "  ~ El resumen de sesion (Engram/Haiku) NO se porta: Codex no soporta hooks type=agent" -ForegroundColor DarkGray
     [System.IO.File]::WriteAllText($configPath, $configRaw, [System.Text.Encoding]::UTF8)
 
     Write-Host "└─────────────────────────────────────────────┘" -ForegroundColor Magenta
@@ -782,8 +849,6 @@ if ($installClaude) {
         )
     }
 
-    $analyzePrompt = "Acabas de ejecutar un git commit. Primero verifica la rama actual con ``git branch --show-current``. Si la rama NO empieza con feat/ ni fix/, termina sin hacer nada. Si si aplica: obtén el diff con ``git diff HEAD~1...HEAD``, lee los archivos afectados con Read, y analiza bugs/seguridad/performance/calidad. Muestra el veredicto (APROBADO o CAMBIOS REQUERIDOS), resumen del cambio, riesgos detectados y checklist para revisión manual. Todo directo en la respuesta, sin generar archivos."
-
     $postToolUseHooks = @(
         [PSCustomObject]@{
             matcher = "Bash"
@@ -803,14 +868,6 @@ if ($installClaude) {
                     command       = "`$b = git branch --show-current; if (`$b -match '^(feat|fix)/') { git push }"
                     timeout       = 30
                     statusMessage = "Auto-push en rama feat/fix..."
-                },
-                [PSCustomObject]@{
-                    type          = "agent"
-                    model         = "claude-haiku-4-5-20251001"
-                    if            = "Bash(git commit *)"
-                    prompt        = $analyzePrompt
-                    timeout       = 120
-                    statusMessage = "Revisando código del commit..."
                 }
             )
         },
@@ -832,14 +889,6 @@ if ($installClaude) {
                     command       = "`$b = git branch --show-current; if (`$b -match '^(feat|fix)/') { git push }"
                     timeout       = 30
                     statusMessage = "Auto-push en rama feat/fix..."
-                },
-                [PSCustomObject]@{
-                    type          = "agent"
-                    model         = "claude-haiku-4-5-20251001"
-                    if            = "PowerShell(git commit *)"
-                    prompt        = $analyzePrompt
-                    timeout       = 120
-                    statusMessage = "Revisando código del commit..."
                 }
             )
         }
