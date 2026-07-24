@@ -356,3 +356,6 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-24 | NAI | BUG | Enmascarar AccessKeyId hardcodeada en appsettings
 - 2026-07-24 | NAI | DECISION | Elimina agent hooks auto-review en setup.ps1 settings-hook.json
 - 2026-07-24 | NAI | BUG | Fix agent-ai-config: remover hooks tipo agent post-commit
+- 2026-07-24 | NAI | GENERAL | Sync destrancado: enmascarar AWS secret, limpiar 67 commits
+- 2026-07-24 | NAI | DECISION | Portar hooks a Codex con feature flag, corregir schema
+- 2026-07-24 | NAI | GENERAL | Todo pusheado a master. Config y hooks listos para Codex
