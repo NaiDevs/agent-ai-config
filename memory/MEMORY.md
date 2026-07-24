@@ -14,3 +14,6 @@
 - [YaloConsole currentUser admin](feedback-yaloconsole-currentuser.md) — currentUser mock siempre admin con acceso total, permisos después
 - [Drag-drop nativo en YaloConsole](decision-yaloconsole-dragdrop.md) — usar DnD HTML5 nativo (no CDK) al portar kanban de yalo-sales-flow
 - [Perf GET /api/organizations](decision-yaloconsole-organizations-perf.md) — dblink agregando fac_facturas era el 94%; fix con MV remota + pg_cron
+- [YaloConsole → Slack Lists](decision-yaloconsole-slack-lists.md) — actividades del kanban como comentarios en Slack List; match email+nombre, post por chat.postMessage al canal C0BJGPESMFS
+- [README integración Slack deals](reference-integracion-slack-deals.md) — cómo comentar en elementos de Slack Lists vía chat.postMessage al canal C… (list id con prefijo C), setup y archivos
+- [Stock bajo — La Bodega](decision-labodega-stock-low.md) — stock_disponible = stock_real − existenciaBaja; restar en todo EP que muestre o valide stock
