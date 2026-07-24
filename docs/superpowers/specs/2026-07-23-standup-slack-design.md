@@ -19,6 +19,7 @@ No es time-tracking ni worklog: es **comunicación** (una bitácora/standup para
 | Próximo / Blockers | Próximo desde Jira; Blockers preguntados al usuario (se omite si no hay) |
 | Destino | DM propio de Naidelyn (self-DM), un solo mensaje con todos los clientes |
 | Disparo | Comando manual `/standup` |
+| Alcance | Opcional por proyecto(s): `/standup [alias...]`. Sin args = todos los clientes; con args = solo esos |
 | Enfoque | Orquestador que reusa `/scan` (git), MCP Atlassian (Jira) y MCP Slack |
 
 ## Arquitectura
@@ -28,17 +29,27 @@ Skill nuevo `commands/standup.md` en el repo `agent-config`, desplegado a `~/.cl
 ## Flujo
 
 ```
-/standup  (o  /standup preview  para dry-run)
-  1. HECHO       barrido git con subagentes Haiku por cliente (lógica de /scan hoy),
+/standup [alias...] [preview]
+  ej: /standup                    → todos los clientes
+      /standup yalo               → solo YALO
+      /standup yalo bodega corinsa → solo esos tres
+      /standup yalo preview       → arma YALO sin enviar
+
+  0. SCOPE       resolver los alias contra projects-registry.md.
+                 Sin alias  → los 7 clientes base.
+                 Con alias  → solo los repos/clientes indicados.
+                 Guardar los "clientes en alcance" para filtrar Jira después.
+  1. HECHO       barrido git con subagentes Haiku por cliente EN ALCANCE (lógica /scan hoy),
                  filtrado a los commits de Naidelyn:
                    git log --since="00:00 today" --author=<email/nombre> --oneline
-                 sobre los repos de cada cliente en projects-registry.
                  Agrupado por proyecto. Máx 10 commits por repo (igual que /scan).
   2. EN PROGRESO Jira MCP (searchJiraIssuesUsingJql):
                    assignee = <accountId> AND status = "In Progress"
+                   [AND project IN (<keys de los clientes en alcance>)]  ← solo si hubo scope
                  cloudId 70102692-578c-4758-a88b-ffb5a3c535cb
                  accountId 712020:8322cd00-7bcb-4a0a-bdfa-0d1e58bf4bd3
   3. PRÓXIMO     Jira MCP: assignee = <accountId> AND status = "To Do"
+                   [AND project IN (<keys en alcance>)]  ← solo si hubo scope
                  (sprint abierto primero si aplica; máx ~5 issues)
   4. BLOCKERS    preguntar a la usuaria; si no hay, se omite la sección
   5. ENSAMBLAR   mensaje Slack (mrkdwn) con tono hondureño natural, por secciones
@@ -47,6 +58,8 @@ Skill nuevo `commands/standup.md` en el repo `agent-config`, desplegado a `~/.cl
   7. ENVIAR      Slack MCP (slack_send_message) al self-DM de Naidelyn
                  salvo que se haya invocado en modo `preview` (no envía)
 ```
+
+**Resolución de alcance:** los alias se resuelven con `projects-registry.md` (nivel cliente como `yalo`/`bodega`, o repo específico). Para filtrar Jira, cada cliente en alcance se mapea a sus Jira keys con `memory/reference-jira.md` (yalo→YAL/YV/YALOAG, bodega→LBO, cpa→CC, bi→CBI, doctor→ED, ult→UL). Si un cliente en alcance no tiene Jira (ej. `nai`), se omite de las secciones de Jira pero sí entra en "Hecho".
 
 ## Fuentes de datos
 
