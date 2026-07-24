@@ -352,3 +352,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-18 | YALO | DECISION | Refactor extenso arquitectura productos múltiples servicios compilación OK
 - 2026-07-22 | bodega bo api | commit | fix(coupons): usa numerofactura en estad�sticas
 - 2026-07-22 | bodega bo | commit | fix(coupons): muestra factura nullable en estad�sticas
+- 2026-07-24 | NAI | BUG | Enmascarar AccessKeyId hardcodeada en appsettings
