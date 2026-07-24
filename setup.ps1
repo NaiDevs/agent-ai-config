@@ -149,17 +149,15 @@ if ($InstallYaloSkills -eq "") {
 $anthropicKey = [System.Environment]::GetEnvironmentVariable("ANTHROPIC_API_KEY", "User")
 $openaiKey    = [System.Environment]::GetEnvironmentVariable("OPENAI_API_KEY",    "User")
 if (($Tool -eq "claude" -or $Tool -eq "both") -and -not $anthropicKey) {
-    Write-Host "  ! ANTHROPIC_API_KEY no encontrada" -ForegroundColor Yellow
-    Write-Host "    Claude Code la necesita para funcionar. Configurala en:" -ForegroundColor DarkYellow
-    Write-Host "    claude.ai/settings → API Keys → copia la key y ejecuta:" -ForegroundColor DarkYellow
-    Write-Host "    [System.Environment]::SetEnvironmentVariable('ANTHROPIC_API_KEY','sk-ant-...','User')" -ForegroundColor DarkGray
+    Write-Host "  i ANTHROPIC_API_KEY no configurada (opcional)" -ForegroundColor DarkGray
+    Write-Host "    Solo hace falta con facturacion por API (console.anthropic.com)." -ForegroundColor DarkGray
+    Write-Host "    Con suscripcion claude.ai (login) NO se necesita." -ForegroundColor DarkGray
     Write-Host ""
 }
 if (($Tool -eq "codex" -or $Tool -eq "both") -and -not $openaiKey) {
-    Write-Host "  ! OPENAI_API_KEY no encontrada" -ForegroundColor Yellow
-    Write-Host "    Codex la necesita para funcionar. Configurala en:" -ForegroundColor DarkYellow
-    Write-Host "    platform.openai.com/api-keys → copia la key y ejecuta:" -ForegroundColor DarkYellow
-    Write-Host "    [System.Environment]::SetEnvironmentVariable('OPENAI_API_KEY','sk-...','User')" -ForegroundColor DarkGray
+    Write-Host "  i OPENAI_API_KEY no configurada (opcional)" -ForegroundColor DarkGray
+    Write-Host "    Solo hace falta con facturacion por API (platform.openai.com)." -ForegroundColor DarkGray
+    Write-Host "    Con login de ChatGPT NO se necesita." -ForegroundColor DarkGray
     Write-Host ""
 }
 
@@ -995,12 +993,12 @@ if ($installCodex) {
 $anthKey   = [System.Environment]::GetEnvironmentVariable("ANTHROPIC_API_KEY", "User")
 $openaiKey = [System.Environment]::GetEnvironmentVariable("OPENAI_API_KEY",    "User")
 if ($installClaude) {
-    if ($anthKey)   { & $ok  "ANTHROPIC_API_KEY configurada" }
-    else            { & $bad "ANTHROPIC_API_KEY falta — Claude Code no funcionará" }
+    if ($anthKey)   { & $ok  "ANTHROPIC_API_KEY configurada (auth por API)" }
+    else            { & $ok  "ANTHROPIC_API_KEY no configurada (ok con suscripcion claude.ai)" }
 }
 if ($installCodex) {
-    if ($openaiKey) { & $ok  "OPENAI_API_KEY configurada" }
-    else            { & $bad "OPENAI_API_KEY falta — Codex no funcionará" }
+    if ($openaiKey) { & $ok  "OPENAI_API_KEY configurada (auth por API)" }
+    else            { & $ok  "OPENAI_API_KEY no configurada (ok con login de ChatGPT)" }
 }
 
 # Hooks
