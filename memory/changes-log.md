@@ -357,6 +357,7 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-22 | bodega bo | commit | fix(coupons): muestra factura nullable en estad�sticas
 - 2026-07-24 | NAI | BUG | Enmascarar AccessKeyId hardcodeada en appsettings
 - 2026-07-24 | NAI | DECISION | Elimina agent hooks auto-review en setup.ps1 settings-hook.json
+- 2026-07-23 | NAI | DECISION | skill `/standup`: spec de rollup diario (Hecho/En progreso/Próximo/Blockers) que orquesta /scan (git) + MCP Atlassian (Jira JQL) + MCP Slack → self-DM. Barrido git hoy con Haiku, JQL searchJiraIssuesUsingJql (In Progress/To Do), pregunta blockers, ensambla mrkdwn, modo preview para dry-run, manejo degradado. Skill prompt-based en commands/standup.md desplegado por setup.ps1. Spec: docs/superpowers/specs/2026-07-23-standup-slack-design.md
 - 2026-07-24 | NAI | BUG | Fix agent-ai-config: remover hooks tipo agent post-commit
 - 2026-07-24 | NAI | GENERAL | Sync destrancado: enmascarar AWS secret, limpiar 67 commits
 - 2026-07-24 | NAI | DECISION | Portar hooks a Codex con feature flag, corregir schema
