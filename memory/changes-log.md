@@ -365,3 +365,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-24 | NAI | GENERAL | Sync destrancado: enmascarar AWS secret, limpiar 67 commits
 - 2026-07-24 | NAI | DECISION | Portar hooks a Codex con feature flag, corregir schema
 - 2026-07-24 | NAI | GENERAL | Todo pusheado a master. Config y hooks listos para Codex
+- 2026-07-26 | LaBodegaEcommerce | commit | fix(tv,checkout,addresses): mejoras UI compartir, precios envío y flujo direcciones
