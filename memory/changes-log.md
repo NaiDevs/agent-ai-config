@@ -380,3 +380,5 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-27 | La Bodega | config | SEO condicional por ENV: ENV=production → robots.txt (index: true, follow: true) + sitemap completo (/sitemap.xml); Cualquier otro env → noindex, nofollow, nocache + sitemap vacío. Implementación: middleware metaRobots condicional + src/app/sitemap.ts retorna array vacío si !isProduction
 - 2026-07-26 | bodega ecommerce | commit | feat(seo): habilita indexación y sitemap dinámico solo en producción (commit 25cabca7, branch development)
 - 2026-07-27 | La Bodega | CONFIG | Revisión SEO robots.txt y sitemap.xml en LaBodegaEcommerce: robots.txt ya creado y apuntando a sitemap.xml (no existe). Decisión: implementar generación automática con Next.js app router (app/sitemap.ts) en lugar de XML estático
+
+- 2026-07-27 | bodega ecommerce | commit | fix(passcode): excluye health y metrics del candado del middleware
