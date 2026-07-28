@@ -383,3 +383,5 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 
 - 2026-07-27 | bodega ecommerce | commit | fix(passcode): excluye health y metrics del candado del middleware- 2026-07-28 | naide | commit | fix(productos): oculta productos sin disponibilidad (labodega-dev)
 - 2026-07-28 | naide | commit | fix(ecommerce): corrige stock, categorias y reels de TV (development)
+- 2026-07-28 | naide | commit | fix(stock): permite consultar stock sin config por sucursal (labodega-dev)
+- 2026-07-28 | naide | commit | fix(auth): redirige al login desde entrega a domicilio (development)
