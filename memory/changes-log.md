@@ -381,4 +381,5 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-26 | bodega ecommerce | commit | feat(seo): habilita indexación y sitemap dinámico solo en producción (commit 25cabca7, branch development)
 - 2026-07-27 | La Bodega | CONFIG | Revisión SEO robots.txt y sitemap.xml en LaBodegaEcommerce: robots.txt ya creado y apuntando a sitemap.xml (no existe). Decisión: implementar generación automática con Next.js app router (app/sitemap.ts) en lugar de XML estático
 
-- 2026-07-27 | bodega ecommerce | commit | fix(passcode): excluye health y metrics del candado del middleware
+- 2026-07-27 | bodega ecommerce | commit | fix(passcode): excluye health y metrics del candado del middleware- 2026-07-28 | naide | commit | fix(productos): oculta productos sin disponibilidad (labodega-dev)
+- 2026-07-28 | naide | commit | fix(ecommerce): corrige stock, categorias y reels de TV (development)
