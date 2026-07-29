@@ -385,3 +385,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-28 | naide | commit | fix(ecommerce): corrige stock, categorias y reels de TV (development)
 - 2026-07-28 | naide | commit | fix(stock): permite consultar stock sin config por sucursal (labodega-dev)
 - 2026-07-28 | naide | commit | fix(auth): redirige al login desde entrega a domicilio (development)
+- 2026-07-29 | La Bodega | bug | BlogProductCard: quitar estado "Agregando..." que hacía pegarse el botón 2s. Causa raíz: `isAdding` state bloqueaba clicks y mostraba estado intermedio. Fix: (1) eliminar `isAdding` state + setIsAdding calls; (2) feedback optimista con toast success inmediato (pattern idéntico CardVideoModal) + revertir solo si falla; (3) botón siempre dice "Agregar al carrito" (sin condicional isAdding). Resultado: toast sale al instante sin bloqueo, UX más snappy. Type-check limpio.
