@@ -392,3 +392,5 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-29 | YALO | BUG | yalo-trackeo: requiere 3 datos del usuario (2 SQL queries + 1 payload inspection) para confirmar causa raíz: (1) Query policies en workflow_states, (2) workspace_id membresías usuario, (3) workspace_id en request 403 payload. Si payload workspace_id NO está en membresías = usuario no miembro; si SÍ está y policies mostró INSERT policy = JWT no llega como authenticated. Pendiente respuesta de usuario.
 - 2026-07-29 | naide | commit | feat(workflow): configura estados por workspace y evita colisiones (descripcion-tiptap-secciones)
 - 2026-07-29 | yalo trackeo | commit | feat(workflow): configura estados por workspace y evita colisiones
+- 2026-07-29 | yalo trackeo | commit | fix(trackeo): corrige editor y renderizado de solicitudes
+- 2026-07-29 | naide | commit | fix(trackeo): corrige editor y renderizado de solicitudes (descripcion-tiptap-secciones)
