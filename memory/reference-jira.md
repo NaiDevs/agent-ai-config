@@ -14,6 +14,12 @@ cloudId: `70102692-578c-4758-a88b-ffb5a3c535cb`
 `712020:8322cd00-7bcb-4a0a-bdfa-0d1e58bf4bd3`
 Usar siempre que el usuario diga "asignado a mí" o "asignamela a mí".
 
+## Account IDs de otras personas
+- Daniel Brizuela: `712020:e460b94e-0e47-4caa-8603-afd517977a58`
+- Giovanny Calderon: `712020:b66a75a3-4284-4a9c-852a-85e95fffa760`
+
+Nota: `lookupJiraAccountId` a veces falla con error de auth; en JQL funciona filtrar por displayName exacto, ej. `assignee = "Daniel Brizuela"`. En LBO los **epics no llevan assignee** — para "epic de X" hay que subir desde subtarea → historia → epic vía el campo `parent`.
+
 ## Mapping alias → Jira Key
 
 | Alias / Grupo | Jira Key | Nombre del proyecto |
