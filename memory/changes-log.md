@@ -394,3 +394,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-29 | yalo trackeo | commit | feat(workflow): configura estados por workspace y evita colisiones
 - 2026-07-29 | yalo trackeo | commit | fix(trackeo): corrige editor y renderizado de solicitudes
 - 2026-07-29 | naide | commit | fix(trackeo): corrige editor y renderizado de solicitudes (descripcion-tiptap-secciones)
+- 2026-07-29 | naide | commit | feat(ia): agrega creaci├│n de tareas y personaliza workflows (descripcion-tiptap-secciones)
