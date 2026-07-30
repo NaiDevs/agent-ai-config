@@ -404,3 +404,5 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-29 | YALO | BUG | yalo-trackeo Popover color inside dark surfaces: labels del popover heredaban blanco del parent (barra navy) → invisible. Fix: `color: var(--color-fg)` inline style en contenedor popover para resetear árbol del dropdown a texto oscuro. Aplica a cualquier popover dentro de superficies de color. Merged PR #17.
 - 2026-07-29 | YALO | CONFIG | ai-create-tasks v6 ACTIVE: edge function Supabase deployada con soporte parámetro `kind` — genera solicitudes en Bandeja + boards producto, tareas en Tareas/Ciclos/Proyecto. Integración en PR #17 con barra bulk actions (Cambiar estado/Asignar/Fecha/Archivar/Eliminar) y lógica IA modular. Versión anterior sin `kind` respondía ok pero sin `requests` array → implementado fallback warning.
 - 2026-07-30 | yalo spc delasa | commit | feat(spc-delasa): agrega base inicial de API por capas
+- 2026-07-30 | naide | commit | feat(spc-delasa): agrega outbox para reintentar facturas del monitor (main)
+- 2026-07-30 | yalo spc delasa | commit | feat(spc-delasa): agrega outbox para reintentar facturas del monitor
