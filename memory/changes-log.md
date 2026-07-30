@@ -410,3 +410,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-30 | yalo-spc-delasa | commit | feat(facturación): integra pedidos Delasa con YALO Monitor
 - 2026-07-30 | YALO-API-MonitorCocina | commit | feat(facturación): sincroniza facturas generadas por SPC Delasa
 - 2026-07-30 | naide | commit | feat(facturaci├│n): integra pedidos Delasa con YALO Monitor (main)
+- 2026-07-30 | YALO | decision | Sesión work planning YaloConsole: confirmación Opus 4.8 (regla consulta previa), aguardando especificación de tarea (feature/bug/kanban/Slack Lists/performance GET /api/organizations). YaloConsole trae drag-drop kanban, Slack Lists, remote MV organizations activas
