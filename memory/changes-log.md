@@ -406,3 +406,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-30 | yalo spc delasa | commit | feat(spc-delasa): agrega base inicial de API por capas
 - 2026-07-30 | naide | commit | feat(spc-delasa): agrega outbox para reintentar facturas del monitor (main)
 - 2026-07-30 | yalo spc delasa | commit | feat(spc-delasa): agrega outbox para reintentar facturas del monitor
+- 2026-07-30 | yalo spc delasa + YALO_API_MonitorPedidos | feature | implementa POST /api/facturacion con stored procedures Delasa y sincronización idempotente de pedido/factura en Monitor
