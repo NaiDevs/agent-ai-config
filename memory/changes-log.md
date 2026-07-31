@@ -415,3 +415,11 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-31 | naide | commit | fix(ordenes): sincroniza Outlook y alertas de reasignaci├│n (feat/naidelyn/permisos)
 - 2026-07-31 | yalo console | commit | fix(ordenes): corrige cotizaciones y ubicación de visitas
 - 2026-07-31 | yalo console api | commit | fix(ordenes): sincroniza Outlook y alertas de reasignación
+- 2026-07-31 | naide | commit | feat(crm): notifica actividades de deals en Slack (feat/naidelyn/permisos)
+- 2026-07-31 | naide | commit | feat(cobertura): agrega mapa nacional de establecimientos (feat/naidelyn/ventas)
+- 2026-07-31 | naide | commit | feat(cobertura): expone ubicaciones de establecimientos (feat/naidelyn/permisos)
+- 2026-07-31 | naide | commit | fix(organizations): ajusta flujo de pagos y alertas de Slack (feat/naidelyn/permisos)
+- 2026-07-31 | yalo console api | commit | feat(crm): notifica actividades de deals en Slack
+- 2026-07-31 | yalo console | commit | feat(cobertura): agrega mapa nacional de establecimientos
+- 2026-07-31 | yalo console api | commit | feat(cobertura): expone ubicaciones de establecimientos
+- 2026-07-31 | yalo console api | commit | fix(organizations): ajusta flujo de pagos y alertas de Slack
