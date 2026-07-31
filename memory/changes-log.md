@@ -111,3 +111,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-07-31 | yalo console api | commit | fix(organizations): ajusta flujo de pagos y alertas de Slack
 - 2026-07-30 | YALO Console | BUG | Icons & Tailwind tints: registrÃ³ CalendarPlus/Building2 como aliases en lucide-icons.ts; header badge con gradiente cian; tarjeta organizaciÃ³n con bg brand-blue-superlight sÃ³lido + Ã­cono en chip blanco
 - 2026-07-31 | naide | commit | feat(organizaciones): agrega solicitud de visita de ventas (feat/naidelyn/ventas)
+- 2026-07-31 | CORINSA | DECISION | Gatorlit en pipeline ventas mensuales: nuevo campo VentasImportada.cs, mapeo CSV CargaVentasService, entidad MaestroCompaniaUcc; limpieza: removidas ClientesXdocumentosXcontrato y VincularDocumento del DbContext
