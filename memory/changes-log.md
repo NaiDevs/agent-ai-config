@@ -423,3 +423,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-07-31 | yalo console | commit | feat(cobertura): agrega mapa nacional de establecimientos
 - 2026-07-31 | yalo console api | commit | feat(cobertura): expone ubicaciones de establecimientos
 - 2026-07-31 | yalo console api | commit | fix(organizations): ajusta flujo de pagos y alertas de Slack
+- 2026-07-30 | YALO Console | BUG | Icons & Tailwind tints: registró CalendarPlus/Building2 como aliases en lucide-icons.ts; header badge con gradiente cian; tarjeta organización con bg brand-blue-superlight sólido + ícono en chip blanco
