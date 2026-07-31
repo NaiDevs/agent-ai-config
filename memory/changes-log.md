@@ -113,3 +113,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-07-31 | naide | commit | feat(organizaciones): agrega solicitud de visita de ventas (feat/naidelyn/ventas)
 - 2026-07-31 | CORINSA | DECISION | Gatorlit en pipeline ventas mensuales: nuevo campo VentasImportada.cs, mapeo CSV CargaVentasService, entidad MaestroCompaniaUcc; limpieza: removidas ClientesXdocumentosXcontrato y VincularDocumento del DbContext
 - 2026-07-31 | CORINSA | DECISION | Sting: agregar columnas sting_no_retornable y sting_retornable a VentasImportadas y VentasImportadas_SinProcesar; propiedades StingNoRetornable/StingRetornable en entidades, mapeo en ApiPostGreDbContext, lectura CSV en CargaVentasService; compilación 0 errores + scripts SQL (ALTER TABLE + rollback)
+- 2026-07-31 | CORINSA | CONFIG | CsvHelper MissingFieldFound=null ignora campos faltantes en CSV; GetField devuelve null, ParseNullableDecimal mapea a NULL en BD
