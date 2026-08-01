@@ -115,3 +115,5 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-07-31 | CORINSA | DECISION | Sting: agregar columnas sting_no_retornable y sting_retornable a VentasImportadas y VentasImportadas_SinProcesar; propiedades StingNoRetornable/StingRetornable en entidades, mapeo en ApiPostGreDbContext, lectura CSV en CargaVentasService; compilación 0 errores + scripts SQL (ALTER TABLE + rollback)
 - 2026-07-31 | CORINSA | CONFIG | CsvHelper MissingFieldFound=null ignora campos faltantes en CSV; GetField devuelve null, ParseNullableDecimal mapea a NULL en BD
 - 2026-07-31 | CORINSA | DECISION | Reporte Rentabilidad (feat/Naidelyn/ReporteRentabilidad): commit 450114d con inicios de cálculo; pendiente scripts BD y actualización plantilla CSV headers
+- 2026-08-01 | La Bodega | CONFIG | Diagnóstico MCP: solo MSSQL (CORINSA) configurado; pg-labodega/pg-yalo no existen en .mcp.json. La Bodega requiere PostgreSQL — pendiente credenciales (host/puerto/user/pass/base)
+- 2026-08-01 | La Bodega | GENERAL | Usuario solicita revisar pendientes en canal Slack de La Bodega
