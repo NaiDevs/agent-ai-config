@@ -11,6 +11,7 @@ Registro cronolÃ³gico de cambios. Cada entrada: `fecha | alias | tipo | descri
 MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera ese lÃ­mite.
 
 <!-- formato: - YYYY-MM-DD | alias | commit/pr | descripciÃ³n -->
+- 2026-08-01 | YALO ext / bodega ecom | FIX | Pedidos POS "no encontrado": GetPedidoByIdAsync ahora hace fallback por Codorden desde MdcOrdenes cuando la orden no tiene Codpedido (POS directo). FE ya navegaba con id_pedido ?? id_order y ocultaba UI de POS con isMdcOrder; faltaba la pata backend. price unitario en orden POS = Total/Cantidad (MdcOrdenesdetalle no guarda precio unitario).
 - 2026-07-16 | YALO | CONFIG | Frecuencia sincronizaciÃ³n configurable Settings Jira afecta cron.
 - 2026-07-16 | YALO | GENERAL | ValidarTransferencia controller 3 bugs: null check, LINQ lambda.
 - 2026-07-16 | yalo-trackeo | commit | fix(jira+realtime): sincroniza con Jira al volver a la pestaÃ±a
@@ -119,3 +120,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-01 | La Bodega | GENERAL | Usuario solicita revisar pendientes en canal Slack de La Bodega
 - 2026-08-01 | Ultimate Labs | DECISION | Mapeo productos BO: 4 tablas core (products, products_translations, products_images, product_costs) + 8 relacionadas (categorías, precios, auditoría). DbContext ApiDbContext.cs, Controller ProductController.cs, endpoints GET/POST/PUT para CRUD + imagen. Exportación UL-300 requiere joins múltiples tablas
 - 2026-08-01 | Ultimate Labs | GENERAL | Análisis desglose 143 productos: 121 EN+ES, 0 solo ES, 0 solo EN, 22 sin traducción. Hallazgo: no hay productos "solo español"; problema real son 22 sin traducción en ningún idioma (nombres vacíos en products_translations)
+- 2026-08-01 | YALO | BUG | ExternalService: fallback en GetPedidoByIdAsync — resuelve órdenes POS sin pedido (Codorden → MdcOrdenes) con InvoicesViewDTO completo (productos, totales, fecha, dirección, formas de pago)
