@@ -121,3 +121,7 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-01 | Ultimate Labs | DECISION | Mapeo productos BO: 4 tablas core (products, products_translations, products_images, product_costs) + 8 relacionadas (categorías, precios, auditoría). DbContext ApiDbContext.cs, Controller ProductController.cs, endpoints GET/POST/PUT para CRUD + imagen. Exportación UL-300 requiere joins múltiples tablas
 - 2026-08-01 | Ultimate Labs | GENERAL | Análisis desglose 143 productos: 121 EN+ES, 0 solo ES, 0 solo EN, 22 sin traducción. Hallazgo: no hay productos "solo español"; problema real son 22 sin traducción en ningún idioma (nombres vacíos en products_translations)
 - 2026-08-01 | YALO | BUG | ExternalService: fallback en GetPedidoByIdAsync — resuelve órdenes POS sin pedido (Codorden → MdcOrdenes) con InvoicesViewDTO completo (productos, totales, fecha, dirección, formas de pago)
+- 2026-08-01 | YALO | SECURITY | Contraseñas guardadas con cifrado reversible (RSA) en lugar de hash — permite descifrado; crítico de seguridad #1
+- 2026-08-01 | YALO | SECURITY | Login: mensaje diferenciado "contraseña incorrecta" vs "correo incorrecto" permite enumeración de usuarios válidos
+- 2026-08-01 | YALO | BUG | Proveedores: desaparición intermitente al consultar; usuario reportó 30 jul "no he podido dar la verdad"
+- 2026-08-01 | YALO | BUG | Búsqueda por establecimiento: caso amplio sigue vacío (roche/la roche resuelto, pero casos genéricos persisten)
