@@ -117,3 +117,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-07-31 | CORINSA | DECISION | Reporte Rentabilidad (feat/Naidelyn/ReporteRentabilidad): commit 450114d con inicios de cálculo; pendiente scripts BD y actualización plantilla CSV headers
 - 2026-08-01 | La Bodega | CONFIG | Diagnóstico MCP: solo MSSQL (CORINSA) configurado; pg-labodega/pg-yalo no existen en .mcp.json. La Bodega requiere PostgreSQL — pendiente credenciales (host/puerto/user/pass/base)
 - 2026-08-01 | La Bodega | GENERAL | Usuario solicita revisar pendientes en canal Slack de La Bodega
+- 2026-08-01 | Ultimate Labs | DECISION | Mapeo productos BO: 4 tablas core (products, products_translations, products_images, product_costs) + 8 relacionadas (categorías, precios, auditoría). DbContext ApiDbContext.cs, Controller ProductController.cs, endpoints GET/POST/PUT para CRUD + imagen. Exportación UL-300 requiere joins múltiples tablas
