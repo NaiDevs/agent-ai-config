@@ -125,3 +125,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-01 | YALO | SECURITY | Login: mensaje diferenciado "contraseña incorrecta" vs "correo incorrecto" permite enumeración de usuarios válidos
 - 2026-08-01 | YALO | BUG | Proveedores: desaparición intermitente al consultar; usuario reportó 30 jul "no he podido dar la verdad"
 - 2026-08-01 | YALO | BUG | Búsqueda por establecimiento: caso amplio sigue vacío (roche/la roche resuelto, pero casos genéricos persisten)
+- 2026-08-01 | YALO | DECISION | Reordenamiento categorías: drag & drop en BO — columna `orden` ya existe en BD (pro_categoriaproductos); agregado endpoint PUT bulk reorder + componente Angular con manija, deshabilita drag en búsqueda, toast confirmación
