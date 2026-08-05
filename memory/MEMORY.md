@@ -17,4 +17,5 @@
 - [YaloConsole → Slack Lists](decision-yaloconsole-slack-lists.md) — actividades del kanban como comentarios en Slack List; match email+nombre, post por chat.postMessage al canal C0BJGPESMFS
 - [README integración Slack deals](reference-integracion-slack-deals.md) — cómo comentar en elementos de Slack Lists vía chat.postMessage al canal C… (list id con prefijo C), setup y archivos
 - [Stock bajo — La Bodega](decision-labodega-stock-low.md) — stock_disponible = stock_real − existenciaBaja; restar en todo EP que muestre o valide stock
+- [Variaciones en pedidos yalo external](decision-yalo-external-variaciones-pedidos.md) — variación+combinados en crear/carrito, inventario por variación, borrado /Pedidos/External
 - [Dark mode YaloConsole](decision-yaloconsole-darkmode.md) — 6 capas de theming (shim Tailwind, vars custom, @apply shadcn, Yalo DS, tokens shadcn HSL, overlays Material) que confluyen en paleta --dk-* bajo html.dark; toggle Sun/Moon en header
