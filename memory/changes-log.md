@@ -181,3 +181,5 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-05 | fx-create-invoice | commit | feat(facturacion): genera facturas directamente en YaloCobro
 - 2026-08-05 | YALO | DECISION | Arquitectura variaciones + combinados en pedidos: plan 7-step (borrar External, DTOs, pricing, persistencia, inventario, carrito, Swagger) con 3 supuestos negocio (precio aditivo combinados/variaciones, impuesto en renglón padre, inventario fallback). Cambio invasivo: carrito regrupar por (idProduct, variación, combinados) evitar colisiones. Pendiente visto bueno supuestos A/B/C.
 - 2026-08-05 | naide | commit | fix(config): corrige secreto JWT de la Lambda (development)
+
+- 2026-08-05 | yalo external | commit | feat(pedidos): agrega soporte de variaciones y combinados en creacion y carrito
