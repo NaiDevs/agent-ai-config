@@ -184,3 +184,5 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 
 - 2026-08-05 | yalo external | commit | feat(pedidos): agrega soporte de variaciones y combinados en creacion y carrito- 2026-08-05 | naide | commit | fix(config): usa secretos productivos en la Lambda (development)
 - 2026-08-05 | naide | commit | fix(secrets): admite comas finales en secretos YALO (development)
+- 2026-08-05 | naide | commit | fix(config): restaura secretos de desarrollo (development)
+- 2026-08-05 | naide | commit | fix(facturacion): continúa con la factura Delasa creada (feat/integracion-facturacion-monitor)
