@@ -186,3 +186,8 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-05 | naide | commit | fix(secrets): admite comas finales en secretos YALO (development)
 - 2026-08-05 | naide | commit | fix(config): restaura secretos de desarrollo (development)
 - 2026-08-05 | naide | commit | fix(facturacion): continúa con la factura Delasa creada (feat/integracion-facturacion-monitor)
+
+## 2026-08-05 — YALO_API_Administrator: fix org "N/A" en alerta Slack de pago
+- **Bug:** alerta Slack de pago por link/transferencia mostraba la organización como `N/A`.
+- **Causa:** `clientInfo.CodOrganizacion` es código AUTH (lo manda el FE como `pay.organizationId`), pero se mapeaba vía `OrgOrganizaciones` (cobro) y el fallback `?? CodOrganizacion` consultaba la tabla auth con un código cobro → org placeholder "N/A".
+- **Fix:** `confirmPay` en `organizations.service.ts` resuelve el nombre desde `orgDetRepo` (vista `vw_organizaciones_suscripciones`) por `codOrganizacionAuth`, igual que el EP del listado. Corrige ambas alertas (link y transferencia).
