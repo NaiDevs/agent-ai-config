@@ -193,3 +193,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - **Bug:** alerta Slack de pago por link/transferencia mostraba la organización como `N/A`.
 - **Causa:** `clientInfo.CodOrganizacion` es código AUTH (lo manda el FE como `pay.organizationId`), pero se mapeaba vía `OrgOrganizaciones` (cobro) y el fallback `?? CodOrganizacion` consultaba la tabla auth con un código cobro → org placeholder "N/A".
 - **Fix:** `confirmPay` en `organizations.service.ts` resuelve el nombre desde `orgDetRepo` (vista `vw_organizaciones_suscripciones`) por `codOrganizacionAuth`, igual que el EP del listado. Corrige ambas alertas (link y transferencia).
+- 2026-08-07 | naide | commit | feat(roles): aplica permisos funcionales en frontend y Supabase (feat-roles-be-enforcement)
