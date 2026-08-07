@@ -1,8 +1,10 @@
 ---
 name: projects-yalo
-description: YALO subproject aliases and paths — 22 repos covering POS backoffice, payments, scheduling, real-time, order monitoring
-metadata:
+description: "YALO subproject aliases and paths — 22 repos covering POS backoffice, payments, scheduling, real-time, order monitoring"
+metadata: 
+  node_type: memory
   type: project
+  originSessionId: cda80a1e-8dea-41ef-98d1-c73d6a501d27
 ---
 
 YALO es una plataforma POS/pagos con 22 subproyectos. Cliente principal con arquitectura de microservicios.
@@ -28,6 +30,14 @@ Base path: `C:\Users\naide\OneDrive\Documentos\Proyectos\YALO\`
 | yalo stripe      | YALO-API-Stripe            | C#/.NET    | API pagos Stripe        |
 | yalo whastapp    | YALO-API-WS                | C#/.NET    | API WebSockets          |
 | yalo pos fe      | YALO-APP-CAP               | Node/TS    | App CAP                 |
+| yalo trackeo     | yalo-trackeo               | Supabase   | Tracker Jira/GitHub/Slack |
+
+**yalo trackeo (Supabase Edge Functions):**
+- Repo GitHub: `Yalo-Technologies/yalo-trackeo` (privado). Clonado en `C:\Users\naide\yalo-trackeo`.
+- Proyecto Supabase: `yalo-trackeo`, project-ref `ybxrkydqphwoilewpwrv`, región us-west-2.
+- Deploy: `cd C:\Users\naide\yalo-trackeo && supabase functions deploy --project-ref ybxrkydqphwoilewpwrv` (login ya tiene acceso — no repite el 403 viejo).
+- Al 2026-08-06: 19 functions (ai-create-tasks, ai-summary, device-token, github-prs, github-repos, github-webhook, invite-user, jira-epic, jira-epics, jira-issue-types, jira-projects, jira-send, jira-sprint, jira-sync, jira-transition, manage-member, slack-channels, slack-send, time-ingest).
+- OJO: hay un scaffold `supabase/functions` VACÍO suelto en `C:\Users\naide\supabase` — no es el repo, ignorarlo/borrarlo.
 | yalo dashboard   | YALO-Dashboard-API         | C#/.NET    | Dashboard API           |
 | yalo external    | YALO-ExternalService       | C#/.NET    | Servicio externo        |
 | yalo spc delasa  | yalo-spc-delasa            | C#/.NET    | Integración Delasa      |
