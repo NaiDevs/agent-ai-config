@@ -195,3 +195,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - **Fix:** `confirmPay` en `organizations.service.ts` resuelve el nombre desde `orgDetRepo` (vista `vw_organizaciones_suscripciones`) por `codOrganizacionAuth`, igual que el EP del listado. Corrige ambas alertas (link y transferencia).
 - 2026-08-07 | naide | commit | feat(roles): aplica permisos funcionales en frontend y Supabase (feat-roles-be-enforcement)
 - 2026-08-07 | yalo external | commit | feat(pedidos): agrega checkout de pedidos mediante API Key
+- 2026-08-08 | YALO | DECISION | Planificación Jira: estructura 4 pedidos con patrón YaloVendo (Epic/Historia/Tarea) — Manuales (1 Historia+4 subtareas), Anulación de Facturas (1 Historia+3 subtareas), Bug repartidor (Error), Sistema Contable (Epic+Historias/Tareas); pendiente confirmación cliente si SPC es integración nueva o reutiliza YV-67.
