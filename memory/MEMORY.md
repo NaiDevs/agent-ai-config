@@ -8,6 +8,7 @@
 - [Proyectos YALO](projects-yalo.md) — 22 subproyectos POS/pagos, aliases `yalo *`
 - [Proyectos La Bodega](projects-labodega.md) — 10 subproyectos ecommerce, aliases `bodega *`
 - [Proyectos CORINSA](projects-corinsa.md) — 7 subproyectos BI/CPA, aliases `corinsa *` y `cpa *`
+- [CPA lógica en SPs](decision-cpa-logica-en-sps.md) — la lógica de negocio de CPA vive en Stored Procedures de SQL Server, no en el código; raíz de los bugs recurrentes del backlog
 - [Proyectos Ultimate Labs](projects-ultimatelabs.md) — 6 subproyectos labs, aliases `ult *`
 - [Proyectos EMSULA + NAI](projects-otros.md) — 12 subproyectos médicos y personales
 - [Workspaces](projects-workspaces.md) — Grupos de repos para trabajo simultáneo con git sync
