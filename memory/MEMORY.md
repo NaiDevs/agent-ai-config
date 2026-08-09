@@ -9,6 +9,7 @@
 - [Proyectos La Bodega](projects-labodega.md) — 10 subproyectos ecommerce, aliases `bodega *`
 - [Proyectos CORINSA](projects-corinsa.md) — 7 subproyectos BI/CPA, aliases `corinsa *` y `cpa *`
 - [CPA lógica en SPs](decision-cpa-logica-en-sps.md) — la lógica de negocio de CPA vive en Stored Procedures de SQL Server, no en el código; raíz de los bugs recurrentes del backlog
+- [CPA BL-05 firma/excepciones](decision-cpa-bl05-firma-excepciones.md) — firma desincronizada: join a MaestroClientesExcepciones ignora NumeroDocumento/Activo; fix puro-SP + 27 hardcodes migrables; requiere golden-master
 - [Proyectos Ultimate Labs](projects-ultimatelabs.md) — 6 subproyectos labs, aliases `ult *`
 - [Proyectos EMSULA + NAI](projects-otros.md) — 12 subproyectos médicos y personales
 - [Workspaces](projects-workspaces.md) — Grupos de repos para trabajo simultáneo con git sync
