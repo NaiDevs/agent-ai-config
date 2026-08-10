@@ -216,3 +216,7 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 
 - 2026-08-10 | yalo bo api | commit | feat(secrets): carga el endpoint n8n de Yalo Console desde Secrets Manager
 - 2026-08-10 | yalo console api | commit | feat(crmConsole): integra notificacion de registro de clientes via n8n webhook (1ceb8ea2)
+- 2026-08-10 | yalo bo api | commit | feat(ajustes): agrega flag UsaIntegracionFacturacion por organizacion
+- 2026-08-10 | yalo monitor api | commit | feat(facturacion): decide integracion de factura por flag en BD (reemplaza lista SpcDelasa de appsettings)
+- 2026-08-10 | yalo bo fe | commit | feat(ajustes-basicos): agrega toggle de integracion de facturacion externa
+- 2026-08-10 | yalo bo fe | commit | feat(clientes,liquidaciones): agrega filtros por campo personalizado y rango de fechas
