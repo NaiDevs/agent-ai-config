@@ -210,3 +210,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 
 - 2026-08-10 | yalo bo api | commit | feat(registro): notifica el registro de clientes a Yalo Console via webhook n8n
 - 2026-08-10 | yalo console api | commit | feat(crm): enriquece leads desde dbyaloauth y unifica la creacion en un nucleo compartido
+- 2026-08-10 | YALO | CONFIG | Secreto n8n endpoint console: se llama `Endpoints:N8nCustomerRegistered` en appsettings.json (binding ServiceExtension.cs:211), propiedad estática EndpointsConfig.cs:24, acceso en código Endpoints.cs:50 como `ENDPOINT_N8N_CUSTOMER_REGISTERED`. Variable entorno: `Endpoints__N8nCustomerRegistered`. Además documentado: tokens n8n y openAI están hardcodeados en appsettings (expuestos en repo) — candidatos para mover a Secrets Manager
