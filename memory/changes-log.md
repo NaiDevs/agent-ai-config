@@ -209,3 +209,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-10 | yalo vendo | commit | fix(sync): alinea clientes del sync offline con las reglas del listado normal
 
 - 2026-08-10 | yalo bo api | commit | feat(registro): notifica el registro de clientes a Yalo Console via webhook n8n
+- 2026-08-10 | yalo console api | commit | feat(crm): enriquece leads desde dbyaloauth y unifica la creacion en un nucleo compartido
