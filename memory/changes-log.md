@@ -215,3 +215,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-10 | YALO | CONFIG | Implementación N8nCustomerRegistered webhook: propiedad agregada a EndpointsBackofficeSecrets.cs; SetIfNotNull en EnhancedSecretsManagerConfigurationProvider.cs; appsettings.json fallback sin tocar. Secreto AWS yalocore/keys (ambiente {AWS_ENV_PREFIX}) debe incluir Endpoints:N8nCustomerRegistered=https://yalo-n8n.yalocobro.com/webhook/prod/customerRegistered. Compilación limpia 0 errores.
 
 - 2026-08-10 | yalo bo api | commit | feat(secrets): carga el endpoint n8n de Yalo Console desde Secrets Manager
+- 2026-08-10 | yalo console api | commit | feat(crmConsole): integra notificacion de registro de clientes via n8n webhook (1ceb8ea2)
