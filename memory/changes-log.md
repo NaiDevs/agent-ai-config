@@ -221,3 +221,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-10 | yalo bo fe | commit | feat(ajustes-basicos): agrega toggle de integracion de facturacion externa
 - 2026-08-10 | yalo bo fe | commit | feat(clientes,liquidaciones): agrega filtros por campo personalizado y rango de fechas
 - 2026-08-10 | fx-sync-info | feature | Lambda nueva: upsert genérico e idempotente de catálogos a YaloCobro (v1 clientes, extensión customField idcliente); SDD 6 tareas TDD 17/17, merge a main
+- 2026-08-10 | YALO | DECISION | Sync SPC vendedores: matchear por código, no por nombre. Propuesta: agregar columna `codvendedorspc` nullable en `emp_empleados` (ALTER TABLE aditivo, riesgo bajo). Matcheo seguro por `(codorganizacion + codvendedorspc)` evita duplicados/asignaciones cruzadas al actualizar nombres en SPC o YALO. Pattern idéntico a `idcliente` en clientes. Costo: 1 migration, beneficio: idempotencia para cron sync.
