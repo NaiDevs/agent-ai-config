@@ -186,6 +186,7 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-05 | naide | commit | fix(secrets): admite comas finales en secretos YALO (development)
 - 2026-08-05 | naide | commit | fix(config): restaura secretos de desarrollo (development)
 - 2026-08-05 | naide | commit | fix(facturacion): continúa con la factura Delasa creada (feat/integracion-facturacion-monitor)
+- 2026-08-10 | YALO spc delasa | CONFIG | appsettings.Development.json configuración sincronización: plantilla completa X-Api-Key (spc-local-test-key), DefaultConnection→AYER_DELASA, CodOrganizacion/CodEstablecimiento, AuthApi+SyncInfo tokens opcionales; ejemplos curl POST /api/sincronizacion (vendedores, tipospago, bodegas, impuestos, productos, clientes). Validación: 3 parámetros reales críticos (ConnectionString/CodOrganizacion/CodEstablecimiento); bearer estático opcional en SyncInfo:Token (skip login). Test propuesto: singular endpoint antes bulk; respuesta {bodegas, impuestos, tiposPago, vendedores, productos, clientes} counts.
 
 - 2026-08-06 | YALO | DECISION | Módulos Jira: crear módulo de tickets y módulo de roles/permisos en Jira — infraestructura despliegue functions Supabase diagnóstico: proyecto ybxrkydqphwoilewpwrv requiere repo código local clonado o remoto GitHub para deploy; función edge jira-epics parcialmente desplegada (rama feat-jira-epic-y-assignee pendiente merge a main).
 
