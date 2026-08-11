@@ -220,3 +220,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-10 | yalo monitor api | commit | feat(facturacion): decide integracion de factura por flag en BD (reemplaza lista SpcDelasa de appsettings)
 - 2026-08-10 | yalo bo fe | commit | feat(ajustes-basicos): agrega toggle de integracion de facturacion externa
 - 2026-08-10 | yalo bo fe | commit | feat(clientes,liquidaciones): agrega filtros por campo personalizado y rango de fechas
+- 2026-08-10 | fx-sync-info | feature | Lambda nueva: upsert genérico e idempotente de catálogos a YaloCobro (v1 clientes, extensión customField idcliente); SDD 6 tareas TDD 17/17, merge a main
