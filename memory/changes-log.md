@@ -108,6 +108,7 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-07-30 | naide | commit | feat(facturaciâ”œâ”‚n): integra pedidos Delasa con YALO Monitor (main)
 - 2026-07-30 | YALO | decision | SesiÃ³n work planning YaloConsole: confirmaciÃ³n Opus 4.8 (regla consulta previa), aguardando especificaciÃ³n de tarea (feature/bug/kanban/Slack Lists/performance GET /api/organizations). YaloConsole trae drag-drop kanban, Slack Lists, remote MV organizations activas
 - 2026-08-14 | yalo vendo entrego | commit | feat(order): persiste fecha de entrega programada en ped_pedidos
+- 2026-08-14 | yalo bo | commit | feat(pedidos,rutas): muestra fechaEntregaProgramada en detalle y lista de entrega
 - 2026-07-31 | naide | commit | fix(ordenes): sincroniza Outlook y alertas de reasignaciâ”œâ”‚n (feat/naidelyn/permisos)
 - 2026-07-31 | yalo console | commit | fix(ordenes): corrige cotizaciones y ubicaciÃ³n de visitas
 - 2026-07-31 | yalo console api | commit | fix(ordenes): sincroniza Outlook y alertas de reasignaciÃ³n
