@@ -227,6 +227,7 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-10 | YALO | CONFIG | Implementación N8nCustomerRegistered webhook: propiedad agregada a EndpointsBackofficeSecrets.cs; SetIfNotNull en EnhancedSecretsManagerConfigurationProvider.cs; appsettings.json fallback sin tocar. Secreto AWS yalocore/keys (ambiente {AWS_ENV_PREFIX}) debe incluir Endpoints:N8nCustomerRegistered=https://yalo-n8n.yalocobro.com/webhook/prod/customerRegistered. Compilación limpia 0 errores.
 
 - 2026-08-10 | yalo bo api | commit | feat(secrets): carga el endpoint n8n de Yalo Console desde Secrets Manager
+- 2026-08-15 | YALO | FEAT | PedPedido.Fechaentregaprogramada: nueva propiedad timestamp en modelo + mapeo ORM (YaloCobroEntities) + DTO PedidoListoEntregaDto en RutasController + join en GetPedidosListosEntregaPorCliente — campo ya está en FE template con *ngIf y label "Entrega: fecha"
 - 2026-08-10 | yalo console api | commit | feat(crmConsole): integra notificacion de registro de clientes via n8n webhook (1ceb8ea2)
 - 2026-08-11 | YALO spc delasa | CONFIG | IIS Application Pool ASP.NET Core: corrección .NET CLR Version v4.0 → "No Managed Code" (module ANCM, no Framework CLR); Start Mode: AlwaysRunning ✓; Application Initialization feature (Install-WindowsFeature Web-AppInit), Preload Enabled=True en sitio, applicationInitialization con /health en web.config. Hangfire arranca automático post-deploy con configuración correcta.
 - 2026-08-10 | yalo bo api | commit | feat(ajustes): agrega flag UsaIntegracionFacturacion por organizacion
