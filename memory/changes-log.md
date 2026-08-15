@@ -268,3 +268,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-15 | yalo vendo entrego | BUG | listado pedidos: muestra clientes sin categoria (GroupJoin + DefaultIfEmpty en lugar de inner join)
 - 2026-08-15 | YALO | DECISION | RutRutasdetalle.Fechavisita ya existe con índice BD; repositorio la usa extensamente para filtrar pedidos hoy (Fechavisita==today). Request: exponer fecha entrega en endpoints detalle/listado pedido via join Codpedido→RutRutasdetalle.Codpedido (opción 1: vista fecha detalle; opción 2: revisar si filtro sync entregador requiere cambios para fechas futuras)
 - 2026-08-15 | yalo vendo entrego | commit | fix(discounts): agrega campo operation al listado de descuentos activos
+- 2026-08-15 | yalo vendo entrego | commit | fix(products): corrige stock incorrecto en detalle de producto
