@@ -111,6 +111,7 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-14 | yalo vendo entrego | commit | feat(order): persiste fecha de entrega programada en ped_pedidos
 - 2026-08-14 | yalo bo | commit | feat(pedidos,rutas): muestra fechaEntregaProgramada en detalle y lista de entrega
 - 2026-08-15 | yalo vendo entrego | commit | fix(orders): muestra pedidos de clientes sin categoria asignada
+- 2026-08-15 | yalo vendo entrego | commit | fix(orders): incluye datos de descuento por ítem en GET /orders/{id}
 - 2026-07-31 | naide | commit | fix(ordenes): sincroniza Outlook y alertas de reasignaciâ”œâ”‚n (feat/naidelyn/permisos)
 - 2026-07-31 | yalo console | commit | fix(ordenes): corrige cotizaciones y ubicaciÃ³n de visitas
 - 2026-07-31 | yalo console api | commit | fix(ordenes): sincroniza Outlook y alertas de reasignaciÃ³n
