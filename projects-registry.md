@@ -91,6 +91,7 @@
 | nai shadow         | ShadowBrowser            | Node/TS    | Shadow browser       |
 | nai teams          | agent-teams-lite         | —          | Agentes teams        |
 | nai gga            | gga                      | —          | GGA                  |
+| nai citas          | nai-citas                | Tauri/React| App de citas offline |
 
 ## Jira Projects
 <!-- cithn.atlassian.net | cloudId: 70102692-578c-4758-a88b-ffb5a3c535cb -->
