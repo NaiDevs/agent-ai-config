@@ -296,3 +296,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-16 | YALO | UI | card.component.html: botón "Generar" aparece inline junto a estado "Sin factura"; desaparece automático cuando comanda recibe NumeroFactura. Toast describe motivo exacto del error (correlativo faltante, config API, etc.) para auditoría post-fallo
 - 2026-08-17 | yalo dashboard | commit | feat(dashboard): agrega persistencia de layouts por usuario
 - 2026-08-17 | yalo dashboard | commit | fix(docker): corrige publicación del proyecto API
+- 2026-08-17 | yalo console api | commit | fix(organizations): reactiva llamada a Stripe al otorgar días gratis
