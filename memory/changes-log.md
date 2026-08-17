@@ -11,6 +11,8 @@ Registro cronolÃ³gico de cambios. Cada entrada: `fecha | alias | tipo | descri
 MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera ese lÃ­mite.
 
 <!-- formato: - YYYY-MM-DD | alias | commit/pr | descripciÃ³n -->
+- 2026-08-17 | yalo bo api | FEAT | Reporte Excel "Facturación por Producto/Addon": nuevo endpoint GET /api/reports/salesBook/products/excel — query SQL agrupa facturadetalle por nombreproducto, retorna cantidad/precio USD/HNL/total; ExcelJS con logo+título fila 10, headers fila 12, totales SUBTOTAL, autofilter
+- 2026-08-17 | yalo console | FEAT | Módulo reportes contabilidad: agrega reporte id:6 "Facturación por Producto / Addon" con botón Excel; service getProductsBillingExcel; handle en exportReport; fixes dark mode tab Documentos (mat-mdc-header-cell/cell + filter-field inputs)
 - 2026-08-15 | yalo vendo | BUG | GetAllProductsForSyncAsync + GetCartByIdsAsync: OrderBy(Codproductoxprecio) tomaba siempre la fila de PK más bajo, potencialmente del establecimiento incorrecto con ISV 7% en lugar del 15% correcto — fix: agregar parámetro codEstablecimiento a IProductRepository; priorizar fila del establecimiento del empleado, fallback a null (global), luego cualquier otra
 - 2026-08-14 | yalo bo | FIX | PrecioSinIsv: propiedad extension en PedPedidosdetalle causaba "column p0.PrecioSinIsv does not exist" en Postgres — fix: [NotMapped] en PedPedidosdetalle.Extensions.cs
 - 2026-08-14 | yalo bo | FEAT | QuitarParadaModalComponent en agregar-rutas: reemplaza AlertController nativo por modal Yalo (ModalController) igual al patrón de pedidos
