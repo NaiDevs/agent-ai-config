@@ -302,3 +302,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-17 | yalo dashboard | commit | feat(dashboard): agrega persistencia de layouts por usuario
 - 2026-08-17 | yalo dashboard | commit | fix(docker): corrige publicación del proyecto API
 - 2026-08-17 | yalo console api | commit | fix(organizations): reactiva llamada a Stripe al otorgar días gratis
+- 2026-08-18 | CORINSA | DECISION | BL-06 completado: 4 artefactos SQL — UCCv2_Function_ADIN_Firmas_Update + GetFirmasContratoUpdate con fallback cascade (version exacta → historial → cualquier fila activa) para puestos sin fixture; 5 puestos JefeAdministrativo/GerenteVentas/GerenteComercial/DirectorComercial/DireccionGeneral; 182 territorios sin JefeZona + BL06_golden_master diagnóstico + BL06_fix_datos plantillas UPDATE/DELETE. Próximo: versionamiento en git, ejecución golden-master, validación con negocio
