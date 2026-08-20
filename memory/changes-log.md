@@ -334,3 +334,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-20 | yalo trackeo | commit | feat(tickets): muestra workspace y usa cuentas de solicitudes como clientes
 - 2026-08-20 | yalo trackeo | commit | fix(topbar,tickets): corrige email quemado, logos de workspace y contexto de config
 - 2026-08-20 | YALO | CONFIG | yalo-trackeo: Configuración Tickets banner + Email desde store + Logos workspace fallback (navy/violeta/cyan por catálogo)
+- 2026-08-20 | YALO | FEAT | YaloConsole FE + YALO_API_Administrator BE: adjuntos en actividades (file picker 5 archivos, upload Supabase, chips preview) + rediseño PDFs facturas/cotizaciones (logo+empresa columnas, colores uniformes, layout custom sin líneas verticales). 2 commits propuestos feat/naidelyn/ventas + feat/naidelyn/permisos
