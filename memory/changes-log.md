@@ -333,3 +333,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-08-20 | YALO | FEAT | Reporte Ventas Ecommerce: endpoint POST api/Informes/VentasEcommerce con DTO VentaEcommerceRowDto + InformeVentasEcommerceDto; método ObtenerVentasEcommerceAsync en GeneradorConsultas.cs (SQL UNION facturas+pedidos con filtro codestablecimiento=1352); devuelve Base64 Excel/PDF según parámetro Tipo (patrón idéntico a facturas; 4 archivos: Controller/Model/Dto/QueryService); compila 0 errores
 - 2026-08-20 | yalo trackeo | commit | feat(tickets): muestra workspace y usa cuentas de solicitudes como clientes
 - 2026-08-20 | yalo trackeo | commit | fix(topbar,tickets): corrige email quemado, logos de workspace y contexto de config
+- 2026-08-20 | YALO | CONFIG | yalo-trackeo: Configuración Tickets banner + Email desde store + Logos workspace fallback (navy/violeta/cyan por catálogo)
