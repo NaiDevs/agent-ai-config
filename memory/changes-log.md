@@ -10,6 +10,7 @@ metadata:
 Registro cronolÃ³gico de cambios. Cada entrada: `fecha | alias | tipo | descripciÃ³n`.
 MÃ¡ximo 100 entradas â€" las mÃ¡s antiguas se eliminan cuando se supera ese lÃ­mite.
 
+- 2026-08-24 | cpa api | BUG+PERF | UCCv2_Function_ADIN_Firmas_Update tomaba 9.1s causando pool exhaustion en DEV. Causa raíz: FirmaFake (166ms/call) estaba como scalar subquery dentro de SELECT FROM view SIN TOP 1 → si la view retornaba N filas con numeroDeActualizacion=0 (siempre 0 por snapshot), FirmaFake se ejecutaba N×puestos veces. Fix: TOP 1 en queries principales + IF IS NULL entre GetDetalleFirmas y GetPuestoFirmaHistorial + FirmaFake llamada UNA sola vez por puesto después de resolver el nombre. Archivo: UCCv2_Function_ADIN_Firmas_Update_BL06_PERF.sql (combina BL-06 + fix perf).
 - 2026-08-10 | yalo console api | commit | feat(crmConsole): integra notificacion de registro de clientes via n8n webhook (1ceb8ea2)
 - 2026-08-11 | YALO spc delasa | CONFIG | IIS Application Pool ASP.NET Core: corrección .NET CLR Version v4.0 → "No Managed Code" (module ANCM, no Framework CLR); Start Mode: AlwaysRunning ✓; Application Initialization feature (Install-WindowsFeature Web-AppInit), Preload Enabled=True en sitio, applicationInitialization con /health en web.config. Hangfire arranca automático post-deploy con configuración correcta.
 - 2026-08-10 | yalo bo api | commit | feat(ajustes): agrega flag UsaIntegracionFacturacion por organizacion
