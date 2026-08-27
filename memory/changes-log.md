@@ -111,3 +111,4 @@ MÃƒÆ’Ã‚Â¡ximo 100 entradas ÃƒÂ¢Ã¢â€šÂ¬" las mÃƒÆ’Ã�
 - 2026-08-26 | yalo trackeo | commit | feat(tickets): convierte tickets en tareas y agrega tipo QA
 - 2026-08-26 | yalo trackeo | commit | feat(tickets): enlaza ticket de origen desde detalle de tarea
 - 2026-08-27 | CPA | GENERAL | Sesión de trabajo iniciada: usuario indicó intención de trabajar con CPA (reportería, API, ventas). Awaiting direcciones específicas.
+- 2026-08-27 | CORINSA | GENERAL | Workspace CPA status: cpa api (development, cambios sin commitear en appsettings.json + DashboardRepository + BL-05 SQL); cpa fe (feat/naidelyn/reporteRentabilidad, 5 archivos modificados); cpa reporteria (feat/Naidelyn/ReporteRentabilidad, limpio); cpa web api (2025-cambio-estados, .idea/ sin trackear); cpa ventas (feat/naidelyn/ventas2021, 14 CSVs/PDFs sin trackear). Usuario menciona fixes de Jonathan en canal cpa-sac-dev.
