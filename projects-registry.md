@@ -30,6 +30,7 @@
 | yalo invoice     | fx-create-invoice          | —          | Generador facturas      |
 | yalo pos encoder | esc-pos-encoder-previewer  | Node/TS    | Encoder ESC/POS         |
 | yalo trackeo     | yalo-trackeo               | Node/TS    | App trackeo interno     |
+| yalo trackeo desktop | yalo-trackeo-desktop       | Tauri/TS   | Tracker de tiempo desktop |
 | yalo auth lambda | fx-auth-login              | Node/TS    | Lambda login JWT        |
 
 ## LA BODEGA | C:\Users\naide\OneDrive\Documentos\Proyectos\LA BODEGA
