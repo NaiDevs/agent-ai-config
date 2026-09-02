@@ -175,4 +175,5 @@ MÃƒÆ’Ã‚Â¡ximo 100 entradas ÃƒÂ¢Ã¢â€šÂ¬" las mÃƒÆ’Ã�
 - 2026-09-01 | naide | commit | fix(tiempo): distingue consumo API y suscripci├│n (feat-mcp-servidor)
 - 2026-09-01 | naide | commit | fix(ia): conserva el tipo de facturaci├│n detectado (feat-mcp-servidor)
 - 2026-09-01 | naide | commit | fix(tiempo): sincroniza contador acumulado del timer (feat-mcp-servidor)
-- 2026-09-01 | naide | commit | feat(descargas): muestra la app de escritorio en el men├║ (feat-mcp-servidor)
+- 2026-09-01 | naide | commit | feat(descargas): muestra la app de escritorio en el menú (feat-mcp-servidor)
+- 2026-09-02 | YALO | DECISION | Auto-updater Tauri desktop: investigación arquitectura para actualización remota. Contexto: script publish-release.mjs ya carga binarios (.exe/.dmg) a Supabase y genera latest.json; plugin updater de Tauri requiere artefactos adicionales (.msi.zip firmado .sig). Análisis pipeline release actual vs cambios necesarios. Fase: clarificación UX — 3 enfoques (A) check silencioso al arrancar + banner no-bloqueante; B) diálogo modal automático; C) manual via Settings). Decisión pendiente arquitectura y UX flow.
