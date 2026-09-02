@@ -170,3 +170,6 @@ MÃƒÆ’Ã‚Â¡ximo 100 entradas ÃƒÂ¢Ã¢â€šÂ¬" las mÃƒÆ’Ã�
 - 2026-09-01 | naide | commit | feat(tracker): sincroniza timers, actividad y consumo de IA (claude/yalo-trackeo-desktop-mvp-sg0b9f)
 - 2026-09-01 | naide | commit | feat(tiempo): integra actividad, consumo de IA y cliente desktop (feat-mcp-servidor)
 - 2026-09-01 | naide | commit | fix(release): acelera builds y corrige sync de consumo de IA (claude/yalo-trackeo-desktop-mvp-sg0b9f)
+- 2026-09-01 | naide | commit | fix(tiempo): restringe datos por rol del workspace (feat-mcp-servidor)
+- 2026-09-01 | naide | commit | feat(tiempo): estima costo de IA y filtra reportes (feat-mcp-servidor)
+- 2026-09-01 | naide | commit | fix(tiempo): distingue consumo API y suscripci├│n (feat-mcp-servidor)
