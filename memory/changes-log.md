@@ -173,3 +173,4 @@ MÃƒÆ’Ã‚Â¡ximo 100 entradas ÃƒÂ¢Ã¢â€šÂ¬" las mÃƒÆ’Ã�
 - 2026-09-01 | naide | commit | fix(tiempo): restringe datos por rol del workspace (feat-mcp-servidor)
 - 2026-09-01 | naide | commit | feat(tiempo): estima costo de IA y filtra reportes (feat-mcp-servidor)
 - 2026-09-01 | naide | commit | fix(tiempo): distingue consumo API y suscripci├│n (feat-mcp-servidor)
+- 2026-09-01 | naide | commit | fix(ia): conserva el tipo de facturaci├│n detectado (feat-mcp-servidor)
