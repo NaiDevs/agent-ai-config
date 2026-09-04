@@ -110,3 +110,4 @@ MÃƒÆ’Ã‚Â¡ximo 100 entradas ÃƒÂ¢Ã¢â€šÂ¬" las mÃƒÆ’Ã�
 - 2026-09-03 | yalo console api | commit | feat(credit-notes): agrega módulo completo de notas de crédito con integración Stripe
 - 2026-09-03 | yalo console | commit | feat(credit-notes): agrega módulo de notas de crédito en contabilidad
 - 2026-09-03 | cpa api | commit | fix(vincular): BL-04 — valida fechas de adendum antes de vincular contrato
+- 2026-09-04 | CORINSA | BUG | BL-04 fix VincularDocumentoRepository: validación rango fechas adendum (FechaInicio <= FechaFin) + validación FechaOriginalContrato para bloquear retroceso. InvalidOperationException capturada como 400 BadRequest en servicio en lugar de 500.
