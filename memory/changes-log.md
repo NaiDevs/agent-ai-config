@@ -10,6 +10,8 @@ metadata:
 Registro cronolÃƒÆ’Ã‚Â³gico de cambios. Cada entrada: `fecha | alias | tipo | descripciÃƒÆ’Ã‚Â³n`.
 MÃƒÆ’Ã‚Â¡ximo 100 entradas ÃƒÂ¢Ã¢â€šÂ¬" las mÃƒÆ’Ã‚Â¡s antiguas se eliminan cuando se supera ese lÃƒÆ’Ã‚Â­mite.
 
+- 2026-09-06 | yalo spc delasa | commit | fix(facturacion): corrige anulacion silenciosa y elimina fecha fija vencida
+- 2026-09-06 | yalo spc delasa | commit | feat(slack): envia errores de facturacion, anulacion y sync a Slack
 - 2026-08-27 | CORINSA | CONFIG | Sesión trabajo recursos: planificación tareas Refrigeración + Ingeniería Comercial; 7 items asignados vos; revisión workspace CPA pendiente (API dev, FE feat, reportería).
 - 2026-08-27 | YALO | CONFIG | Diagnóstico conexión Jira: error jira-epic/index.ts:175 GET /rest/api/3/project/{CC} falla porque JIRA_EMAIL en Supabase secret es cuenta diferente sin acceso a proyecto CC. Soluciones: (A) verificar email en Settings UI Trackeo, agregar usuario a proyecto; (B) actualizar secret con token personal nuevo (Atlassian Security → Create API tokens). Autoclasificador rechazó query por credenciales en config.
 - 2026-08-27 | La Bodega | GENERAL | Estructura presentación proyecto: 5 puntos identificados — (1) Integración YALO (catálogo, sync, single source of truth); (2) Manejo caché (invalidación, impacto rendimiento); (3) Carrito Firebase (tiempo real, cross-device, flujo anónimo→autenticado); (4) LaBodegaTV (contenido+commerce); (5) Microservicios (escalabilidad independiente). Documento base para presentación en próximos días.
