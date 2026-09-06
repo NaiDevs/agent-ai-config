@@ -10,6 +10,7 @@ metadata:
 Registro cronolÃƒÆ’Ã‚Â³gico de cambios. Cada entrada: `fecha | alias | tipo | descripciÃƒÆ’Ã‚Â³n`.
 MÃƒÆ’Ã‚Â¡ximo 100 entradas ÃƒÂ¢Ã¢â€šÂ¬" las mÃƒÆ’Ã‚Â¡s antiguas se eliminan cuando se supera ese lÃƒÆ’Ã‚Â­mite.
 
+- 2026-09-06 | yalo spc delasa | commit | feat(infra): middleware de errores, tope 5 reintentos outbox y timezone en facturacion
 - 2026-09-06 | yalo spc delasa | commit | fix(facturacion): corrige anulacion silenciosa y elimina fecha fija vencida
 - 2026-09-06 | yalo spc delasa | commit | feat(slack): envia errores de facturacion, anulacion y sync a Slack
 - 2026-08-27 | CORINSA | CONFIG | Sesión trabajo recursos: planificación tareas Refrigeración + Ingeniería Comercial; 7 items asignados vos; revisión workspace CPA pendiente (API dev, FE feat, reportería).
@@ -118,4 +119,5 @@ MÃƒÆ’Ã‚Â¡ximo 100 entradas ÃƒÂ¢Ã¢â€šÂ¬" las mÃƒÆ’Ã�
 - 2026-09-05 | YALO | GENERAL | Artefacto web actualizado a formato slides con rediseño UI (estructura secciones separadas, indigo #4F46E5, IDs como elemento diseño, sin sticky navbar, tipografía system-ui)
 - 2026-09-06 | nai config | commit | feat(config): agrega skill /tauri, loop SQL Server SP y aliases de proyecto
 - 2026-09-06 | nai config | commit | feat(config): agrega alias nai config y workspace yalo trackeo al registry
+- 2026-09-06 | YALO | DECISION | Review SPC Delasa status: documentado state memoria pendientes críticos (sin tope reintentos, DateTime.Now sin timezone, middleware errores, Swagger faltante) + bloqueantes producción 6 items (AUTH code, codestablecimiento, idcliente field, smoke test real, nombres SPC, merge feat branch). 57 mensajes sesión análisis completo. Próximo: obtener datos de Delasa para #1-2 bloqueantes.
 - 2026-09-05 | YALO | GENERAL | Sesión yalo-trackeo-charla: artefacto con análisis técnico proyecto desktop (Tauri 2, React, SQLite, keychain, sync offline). Contexto: evolución desde Hubstaff → yalo-trackeo con mejoras IA/MCP, control distribuido, arquitectura cliente-servidor con edge functions Supabase, timestamps exactos timer, integración con boards (Yalo Cobro/Vendo, Corinsa CPA, YaloSOS). Stack completo: pairing token, picker tareas asignadas, bloques 10min, idle detection, queue offline, profile workspace/time/settings. Session id 08c7f501-ec09-468a-9d99-724139d4233d.
