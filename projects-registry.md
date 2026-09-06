@@ -93,6 +93,7 @@
 | nai teams          | agent-teams-lite         | —          | Agentes teams        |
 | nai gga            | gga                      | —          | GGA                  |
 | nai citas          | nai-citas                | Tauri/React| App de citas offline |
+| nai config         | agent-ai-config          | —          | Config Claude Code   |
 
 ## Jira Projects
 <!-- cithn.atlassian.net | cloudId: 70102692-578c-4758-a88b-ffb5a3c535cb -->
@@ -122,3 +123,4 @@
 | cpa full            | cpa fe, cpa api, cpa reports api                       | CPA completo                   |
 | doctor full         | doctor fe, doctor api                                  | Sistema médico completo        |
 | ult full            | ult fe, ult api                                        | Ultimate Labs full stack        |
+| yalo trackeo        | yalo trackeo, yalo trackeo desktop                     | Trackeo web + desktop          |
