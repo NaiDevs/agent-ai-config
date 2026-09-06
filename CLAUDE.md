@@ -71,6 +71,7 @@ Cuando el usuario pida algo relacionado con alguna de estas tecnologías o accio
 | Firebase / FCM / push notification / firebase-admin / react-native-firebase | `/firebase` |
 | Azure AD / MSAL / login Microsoft / Azure Pipelines / AKS | `/azure` |
 | JWT / token / refresh token / guard auth / passport / Bearer / API Key auth | `/jwt` |
+| Tauri / desktop / Rust command / .app / .exe / SQLite offline / keychain / auto-updater | `/tauri` |
 
 ### Documentación y calidad
 | Si el usuario menciona... | Invocar |
@@ -201,4 +202,15 @@ Identificar todos los repos afectados → ordenar por dependencia (BD → API �
 → implementar en orden, compilar cada uno antes de avanzar al siguiente
 → verificar contratos entre repos (shapes de request/response compatibles)
 → commit por repo con referencia cruzada → push todos antes de abrir PR
+```
+
+### SQL Server SP loop
+```
+Hacer golden-master del SP antes de tocar (SELECT output actual como referencia) →
+medir línea base: SET STATISTICS TIME ON + ejecutar SP + SET STATISTICS TIME OFF →
+abrir plan de ejecución: buscar Table Scan, Key Lookup, Sort sin índice →
+fix lógica: NOT IN (estados rechazados), ISNULL guards en variables, división por cero →
+agregar índices covering: CREATE NONCLUSTERED INDEX ... INCLUDE (columnas del SELECT) →
+aplicar en DEV → validar con QA que resultado coincide con golden-master →
+aplicar en PROD → medir tiempo después y documentar mejora
 ```
