@@ -10,6 +10,7 @@ metadata:
 Registro cronolÃƒÆ’Ã‚Â³gico de cambios. Cada entrada: `fecha | alias | tipo | descripciÃƒÆ’Ã‚Â³n`.
 MÃƒÆ’Ã‚Â¡ximo 100 entradas ÃƒÂ¢Ã¢â€šÂ¬" las mÃƒÆ’Ã‚Â¡s antiguas se eliminan cuando se supera ese lÃƒÆ’Ã‚Â­mite.
 
+- 2026-09-06 | yalo spc delasa | merge | feat/integracion-facturacion-monitor -> main (49 commits, sync+facturacion completo)
 - 2026-09-06 | yalo spc delasa | commit | feat(infra): middleware de errores, tope 5 reintentos outbox y timezone en facturacion
 - 2026-09-06 | yalo spc delasa | commit | fix(facturacion): corrige anulacion silenciosa y elimina fecha fija vencida
 - 2026-09-06 | yalo spc delasa | commit | feat(slack): envia errores de facturacion, anulacion y sync a Slack
@@ -116,6 +117,8 @@ MÃƒÆ’Ã‚Â¡ximo 100 entradas ÃƒÂ¢Ã¢â€šÂ¬" las mÃƒÆ’Ã�
 - 2026-09-04 | CORINSA | BUG | BL-04 fix VincularDocumentoRepository: validación rango fechas adendum (FechaInicio <= FechaFin) + validación FechaOriginalContrato para bloquear retroceso. InvalidOperationException capturada como 400 BadRequest en servicio en lugar de 500.
 - 2026-09-04 | CORINSA | BUG | BL-04 — Valida fechas adéndums antes de vincular contrato: VincularDocumentoRepository agrega validación FechaInicio <= FechaFin; VincularDocumentoService captura InvalidOperationException como 400 BadRequest. FechaOriginalContrato existía en tabla pero nunca se consultaba (2 casos con inicio > fin, 19 casos con retroceso de fecha). Commit 998c599.
 - 2026-09-04 | yalo console | commit | fix(credit-notes): corrige binding de yalo-select en formulario de creación
+- 2026-09-06 | YALO | DECISION | Review SPC Delasa status: documentado state memoria pendientes críticos (sin tope reintentos, DateTime.Now sin timezone, middleware errores, Swagger faltante) + bloqueantes producción 6 items (AUTH code, codestablecimiento, idcliente field, smoke test real, nombres SPC, merge feat branch)
+- 2026-09-06 | yalo spc delasa | CONFIG | Implementación middleware errores, tope reintentos y timezone: (1) Middleware ArgumentException→400, InvalidOperationException→422, resto→500, responde application/problem+json; (2) Tope 5 reintentos — fallo #5 marca orden EnviadoUtc (saca de procesamiento) + Slack "descartada", fallo #1 también Slack, #2-4 solo warning; (3) Timezone: DateTime.Now→TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, zona) usando ZonaHoraria de FacturacionOptions
 - 2026-09-05 | YALO | GENERAL | Artefacto web actualizado a formato slides con rediseño UI (estructura secciones separadas, indigo #4F46E5, IDs como elemento diseño, sin sticky navbar, tipografía system-ui)
 - 2026-09-06 | nai config | commit | feat(config): agrega skill /tauri, loop SQL Server SP y aliases de proyecto
 - 2026-09-06 | nai config | commit | feat(config): agrega alias nai config y workspace yalo trackeo al registry
