@@ -7,9 +7,11 @@ metadata:
   originSessionId: baa97b0f-6550-4a98-92f2-501e6aea9d37
 ---
 
-Registro cronolÃƒÆ’Ã‚Â³gico de cambios. Cada entrada: `fecha | alias | tipo | descripciÃƒÆ’Ã‚Â³n`.
-MÃƒÆ’Ã‚Â¡ximo 100 entradas ÃƒÂ¢Ã¢â€šÂ¬" las mÃƒÆ’Ã‚Â¡s antiguas se eliminan cuando se supera ese lÃƒÆ’Ã‚Â­mite.
+Registro cronológico de cambios. Cada entrada: `fecha | alias | tipo | descripción`.
+Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese límite.
 
+- 2026-09-07 | yalo spc delasa | DECISION | Acción genérica `query` para fx-sync-info: propuesta reemplazar `query-empleados` hardcodeado por acción parametrizada que acepte table+where+columns del whitelist. Contrato: `{ table, action: "query", where, columns }` → `{ rows }`. Escalabilidad: permite consultar cualquier tabla sin agregar código. Usuario solicita.
+- 2026-09-07 | yalo spc delasa | feature | Sincronización vendedores SPC↔YALO con matcheo inteligente: (1) SincronizarVendedoresAsync() nuevo en CatalogoSyncService.cs con normalizador nombres (sin acentos, lowercase, trimmed); (2) queryEmpleados endpoint nuevo en fx-sync-info/lambda; (3) POST /api/sincronizacion/vendedores agregado a controller; (4) sync completo incluye vendedores antes clientes; (5) detalles pre-eliminados capturados con SaveChangesAsync. Compilación limpia 0 errores. Rama dev/spc-vendedores-sync.
 - 2026-09-06 | yalo spc delasa | merge | feat/integracion-facturacion-monitor -> main (49 commits, sync+facturacion completo)
 - 2026-09-06 | yalo spc delasa | commit | feat(infra): middleware de errores, tope 5 reintentos outbox y timezone en facturacion
 - 2026-09-06 | yalo spc delasa | commit | fix(facturacion): corrige anulacion silenciosa y elimina fecha fija vencida
