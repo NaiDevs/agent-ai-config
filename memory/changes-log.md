@@ -120,6 +120,7 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-09-03 | cpa api | commit | fix(vincular): BL-04 — valida fechas de adendum antes de vincular contrato
 - 2026-09-07 | yalo trackeo | commit | fix(reuniones): corrige auth MS, filtro por usuario y carga inicial lenta
 - 2026-09-07 | yalo trackeo | commit | fix(reuniones): filtra por calendario propio via reunion_calendars
+- 2026-09-07 | yalo trackeo | pr | Integra reuniones de Microsoft Teams con filtro por calendario propio
 - 2026-09-04 | CORINSA | BUG | BL-04 fix VincularDocumentoRepository: validación rango fechas adendum (FechaInicio <= FechaFin) + validación FechaOriginalContrato para bloquear retroceso. InvalidOperationException capturada como 400 BadRequest en servicio en lugar de 500.
 - 2026-09-04 | CORINSA | BUG | BL-04 — Valida fechas adéndums antes de vincular contrato: VincularDocumentoRepository agrega validación FechaInicio <= FechaFin; VincularDocumentoService captura InvalidOperationException como 400 BadRequest. FechaOriginalContrato existía en tabla pero nunca se consultaba (2 casos con inicio > fin, 19 casos con retroceso de fecha). Commit 998c599.
 - 2026-09-04 | yalo console | commit | fix(credit-notes): corrige binding de yalo-select en formulario de creación
