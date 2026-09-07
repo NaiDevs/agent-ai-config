@@ -147,3 +147,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-09-07 | YALO | DECISION | Query acción genérica vs query-impuestos hardcodeado: usuario solicita acción `query` parametrizada en fx-sync-info que acepte table + where + columns del whitelist sin agregar endpoint nuevo por tabla. Contrato: `{ table, action: "query", where, columns }` → `{ rows }`. Permite consultar bodegas, impuestos, etc. sin codigo adicional — escalable. Propuesta aceptada: reemplaza pattern hardcodeado por action genérica.
 - 2026-09-07 | naide | commit | feat(trackeo): mejora reuniones y visualización del tiempo (feat-mcp-servidor)
 - 2026-09-07 | naide | commit | feat(triage): agrega filtro por tablero en solicitudes (feat-mcp-servidor)
+- 2026-09-07 | yalo vendo | commit | fix(payment): corrige lógica invertida de canCharge en contexto de pago
