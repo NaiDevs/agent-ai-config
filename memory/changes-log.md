@@ -149,3 +149,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-09-07 | naide | commit | feat(trackeo): mejora reuniones y visualización del tiempo (feat-mcp-servidor)
 - 2026-09-07 | naide | commit | feat(triage): agrega filtro por tablero en solicitudes (feat-mcp-servidor)
 - 2026-09-07 | yalo vendo | commit | fix(payment): corrige lógica invertida de canCharge en contexto de pago
+- 2026-09-08 | yalo monitor api | commit | fix(facturacion): condiciona Pagado al existir forma de pago en pag_formapagoxfacturas
