@@ -10,6 +10,8 @@ metadata:
 Registro cronológico de cambios. Cada entrada: `fecha | alias | tipo | descripción`.
 Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese límite.
 
+- 2026-09-10 | yalo trackeo desktop | commit | feat(tickets): YATR-102 — trackear tiempo en tickets asignados (Rust+React full-stack: db, api, timer, sync, comandos, ipc, UI)
+- 2026-09-10 | yalo trackeo | commit | feat(tickets): YATR-102 — ticket_id en time_entries + tickets asignados en time-ingest
 - 2026-09-07 | yalo spc delasa | DECISION | Acción genérica `query` para fx-sync-info: propuesta reemplazar `query-empleados` hardcodeado por acción parametrizada que acepte table+where+columns del whitelist. Contrato: `{ table, action: "query", where, columns }` → `{ rows }`. Escalabilidad: permite consultar cualquier tabla sin agregar código. Usuario solicita.
 - 2026-09-07 | yalo spc delasa | feature | Sincronización vendedores SPC↔YALO con matcheo inteligente: (1) SincronizarVendedoresAsync() nuevo en CatalogoSyncService.cs con normalizador nombres (sin acentos, lowercase, trimmed); (2) queryEmpleados endpoint nuevo en fx-sync-info/lambda; (3) POST /api/sincronizacion/vendedores agregado a controller; (4) sync completo incluye vendedores antes clientes; (5) detalles pre-eliminados capturados con SaveChangesAsync. Compilación limpia 0 errores. Rama dev/spc-vendedores-sync.
 - 2026-09-06 | yalo spc delasa | merge | feat/integracion-facturacion-monitor -> main (49 commits, sync+facturacion completo)
