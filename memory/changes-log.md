@@ -129,3 +129,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-09-10 | naide | commit | fix(responsive): adapta m├│dulos operativos a m├│vil (feat-mcp-servidor)
 - 2026-09-10 | YALO | BUG | fix(reuniones): integración Microsoft desde banner global — reemplaza buildMsConnectUrl (credenciales locales) por handleMsConnect vía invokeFn('ms-graph-auth', get_connect_url); elimina query workspace_ms_apps (tabla removida); banner ya no requiere msApps.length > 0. Archivo Reuniones.tsx: líneas 834-847 (handleMsConnect asyncrónico), 937-948 (banner condicional userConnected === false). Cambio reduce acoplamiento tablas y simplifica auth flow. Compilación 0 errores.
 - 2026-09-10 | yalo-trackeo | commit | fix(reuniones): conectar Microsoft desde banner de Reuniones usando App global
+- 2026-09-10 | yalo-trackeo | commit | feat(teams-bot): webhook calling gateway + servicio .NET de media
