@@ -110,3 +110,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-09-10 | yalo-trackeo | commit | feat(tickets): agrega boton Tomar ticket que auto-asigna al usuario actual
 - 2026-09-10 | yalo-trackeo | commit | feat(tickets): muestra boton Tomar ticket en columna Resuelto Por de la tabla
 - 2026-09-10 | yalo-trackeo | commit | fix(tickets): filtra lista Resuelto Por a miembros que trackean tiempo en el workspace
+- 2026-09-10 | YALO | CONFIG | Filtro Resuelto Por / Asignado para resolver: select dropdowns solo muestran miembros que tienen trackea_tiempo=true Y están registrados en workspace activo. Implementación completa con validación múltiple filtros. Commit ac6a636 listo.
