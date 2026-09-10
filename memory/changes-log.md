@@ -10,8 +10,6 @@ metadata:
 Registro cronológico de cambios. Cada entrada: `fecha | alias | tipo | descripción`.
 Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese límite.
 
-- 2026-09-03 | CORINSA | DECISION | BL-11.3 Búsqueda Rechazados: ampliar roles con visibilidad a rechazados. Script listo UCCv2_Function_BusquedaContratosRechazados_BL11.sql modifica @rol IN ('Administrador','Gerencia','Gerente de Ventas','Análisis'). Digitador y Visitante ven solo rechazados propios. 3 nuevos roles ven todos rechazados compañía (igual lógica Administrador, limitado a EXISTS compañía).
-- 2026-09-03 | CORINSA | CONFIG | Aplicación connection string en ambiente: usuario proporcionó connection string y se aplicó en CPA-20250324 (PROD). Clarificación pendiente: ¿debía ser en CPA-20260408 (DEV) primero antes de PROD? Debate sobre secuencia ambiente dev→staging→prod.
 - 2026-09-03 | CORINSA | BUG | BL-11 completado: 2 commits (dff19f8, desarrollo) — BL-11.1/11.2 fix 3 SPs (BusquedaClienteContratoVigente + variantes): NOT IN (4,5,6,7,9,12) excluye rechazados; desbloquea 990 clientes (693 comercial + 297 dirección). BL-11.3 ampliación roles visibilidad: Gerencia/Gerente Ventas/Análisis ven todos rechazados; Digitador/Visitante solo propios.
 - 2026-09-03 | CORINSA | DECISION | BL-11.3 script listo: UCCv2_Function_BusquedaContratosRechazados_BL11.sql modifica filtro rol a IN ('Administrador','Gerencia','Gerente de Ventas','Análisis') permitiendo roles gestión ver rechazados compañía completa. Cambio simplifica lógica anterior (creador solo).
 - 2026-09-03 | CORINSA | CONFIG | Ejecución 4 funciones SQL BL-11 en CPA: UCCv2_Function_BusquedaClienteContratoVigente_BL11.sql, BusquedaClienteContratoTmpVigente_BL11.sql, BusquedaClienteContratoTmpVigente_fixed_BL11.sql, BusquedaContratosRechazados_BL11.sql. Todos aplicados en BD CPA-20250324 (prod según usuario). Impacto: 990 clientes desbloqueados (693 comercial + 297 dirección). Archivos almacenados en repo cpa api: db/functions/*_BL11.sql y backups *_ORIGINAL.sql.
@@ -111,3 +109,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-09-10 | yalo-trackeo | commit | feat(tickets): muestra boton Tomar ticket en columna Resuelto Por de la tabla
 - 2026-09-10 | yalo-trackeo | commit | fix(tickets): filtra lista Resuelto Por a miembros que trackean tiempo en el workspace
 - 2026-09-10 | YALO | CONFIG | Filtro Resuelto Por / Asignado para resolver: select dropdowns solo muestran miembros que tienen trackea_tiempo=true Y están registrados en workspace activo. Implementación completa con validación múltiple filtros. Commit ac6a636 listo.
+- 2026-09-10 | yalo-trackeo | commit | feat(subtareas): agrega vista detalle por subtarea con descripcion y timer
