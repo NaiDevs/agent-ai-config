@@ -115,3 +115,6 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-09-10 | yalo-trackeo-desktop | commit | feat(desktop): soporte de sub_task_id en entradas de tiempo — LocalEntry.subTaskId, SQLite migration 0002, database.ts queries actualizados
 
 - 2026-09-10 | yalo-trackeo | commit | feat(subtareas): expande SubTaskDetail con todos los campos de TaskDetail
+- 2026-09-09 | yalo-trackeo-desktop | DECISION | CLI `yt` binario Rust creado (src/bin/yt.rs) con comandos status/workspaces/tasks/projects/start/stop/resume. Registrado en Cargo.toml [[bin]]. Pendiente: integración en MCP para trackeo automático — al ejecutar tarea desde yalo-trackeo, el MCP debe llamar `yt start CLAVE` para sincronizar timer desktop.
+
+- 2026-09-10 | yalo-trackeo | commit | feat(subtareas): agrega cards de GitHub y Slack en SubTaskDetail
