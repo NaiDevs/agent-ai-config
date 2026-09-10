@@ -123,3 +123,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-09-10 | yalo-trackeo | commit | feat(roadmap): agrega filtro por tablero en la vista de proyectos
 - 2026-09-10 | yalo-trackeo | commit | feat(proyectos): progreso automático desde tareas completadas
 - 2026-09-10 | yalo-trackeo | commit | feat(tareas): updates semanales, pills de salud y estados dinámicos
+- 2026-09-10 | naide | commit | fix(responsive): corrige bandeja y detalle de solicitudes en m├│vil (feat-mcp-servidor)
