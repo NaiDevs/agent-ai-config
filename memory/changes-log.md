@@ -113,3 +113,5 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-09-10 | YALO | DECISION | Subtask detail view completo (e6b648c): router task/:id/sub/:subId, breadcrumb navegable, título editable, descripción RichTextEditor (view/edit), sidebar estado cicla/asignado dropdown+roster/tiempo timer padre. Icono ⬡ en TaskDetail indica subtarea con descripción. Fase 2 pendiente: trackeo tiempo específico por subtarea (requiere sub_task_id en time_entries + integración desktop).
 - 2026-09-10 | yalo-trackeo | commit | feat(subtareas): tracking de tiempo por subtarea (Phase 2) — sub_task_id en time_entries, SubTaskDetail timer usa startTimer(taskId, subId), deploy time-ingest v64
 - 2026-09-10 | yalo-trackeo-desktop | commit | feat(desktop): soporte de sub_task_id en entradas de tiempo — LocalEntry.subTaskId, SQLite migration 0002, database.ts queries actualizados
+
+- 2026-09-10 | yalo-trackeo | commit | feat(subtareas): expande SubTaskDetail con todos los campos de TaskDetail
