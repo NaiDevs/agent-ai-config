@@ -120,3 +120,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-09-10 | yalo-trackeo | commit | feat(subtareas): agrega cards de GitHub y Slack en SubTaskDetail
 - 2026-09-10 | yalo-trackeo | commit | fix(tareas): avisa cuando se reasigna una tarea propia a otra persona
 - 2026-09-10 | yalo-trackeo | commit | fix(tareas): corrige mensaje del toast al desasignar tarea propia
+- 2026-09-10 | yalo-trackeo | commit | feat(roadmap): agrega filtro por tablero en la vista de proyectos
