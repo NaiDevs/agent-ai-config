@@ -119,3 +119,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 
 - 2026-09-10 | yalo-trackeo | commit | feat(subtareas): agrega cards de GitHub y Slack en SubTaskDetail
 - 2026-09-10 | yalo-trackeo | commit | fix(tareas): avisa cuando se reasigna una tarea propia a otra persona
+- 2026-09-08 | YALO | BUG | cd8fcac — bug resuelto. Toast aparece solo cuando la tarea era tuya y la reasignás a alguien más; si asignás una tarea sin responsable, o si alguien más la reasigna, no molesta
