@@ -118,3 +118,4 @@ Máximo 100 entradas — las más antiguas se eliminan cuando se supera ese lím
 - 2026-09-09 | yalo-trackeo-desktop | DECISION | CLI `yt` binario Rust creado (src/bin/yt.rs) con comandos status/workspaces/tasks/projects/start/stop/resume. Registrado en Cargo.toml [[bin]]. Pendiente: integración en MCP para trackeo automático — al ejecutar tarea desde yalo-trackeo, el MCP debe llamar `yt start CLAVE` para sincronizar timer desktop.
 
 - 2026-09-10 | yalo-trackeo | commit | feat(subtareas): agrega cards de GitHub y Slack en SubTaskDetail
+- 2026-09-10 | yalo-trackeo | commit | fix(tareas): avisa cuando se reasigna una tarea propia a otra persona
