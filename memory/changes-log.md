@@ -10,9 +10,6 @@ metadata:
 Registro cronolÃ³gico de cambios. Cada entrada: `fecha | alias | tipo | descripciÃ³n`.
 MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera ese lÃ­mite.
 
-- 2026-09-03 | yalo console | commit | feat(credit-notes): agrega mÃ³dulo de notas de crÃ©dito en contabilidad
-- 2026-09-03 | cpa api | commit | fix(vincular): BL-04 â€” valida fechas de adendum antes de vincular contrato
-- 2026-09-07 | yalo trackeo | commit | fix(reuniones): corrige auth MS, filtro por usuario y carga inicial lenta
 - 2026-09-07 | yalo trackeo | commit | fix(reuniones): filtra por calendario propio via reunion_calendars
 - 2026-09-07 | yalo trackeo | pr | Integra reuniones de Microsoft Teams con filtro por calendario propio
 - 2026-09-04 | CORINSA | BUG | BL-04 fix VincularDocumentoRepository: validaciÃ³n rango fechas adendum (FechaInicio <= FechaFin) + validaciÃ³n FechaOriginalContrato para bloquear retroceso. InvalidOperationException capturada como 400 BadRequest en servicio en lugar de 500.
@@ -112,3 +109,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-09-11 | naide | commit | feat(intercom): configura integracion segura por workspace (feat-mcp-servidor)
 - 2026-09-11 | naide | commit | tarea(reuniones): elimina esquema obsoleto del bot de Teams (feat-mcp-servidor)
 - 2026-09-11 | naide | commit | feat(slack): enriquece mensajes de seguimiento (feat-mcp-servidor)
+- 2026-09-11 | naide | commit | fix(tickets): corrige acciones masivas y miembros del workspace (feat-mcp-servidor)
