@@ -111,3 +111,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-09-11 | naide | commit | fix(formularios): mejora selectores de cuenta y canales (feat-mcp-servidor)
 - 2026-09-11 | naide | commit | feat(intercom): configura integracion segura por workspace (feat-mcp-servidor)
 - 2026-09-11 | naide | commit | tarea(reuniones): elimina esquema obsoleto del bot de Teams (feat-mcp-servidor)
+- 2026-09-11 | naide | commit | feat(slack): enriquece mensajes de seguimiento (feat-mcp-servidor)
