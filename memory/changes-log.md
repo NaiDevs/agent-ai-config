@@ -10,6 +10,8 @@ metadata:
 Registro cronolÃ³gico de cambios. Cada entrada: `fecha | alias | tipo | descripciÃ³n`.
 MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera ese lÃ­mite.
 
+- 2026-09-14 | YALO | FEAT | Lista negra leads sospechosos: CrmBlacklist entity + CrmBlacklistService (normaliza phone/email, checkDuplicates, banContact), contactos auto-marcados isSuspicious en createContact y en integración yalo-bo, endpoint POST contacts/:id/ban + GET blacklist/entries, badge naranja/rojo en drawer-contact + botón ban
+- 2026-09-14 | YALO | FEAT | Merge deals duplicados: POST /api/crm-deals/:id/merge — fusiona deal secundario en primario: org merge (authOrgId gana), enriquecimiento de campos nulos, merge BANT + ActivationChecks, migración actividades, historial de fusión, archiva secundario; FE: botón Fusionar en drawer con modal de búsqueda/selección
 - 2026-09-07 | yalo trackeo | commit | fix(reuniones): filtra por calendario propio via reunion_calendars
 - 2026-09-07 | yalo trackeo | pr | Integra reuniones de Microsoft Teams con filtro por calendario propio
 - 2026-09-04 | CORINSA | BUG | BL-04 fix VincularDocumentoRepository: validaciÃ³n rango fechas adendum (FechaInicio <= FechaFin) + validaciÃ³n FechaOriginalContrato para bloquear retroceso. InvalidOperationException capturada como 400 BadRequest en servicio en lugar de 500.
