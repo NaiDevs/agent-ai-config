@@ -150,3 +150,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-09-16 | yalo api admin | commit | feat(blacklist): implementa ban completo con suspension en yaloauth, yaloCobro y BO
 - 2026-09-16 | yalo console | commit | feat(blacklist): agrega vista Lista Negra, modal de confirmacion de ban y mejoras al drawer
 - 2026-09-17 | YALO | BUG | Corrección timestamp time_entries: entrada e75873ed-20a8-4ba5-9b28-60f4acd9a4d9 registraba desde medianoche cuando terminó el miércoles a las 18:00 HN. Fix: actualizar ended_at a timestamp correcto, eliminar distorsión de 7h 34min en el conteo diario. Yalo Trackeo database correction.
+- 2026-09-17 | YALO | CONFIG | Revisión versionamiento yalo-trackeo-desktop: versión actual 0.1.3, consulta next release number para planificación.
