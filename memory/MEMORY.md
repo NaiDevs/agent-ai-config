@@ -28,3 +28,4 @@
 - [CPA BL-11 rechazados bloquean clientes](decision-cpa-bl11-rechazados-bloquean-clientes.md) — SP vigentes no excluye estados 4/6/9 (rechazados); 839 clientes bloqueados; fix puro SQL en 3 SPs + visibilidad rechazados
 - [Integración calendario Teams/Outlook → yalo-trackeo](decision-yalotrackeo-calendar-integration.md) — Graph API doble suscripción (calendar events + meetingCallEvents) es la única opción para tiempo real exacto; n8n como alternativa con hora agendada; punto de integración: addManualEntry con source:'calendar'
 - [MCP timer local yalo-trackeo-desktop](decision-yalotrackeo-desktop-mcp-timer.md) — stdio server (no HTTP) en agent-ai-config/mcp-servers/; tools: timer_start/stop/status/resume; llama yt.exe localmente; registrado en ~/.claude/settings.json
+- [Errores → Slack DM](feedback-slack-errores.md) — ante cualquier error (por mínimo que sea), DM a U07LLJ00WDR en Slack
