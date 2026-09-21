@@ -176,4 +176,4 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-09-21 | YALO | CONFIG | fix(secrets): cambia DisableSecretsManager de true a false en appsettings.Development.json — permite que app local cargue secrets de AWS (RDS dev) en lugar de usar BD local vacía; root cause problema reportado: equipos probaban contra BD local sin datos reales; solución: Direct AWS Secrets Manager load en env Development. Commit 4a56c63 rama feat/naidelyn/merge
 - 2026-09-21 | yalo trackeo | commit | feat(roles): permisos por recuadro en Settings > General
 - 2026-09-21 | yalo trackeo desktop | commit | fix(timer): corrige paros inesperados — elimina auto-discard idle, detecta sleep por gap entre ticks >30s
-- 2026-09-21 | yalo trackeo desktop | commit | fix(login): corrige doble icono de ojo en campo de contraseña
+- 2026-09-21 | yalo trackeo desktop | commit | fix(login): corrige doble icono de ojo en campo de contraseña- 2026-09-21 | yalo trackeo desktop | commit | fix(timer): elimina auto-discard del prompt idle y corrige doble ícono del ojo
