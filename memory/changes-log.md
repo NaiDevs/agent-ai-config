@@ -195,3 +195,5 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-09-23 | yalo spc delasa | BUG | Cambio credenciales AuthApi causa fallo sync: usuario juanpedrotest@gmail.com/org 819 → edgar.ponce@delasa.hn/org 524 en appsettings.json. Login falla contra https://yalo-api.yalocobro.dev/auth/login → ObtenerTokenAsync retorna null → todos upserts catálogos fallan ("no se pudo obtener token para [tabla]"). Root cause: (1) usuario edgar.ponce no creado en YALO org 524, O (2) contraseña RSA encriptada incorrecta. Verificación: curl -X POST auth/login con credenciales; si 401/error → credenciales inválidas; si 200 sin access_token → formato respuesta mismatch.
 - 2026-09-22 | naide | commit | feat(vision): agrega m├│dulo estrat├⌐gico YaloVerso (feat-mcp-servidor)
 - 2026-09-22 | naide | commit | feat(github): exige evidencia al completar tareas (feat-mcp-servidor)
+- 2026-09-23 | naide | commit | feat(trackeo): agrega pausas y portales por tablero (feat-mcp-servidor)
+- 2026-09-23 | naide | commit | feat(timer): agrega pausas sincronizadas en desktop (claude/yalo-trackeo-desktop-mvp-sg0b9f)
