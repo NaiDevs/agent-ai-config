@@ -1,19 +1,3 @@
----
-name: changes-log
-description: Log de commits y PRs realizados por proyecto ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬" referencia rÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡pida de quÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â© se trabajÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³ recientemente
-metadata: 
-  node_type: memory
-  type: project
-  originSessionId: baa97b0f-6550-4a98-92f2-501e6aea9d37
----
-
-Registro cronolÃ³gico de cambios. Cada entrada: `fecha | alias | tipo | descripciÃ³n`.
-MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera ese lÃ­mite.
-
-
-
-- 2026-09-19 | yalo-spc-delasa | CONFIG | Lambda fx-auth-login en vdd72uwnwe.execute-api.us-east-1.amazonaws.com/v1 no tiene CORE_SECRET_NAME/RDS_SECRET_NAME configuradas en AWS — workaround: usar token estático en SyncInfoOptions.Token en appsettings.Development.json
-- 2026-09-20 | yalo-spc-delasa | CONFIG | Deploy IIS documentado en DEPLOY-IIS.md: sitio SPCserverDELASA, carpeta C:\inetpub\wwwroot\SPCserverDelasa, connections.json a mano, ver-logs.ps1 para logs en vivo
 - 2026-09-12 | YALO | GENERAL | Análisis exhaustivo Yalo Trackeo v3 prototipo: identificados 3 niveles de gaps — (Nivel 1) 15+ problemas diseño incompleto en Novedades/Portal/Bandeja/Tareas/QA/Visión (sin edición posts, estados drafts, logos, validaciones, flujos incompletos); (Nivel 2) 6 flujos sin pantalla (email notificaciones, URL pública portal, invitar clientes, onboarding, crear workspace, importar Canny/Jira); (Nivel 3) producción 0% — sin backend/BD/auth/integraciones reales/storage/notificaciones/websockets/multi-tenant. Ruta bloqueantes: (1) definir flujo notificación cliente, (2) diseñar empty state workspace nuevo, (3) aclarar desktop/mobile en prod. Próximo: atacar estos 3 gaps antes buildear.
 - 2026-09-12 | YALO | GENERAL | Focus Novedades + Portal: extracción HTML completo prototipo v3.dc.html (6049 lineas). Composer modal clcOpen (vX.Y version input, publico/interno toggle, work picker con search, bloques text/image/video/item con categorias, AI generator 3-step PR selector→generar→revisar). Toast post-publish "Se notificó a los clientes que pidieron estas mejoras" contextual (publico vs interno). Empty state fallback UI. Portal feed público (timeline sticky version dates, sidebar widget preview 2 items, "Ver todas las novedades" link). Código referencia para backend implementación siguientes fases.
 - 2026-09-12 | YALO | GENERAL | Revisión prototipo Yalo Trackeo v3: análisis detallado gaps en módulos Novedades (11 gaps: empty state, edición entrada existente, borradores guardados, notificación votantes opaca, etc) y Portal (7 gaps: guardar/dirty state, hero text hardcodeado, logo upload, imágenes en portal, código embed widget). Prototipo de referencia para implementación producción — bloqueantes: flujo notificación cliente, empty state workspace, claridad desktop/mobile.
@@ -112,3 +96,5 @@ MÃ¡ximo 100 entradas â€” las mÃ¡s antiguas se eliminan cuando se supera
 - 2026-09-23 | naide | commit | chore: bump version a 0.1.10 (claude/yalo-trackeo-desktop-mvp-sg0b9f)
 - 2026-09-23 | yalo trackeo desktop | commit | fix(timer): detiene el conteo tras aviso de inactividad
 - 2026-09-23 | yalo trackeo desktop | commit | chore: bump version a 0.1.10
+- 2026-09-23 | naide | commit | feat(tickets): agrega API externa y webhooks por workspace (feat-mcp-servidor)
+- 2026-09-23 | yalo-trackeo | commit | feat(tickets): agrega API externa y webhooks por workspace
