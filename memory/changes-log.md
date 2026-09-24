@@ -98,3 +98,4 @@
 - 2026-09-23 | yalo trackeo desktop | commit | chore: bump version a 0.1.10
 - 2026-09-23 | naide | commit | feat(tickets): agrega API externa y webhooks por workspace (feat-mcp-servidor)
 - 2026-09-23 | yalo-trackeo | commit | feat(tickets): agrega API externa y webhooks por workspace
+- 2026-09-23 | YALO | DECISION | Módulo Organizaciones YaloConsole - productos/planes/addons: sesión brainstorming para diseñar dos sub-tareas (1) filtro de organizaciones por producto/addon en tabla principal, (2) tab de detalle producto/addon por organización en view-details. Stack: Angular standalone. Módulo existente con 6 tabs en view-details y tabla con filtros dinámicos. Subagente exploración activado para mapear estructura planes/addons en configs de ventas (servicios, interfaces, endpoints API). Clarificación requerida: distinguir productos Yalo (módulos suscritos) vs productos catálogo (vendidos por organización).
