@@ -1,3 +1,4 @@
+- 2026-09-25 | yalo-trackeo | commit | fix(tareas): corrige 4 bugs de filtros, estado y subtareas en lista
 - 2026-09-25 | yalo-trackeo | commit | feat(cuentas): renombra 'Yalo Console' a 'API Propia' y agrega phone/email
 - 2026-09-25 | yalo-trackeo | pr | Corrige contador de tableros para incluir solicitudes y tareas
 - 2026-09-25 | yalo-trackeo | commit | fix(sidebar): incluye tareas en el contador de tableros
