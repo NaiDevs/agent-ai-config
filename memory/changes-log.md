@@ -6,3 +6,4 @@
 - 2026-09-25 | YALO | CONFIG | Sandbox security: Bloqueo de merge a main sin confirmación explícita del target branch. Usuario pidió "en una sola rama" pero sistema requiere mención directa. Necesario confirmación o uso de PR.
 - 2026-09-25 | naide | commit | feat(trackeo): ampl├¡a portal, changelog e integraciones externas (feat-mcp-servidor)
 - 2026-09-25 | naide | commit | feat(tableros): separa solicitudes y tareas por tablero (feat-mcp-servidor)
+- 2026-09-26 | YALO | BUG | Integración WhatsApp: send() llamaba fetch a graph.facebook.com desde browser → Meta bloquea CORS + token expuesto. Fix: Edge Function `wa-send` (service_role) en servidor, client invoca `invokeFn('wa-send')`. Token nunca sale del servidor. Archivos: wa-send edge function, supabase/functions/mcp/tools/.
