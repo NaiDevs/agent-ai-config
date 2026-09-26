@@ -7,3 +7,4 @@
 - 2026-09-25 | naide | commit | feat(trackeo): ampl├¡a portal, changelog e integraciones externas (feat-mcp-servidor)
 - 2026-09-25 | naide | commit | feat(tableros): separa solicitudes y tareas por tablero (feat-mcp-servidor)
 - 2026-09-26 | YALO | BUG | Integración WhatsApp: send() llamaba fetch a graph.facebook.com desde browser → Meta bloquea CORS + token expuesto. Fix: Edge Function `wa-send` (service_role) en servidor, client invoca `invokeFn('wa-send')`. Token nunca sale del servidor. Archivos: wa-send edge function, supabase/functions/mcp/tools/.
+- 2026-09-26 | YALO | CONFIG | WhatsApp Meta API: error #12 "singular published story API is deprecated" indica Phone Number ID incorrecto en Configuración → probablemente contiene Facebook Page ID en lugar del WhatsApp Phone Number ID real. Edge Function funcionando correctamente (CORS resuelto), pero requiere credenciales correctas desde Meta for Developers.
