@@ -3,3 +3,4 @@
 - 2026-09-25 | YALO | GENERAL | Changelog.tsx: simplifica drag-drop JSX — elimina handlers redundantes de onDragOver/onDragEnter/onDrop en divs. Refactor menor, build OK.
 - 2026-09-24 | YALO | CONFIG | Migration SQL pendiente: `20260925120000_cuentas_phone_email.sql` (columnas phone/email en tabla cuentas). Se aplica automáticamente en merge a main, pero requiere aplicación manual en dashboard Supabase si se prueba en dev antes.
 - 2026-09-24 | YALO | BUG | PR pendiente: rama `hotfix/board-counts-include-tasks` contiene 3 commits listos (sidebar counter fix + cuentas + bugs tracker). No se ha abierto PR hacia main.
+- 2026-09-25 | YALO | CONFIG | Sandbox security: Bloqueo de merge a main sin confirmación explícita del target branch. Usuario pidió "en una sola rama" pero sistema requiere mención directa. Necesario confirmación o uso de PR.
