@@ -17,6 +17,7 @@
 - 2026-09-26 | YALO | BUG | WhatsApp Bearer token doble: WA_TOKEN en Supabase ya incluye "Bearer " (como en YALO-API-WS), pero Edge Function wa-send construía `Bearer ${WA_TOKEN}` → doble prefijo. Fix: condicional `WA_TOKEN.startsWith('Bearer ') ? WA_TOKEN : \`Bearer ${WA_TOKEN}\`` evita error y permite ambos formatos (v9 deployed).
 - 2026-09-26 | yalo-trackeo | commit | feat(novedades): integración WhatsApp funcional + mejoras de tracking y UI
 - 2026-09-26 | YALO | BUG | Debugging wa-send edge function: verificación de phoneNumberId en app_config table (SELECT workspace_id, key, data) — confirmación de almacenamiento correcto en comms config. Sistema bloqueó intento de temporary auth bypass (`x-wa-test` header) por ser weakening authorization en producción. Revertido sin impacto. Usuario instruido a probar desde UI con número +50495349633.
+- 2026-09-28 | yalo-trackeo | commit | feat(comentarios): chip visual y hover card en menciones de comentarios
 - 2026-09-28 | yalo-trackeo | commit | feat(settings): muestra badge de rol real en fila de miembro
 - 2026-09-28 | yalo-trackeo | commit | feat(notificaciones): agrega toast in-app y corrige link en DM Slack
 - 2026-09-28 | yalo-trackeo | commit | feat(notificaciones): notifica al asignado al comentar en tarea o ticket
