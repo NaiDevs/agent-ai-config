@@ -21,3 +21,4 @@
 2026-09-29 | yalo trackeo | commit | feat(novedades): agrega envío masivo por correo a toda la cartera
 2026-09-29 | yalo trackeo | commit | feat(proyectos): usa RichTextEditor en descripción del modal de proyecto
 2026-09-29 | YALO | DECISION | Modal de proyecto: campo Descripción migrado de textarea a RichTextEditor (toolbar con bold, italic, listas, links igual que en tareas) para mejor edición de contexto y objetivos
+2026-09-29 | YALO | GENERAL | Sidebar de filtros + Group By en timesheet: implementación en progreso (subagent fork) para agregar capacidad de agrupar registros por criterios y filtrar vista de horas trabajadas
