@@ -30,3 +30,4 @@
 - [Integración calendario Teams/Outlook → yalo-trackeo](decision-yalotrackeo-calendar-integration.md) — Graph API doble suscripción (calendar events + meetingCallEvents) es la única opción para tiempo real exacto; n8n como alternativa con hora agendada; punto de integración: addManualEntry con source:'calendar'
 - [MCP timer local yalo-trackeo-desktop](decision-yalotrackeo-desktop-mcp-timer.md) — stdio server (no HTTP) en agent-ai-config/mcp-servers/; tools: timer_start/stop/status/resume; llama yt.exe localmente; registrado en ~/.claude/settings.json
 - [Errores → Slack DM](feedback-slack-errores.md) — ante cualquier error (por mínimo que sea), DM a U07LLJ00WDR en Slack
+- [YALO-API-Soporte](projects-yalo-api-soporte.md) — API interna soporte POS: .NET 10, 4 capas, 3 PostgreSQL + DynamoDB, Read Replica interceptor, tickets SAC↔Jira, Slack, deploy ECS+Terraform

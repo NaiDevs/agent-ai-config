@@ -41,3 +41,7 @@
 2026-09-30 | YALO | DECISION | YA-143 (Bitácora pedidos cliente): nuevo endpoint GET /api/contingencias/clientes/pedidos + componente BitacoraPedidosClienteComponent con búsqueda por cliente (nombre/teléfono/código) y muestra facturas
 2026-09-30 | YALO | DECISION | YA-144 (Actualizar info cliente): nuevo endpoint PATCH /api/contingencias/clientes/:codCliente + modal de edición en yalo-vendo-entrego categoría Clientes (referencia campos yalo bo)
 2026-09-30 | YALO | DECISION | Arquitectura YaloConsole bitácoras: componentes standalone (bitacora-pedidos, bitacora-clientes), service pattern con endpoints GET /bitacoras/**/buscar, signal-based state management, timeline diff tracking
+
+## Session b9ac393f-93e0-47b9-9b2d-5a7d7a0aa985
+
+2026-09-30 | YALO | DECISION | Análisis de arquitectura YALO-API-Soporte: clone de repo y análisis completo via subagent (stack, estructura, módulos, integraciones, patterns, BD, Swagger)
