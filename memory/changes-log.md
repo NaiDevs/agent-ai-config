@@ -34,3 +34,4 @@
 ## Session 464a9139-485a-45a0-80fb-01ca2f3a0abb (continuación)
 
 2026-09-30 | YALO | BUG | activityBlocks solo se cargaba con vista='actividad'; exports mostraban 0% actividad. Solución: ambos exports (Excel/PDF) ahora cargan directamente de activity_blocks al exportar, independiente del tab activo, usando snake_case fields (tracked_s, keyboard_s, mouse_s, pantalla_s, time_entry_id)
+2026-09-30 | yalo trackeo | BUG | Indicador visual (puntito) en campo de fecha "MAR 29" desalineaba fila — removido, solo aplica cambio de color (brand azul) al marcar como destacado
