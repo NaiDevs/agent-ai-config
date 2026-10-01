@@ -54,3 +54,4 @@
 ## Session 56d0bcc2-ada8-4c9b-9ba5-23aa04478125
 
 2026-10-01 | YALO | CONFIG | Typecheck módulo QA v2 en yalo-trackeo: verificación de tipos TypeScript con background task runner para validar transpilación y bindings post-porting
+2026-10-01 | YALO | DECISION | Modal "Devolver caso a Dev": tipos QACaseReturn/QACaseReturnType/QACaseReturnMotivo, campos type (Bug/Sugerencia/Requerimiento), motivo obligatorio (no_cumple/regresion/no_reproducible/falta_ambiente), clientes multi-select, detalle y evidencia para Dev
