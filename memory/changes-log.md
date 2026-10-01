@@ -60,4 +60,4 @@
 
 ## Session ef38935f-cc72-40e0-89bb-37f29a110f70
 
-2026-10-01 | YALO | BUG | Validación de liquidaciones: error en cálculo o UI que valida "valores deben ser mayor a 0" o "valores a liquidar son mayores al total" — requiere investigación en yalo bo api y vendo-entrego repos
+2026-10-01 | YALO | BUG | Validación de liquidaciones: error en cálculo o UI que valida "valores deben ser mayor a 0" o "valores a liquidar son mayores al total" — validaciones localizadas en LiquidacionesController.cs líneas 427-429 (PostLiquidacion, montoLiquidar <= 0) y 475-477 (total pedido excedido); también en LiquidacionesService.cs líneas 82-89 (organizationId y employeeId <= 0)
