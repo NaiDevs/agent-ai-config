@@ -51,10 +51,3 @@
 
 2026-10-01 | YALO | GENERAL | Módulo QA v2 — porting completo desde v3 NM: constants (5339-4419), state fields, helpers (5366-5700), screen principal (1091-3026), drawers/modales (3026-3826), resumen en detalle tarea (786-840) con orden de ejecución verificado
 
-## Session 56d0bcc2-ada8-4c9b-9ba5-23aa04478125
-
-2026-10-01 | YALO | CONFIG | Typecheck módulo QA v2 en yalo-trackeo: verificación de tipos TypeScript con background task runner para validar transpilación y bindings post-porting
-2026-10-01 | YALO | DECISION | Modal "Devolver caso a Dev": tipos QACaseReturn/QACaseReturnType/QACaseReturnMotivo, campos type (Bug/Sugerencia/Requerimiento), motivo obligatorio (no_cumple/regresion/no_reproducible/falta_ambiente), clientes multi-select, detalle y evidencia para Dev
-2026-10-01 | YALO | DECISION | Popup "Agregar caso": Modal con campos name/steps, file pickers funcionales (<label><input type="file">) para Imagen/Video/Documento, estado de UI con respuesta en tiempo real
-2026-10-01 | YALO | DECISION | Adjuntos en QA: botones Imagen/Video/Documento rediseñados como <label><input type="file"> reales (no fake), alineados con patrón de ReturnCase modal, soportan múltiples formatos
-2026-10-01 | YALO | DECISION | Cards de reportes QA: rediseño completo con thumbnail tipo (Bug/Sugerencia), badges de categoría, status badge (REPORTADO/EN REVISIÓN/COMPLETO), motivo + detalle, meta row, sección DEV, botones de cambio de estado funcionales
