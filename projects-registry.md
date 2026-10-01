@@ -114,7 +114,7 @@
 
 | Workspace           | Proyectos                                              | Descripción                    |
 |---------------------|--------------------------------------------------------|--------------------------------|
-| yalo bo             | yalo bo, yalo bo api                                   | POS frontend + backend         |
+| yalo bo             | yalo bo, yalo bo api, yalo vendo                       | POS frontend + backend + vendo |
 | yalo pedidos        | yalo monitor, yalo monitor api                         | Monitor de pedidos full stack  |
 | yalo full           | yalo bo, yalo bo api, yalo signalr                     | POS con tiempo real            |
 | bodega shop         | bodega ecom, bodega bo api                             | E-commerce web + API           |
