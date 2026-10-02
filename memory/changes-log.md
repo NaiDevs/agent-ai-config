@@ -79,3 +79,4 @@
 
 2026-10-02 | YALO | BUG | Validación liquidaciones: falso positivo "montos exceden total pedido" — saldoEfectivo redonda a 2 decimales, pero comparación usaba NormalizarMonto (4 decimales), causando diferencias hasta 0.003 en pedidos con centavos en 3er decimal; fix: redondea totalPedido y totalSolicitado a 2 decimales antes de validar
 2026-10-02 | yalo bo api | commit | fix(liquidaciones): corrige falso positivo al validar monto contra total del pedido
+2026-10-02 | YALO | BUG | Rutas con parámetros opcionales: soluciona error al listar órdenes donde querystring faltaba parametrización en URL base — corregido en endpoint con cast seguro de queryParameters en hotfix/naidelyn/rutas
