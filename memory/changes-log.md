@@ -106,3 +106,4 @@
 - 2026-10-02 | naide | commit | fix(customer-balance): valida configuraci├│n y entradas Stripe (feat/naidelyn/stripe)
 - 2026-10-02 | naide | commit | fix(customer-balance): explicita estado de procesamiento (feat/naidelyn/stripe)
 2026-10-02 | YALO | FEATURE | Commit 5418174 pusheado en feat/naidelyn/ventas — integración completa de asignación/reasignación de leads en onboarding y pipeline de ventas
+2026-10-02 | YALO | BUG | FormaPago inconsistencia en confirmación de pago: YaloConsole POST /organizations/confirm-pay envía FormaPago=3, pero YaloPOSBackofficeAPI endpoint PagoFacturaTransferencia/ActivarSuscripcion hardcodea formapago=2 en BD ignorando parámetro — Slack se genera correctamente (leyendo FormaPago=3), pero tabla muestra transferencia. Fix necesario en BO API para respetar el FormaPago enviado
