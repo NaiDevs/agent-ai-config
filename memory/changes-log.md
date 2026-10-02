@@ -91,3 +91,4 @@
 - 2026-10-02 | naide | commit | fix(customer-balance): asegura idempotencia y auditor├¡a (feat/naidelyn/stripe)
 - 2026-10-02 | naide | commit | fix(customer-balance): corrige configuraci├│n y compatibilidad (feat/naidelyn/stripe)
 - 2026-10-02 | naide | commit | fix(customer-balance): maneja fallos parciales de auditor├¡a (feat/naidelyn/stripe)
+- 2026-10-02 | naide | commit | fix(customer-balance): garantiza unicidad y libera recursos (feat/naidelyn/stripe)
