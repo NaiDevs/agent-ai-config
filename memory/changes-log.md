@@ -73,9 +73,8 @@
 
 ## Session 22a83bab-58b6-4972-a052-5758d237bc8d
 
-2026-10-02 | YALO | DECISION | Onboarding + Sales Pipeline: asignar/reasignar leads con motivo (lista predefinida), exploración FE (componentes, flujo UI) y API (endpoints onboarding/reasignación)
-2026-10-02 | YALO | DECISION | API endpoints reasignación: PATCH /api/crm-deals/:id (para reassign asesor en sales), actividad registra "Reasignado de X a Y por Z", Slack notifies; CrmLossReasons es CRUD con appliesTo('deals'|'trial'|'both'); fields lostReasonId+lostReasonNote en CrmDeals para motivo reasignación
-2026-10-02 | YALO | DECISION | FE onboarding: "Tomar" sin cambios; nuevo botón Asignar/reasignar en la card (con dropdown inline que muestra lista asesores) + también en panel detalle; motivos de reasignación sales pipeline son administrables (CRUD CrmLossReasons) o hardcodeados según preferencia
+2026-10-02 | yalo console api | feat | reassignmentReason en UpdateCrmDealDto + motivo en descripción de actividad al reasignar asesor (rama fix/naidelyn/caracteres-especiales-slack)
+2026-10-02 | yalo console | feat | Modal de motivo al reasignar asesor en deal drawer (5 motivos hardcodeados); botones Asignar/Reasignar con dropdown en kanban card de onboarding (solo manager/admin); campo SAC editable en drawer de onboarding via modal popup; "Tomar cuenta" eliminado del drawer de onboarding (rama feat/naidelyn/ventas)
 
 ## Session 1e9a05e0-795d-4bee-b9cd-c6a9f6e69ab7
 
