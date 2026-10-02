@@ -84,3 +84,6 @@
 2026-10-02 | YALO | BUG | Rutas con parámetros opcionales: soluciona error al listar órdenes donde querystring faltaba parametrización en URL base — corregido en endpoint con cast seguro de queryParameters en hotfix/naidelyn/rutas
 2026-10-02 | yalo console api | BUG | Integración Stripe en notas de crédito (credit-notes.service.ts): `applyStripeBalance` llamaba a endpoint sin `/api/` prefix, causando 404 en YALO_API_Stripe; `reverseStripeBalance` ya tenía `/api/` — fix: añade `/api/` al endpoint CustomerBalance para consistencia
 2026-10-02 | YALO | CONFIG | Variables de entorno yalo console api: investigación de dónde están configuradas (AWS Secrets, .env de servidor, pipeline) para diferenciar prod/staging — revertido cambio previo para replantear configuración correcta
+- 2026-10-02 | naide | commit | feat(customer-balance): agrega cr├⌐ditos y reversiones (feat/naidelyn/stripe)
+- 2026-10-02 | naide | commit | feat(cr├⌐dito): integra notas con Stripe y PDF fiscal (fix/naidelyn/caracteres-especiales-slack)
+- 2026-10-02 | naide | commit | feat(console): integra notas de cr├⌐dito y mejoras operativas (feat/naidelyn/ventas)
