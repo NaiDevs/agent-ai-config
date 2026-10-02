@@ -49,6 +49,11 @@
 
 ## Session b9ac393f-93e0-47b9-9b2d-5a7d7a0aa985
 
+## Session 22a83bab-58b6-4972-a052-5758d237bc8d
+
+2026-10-02 | YALO | DECISION | Onboarding UI: permitir asignar/reasignar leads en onboarding con interfaz drag-drop y modal de asignación, integración con sacAgentId en API
+2026-10-02 | YALO | DECISION | Sales Pipeline: agregar motivo configurable (lista desplegable) al reasignar lead a otro asesor; motivo seleccionable por defecto (no texto libre) integrado con endpoint PATCH /crm-deals
+
 2026-09-30 | YALO | DECISION | Análisis de arquitectura YALO-API-Soporte: clone de repo y análisis completo via subagent (stack, estructura, módulos, integraciones, patterns, BD, Swagger)
 2026-09-30 | YALO | DECISION | YALO-API-Soporte patterns: ServiceResult + ApiResponse wrappers, ApiKey auth (AWS Secrets), Read Replica interceptor (GET→reader, POST/PUT/PATCH/DELETE→writer), 3 PostgreSQL contexts + DynamoDB, BugReports↔Jira bidireccional, 56 endpoints (GET 27, POST 15, PUT 11, PATCH 2, DELETE 1)
 
