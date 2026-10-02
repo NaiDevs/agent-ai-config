@@ -107,3 +107,11 @@
 - 2026-10-02 | naide | commit | fix(customer-balance): explicita estado de procesamiento (feat/naidelyn/stripe)
 2026-10-02 | YALO | FEATURE | Commit 5418174 pusheado en feat/naidelyn/ventas — integración completa de asignación/reasignación de leads en onboarding y pipeline de ventas
 2026-10-02 | YALO | BUG | FormaPago inconsistencia en confirmación de pago: YaloConsole POST /organizations/confirm-pay envía FormaPago=3, pero YaloPOSBackofficeAPI endpoint PagoFacturaTransferencia/ActivarSuscripcion hardcodea formapago=2 en BD ignorando parámetro — Slack se genera correctamente (leyendo FormaPago=3), pero tabla muestra transferencia. Fix necesario en BO API para respetar el FormaPago enviado
+
+## Session e43e024d-dccc-41eb-a6b9-5b46cd8739ce
+
+2026-10-02 | CORINSA | BUG | Inventario septiembre - correlativo AI-18-A-2025-00170 no aparece en reportes (Inventario, AI, Pronóstico, Dashboard) por vigencia extendida con adendum
+2026-10-02 | CORINSA | BUG | Inventario septiembre - correlativo AI-12-C-2022-00191 cambió ramo a Salud pero reportería sigue mostrando Tradicional
+2026-10-02 | CORINSA | BUG | Inciso duplicado al agregar ítem manual en Recursos>Suministros>Otros (Periodicidades: Por única vez, Anualmente, Cada dos años) — bloquea deploy a producción; Jonathan coordinará after fix
+2026-10-02 | CORINSA | GENERAL | Payback CD El Progreso desajuste: 2.25 actual vs 2.42 correcto — ~38 correlativos de trabajos ing/adendums no están sumando
+2026-10-02 | CORINSA | CONFIG | Repos con cambios sin commitear: cpa webapi (rama 2025-cambio-estados, 1 archivo), cpa webapp (rama feat/naidelyn/reporteRentabilidad, 5 archivos), cpa ventas (rama feat/naidelyn/ventas2021, 17 archivos)
