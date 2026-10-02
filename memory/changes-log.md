@@ -62,6 +62,7 @@
 2026-10-01 | YALO | BUG | QA preview persistencia: cambio estructura attachments de `string[]` (solo nombre, URL se perdía) a `{ name, url }[]` con data URL persistido en Zustand/Supabase — preview ahora abre tras recarga de sesión
 2026-10-01 | YALO | BUG | Case row interactividad: agrega `cursor-pointer` explícito, `transition-colors` o `transition-opacity` (150ms) a elementos clickeables, y `transition-all` al checkbox para cambios de color/borde — mejora feedback visual en módulo QA
 2026-10-01 | YALO | GENERAL | Report cards UX: agrega `cursor-pointer` + `transition-colors duration-150` a todos elementos interactivos, y display de evidencias del reporte como chips clickeables con lightbox para visualización
+2026-10-02 | YALO | BUG | Badge Release tab QA: contaba tareas "listo" sin filtrar por `enabledBoards`, mostraba "1" con tableros vacíos — corregido en Qa.tsx lines 1485-1498 filtrando qaTasks/qaTickets por enabledBoards en useMemo
 
 ## Session ef38935f-cc72-40e0-89bb-37f29a110f70
 
