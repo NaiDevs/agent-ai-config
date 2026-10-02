@@ -74,3 +74,8 @@
 ## Session 22a83bab-58b6-4972-a052-5758d237bc8d
 
 2026-10-02 | YALO | DECISION | Onboarding + Sales Pipeline: asignar/reasignar leads con motivo (lista predefinida), exploración FE (componentes, flujo UI) y API (endpoints onboarding/reasignación)
+
+## Session 1e9a05e0-795d-4bee-b9cd-c6a9f6e69ab7
+
+2026-10-02 | YALO | BUG | Validación liquidaciones: falso positivo "montos exceden total pedido" — saldoEfectivo redonda a 2 decimales, pero comparación usaba NormalizarMonto (4 decimales), causando diferencias hasta 0.003 en pedidos con centavos en 3er decimal; fix: redondea totalPedido y totalSolicitado a 2 decimales antes de validar
+2026-10-02 | yalo bo api | commit | fix(liquidaciones): corrige falso positivo al validar monto contra total del pedido
