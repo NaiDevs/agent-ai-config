@@ -81,3 +81,4 @@
 2026-10-02 | yalo bo api | commit | fix(liquidaciones): corrige falso positivo al validar monto contra total del pedido
 2026-10-02 | YALO | BUG | Rutas con parámetros opcionales: soluciona error al listar órdenes donde querystring faltaba parametrización en URL base — corregido en endpoint con cast seguro de queryParameters en hotfix/naidelyn/rutas
 2026-10-02 | yalo console api | BUG | Integración Stripe en notas de crédito (credit-notes.service.ts): `applyStripeBalance` llamaba a endpoint sin `/api/` prefix, causando 404 en YALO_API_Stripe; `reverseStripeBalance` ya tenía `/api/` — fix: añade `/api/` al endpoint CustomerBalance para consistencia
+2026-10-02 | YALO | CONFIG | Variables de entorno yalo console api: investigación de dónde están configuradas (AWS Secrets, .env de servidor, pipeline) para diferenciar prod/staging — revertido cambio previo para replantear configuración correcta
