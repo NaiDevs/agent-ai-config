@@ -53,6 +53,7 @@
 
 2026-10-02 | YALO | DECISION | Onboarding UI: permitir asignar/reasignar leads en onboarding con interfaz drag-drop y modal de asignación, integración con sacAgentId en API
 2026-10-02 | YALO | DECISION | Sales Pipeline: agregar motivo configurable (lista desplegable) al reasignar lead a otro asesor; motivo seleccionable por defecto (no texto libre) integrado con endpoint PATCH /crm-deals
+2026-10-02 | YALO | FEATURE | Organizations: agrega valor suscripción USD/LPS (calcula USD desde productos activos, LPS con tasa del último pago/fallback 24.7), oculta productos con cantidad=0, corrige dark mode en tab Productos
 
 2026-09-30 | YALO | DECISION | Análisis de arquitectura YALO-API-Soporte: clone de repo y análisis completo via subagent (stack, estructura, módulos, integraciones, patterns, BD, Swagger)
 2026-09-30 | YALO | DECISION | YALO-API-Soporte patterns: ServiceResult + ApiResponse wrappers, ApiKey auth (AWS Secrets), Read Replica interceptor (GET→reader, POST/PUT/PATCH/DELETE→writer), 3 PostgreSQL contexts + DynamoDB, BugReports↔Jira bidireccional, 56 endpoints (GET 27, POST 15, PUT 11, PATCH 2, DELETE 1)
@@ -80,6 +81,7 @@
 
 2026-10-02 | yalo console api | feat | reassignmentReason en UpdateCrmDealDto + motivo en descripción de actividad al reasignar asesor (rama fix/naidelyn/caracteres-especiales-slack)
 2026-10-02 | yalo console | feat | Modal de motivo al reasignar asesor en deal drawer (5 motivos hardcodeados); botones Asignar/Reasignar con dropdown en kanban card de onboarding (solo manager/admin); campo SAC editable en drawer de onboarding via modal popup; "Tomar cuenta" eliminado del drawer de onboarding (rama feat/naidelyn/ventas)
+2026-10-02 | yalo console | feat | Valor suscripcion USD/LPS en Historial de Pagos (calculado desde productos activos con tasa del ultimo pago); oculta productos con cantidad 0; dark mode tab Productos via section bg-neutral-white + :host-context(.dark)
 
 ## Session 1e9a05e0-795d-4bee-b9cd-c6a9f6e69ab7
 
