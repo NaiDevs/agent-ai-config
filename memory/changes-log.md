@@ -51,6 +51,7 @@
 
 ## Session 22a83bab-58b6-4972-a052-5758d237bc8d
 
+- 2026-10-02 | yalo console api | commit | feat(secrets): agrega modulo de secretos de un solo uso con cifrado E2E
 - 2026-10-02 | yalo console | commit | feat(organizations): agrega secretos de un solo uso con cifrado E2E
 2026-10-02 | YALO | FEATURE | Secretos de un solo uso: tab "Secretos" en Organizations (YaloConsole), cifrado E2E AES-GCM con clave en fragmento URL, POST auth + GET público delete-on-read en YALO_API_Administrator, ruta pública /secret/:id sin auth
 
@@ -104,3 +105,4 @@
 - 2026-10-02 | naide | commit | fix(customer-balance): garantiza unicidad y libera recursos (feat/naidelyn/stripe)
 - 2026-10-02 | naide | commit | fix(customer-balance): valida configuraci├│n y entradas Stripe (feat/naidelyn/stripe)
 - 2026-10-02 | naide | commit | fix(customer-balance): explicita estado de procesamiento (feat/naidelyn/stripe)
+2026-10-02 | YALO | FEATURE | Commit 5418174 pusheado en feat/naidelyn/ventas — integración completa de asignación/reasignación de leads en onboarding y pipeline de ventas
