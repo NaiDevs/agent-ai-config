@@ -51,6 +51,8 @@
 
 ## Session 22a83bab-58b6-4972-a052-5758d237bc8d
 
+2026-10-02 | YALO | FEATURE | Secretos de un solo uso: tab "Secretos" en Organizations (YaloConsole), cifrado E2E AES-GCM con clave en fragmento URL, POST auth + GET público delete-on-read en YALO_API_Administrator, ruta pública /secret/:id sin auth
+
 2026-10-02 | YALO | DECISION | Onboarding UI: permitir asignar/reasignar leads en onboarding con interfaz drag-drop y modal de asignación, integración con sacAgentId en API
 2026-10-02 | YALO | DECISION | Sales Pipeline: agregar motivo configurable (lista desplegable) al reasignar lead a otro asesor; motivo seleccionable por defecto (no texto libre) integrado con endpoint PATCH /crm-deals
 2026-10-02 | YALO | FEATURE | Organizations: agrega valor suscripción USD/LPS (calcula USD desde productos activos, LPS con tasa del último pago/fallback 24.7), oculta productos con cantidad=0, corrige dark mode en tab Productos
