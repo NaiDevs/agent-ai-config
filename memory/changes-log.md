@@ -89,3 +89,4 @@
 - 2026-10-02 | naide | commit | feat(console): integra notas de cr├⌐dito y mejoras operativas (feat/naidelyn/ventas)
 - 2026-10-02 | naide | commit | fix(customer-balance): refuerza seguridad e idempotencia (feat/naidelyn/stripe)
 - 2026-10-02 | naide | commit | fix(cr├⌐dito): env├¡a moneda al saldo de Stripe (fix/naidelyn/caracteres-especiales-slack)
+- 2026-10-02 | naide | commit | fix(customer-balance): asegura idempotencia y auditor├¡a (feat/naidelyn/stripe)
