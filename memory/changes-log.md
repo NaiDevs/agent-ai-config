@@ -128,3 +128,4 @@
 ## Session fe50de79-b897-4353-9e59-4e5736f3971d
 
 2026-10-03 | La Bodega | BUG | Monitor de pedidos no apareciendo: tres causas raíz históricas resueltas por Daniel Brizuela en BD/config — (1) pedidos viejos (filtro fecha creación), (2) monitor sobreescribiendo estados desde otra bodega (patrón con Merendón), (3) monitores duplicados o correlativo incorrecto en establecimiento — diagnóstico para #419148 (Mall Galerías) requiere validar antigüedad pedido, cantidad de monitores configurados, y si jalando estados de otra bodega
+2026-10-03 | La Bodega | BUG | Orden 615931 no aparece en monitor de establecimiento 485 (Mall Galerías): codpuntoemision=1094 asignado pero establecimiento solo posee punto de emisión 547 — monitor filtra por establec→punto emisión y no encuentra registro; solución: UPDATE ordenes SET codpuntoemision=547 WHERE codorden=615931
