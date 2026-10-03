@@ -123,3 +123,4 @@
 2026-10-03 | YALO | DECISION | Módulo QA v2 completo: routes/Qa.tsx (inline-edit build/env, retornos Editar/Quitar, borrar con confirm, tab Release con firma, dedup releasedIn), store actions (createQaRelease, signRelease reescrito con releasedIn/aiGenerated/boardIds, createCycle con boardId, ciclos por tablero), types (boardId en Ciclo, releasedIn en QATask), Changelog ordena novedades ASC por id, CycleModal exportado con boardId, dark mode CSS (--color-bg, tokens navy/cyan/cell, semáforos), supabase migrations qa_module + qa_board_id
 2026-10-03 | YALO | FEATURE | Sort novedades: ordena Changelog de más reciente a más antigua por id (Changelog.tsx), visible en tab "Novedades" de módulo QA
 2026-10-03 | yalo-trackeo | commit | feat(qa/ciclos/novedades): módulo QA completo, ciclos por tablero y orden de novedades
+2026-10-03 | YALO | CONFIG | Servidor MCP: desarrollo en rama feat-mcp-servidor, commit 4771095 pusheado — integración MCP para yalo-trackeo
