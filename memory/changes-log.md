@@ -119,3 +119,4 @@
 ## Session 3ce5c0e8-22f6-45b4-837a-1b9598bf68a6
 
 2026-10-03 | YALO | DECISION | Feature jerarquía de tareas: análisis UX para identificación de contexto — breadcrumb en vista detalle (/task/:id) vs columna proyecto/epic en lista (/tasks) vs ambas; propuesta de diseño pendiente
+2026-10-03 | YALO | DECISION | Ciclos scoped a tableros: `Ciclo` con `boardId?` opcional, `createCycle` filtra activación por board, ReleaseTab toma última release sin firmar, selector de tablero en /ciclos global, sección "Ciclos" en ProjectDetail con listado, badge "Activo", botón "Nuevo ciclo" pre-asignado
