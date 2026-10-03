@@ -124,3 +124,7 @@
 2026-10-03 | YALO | FEATURE | Sort novedades: ordena Changelog de más reciente a más antigua por id (Changelog.tsx), visible en tab "Novedades" de módulo QA
 2026-10-03 | yalo-trackeo | commit | feat(qa/ciclos/novedades): módulo QA completo, ciclos por tablero y orden de novedades
 2026-10-03 | YALO | CONFIG | Servidor MCP: desarrollo en rama feat-mcp-servidor, commit 4771095 pusheado — integración MCP para yalo-trackeo
+
+## Session fe50de79-b897-4353-9e59-4e5736f3971d
+
+2026-10-03 | La Bodega | BUG | Monitor de pedidos no apareciendo: tres causas raíz históricas resueltas por Daniel Brizuela en BD/config — (1) pedidos viejos (filtro fecha creación), (2) monitor sobreescribiendo estados desde otra bodega (patrón con Merendón), (3) monitores duplicados o correlativo incorrecto en establecimiento — diagnóstico para #419148 (Mall Galerías) requiere validar antigüedad pedido, cantidad de monitores configurados, y si jalando estados de otra bodega
