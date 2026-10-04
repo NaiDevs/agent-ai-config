@@ -138,4 +138,4 @@
 
 ## Session 73c74dd6-0562-45cd-a487-3d7282570282
 
-2026-10-04 | NAI | CONFIG | Code signing agendivo (Windows + macOS): Windows SmartScreen advierte sin certificado (requiere EV OV $300-500/año); macOS Gatekeeper bloquea sin firma Apple ($99 + notarización); opciones evaluadas: EV Code Signing (DigiCert/Sectigo), OV Code Signing (~$100-200), Apple Developer Program, Microsoft Store MSIX (gratis/registro). Decisión pendiente según target (clientes finales Ecuador vs uso interno).
+2026-10-04 | NAI | CONFIG | Code signing agendivo (Windows + macOS): target principal Honduras (mayormente Windows). Windows SmartScreen advierte sin certificado; macOS Gatekeeper bloquea sin firma Apple (baja prioridad para Honduras). Opción evaluada: Azure Trusted Signing ($9.99/mes, SmartScreen-compatible, sin hardware token, integra con GitHub Actions). Apple Developer ($99/año) diferido. Decisión: implementar Azure Trusted Signing para Windows primero.
