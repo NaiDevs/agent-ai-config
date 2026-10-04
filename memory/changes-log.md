@@ -135,3 +135,7 @@
 ## Session 615b1d85-6254-4ff1-8b94-a0a04ebc03ef
 
 2026-10-04 | NAI | CONFIG | Engram auto-save: actualmente guardando automáticamente (CLAUDE.md triggers), genera inquietud sobre consumo de tokens. Propuesta: afinar triggers para guardar solo decisiones arquitectónicas relevantes, no bugs menores ni config rutinarios. Alternativa: explicit save-on-demand quitando auto-save del CLAUDE.md
+
+## Session 73c74dd6-0562-45cd-a487-3d7282570282
+
+2026-10-04 | NAI | CONFIG | Code signing agendivo (Windows + macOS): Windows SmartScreen advierte sin certificado (requiere EV OV $300-500/año); macOS Gatekeeper bloquea sin firma Apple ($99 + notarización); opciones evaluadas: EV Code Signing (DigiCert/Sectigo), OV Code Signing (~$100-200), Apple Developer Program, Microsoft Store MSIX (gratis/registro). Decisión pendiente según target (clientes finales Ecuador vs uso interno).
