@@ -139,3 +139,4 @@
 ## Session 73c74dd6-0562-45cd-a487-3d7282570282
 
 2026-10-04 | NAI | CONFIG | Code signing agendivo (Windows + macOS): target principal Honduras (mayormente Windows). Windows SmartScreen advierte sin certificado; macOS Gatekeeper bloquea sin firma Apple (baja prioridad para Honduras). Opción evaluada: Azure Trusted Signing ($9.99/mes, SmartScreen-compatible, sin hardware token, integra con GitHub Actions). Apple Developer ($99/año) diferido. Decisión: implementar Azure Trusted Signing para Windows primero.
+2026-10-04 | NAI | CONFIG | Normalización line endings agendivo: configurado .gitattributes con `* text=auto eol=lf` (todos los archivos en LF) y `*.bat text eol=crlf` (batch scripts permanecen CRLF para Windows) — commit 46cedbe pusheado, CI debería pasar ahora
