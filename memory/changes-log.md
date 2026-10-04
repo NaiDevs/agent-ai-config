@@ -131,3 +131,7 @@
 2026-10-03 | La Bodega | BUG | Orden 615931 no aparece en monitor de establecimiento 485 (Mall Galerías): codpuntoemision=1094 asignado pero establecimiento solo posee punto de emisión 547 — monitor filtra por establec→punto emisión y no encuentra registro; solución: UPDATE ordenes SET codpuntoemision=547 WHERE codorden=615931
 2026-10-03 | YALO | BUG | Monitor de órdenes: filtro de 24 horas estricto en controller (línea 355) excluye órdenes con > 24h de antigüedad — diagnosticado orden con fechacreacion 2026-10-02 10:50 que a 2026-10-03 11:46 suma 25h, cae fuera de ventana; solución: cambiar fecha_creacion para caer dentro de últimas 24h o revisar lógica de rango temporal
 2026-10-03 | La Bodega | BUG | Monitor de pedidos Mall Galerías: polling de 30 segundos comentado en home.page.ts (línea 327-329); monitor carga órdenes solo al inicio y vía SignalR — orden con fecha actualizada 2026-10-02→2026-10-03 no dispara evento SignalR, requiere F5 manual o descomentar polling de actualización periódica
+
+## Session 615b1d85-6254-4ff1-8b94-a0a04ebc03ef
+
+2026-10-04 | NAI | CONFIG | Engram auto-save: actualmente guardando automáticamente (CLAUDE.md triggers), genera inquietud sobre consumo de tokens. Propuesta: afinar triggers para guardar solo decisiones arquitectónicas relevantes, no bugs menores ni config rutinarios. Alternativa: explicit save-on-demand quitando auto-save del CLAUDE.md
