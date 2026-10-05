@@ -163,3 +163,5 @@
 2026-10-05 | NAI | BUG | nai-admin: AuthProvider.setPin() no seteaba _isUnlocked=true, causando redirección a PIN después de crear PIN — fix: setPin() ahora actualiza _isUnlocked y notifica listeners para permitir navegación a /projects
 2026-10-05 | NAI | CONFIG | nai-admin: rebuild APK release tras creación del proyecto Flutter — compilación en progreso
 2026-10-05 | NAI | CONFIG | agendivo release v0.2.1: instalación y configuración de credenciales Supabase (URL + Admin Secret) via modal de setup en app — workflow eliminación/reinicio de proyecto para reconfiguración
+2026-10-05 | NAI | BUG | nai-admin: funcionalidad delete bloqueada en app móvil — investigación iniciada para identificar causas (UI no ejecuta acción, lógica en backend, o validación de permisos)
+2026-10-05 | NAI | BUG | nai-admin: problemas de carga de datos desde backend — "sigue sin cargar" indica timeouts o errores en peticiones HTTP/sincronización
