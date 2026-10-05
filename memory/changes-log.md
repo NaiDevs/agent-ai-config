@@ -71,6 +71,7 @@
 ## Session 56d0bcc2-ada8-4c9b-9ba5-23aa04478125
 
 - 2026-10-05 | yalo trackeo | commit | feat(novedades): migra envío de correos a YALO-API con AWS SES
+- 2026-10-05 | yalo sendgrid | commit | feat(ses): agrega endpoint EnvioHtml con AWS SES v2
 
 2026-10-01 | YALO | DECISION | Sistema de colores dinámicos en módulo QA: cada tipo de retorno (Bug/Sugerencia/Requerimiento) tiene activeColor y activeBg propios (rojo/dodoria, morado, azul brand) — mapeo en RETURN_TYPES.map con const active para refactorización limpia en Qa.tsx línea 221
 2026-10-01 | YALO | BUG | QA preview persistencia: cambio estructura attachments de `string[]` (solo nombre, URL se perdía) a `{ name, url }[]` con data URL persistido en Zustand/Supabase — preview ahora abre tras recarga de sesión
