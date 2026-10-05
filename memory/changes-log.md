@@ -156,3 +156,7 @@
 ## Session b623c5ee-0c39-4259-a75b-476c49c7ef62
 
 2026-10-05 | YALO | CONFIG | Activación de proyecto yalo-trackeo: rama feat-mcp-servidor, árbol limpio, commits recientes en moduleQA y ciclos por tablero
+
+## Session 8f8c98d5-80b7-45d5-8f6d-5d1aff068f52
+
+2026-10-05 | NAI | CONFIG | Autenticación Edge Functions agendivo: flujo Bearer token — ADMIN_SECRET configurado en Supabase, replicado en app como "Admin Secret", cada request envía `Authorization: Bearer <valor>` validado por función
