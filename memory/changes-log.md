@@ -165,6 +165,7 @@
 ## Session b623c5ee-0c39-4259-a75b-476c49c7ef62
 
 2026-10-05 | YALO | CONFIG | Activación de proyecto yalo-trackeo: rama feat-mcp-servidor, árbol limpio, commits recientes en moduleQA y ciclos por tablero
+2026-10-05 | YALO | DECISION | SES + Gmail DMARC policy: envío desde @gmail.com imposible por política `p=reject` de Google (solo servidores Google pueden enviar desde @gmail.com). Solución: usar dominio controlado (yalocobro.com, yalotechnologies.com) verificado en SES + configurar CNAME en DNS; toma ~5 minutos
 
 ## Session 8f8c98d5-80b7-45d5-8f6d-5d1aff068f52
 
