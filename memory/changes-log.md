@@ -9,6 +9,7 @@
 
 2026-10-01 | yalo bo api | commit | fix(liquidaciones): corrige saldo que excede total del pedido y pagos con monto cero
 2026-10-01 | yalo bo | commit | fix(liquidaciones): oculta ordenes con monto a liquidar en cero
+2026-10-04 | agendivo | commit | fix(onboarding): permite crear negocio sin sesión autenticada
 
 ## Session 05c3b771-276d-4e19-b3e1-5069376fddfe
 
@@ -142,3 +143,4 @@
 2026-10-04 | NAI | CONFIG | Normalización line endings agendivo: configurado .gitattributes con `* text=auto eol=lf` (todos los archivos en LF) y `*.bat text eol=crlf` (batch scripts permanecen CRLF para Windows) — commit 46cedbe pusheado, CI debería pasar ahora
 2026-10-04 | NAI | CONFIG | Tauri 2 dmg build: commit e34a982 pusheado — bloque configuración `dmg` removido en Tauri 2 (incompatible), target `dmg` en `targets` sigue siendo válido; customización de layout DMG debe ir dentro de `macOS` build config, no como bloque separado
 2026-10-04 | NAI | GENERAL | Graphify (skill de visualización de grapos/DAGs): configurado en CLAUDE.md pero nunca activado en uso real hasta hoy — sesión explora estado actual y opciones para integración
+2026-10-04 | NAI | BUG | onboarding: fix en src/stores/app.store.ts — crea empleado propietario solo si hay usuario autenticado; en modo offline (Supabase no configurado) inicia employees vacío sin lanzar error — resolve "No encontramos la cuenta propietaria activa"
