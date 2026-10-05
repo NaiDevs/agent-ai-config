@@ -145,3 +145,4 @@
 2026-10-04 | NAI | GENERAL | Graphify (skill de visualización de grapos/DAGs): configurado en CLAUDE.md pero nunca activado en uso real hasta hoy — sesión explora estado actual y opciones para integración
 2026-10-04 | NAI | BUG | onboarding: fix en src/stores/app.store.ts — crea empleado propietario solo si hay usuario autenticado; en modo offline (Supabase no configurado) inicia employees vacío sin lanzar error — resolve "No encontramos la cuenta propietaria activa"
 2026-10-04 | NAI | CONFIG | agendivo: commit 71532dc pusheado — corrección para pasar CI (verificable en conversación posterior)
+2026-10-04 | NAI | CONFIG | Release v0.2.1 agendivo: tag pusheado, GitHub Actions workflow ejecutándose — buildea Windows + macOS y sube instaladores a Supabase
