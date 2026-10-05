@@ -10,6 +10,7 @@
 2026-10-01 | yalo bo api | commit | fix(liquidaciones): corrige saldo que excede total del pedido y pagos con monto cero
 2026-10-01 | yalo bo | commit | fix(liquidaciones): oculta ordenes con monto a liquidar en cero
 2026-10-04 | agendivo | commit | fix(onboarding): permite crear negocio sin sesión autenticada
+2026-10-04 | agendivo | commit | feat(billing): registra suscripcion past_due al crear negocio y separa pantallas de acceso
 
 ## Session 05c3b771-276d-4e19-b3e1-5069376fddfe
 
