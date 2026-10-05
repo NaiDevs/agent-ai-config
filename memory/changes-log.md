@@ -70,6 +70,8 @@
 
 ## Session 56d0bcc2-ada8-4c9b-9ba5-23aa04478125
 
+- 2026-10-05 | yalo trackeo | commit | feat(novedades): migra envío de correos a YALO-API con AWS SES
+
 2026-10-01 | YALO | DECISION | Sistema de colores dinámicos en módulo QA: cada tipo de retorno (Bug/Sugerencia/Requerimiento) tiene activeColor y activeBg propios (rojo/dodoria, morado, azul brand) — mapeo en RETURN_TYPES.map con const active para refactorización limpia en Qa.tsx línea 221
 2026-10-01 | YALO | BUG | QA preview persistencia: cambio estructura attachments de `string[]` (solo nombre, URL se perdía) a `{ name, url }[]` con data URL persistido en Zustand/Supabase — preview ahora abre tras recarga de sesión
 2026-10-01 | YALO | BUG | Case row interactividad: agrega `cursor-pointer` explícito, `transition-colors` o `transition-opacity` (150ms) a elementos clickeables, y `transition-all` al checkbox para cambios de color/borde — mejora feedback visual en módulo QA
@@ -165,3 +167,5 @@
 2026-10-05 | NAI | CONFIG | agendivo release v0.2.1: instalación y configuración de credenciales Supabase (URL + Admin Secret) via modal de setup en app — workflow eliminación/reinicio de proyecto para reconfiguración
 2026-10-05 | NAI | BUG | nai-admin: funcionalidad delete bloqueada en app móvil — investigación iniciada para identificar causas (UI no ejecuta acción, lógica en backend, o validación de permisos)
 2026-10-05 | NAI | BUG | nai-admin: problemas de carga de datos desde backend — "sigue sin cargar" indica timeouts o errores en peticiones HTTP/sincronización
+2026-10-05 | NAI | BUG | nai-admin APK: faltaba permiso `INTERNET` en AndroidManifest.xml — APK generado sin conectividad red; agregado `<uses-permission android:name="android.permission.INTERNET"/>` y rebuild release apk completado
+2026-10-05 | NAI | CONFIG | nai-admin: instalación y prueba post-fix de APK con permiso de internet — testeo de funcionalidad "Negocios" en dispositivo móvil
