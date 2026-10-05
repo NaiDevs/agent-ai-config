@@ -17,6 +17,11 @@
 2026-09-29 | YALO | CONFIG | Firma de aplicación Tauri (yalo-trackeo-desktop): roadmap para certificado OV Windows (DigiCert/Sectigo/SSL.com ~$100-500), Apple Developer ($99 + notarización), GitHub Secrets (WINDOWS_CERTIFICATE, APPLE_CERTIFICATE, TAURI_SIGNING_PRIVATE_KEY), y updater obligatorio bloqueante
 2026-09-29 | YALO | CONFIG | Certificados de firma: instrucciones para obtener .pfx de Windows (empresarial OV), Apple Developer ID Application (.p12), Team ID y App-Specific Password — canales seguros (1Password, Bitwarden) vs inseguro (Slack/email)
 
+## Session b623c5ee-0c39-4259-a75b-476c49c7ef62
+
+2026-10-05 | YALO | BUG | ELB health checks fallaban: .NET 8 en Dockerfile escucha puerto 8080 por defecto, deployment usa 80 — fix: agregar ENV ASPNETCORE_URLS=http://+:80
+2026-10-05 | YALO | BUG | HealthController eliminó verificación innecesaria de conectividad a AUTH+Cobro DB (retorna 200 sin deps)
+
 ## Session 464a9139-485a-45a0-80fb-01ca2f3a0abb
 
 2026-09-29 | YALO | DECISION | Desarrollo en rama feat-mcp-servidor: cambios en rutas (Changelog, SettingsComms), store, funciones Supabase (mcp, novedad-email) con nueva clase compartida yalo-email
