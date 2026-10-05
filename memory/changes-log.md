@@ -171,3 +171,4 @@
 2026-10-05 | NAI | BUG | nai-admin: problemas de carga de datos desde backend — "sigue sin cargar" indica timeouts o errores en peticiones HTTP/sincronización
 2026-10-05 | NAI | BUG | nai-admin APK: faltaba permiso `INTERNET` en AndroidManifest.xml — APK generado sin conectividad red; agregado `<uses-permission android:name="android.permission.INTERNET"/>` y rebuild release apk completado
 2026-10-05 | NAI | CONFIG | nai-admin: instalación y prueba post-fix de APK con permiso de internet — testeo de funcionalidad "Negocios" en dispositivo móvil
+2026-10-05 | YALO | BUG | YALO-API-Sendgrid: .NET 8 cambió puerto default 80→8080 pero ECS/ELB mapeaba puerto 80, causando que contenedor no respondiera en deployment. Fix: environment variable ASPNETCORE_URLS=http://+:80 para escuchar en puerto correcto (commit c1f2c65). Requiere rebuild de imagen en ECS.
