@@ -144,3 +144,4 @@
 2026-10-04 | NAI | CONFIG | Tauri 2 dmg build: commit e34a982 pusheado — bloque configuración `dmg` removido en Tauri 2 (incompatible), target `dmg` en `targets` sigue siendo válido; customización de layout DMG debe ir dentro de `macOS` build config, no como bloque separado
 2026-10-04 | NAI | GENERAL | Graphify (skill de visualización de grapos/DAGs): configurado en CLAUDE.md pero nunca activado en uso real hasta hoy — sesión explora estado actual y opciones para integración
 2026-10-04 | NAI | BUG | onboarding: fix en src/stores/app.store.ts — crea empleado propietario solo si hay usuario autenticado; en modo offline (Supabase no configurado) inicia employees vacío sin lanzar error — resolve "No encontramos la cuenta propietaria activa"
+2026-10-04 | NAI | CONFIG | agendivo: commit 71532dc pusheado — corrección para pasar CI (verificable en conversación posterior)
