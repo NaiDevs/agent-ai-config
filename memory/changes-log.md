@@ -161,3 +161,4 @@
 
 2026-10-05 | NAI | CONFIG | Autenticación Edge Functions agendivo: flujo Bearer token — ADMIN_SECRET configurado en Supabase, replicado en app como "Admin Secret", cada request envía `Authorization: Bearer <valor>` validado por función
 2026-10-05 | NAI | BUG | nai-admin: AuthProvider.setPin() no seteaba _isUnlocked=true, causando redirección a PIN después de crear PIN — fix: setPin() ahora actualiza _isUnlocked y notifica listeners para permitir navegación a /projects
+2026-10-05 | NAI | CONFIG | nai-admin: rebuild APK release tras creación del proyecto Flutter — compilación en progreso
