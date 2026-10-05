@@ -152,3 +152,7 @@
 
 2026-10-05 | NAI | CONFIG | agendivo: reset de base de datos anterior (contenía migración desactualizada/incompatible), relanzado dev environment con Tauri dev — resolución de estado inconsistente de BD para nueva sesión de desarrollo
 2026-10-05 | NAI | DECISION | agendivo: flujo de acceso a suscripción con Stripe — (1) registro nuevo → `ensureBusiness` crea negocio en Supabase + inserta `past_due` automáticamente; (2) pantalla "Tu acceso está pendiente" con clock icon y botón "Verificar acceso"; (3) webhook Stripe → `sync-subscription` → status `active` desbloquea app; (4) otros estados (cancelado, vencido) → pantalla genérica "Sin acceso" con estado visible
+
+## Session b623c5ee-0c39-4259-a75b-476c49c7ef62
+
+2026-10-05 | YALO | CONFIG | Activación de proyecto yalo-trackeo: rama feat-mcp-servidor, árbol limpio, commits recientes en moduleQA y ciclos por tablero
