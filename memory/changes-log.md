@@ -180,3 +180,7 @@
 2026-10-05 | YALO | BUG | YALO-API-Sendgrid: .NET 8 cambió puerto default 80→8080 pero ECS/ELB mapeaba puerto 80, causando que contenedor no respondiera en deployment. Fix: environment variable ASPNETCORE_URLS=http://+:80 para escuchar en puerto correcto (commit c1f2c65). Requiere rebuild de imagen en ECS.
 2026-10-05 | YALO | CONFIG | ECS/ELB health checks pendientes: deployment revisión 49 exitoso (1 running), ELB status "Unknown" se resuelve en próximos minutos tras health checks completados (normal en inicial deployment) — requiere actualizar secret YALO_EMAIL_API_URL en Supabase Settings→Edge Functions→Secrets a `https://apiv2sendgriddev.yalocobro.dev/api/` para resolver error 404 del ngrok offline
 2026-10-05 | YALO | CONFIG | SES deliverability: bounce en Gmail indica SES envió correo exitosamente pero Gmail lo rechazó porque dominio `cit.hn` no tiene SPF/DKIM configurado para AWS SES — problema es configuración de dominio, no código. Solución: (1) Verificar dominio `cit.hn` en SES + agregar CNAME records en DNS, o (2) usar dominio de producción (yalocobro.com/yalotechnologies.com) como sender identity verificado en SES
+
+## Session f8acfac3-b27e-47ef-bdcc-b66544599219
+
+2026-10-06 | CORINSA | GENERAL | Reportería CPA: identificación del SP usado en endpoint GET /api/Reportes/ReporteInventario — endpoint llamado `GetReporteInventario()` en repo ejecuta SP `[dbo].[UCCv2_GetDetallePronosticoVenta]` que recibe parámetro @FECHA (string), nombre confuso comparado con endpoint
