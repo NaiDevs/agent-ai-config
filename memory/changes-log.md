@@ -188,3 +188,8 @@
 2026-10-06 | YALO | GENERAL | Reemplazó emojis y Remix Icons por SVGs de Tabler en preview de contactos/redes sociales de SettingsComms.tsx: mail/phone/whatsapp Tabler SVG, Instagram/Facebook/LinkedIn/WhatsApp SVG, fallback Remix Icon para TikTok/YouTube/X/etc
 2026-10-05 | YALO | CONFIG | Edge Function `buildFooter()`: deployed con estructura en tabla, secciones con `border-top`, badges oscuros con texto, y copyright usando el nombre del workspace — integración en yalo-trackeo enviador de emails
 2026-10-06 | YALO | CONFIG | buildEmailHtmlFromBlocks: integración final de footer con workspaceName, padding:0 en <td>, estructura alineada con preview — compilación limpia en yalo-trackeo, emails envían con footer nuevo
+
+## Session b623c5ee-0c39-4259-a75b-476c49c7ef62
+
+2026-10-05 | YALO | BUG | Novedades email footer: fondo gris #F3F4F6 en cada <td> del footer para mantener estilo consistente en emails enviados vs preview
+2026-10-05 | YALO | BUG | Íconos contactos SettingsComms.tsx: reemplazó emojis y Remix Icons por SVGs de Tabler (mail/phone/whatsapp) para mantener consistencia visual con preview de emails
