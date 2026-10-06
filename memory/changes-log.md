@@ -194,5 +194,6 @@
 2026-10-05 | YALO | BUG | Novedades email footer: fondo gris #F3F4F6 en cada <td> del footer para mantener estilo consistente en emails enviados vs preview
 2026-10-05 | YALO | BUG | Íconos contactos SettingsComms.tsx: reemplazó emojis y Remix Icons por SVGs de Tabler (mail/phone/whatsapp) para mantener consistencia visual con preview de emails
 2026-10-05 | YALO | CONFIG | SVG en emails: sustitución `<svg>` inline por `<img src="data:image/svg+xml;base64,...">` para compatibilidad con clientes email (Gmail, Outlook) que bloquean SVG inline pero renderizan `<img>` sin problema. Paths de Tabler embebidos en data URI.
+2026-10-06 | YALO | BUG | Social icons email: renombrados a `social-instagram.png`, `social-facebook.png`, etc. con color secundario #52BAE1 (sin círculo de fondo); tabla de contactos ahora usa `align="center"` + `cellspacing="8"` sin flex para máxima compatibilidad con clientes email
 - 2026-10-06 | naide | commit | fix(ventas): detecta errores al reasignar vendedor (feat/naidelyn/ventas)
 - 2026-10-06 | naide | commit | fix(crm-deals): corrige persistencia al reasignar vendedor (fix/naidelyn/caracteres-especiales-slack)
