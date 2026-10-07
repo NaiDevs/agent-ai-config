@@ -200,3 +200,7 @@
 - 2026-10-06 | naide | commit | fix(crm-deals): corrige persistencia al reasignar vendedor (fix/naidelyn/caracteres-especiales-slack)
 - 2026-10-06 | naide | commit | fix(ecommerce): corrige navegaci├│n, cat├ílogo, sucursales y blogs (temp/naidelyn/fixes)
 - 2026-10-06 | naide | commit | Merge branch 'development' of https://github.com/Creative-Information-Technologies/LaBodegaEcommerce into temp/naidelyn/fixes (temp/naidelyn/fixes)
+
+## Session 3c9c30c4-debc-41af-b4cc-2be6b6929e21
+
+2026-10-07 | YALO | GENERAL | Feedback módulo QA: comentarios sin evidencia obligatoria, timeline para regresiones+nuevos casos, estado "Fix listo" con notificación, cierre en timeline, códigos HTTP en reportes, barra de búsqueda, reportes excluyen no-completados, textos descriptivos en sugerencias/requerimientos
