@@ -248,3 +248,4 @@
 ## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación)
 
 2026-10-07 | NAI | GENERAL | Testing dev environment: setup Tauri dev server + Firebase/Flutter logs capture para validación de agendivo en lista de negocios
+2026-10-07 | NAI | BUG | admin-list-businesses PostgREST relation mismatch: subscriptions tiene business_id como primary key (1-a-1), PostgREST retorna objeto directo, no array — código hacía `b.subscriptions?.[0]` que siempre era undefined, rompiendo conteo status activo en summary. Fix: removido `[0]` para acceso directo al objeto suscripción — deploy admin-list-businesses completado
