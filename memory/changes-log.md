@@ -237,3 +237,4 @@
 2026-10-07 | NAI | CONFIG | Integración Stripe desactivada en agendivo: UI de pagos removida, flujo de suscripción simplificado para desarrollo local sin transacciones reales
 2026-10-07 | NAI | FEATURE | KPI cards nai-admin: agrega cards de resumen (clientes, servicios, ventas) en pantalla principal — vistas de datos sincronizadas desde Supabase
 2026-10-07 | NAI | CONFIG | Instalación APK nai-admin en móvil: permiso INTERNET agregado a AndroidManifest.xml, rebuild release completado tras diagnosticar falta de conectividad de red
+2026-10-07 | NAI | CONFIG | Push notifications nai-admin: Firebase FCM completo (Edge Functions admin-register-token + admin-notify-inactive, migration admin_fcm_tokens, Flutter FcmService) — bloqueado en credentials (google-services.json, FIREBASE_SERVICE_ACCOUNT_JSON, FIREBASE_PROJECT_ID en Supabase secrets) y pg_cron diario para inactividad 15 días
