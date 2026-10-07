@@ -231,3 +231,5 @@
 ## Session 798cab57-c118-483a-a449-2f5d538bb092
 
 2026-10-07 | NAI | GENERAL | Activación de proyectos: nai agendivo (rama main, status limpio, último commit bump v0.2.2) y nai admin (nuevo repo registrado en projects-registry.md)
+2026-10-07 | NAI | BUG | Dispositivo vinculado a otra cuenta: SQLite local guardaba auth_user_id del primer usuario; assertDeviceAccount comparaba ID guardado vs actual y lanzaba error en dev. Fix: se limpió device_metadata para permitir re-vinculación — resolución de conflicto de múltiples cuentas por dispositivo
+2026-10-07 | NAI | BUG | stripe_price_id null: edge function admin-update-subscription hacía UPDATE (0 filas afectadas) mintiendo success=true, nunca creaba suscripción. Fix: cambiar a INSERT cuando no existe fila + usar 'manual' como placeholder + hacer campo nullable en Zod/Supabase + parchear fila existente con UPDATE a 'manual'
