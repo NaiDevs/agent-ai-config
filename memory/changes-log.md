@@ -210,6 +210,7 @@
 2026-10-07 | YALO | GENERAL | Feedback módulo QA: comentarios sin evidencia obligatoria, timeline para regresiones+nuevos casos, estado "Fix listo" con notificación, cierre en timeline, códigos HTTP en reportes, barra de búsqueda, reportes excluyen no-completados, textos descriptivos en sugerencias/requerimientos
 2026-10-07 | YALO | DECISION | Análisis QA feedback: 9 tareas priorizadas — (1) barra búsqueda FeedbackBoard, (2) estado "fix_listo" + notificación, (3) timeline activity para Solicitud (creación, regresión, completado), (4) evidencia no-obligatoria en QA, (5) códigos HTTP en reportes, (6) reiniciar pruebas sin completar release, (7) reporte por estado+release, (8) labels descriptivos tipo/módulo, (9) integración activity log en RequestDetail
 2026-10-07 | YALO | CONFIG | Ancho máximo tabs yalo-trackeo: Integraciones/Equipo/Roles/Estados/QA/Tickets sin límite (responsive), Reuniones `max-w-[720px]`, Labels `max-w-[680px]` (contenido simple, evita estiramiento horizontal en full-width)
+2026-10-07 | YALO | commit | feat(qa): agrega mejoras del módulo QA (9 items solicitados por Cristian) — estado fix_listo, activity timeline en solicitudes, evidencia no-obligatoria, códigos HTTP, barra búsqueda, reiniciar pruebas, labels con hints, migration Supabase
 
 ## Session b623c5ee-0c39-4259-a75b-476c49c7ef62 (continuación)
 
