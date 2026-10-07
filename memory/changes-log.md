@@ -3,6 +3,7 @@
 ## Session 3c9c30c4-debc-41af-b4cc-2be6b6929e21
 
 2026-10-07 | yalo-trackeo | commit | feat(qa): agrega mejoras del módulo QA (9 items solicitados por Cristian)
+2026-10-07 | yalo-trackeo | commit | fix(qa): corrige visibilidad de reportes y mejora módulo QA
 2026-10-07 | yalo-trackeo | commit | feat(TaskDetail): muestra panel QA en solicitudes de origen de la tarea
 
 ## Session d30762e8-962c-4159-8f8f-e8c98fbb2684
