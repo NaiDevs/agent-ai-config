@@ -11,6 +11,7 @@
 2026-10-01 | yalo bo | commit | fix(liquidaciones): oculta ordenes con monto a liquidar en cero
 2026-10-04 | agendivo | commit | fix(onboarding): permite crear negocio sin sesión autenticada
 2026-10-04 | agendivo | commit | feat(billing): registra suscripcion past_due al crear negocio y separa pantallas de acceso
+2026-10-06 | yalo trackeo | commit | feat(novedades): implementa footer HTML email-safe con íconos en Supabase Storage
 
 ## Session 05c3b771-276d-4e19-b3e1-5069376fddfe
 
