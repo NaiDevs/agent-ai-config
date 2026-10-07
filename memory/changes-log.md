@@ -197,3 +197,4 @@
 2026-10-06 | YALO | BUG | Social icons email: renombrados a `social-instagram.png`, `social-facebook.png`, etc. con color secundario #52BAE1 (sin círculo de fondo); tabla de contactos ahora usa `align="center"` + `cellspacing="8"` sin flex para máxima compatibilidad con clientes email
 - 2026-10-06 | naide | commit | fix(ventas): detecta errores al reasignar vendedor (feat/naidelyn/ventas)
 - 2026-10-06 | naide | commit | fix(crm-deals): corrige persistencia al reasignar vendedor (fix/naidelyn/caracteres-especiales-slack)
+- 2026-10-06 | naide | commit | fix(ecommerce): corrige navegaci├│n, cat├ílogo, sucursales y blogs (temp/naidelyn/fixes)
