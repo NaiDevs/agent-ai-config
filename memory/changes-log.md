@@ -204,3 +204,4 @@
 ## Session 3c9c30c4-debc-41af-b4cc-2be6b6929e21
 
 2026-10-07 | YALO | GENERAL | Feedback módulo QA: comentarios sin evidencia obligatoria, timeline para regresiones+nuevos casos, estado "Fix listo" con notificación, cierre en timeline, códigos HTTP en reportes, barra de búsqueda, reportes excluyen no-completados, textos descriptivos en sugerencias/requerimientos
+2026-10-07 | YALO | DECISION | Análisis QA feedback: 9 tareas priorizadas — (1) barra búsqueda FeedbackBoard, (2) estado "fix_listo" + notificación, (3) timeline activity para Solicitud (creación, regresión, completado), (4) evidencia no-obligatoria en QA, (5) códigos HTTP en reportes, (6) reiniciar pruebas sin completar release, (7) reporte por estado+release, (8) labels descriptivos tipo/módulo, (9) integración activity log en RequestDetail
