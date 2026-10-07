@@ -244,3 +244,7 @@
 2026-10-07 | NAI | FEATURE | Edge functions deployadas: admin-register-token + admin-notify-inactive con soporte CRON_SECRET
 2026-10-07 | NAI | DECISION | Función SQL get_inactive_businesses(cutoff_date): lista negocios activos sin ventas en X días para notificaciones
 2026-10-07 | NAI | CONFIG | Cron job diario: pg_cron + pg_net habilitadas (supabase db push), schedule 09:00 UTC llamando admin-notify-inactive con x-cron-secret token
+
+## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación)
+
+2026-10-07 | NAI | GENERAL | Testing dev environment: setup Tauri dev server + Firebase/Flutter logs capture para validación de agendivo en lista de negocios
