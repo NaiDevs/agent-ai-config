@@ -221,3 +221,5 @@
 
 2026-10-07 | YALO | FEATURE | TaskDetail.tsx: panel QA en "Solicitudes de origen" extiende card con estado, errorCode (HTTP), últimas 3 actividades con timestamp, botones "Marcar Fix Listo" y "Reiniciar pruebas" — condicional isQa = r.type === 'qa' delimita render, store actions classifyRequest/reiniciarPruebas integrados
 2026-10-07 | YALO | FEATURE | Panel QA solicitudes: estado coloreado con RSTATUS catalog, errorCode en badge monoespaciado, activity entries (ActivityEntry type) muestran descripción + timeAgo, botones habilitados según status (fix_listo/completado desactivan "Marcar Fix Listo"), transiciones UI lisas (transition-colors 150ms)
+2026-10-07 | YALO | FEATURE | Qa.tsx: timeline de QA invertida (más reciente arriba) — permite visualizar casos más recientes sin scroll
+2026-10-07 | YALO | FEATURE | TaskDetail.tsx: attachments de casos QA como links clickeables — mejora accesibilidad a evidencias en solicitudes
