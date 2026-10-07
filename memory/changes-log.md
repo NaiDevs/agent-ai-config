@@ -238,3 +238,9 @@
 2026-10-07 | NAI | FEATURE | KPI cards nai-admin: agrega cards de resumen (clientes, servicios, ventas) en pantalla principal — vistas de datos sincronizadas desde Supabase
 2026-10-07 | NAI | CONFIG | Instalación APK nai-admin en móvil: permiso INTERNET agregado a AndroidManifest.xml, rebuild release completado tras diagnosticar falta de conectividad de red
 2026-10-07 | NAI | CONFIG | Push notifications nai-admin: Firebase FCM completo (Edge Functions admin-register-token + admin-notify-inactive, migration admin_fcm_tokens, Flutter FcmService) — bloqueado en credentials (google-services.json, FIREBASE_SERVICE_ACCOUNT_JSON, FIREBASE_PROJECT_ID en Supabase secrets) y pg_cron diario para inactividad 15 días
+2026-10-07 | NAI | FEATURE | KPIs con rango de fechas: chip de fechas encima de cards; date picker al tocarlo; filtros por created_at (clientes/servicios) y starts_at (ventas)
+2026-10-07 | NAI | CONFIG | Firebase credenciales reales: google-services.json real, firebase_options.dart generado con credenciales Naidelyn, APK compilado con FCM real
+2026-10-07 | NAI | FEATURE | FCM tokens automáticos: app pide permisos al abrir, guarda token automáticamente, registra en Supabase al entrar pantalla negocios
+2026-10-07 | NAI | FEATURE | Edge functions deployadas: admin-register-token + admin-notify-inactive con soporte CRON_SECRET
+2026-10-07 | NAI | DECISION | Función SQL get_inactive_businesses(cutoff_date): lista negocios activos sin ventas en X días para notificaciones
+2026-10-07 | NAI | CONFIG | Cron job diario: pg_cron + pg_net habilitadas (supabase db push), schedule 09:00 UTC llamando admin-notify-inactive con x-cron-secret token
