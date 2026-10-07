@@ -2,7 +2,7 @@
 
 ## Session 3c9c30c4-debc-41af-b4cc-2be6b6929e21
 
-2026-10-07 | yalo-trackeo | feat | Mejoras módulo QA (9 items de Cristian Medrano): estado fix_listo, timeline en Solicitud, evidencia no obligatoria para QA (skip github gate), errorCode HTTP, barra de búsqueda en FeedbackBoard, reiniciarPruebas, labels descriptivos. Migración SQL: activity + error_code en solicitudes.
+2026-10-07 | yalo-trackeo | commit | feat(qa): agrega mejoras del módulo QA (9 items solicitados por Cristian)
 
 ## Session d30762e8-962c-4159-8f8f-e8c98fbb2684
 
