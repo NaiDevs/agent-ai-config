@@ -3,6 +3,7 @@
 ## Session 3c9c30c4-debc-41af-b4cc-2be6b6929e21
 
 2026-10-07 | yalo-trackeo | commit | feat(qa): agrega mejoras del módulo QA (9 items solicitados por Cristian)
+2026-10-07 | yalo-trackeo | commit | feat(TaskDetail): muestra panel QA en solicitudes de origen de la tarea
 
 ## Session d30762e8-962c-4159-8f8f-e8c98fbb2684
 
@@ -215,3 +216,8 @@
 ## Session b623c5ee-0c39-4259-a75b-476c49c7ef62 (continuación)
 
 2026-10-05 | YALO | FEATURE | feat(perfil): agrega pantalla de perfil con edición de nombre y contraseña — Profile.tsx (secciones Identidad/Correo/Contraseña), edita nombre (upsert en tabla equipo + actualiza store), cambia contraseña vía supabase.auth.updateUser; rutas App.tsx (/w/:wsId/profile); navegación GlobalTopbar.tsx ("Mi perfil" navega a /profile)
+
+## Session 3c9c30c4-debc-41af-b4cc-2be6b6929e21 (continuación)
+
+2026-10-07 | YALO | FEATURE | TaskDetail.tsx: panel QA en "Solicitudes de origen" extiende card con estado, errorCode (HTTP), últimas 3 actividades con timestamp, botones "Marcar Fix Listo" y "Reiniciar pruebas" — condicional isQa = r.type === 'qa' delimita render, store actions classifyRequest/reiniciarPruebas integrados
+2026-10-07 | YALO | FEATURE | Panel QA solicitudes: estado coloreado con RSTATUS catalog, errorCode en badge monoespaciado, activity entries (ActivityEntry type) muestran descripción + timeAgo, botones habilitados según status (fix_listo/completado desactivan "Marcar Fix Listo"), transiciones UI lisas (transition-colors 150ms)
