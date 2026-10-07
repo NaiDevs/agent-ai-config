@@ -94,7 +94,7 @@
 | nai gga            | gga                      | —          | GGA                  |
 | nai citas          | nai-citas                | Tauri/React| App de citas offline |
 | nai agendivo       | agendivo                 | Tauri/React| App agendamiento desktop (offline + Supabase) |
-| nai admin          | nai-admin                | —          | Admin panel Nai |
+| nai admin          | nai-admin                | Flutter    | Admin panel Nai |
 
 ## Jira Projects
 <!-- cithn.atlassian.net | cloudId: 70102692-578c-4758-a88b-ffb5a3c535cb -->
