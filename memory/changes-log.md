@@ -251,3 +251,7 @@
 2026-10-07 | NAI | BUG | admin-list-businesses PostgREST relation mismatch: subscriptions tiene business_id como primary key (1-a-1), PostgREST retorna objeto directo, no array — código hacía `b.subscriptions?.[0]` que siempre era undefined, rompiendo conteo status activo en summary. Fix: removido `[0]` para acceso directo al objeto suscripción — deploy admin-list-businesses completado
 2026-10-07 | NAI | CONFIG | agendivo date range picker: styling oscuro (AppColors.ground/surface) con franja de rango naranja semitransparente (#33F5A623), días seleccionados en círculo naranja con texto oscuro (accent color), botón "Save" renombrado a "Guardar" — APK build completado
 2026-10-07 | NAI | FEATURE | Selector de servicios agendivo: campo seleccionable con servicios (ej. "Manicura · 30 min · HNL 100.00"), autocompleta monto en formulario de cita sin sesión autenticada
+
+## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 2)
+
+2026-10-07 | NAI | DECISION | POS redesign agendivo: display oscuro con monto prominente en la parte superior, integración con formulario de servicios, hot reload aplicado correctamente en Tauri dev server — diseño visual validado y deploying en rama main
