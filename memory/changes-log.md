@@ -255,3 +255,7 @@
 ## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 2)
 
 2026-10-07 | NAI | DECISION | POS redesign agendivo: display oscuro con monto prominente en la parte superior, integración con formulario de servicios, hot reload aplicado correctamente en Tauri dev server — diseño visual validado y deploying en rama main
+
+## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 3)
+
+2026-10-07 | NAI | BUG | nai-admin registerFcmToken: error handling inconsistente en admin_api_client.dart — reemplazó `_checkStatus()` helper (reutilizado en otros métodos) con inline check + ApiException thrown con mensaje HTTP explícito; retorna HTTP statusCode + response.body para debug de 401 invalid jwt — validado con app móvil
