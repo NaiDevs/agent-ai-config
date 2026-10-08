@@ -259,3 +259,4 @@
 ## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 3)
 
 2026-10-07 | NAI | BUG | nai-admin registerFcmToken: error handling inconsistente en admin_api_client.dart — reemplazó `_checkStatus()` helper (reutilizado en otros métodos) con inline check + ApiException thrown con mensaje HTTP explícito; retorna HTTP statusCode + response.body para debug de 401 invalid jwt — validado con app móvil
+2026-10-08 | NAI | BUG | Timezone Honduras (UTC-6) en agendivo: `new Date("2026-10-07T19:00").toISOString()` convertía al UTC resultando "2026-10-08T01:00:00.000Z", `.slice(0,10)` daba "2026-10-08" en lugar de "2026-10-07" — no matcheaba comparación de fechas en paid-screen y expenses-screen. Fix: usar `format(new Date(p.paidAt), "yyyy-MM-dd")` que convierte UTC de vuelta a hora local antes de comparar (misma solución en `spentAt`)
