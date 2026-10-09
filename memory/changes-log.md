@@ -265,3 +265,4 @@
 
 2026-10-09 | YALO | BUG | AddTrialDays.cs — DateTime.Now.AddDays() causa doble cobro en suscripciones activas: reinicia ciclo de facturación desde ahora, no desde fin del período actual. Afectados: Johan Andrade (Novedades Gema), Paola (Nort1401). Fix: cambiar a subscription.CurrentPeriodEnd.AddDays(model.dias)
 2026-10-09 | YALO | BUG | PagoFacturaController.cs webhook flow: payment link manual genera factura nueva cuando Stripe ya cobró automáticamente (ambos disparas webhooks, segundo genera factura porque no hay "pendiente" en BD) — afectado caso Paola. Root cause: lógica busca factura pendiente, si no existe genera nueva, sin validar si ya fue pagada por otro medio
+2026-10-09 | YALO | BUG | Paola (Nort1401) doble cobro: dos facturas mismo período (ago 28 – sep 28) — una por tarjeta, una por link. Investigación: AddTrialDays causa reinicio ciclo desde DateTime.Now; webhook double-charge por falta de idempotencia en validación de pagos ya procesados
