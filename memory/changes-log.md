@@ -260,3 +260,7 @@
 
 2026-10-07 | NAI | BUG | nai-admin registerFcmToken: error handling inconsistente en admin_api_client.dart — reemplazó `_checkStatus()` helper (reutilizado en otros métodos) con inline check + ApiException thrown con mensaje HTTP explícito; retorna HTTP statusCode + response.body para debug de 401 invalid jwt — validado con app móvil
 2026-10-08 | NAI | BUG | Timezone Honduras (UTC-6) en agendivo: `new Date("2026-10-07T19:00").toISOString()` convertía al UTC resultando "2026-10-08T01:00:00.000Z", `.slice(0,10)` daba "2026-10-08" en lugar de "2026-10-07" — no matcheaba comparación de fechas en paid-screen y expenses-screen. Fix: usar `format(new Date(p.paidAt), "yyyy-MM-dd")` que convierte UTC de vuelta a hora local antes de comparar (misma solución en `spentAt`)
+
+## Session e0566b7b-330d-43da-94ad-366f27919ae1
+
+2026-10-09 | YALO | BUG | AddTrialDays.cs — DateTime.Now.AddDays() causa doble cobro en suscripciones activas: reinicia ciclo de facturación desde ahora, no desde fin del período actual. Afectados: Johan Andrade (Novedades Gema), Paola (Nort1401). Fix: cambiar a subscription.CurrentPeriodEnd.AddDays(model.dias)
