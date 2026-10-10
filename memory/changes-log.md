@@ -310,3 +310,5 @@
 2026-10-10 | NAI | DECISION | agendivo payment-receipt refactor: cambio de tipo `taxBreakdown: TaxBreakdown | null` a `taxBreakdown: TaxBreakdown` (obligatorio) — lógica siempre calcula breakdown de impuestos (exento, gravado15, isv15), eliminado ternario condicional en UI (payment-receipt.tsx), simplifica renders eliminando caso nulo
 2026-10-10 | NAI | CONFIG | agendivo subscription-card: mensaje sin fecha vencimiento cambiado a "Para renovaciones o cambios de plan, contactá al soporte." (antes: "El pago se procesa de forma segura en Stripe.")
 2026-10-10 | NAI | CONFIG | payment-methods-card: limpia imports y props sin usar (remueve BuiltinPaymentMethod import, method prop de BuiltinRowProps) para compilación TypeScript limpia — solo errores pre-existentes del spec de cloud-sync
+
+2026-10-10 | NAI | GENERAL | Análisis de mercado Agendivo: mercado objetivo son pequeños negocios de servicio en Honduras (salones, barberías, spas) que necesitan control de citas y cobros; diferenciador clave es facturación SAR (CAI, rango, ISV) lista; pendientes: reportes básicos, multi-usuario/PIN caja, precio y modelo de distribución
