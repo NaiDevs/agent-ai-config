@@ -328,3 +328,7 @@
 2026-10-10 | NAI | FEATURE | nai-admin tarjetas negocio: módulo Equipo con botones candado por empleado — candado gris (sin PIN) → click crea PIN con numpad; candado azul (con PIN) → botón para quitar + confirmación re-ingresando PIN dos veces
 2026-10-10 | NAI | FEATURE | agendivo pantalla de bloqueo: grid de empleados activos mostrados con íconos candado pequeños si tienen PIN, click ingresa numpad para 4 dígitos, empleados sin PIN inician sesión directamente
 2026-10-10 | NAI | CONFIG | agendivo botón bloqueo header: se activa automáticamente cuando hay al menos un empleado con PIN configurado
+
+## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación - Sistema de roles y permisos)
+
+2026-10-10 | NAI | DECISION | Sistema de roles y permisos agendivo: EmployeesScreen tabs Profesionales+Roles, cada empleado con <select> asignable a rol desde useRolesStore, AppShell filtra navegación por permisos del activeEmployeeId — restricción Settings omitida intencionalmente para permitir setup del negocio
