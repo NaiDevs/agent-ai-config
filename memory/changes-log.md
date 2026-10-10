@@ -287,3 +287,7 @@
 ## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 8)
 
 2026-10-10 | NAI | CONFIG | agendivo Tauri dev server: levantamiento exitoso con `npm run tauri dev`, vite en localhost:1420, frontend hot-reload habilitado para testing en progress
+
+## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 9)
+
+2026-10-10 | NAI | BUG | Device auth vinculado a otra cuenta: SQLite local guardaba auth_user_id del primer usuario, bloqueaba re-vinculación. Fix: limpiar device_metadata, permitir múltiples cuentas por dispositivo sin error tenancy
