@@ -279,3 +279,7 @@
 ## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 6)
 
 2026-10-07 | NAI | CONFIG | agendivo Tauri dev build: levantar servidor dev en progreso, compila cambios de app desktop con hot reload habilitado
+
+## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 7)
+
+2026-10-10 | NAI | CONFIG | agendivo payment-receipt styling: añadido word-break:break-all y overflow-wrap:anywhere al .receipt-fiscal-header para forzar CAI dentro de 80mm del sheet (ajuste de layout para impresión)
