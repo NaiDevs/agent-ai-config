@@ -295,3 +295,8 @@
 ## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 10)
 
 2026-10-10 | NAI | CONFIG | agendivo payment-receipt YALO template: estructura definitiva alineada — nombre negocio bold centrado, RTN→CAI inline, dashes separadores, folio centrado, cliente/teléfono/fecha/atendido por, tabla Producto|Total con prefijo [G]/[E], subtotales Exento/Gravado/ISV 15%, **Total a Pagar** destacado, forma de pago con dashes igual que YALO, fecha límite emisión/rango autorizado, footer gracias — Vite dev reloading correctamente con hot module replacement
+
+## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 11)
+
+2026-10-07 | NAI | CONFIG | nai-admin registry: agregado proyecto a projects-registry.md bajo sección NAI (carpeta nai-admin, stack Flutter)
+2026-10-07 | NAI | BUG | agendivo subscription activation: usuario no puede activar suscripción en nai-admin — investigación en progreso para identificar causas en flujo de integración entre agendivo y nai-admin
