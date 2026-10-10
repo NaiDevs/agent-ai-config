@@ -332,3 +332,4 @@
 ## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación - Sistema de roles y permisos)
 
 2026-10-10 | NAI | DECISION | Sistema de roles y permisos agendivo: EmployeesScreen tabs Profesionales+Roles, cada empleado con <select> asignable a rol desde useRolesStore, AppShell filtra navegación por permisos del activeEmployeeId — restricción Settings omitida intencionalmente para permitir setup del negocio
+2026-10-10 | NAI | CONFIG | Dropdown custom roles agendivo: reemplaza @/components/ui/select (no disponible) con toggle customizado Tailwind + Badge con "Actual"/"Sistema" — compilación TypeScript limpia sin errores, diseño con fondo secondary, ícono Shield primary, rotación chevron al abrir, items con ícono cuadrado pintado primary cuando activo
