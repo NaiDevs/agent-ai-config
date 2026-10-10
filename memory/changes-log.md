@@ -275,3 +275,7 @@
 
 2026-10-10 | NAI | GENERAL | agendivo payment-receipt: cambios visuales para consistencia con YALO — fuente system-ui/sans-serif en lugar de Courier New, filas de datos inline en lugar de justify-between, ReceiptRowBlock para CAI y Rango con word-break, texto total "Total a pagar" (era "Monto recibido"), CSS print simplificado sin flex-direction hack
 2026-10-10 | NAI | BUG | agendivo payment-receipt modal portal: modales renderizados en document.body con createPortal() en lugar de dentro de sección con transform — z-index y overlay ahora cubren correctamente sin restricción de scroll
+
+## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 6)
+
+2026-10-07 | NAI | CONFIG | agendivo Tauri dev build: levantar servidor dev en progreso, compila cambios de app desktop con hot reload habilitado
