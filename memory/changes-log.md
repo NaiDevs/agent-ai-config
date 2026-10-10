@@ -304,3 +304,4 @@
 ## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 12)
 
 2026-10-10 | NAI | DECISION | agendivo payment-receipt refactor: cambio de tipo `taxBreakdown: TaxBreakdown | null` a `taxBreakdown: TaxBreakdown` (obligatorio) — lógica siempre calcula breakdown de impuestos (exento, gravado15, isv15), eliminado ternario condicional en UI (payment-receipt.tsx), simplifica renders eliminando caso nulo
+2026-10-10 | NAI | CONFIG | agendivo subscription-card: mensaje sin fecha vencimiento cambiado a "Para renovaciones o cambios de plan, contactá al soporte." (antes: "El pago se procesa de forma segura en Stripe.")
