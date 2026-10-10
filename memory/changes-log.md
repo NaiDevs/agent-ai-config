@@ -321,3 +321,10 @@
 
 2026-10-07 | NAI | FEATURE | agendivo Reportes: paneles diario y mensual ahora consultan Supabase directamente para datos en tiempo real (sin cache local), botones "Excel" y "PDF" separados — PDF usa jsPDF con autotable, formato A4 landscape automático, estado cargando "Cargando datos desde Supabase…"
 2026-10-07 | NAI | FEATURE | agendivo PIN de equipo: Settings card "PIN de equipo" con numpad modal para crear/cambiar/quitar PIN — header muestra icono candado cuando PIN está configurado, app arranca bloqueada automáticamente si hay PIN seteado, pantalla bloqueo cubre toda app, sin persistencia isLocked (siempre locked on startup si PIN existe)
+
+## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación revisión final)
+
+2026-10-10 | NAI | BUG | nai-admin suscripción usuario: edge function admin-update-subscription no persistía cambios cuando stripe_price_id era null — INSERT no ejecutaba por validación, UPDATE retornaba 0 filas pero reportaba success=true. Fix: cambiar lógica a INSERT OR UPDATE con 'manual' placeholder + hacer campo nullable + parchear fila existente
+2026-10-10 | NAI | FEATURE | nai-admin tarjetas negocio: módulo Equipo con botones candado por empleado — candado gris (sin PIN) → click crea PIN con numpad; candado azul (con PIN) → botón para quitar + confirmación re-ingresando PIN dos veces
+2026-10-10 | NAI | FEATURE | agendivo pantalla de bloqueo: grid de empleados activos mostrados con íconos candado pequeños si tienen PIN, click ingresa numpad para 4 dígitos, empleados sin PIN inician sesión directamente
+2026-10-10 | NAI | CONFIG | agendivo botón bloqueo header: se activa automáticamente cuando hay al menos un empleado con PIN configurado
