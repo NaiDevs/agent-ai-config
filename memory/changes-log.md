@@ -283,3 +283,7 @@
 ## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 7)
 
 2026-10-10 | NAI | CONFIG | agendivo payment-receipt styling: añadido word-break:break-all y overflow-wrap:anywhere al .receipt-fiscal-header para forzar CAI dentro de 80mm del sheet (ajuste de layout para impresión)
+
+## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 8)
+
+2026-10-10 | NAI | CONFIG | agendivo Tauri dev server: levantamiento exitoso con `npm run tauri dev`, vite en localhost:1420, frontend hot-reload habilitado para testing en progress
