@@ -316,3 +316,8 @@
 ## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 13)
 
 2026-10-07 | NAI | GENERAL | Exploración Supabase agendivo: estructura de datos y disponibilidad de campos para implementación de reportes — sesión enfocada en mapeo de tablas y relaciones para análisis de negocio
+
+## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación final)
+
+2026-10-07 | NAI | FEATURE | agendivo Reportes: paneles diario y mensual ahora consultan Supabase directamente para datos en tiempo real (sin cache local), botones "Excel" y "PDF" separados — PDF usa jsPDF con autotable, formato A4 landscape automático, estado cargando "Cargando datos desde Supabase…"
+2026-10-07 | NAI | FEATURE | agendivo PIN de equipo: Settings card "PIN de equipo" con numpad modal para crear/cambiar/quitar PIN — header muestra icono candado cuando PIN está configurado, app arranca bloqueada automáticamente si hay PIN seteado, pantalla bloqueo cubre toda app, sin persistencia isLocked (siempre locked on startup si PIN existe)
