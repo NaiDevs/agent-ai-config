@@ -300,3 +300,7 @@
 
 2026-10-07 | NAI | CONFIG | nai-admin registry: agregado proyecto a projects-registry.md bajo sección NAI (carpeta nai-admin, stack Flutter)
 2026-10-07 | NAI | BUG | agendivo subscription activation: usuario no puede activar suscripción en nai-admin — investigación en progreso para identificar causas en flujo de integración entre agendivo y nai-admin
+
+## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 12)
+
+2026-10-10 | NAI | DECISION | agendivo payment-receipt refactor: cambio de tipo `taxBreakdown: TaxBreakdown | null` a `taxBreakdown: TaxBreakdown` (obligatorio) — lógica siempre calcula breakdown de impuestos (exento, gravado15, isv15), eliminado ternario condicional en UI (payment-receipt.tsx), simplifica renders eliminando caso nulo
