@@ -328,6 +328,7 @@
 2026-10-10 | NAI | FEATURE | nai-admin tarjetas negocio: módulo Equipo con botones candado por empleado — candado gris (sin PIN) → click crea PIN con numpad; candado azul (con PIN) → botón para quitar + confirmación re-ingresando PIN dos veces
 2026-10-10 | NAI | FEATURE | agendivo pantalla de bloqueo: grid de empleados activos mostrados con íconos candado pequeños si tienen PIN, click ingresa numpad para 4 dígitos, empleados sin PIN inician sesión directamente
 2026-10-10 | NAI | CONFIG | agendivo botón bloqueo header: se activa automáticamente cuando hay al menos un empleado con PIN configurado
+2026-10-07 | NAI | BUG | Sistema de folios único por caja: pagos de cajas distintas generaban folios duplicados — implementado prefijo único derivado de device_id (primeros 4 chars hex, ej: A1B2) combinado con contador atómico en device_metadata. Folio generado como A1B2-000001, A1B2-000002, etc. Nunca duplica entre cajas, inmutable en tabla payments.receipt_folio; fallback calculado para pagos migrados sin SP actualizado
 
 ## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación - Sistema de roles y permisos)
 
