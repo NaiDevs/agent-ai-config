@@ -270,3 +270,7 @@
 ## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 4)
 
 2026-10-09 | NAI | BUG | agendivo modal portal: modales montados dentro de `<section class="page-enter">` con transform de animación que afectaba overlay — z-index no cubría toda la app. Fix: montar modales en `document.body` directamente con `ReactDOM.createPortal()`, fuera del contexto de transform — overlay ahora cubre correctamente y scroll del form funciona sin restricciones
+
+## Session 798cab57-c118-483a-a449-2f5d538bb092 (continuación 5)
+
+2026-10-10 | NAI | GENERAL | agendivo payment-receipt: cambios visuales para consistencia con YALO — fuente system-ui/sans-serif en lugar de Courier New, filas de datos inline en lugar de justify-between, ReceiptRowBlock para CAI y Rango con word-break, texto total "Total a pagar" (era "Monto recibido"), CSS print simplificado sin flex-direction hack
