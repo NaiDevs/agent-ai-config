@@ -1,4 +1,4 @@
-# doctor.ps1 — Valida que la instalacion de agent-ai-config este correcta
+﻿# doctor.ps1 — Valida que la instalacion de agent-ai-config este correcta
 # Uso: .\doctor.ps1
 # Uso: .\doctor.ps1 -Tool claude   (solo Claude Code)
 # Uso: .\doctor.ps1 -Tool codex    (solo Codex)
@@ -208,7 +208,50 @@ if (Get-Command engram -ErrorAction SilentlyContinue) {
 
 Write-Host ""
 
-# ─── MCPs locales ─────────────────────────────────────────────────────────────
+# ─── Nai CLI ─────────────────────────────────────────────────────────────────
+Write-Host "[ Nai CLI ]" -ForegroundColor Blue
+
+$naiCommand = Get-Command nai -ErrorAction SilentlyContinue
+if ($naiCommand) {
+    $naiVersion = & $naiCommand.Source --version 2>$null
+    if ($LASTEXITCODE -eq 0 -and $naiVersion) { ok "$naiVersion" }
+    else { warn "Nai CLI está en PATH pero no pudo ejecutarse" }
+} else {
+    warn "Nai CLI no encontrado. Corre setup.ps1 o npm link dentro de nai-cli/."
+}
+
+Write-Host ""
+
+# ─── Graphify ────────────────────────────────────────────────────────────────
+Write-Host "[ Graphify ]" -ForegroundColor Blue
+
+$graphifyCommand = Get-Command graphify -ErrorAction SilentlyContinue
+if ($graphifyCommand) {
+    $graphifyVersion = & $graphifyCommand.Source version 2>$null
+    if ($LASTEXITCODE -eq 0 -and $graphifyVersion) { ok "$graphifyVersion" }
+    else { warn "Graphify está en PATH pero no pudo ejecutarse" }
+
+    if ($checkClaude) {
+        $claudeGraphifySkill = Join-Path $ClaudeHome "skills\graphify\SKILL.md"
+        if (Test-Path $claudeGraphifySkill) { ok "Skill Graphify instalada en Claude Code" }
+        else {
+            $claudeInstall = if ($IsWin) { "graphify install --platform windows" } else { "graphify install" }
+            warn "Skill Graphify no encontrada en Claude Code. Corre: $claudeInstall"
+        }
+    }
+
+    if ($checkCodex) {
+        $codexGraphifySkill = Join-Path $CodexHome "skills\graphify\SKILL.md"
+        if (Test-Path $codexGraphifySkill) { ok "Skill Graphify instalada en Codex" }
+        else { warn "Skill Graphify no encontrada en Codex. Corre: graphify install --platform codex" }
+    }
+} else {
+    warn "Graphify no encontrado. Corre setup.ps1 con -InstallGraphify yes."
+}
+
+Write-Host ""
+
+# ─── MCPs locales ────────────────────────────────────────────────────────────
 Write-Host "[ MCPs locales ]" -ForegroundColor Blue
 
 # Playwright — MCP para automatizacion de browser y pruebas UI

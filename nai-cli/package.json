@@ -1,0 +1,23 @@
+{
+  "name": "@naide/nai-cli",
+  "version": "0.2.0",
+  "private": true,
+  "description": "CLI unificado para trabajar con Claude Code y Codex",
+  "type": "module",
+  "bin": {
+    "nai": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test dist/tests/*.test.js",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

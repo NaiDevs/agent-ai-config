@@ -1,10 +1,10 @@
 ---
-description: Navega entre proyectos y workspaces por alias, muestra git status y sincroniza con remotos
+description: Navega entre proyectos y workspaces por alias, sincroniza con remotos y genera o abre su grafo Graphify
 ---
 
 # proyecto
 
-Lee `~/.claude/projects-registry.md` para resolver aliases de proyectos y workspaces. Gestiona navegación entre proyectos y sincronización con repositorios remotos usando subagentes Haiku para operaciones git.
+Lee el `projects-registry.md` de la herramienta activa para resolver aliases de proyectos y workspaces: `~/.claude/projects-registry.md` en Claude Code o `~/.codex/projects-registry.md` en Codex. Gestiona navegación, sincronización y grafos locales de los repositorios.
 
 ## Modelo a usar
 
@@ -22,9 +22,29 @@ Lee `~/.claude/projects-registry.md` para resolver aliases de proyectos y worksp
 /proyecto ws list          → Lista todos los workspaces definidos
 /proyecto sync [alias]     → git pull directo sin confirmar
 /proyecto github [alias]   → Muestra commits remotos pendientes
+/proyecto grafo [alias]    → Genera o actualiza el grafo y abre el visor HTML
+/proyecto grafo abrir [alias] → Abre el grafo existente sin regenerarlo
+/proyecto grafo consulta [alias] -- [pregunta] → Consulta el grafo del proyecto
 ```
 
 ## Instrucciones de comportamiento
+
+### Lenguaje natural primero
+
+La usuaria no necesita recordar ni escribir el slash command. Detectar su intención por la forma natural en que habla y ejecutar la acción directamente. Aceptar `grafo`, `grapho`, `graph` y `graphify`, con o sin tildes y sin importar mayúsculas.
+
+Reconocer, entre otras, estas formas:
+
+```text
+"mostrame el grafo de yalo console"       → generar/actualizar y abrir
+"quiero ver el grapho de yalo console"    → generar/actualizar y abrir
+"abrime el grafo de yalo console"         → abrir; si no existe, generar y abrir
+"actualizame el grafo de yalo console"    → actualización incremental
+"preguntale al grafo de yalo console cómo funciona auth" → consultar
+"cómo se conecta AuthService con UserRepository en yalo console" → consultar o buscar path
+```
+
+Extraer el alias comparando contra el registry y elegir la coincidencia completa más larga; por ejemplo, `yalo console api` tiene prioridad sobre `yalo console`. Si la intención y el alias son claros, actuar sin pedir que la usuaria reformule ni mostrarle el comando equivalente.
 
 ### Al invocar `/proyecto [alias]`
 
@@ -69,9 +89,9 @@ Cuando el usuario pregunta "¿qué cambió hoy?" o "¿hay algo sin mergear?":
 ### Al mencionar un alias sin invocar el skill
 
 Si el usuario menciona un alias en conversación:
-1. Reconocerlo desde la memoria
-2. Informar path y stack
-3. Ofrecer activar: "`/proyecto [alias]`"
+1. Reconocerlo desde el registry activo, no solo desde memoria.
+2. Si expresó una acción clara, ejecutarla directamente.
+3. Si solo mencionó el proyecto sin pedir una acción, informar path y stack y ofrecer activarlo.
 
 ### Paths base por cliente
 
@@ -98,3 +118,42 @@ Filtrar por cliente si se especifica (ej. `/proyecto list yalo`, `/proyecto list
 
 - Subagente Haiku hace `git fetch` + `git log HEAD..origin/<branch> --oneline`
 - Mostrar commits remotos pendientes y rama actual vs remota
+
+### `/proyecto grafo [alias]`
+
+1. Resolver el alias exacto, case-insensitive, desde el registry activo.
+2. Construir y validar el path completo `<base_path_del_cliente>\<carpeta>`.
+3. Activar la skill oficial `graphify` sobre ese path:
+   - Si no existe `graphify-out/graph.json`, generar el grafo completo.
+   - Si ya existe, ejecutar la actualización incremental.
+4. Abrir `<path>/graphify-out/graph.html` con el navegador predeterminado.
+5. Mostrar el alias, path del repositorio y path del visor generado.
+
+Cada repositorio conserva su propio `graphify-out/`. No combinar grafos de un workspace ni guardarlos en `agent-ai-config`.
+
+### `/proyecto grafo abrir [alias]`
+
+1. Resolver el alias desde el registry activo.
+2. Abrir `<path>/graphify-out/graph.html` sin actualizar el índice.
+3. Si no existe, indicar que primero se ejecute `/proyecto grafo [alias]`.
+
+En Windows usar `Start-Process`; en macOS `open`; en Linux `xdg-open`.
+
+### `/proyecto grafo consulta [alias] -- [pregunta]`
+
+1. Resolver el alias desde el registry activo y trabajar desde su path.
+2. Verificar que exista `graphify-out/graph.json`.
+3. Ejecutar `graphify query "<pregunta>"` y devolver una respuesta breve con los archivos relacionados.
+4. Si no hay grafo, generarlo antes mediante la skill oficial `graphify`.
+
+Ejemplos:
+
+```text
+/proyecto grafo "yalo console"
+/proyecto grafo abrir "yalo console"
+/proyecto grafo consulta "yalo console" -- "cómo fluye la autenticación"
+
+mostrame el grafo de yalo console
+abrime el grapho de yalo console
+preguntale al grafo de yalo console cómo fluye la autenticación
+```

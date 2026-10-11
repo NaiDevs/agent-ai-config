@@ -1,0 +1,13 @@
+{
+  "name": "mcp-yalo-trackeo-timer",
+  "version": "1.0.0",
+  "description": "MCP local para controlar el timer de Yalo Trackeo Desktop",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.3"
+  }
+}

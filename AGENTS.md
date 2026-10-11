@@ -62,6 +62,13 @@ Los archivos de memoria están en `~/.codex/memory/`. Consultar antes de respond
 - `projects-corinsa.md` — proyectos CORINSA (BI/CPA)
 - `user-profile.md` — perfil de la usuaria
 
+## Graphify y Engram
+
+- Usar Graphify para arquitectura actual, dependencias, rutas entre símbolos y análisis de impacto del código.
+- Usar Engram para decisiones históricas, preferencias, bugs resueltos y contexto entre sesiones.
+- Si existe `graphify-out/graph.json`, consultar el grafo antes de hacer búsquedas amplias para preguntas transversales del repositorio.
+- No copiar `graphify-out/` a Engram: el grafo se regenera desde el código y Engram conserva únicamente conocimiento durable.
+
 ## Loops de desarrollo
 
 ### React → Angular Port loop

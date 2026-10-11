@@ -9,6 +9,8 @@
 #   .\setup.ps1 -Tool both                               → ambos (sin preguntar)
 #   .\setup.ps1 -ProjectsRoot "D:\Proyectos"             → carpeta de proyectos (sin preguntar)
 #   .\setup.ps1 -UseEngram yes|no                        → engram (sin preguntar)
+#   .\setup.ps1 -InstallGraphify yes|no                  → Graphify + skill oficial (sin preguntar)
+#   .\setup.ps1 -InstallNaiCli yes|no                    → comando global nai (default: yes)
 #   .\setup.ps1 -SkipRegistryOverwrite                   → no sobreescribir projects-registry.md
 
 param(
@@ -17,6 +19,10 @@ param(
     [string]$Tool = "auto",
     [ValidateSet("","yes","no")]
     [string]$UseEngram   = "",
+    [ValidateSet("","yes","no")]
+    [string]$InstallGraphify = "",
+    [ValidateSet("yes","no")]
+    [string]$InstallNaiCli = "yes",
     [switch]$SkipRegistryOverwrite,
     [ValidateSet("","yes","no")]
     [string]$InstallYaloSkills = ""
@@ -57,6 +63,23 @@ function Backup-File {
     return $null
 }
 
+function Resolve-GraphifyCommand {
+    $command = Get-Command graphify -ErrorAction SilentlyContinue
+    if ($command) { return $command.Source }
+
+    $uvCommand = Get-Command uv -ErrorAction SilentlyContinue
+    if (-not $uvCommand) { return $null }
+
+    $uvBin = (& $uvCommand.Source tool dir --bin 2>$null | Select-Object -First 1)
+    if (-not $uvBin) { return $null }
+
+    $executable = if ($IsWin) { "graphify.exe" } else { "graphify" }
+    $candidate = Join-Path $uvBin $executable
+    if (Test-Path $candidate) { return $candidate }
+
+    return $null
+}
+
 Write-Host ""
 Write-Host "╔══════════════════════════════════════╗" -ForegroundColor Cyan
 Write-Host "║      agent-config — Setup            ║" -ForegroundColor Cyan
@@ -71,6 +94,7 @@ Write-Host ""
 $_hasClaude = (Test-Path $ClaudeHome) -or [bool](Get-Command claude -ErrorAction SilentlyContinue)
 $_hasCodex  = (Test-Path $CodexHome)  -or [bool](Get-Command codex  -ErrorAction SilentlyContinue)
 $_hasEngram = [bool](Get-Command engram -ErrorAction SilentlyContinue)
+$_hasGraphify = [bool](Resolve-GraphifyCommand)
 
 Write-Host "┌─ Configuración ─────────────────────────────┐" -ForegroundColor Cyan
 Write-Host "│  Presioná Enter para aceptar el default [X] │" -ForegroundColor DarkGray
@@ -131,13 +155,24 @@ if ($UseEngram -eq "yes" -and -not $_hasEngram) {
     Write-Host ""
 }
 
-# P5 — YALO Skills
+# P5 — Graphify
+if ($InstallGraphify -eq "") {
+    $graphifyStatus = if ($_hasGraphify) { "(detectado)" } else { "(no encontrado)" }
+    Write-Host "  5. ¿Querés instalar Graphify? $graphifyStatus"
+    Write-Host "     Agrega un grafo local del código y la skill oficial para Claude Code/Codex"
+    $ans = (Read-Host "     (s/n) [s]").Trim().ToLower()
+    if (-not $ans) { $ans = "s" }
+    $InstallGraphify = if ($ans -eq "s") { "yes" } else { "no" }
+    Write-Host ""
+}
+
+# P6 — YALO Skills
 if ($InstallYaloSkills -eq "") {
     $yaloSkillsPath = Join-Path (Join-Path $ProjectsRoot "YALO") "YALO-SKILLS"
     $yaloPresent    = Test-Path (Join-Path $yaloSkillsPath ".git")
     $yaloStatus     = if ($yaloPresent) { "(ya clonado)" } else { "(se clonara de GitHub)" }
     $suggestYalo    = "s"
-    Write-Host "  7. ¿Queres instalar las skills de YALO? $yaloStatus"
+    Write-Host "  6. ¿Querés instalar las skills de YALO? $yaloStatus"
     Write-Host "     Incluye yalo-components (Angular) y yalo-database (Postgres)"
     $ans = (Read-Host "     (s/n) [$suggestYalo]").Trim().ToLower()
     if (-not $ans) { $ans = $suggestYalo }
@@ -166,6 +201,8 @@ Write-Host "  Herramienta  : $toolLabel" -ForegroundColor Cyan
 Write-Host "  Proyectos    : $ProjectsRoot" -ForegroundColor Cyan
 Write-Host "  Registry     : $(if ($SkipRegistryOverwrite) { 'conservar el tuyo' } else { 'copiar plantilla' })" -ForegroundColor Cyan
 Write-Host "  Engram       : $UseEngram" -ForegroundColor Cyan
+Write-Host "  Graphify     : $InstallGraphify" -ForegroundColor Cyan
+Write-Host "  Nai CLI      : $InstallNaiCli" -ForegroundColor Cyan
 Write-Host "  YALO Skills  : $InstallYaloSkills" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "─────────────────────────────────────────────────────────────────" -ForegroundColor DarkGray
@@ -329,6 +366,20 @@ $hasClaude = (Test-Path $ClaudeHome) -or [bool](Get-Command claude -ErrorAction 
 $hasCodex  = (Test-Path $CodexHome)  -or [bool](Get-Command codex  -ErrorAction SilentlyContinue)
 # hasEngram: respeta la elección del wizard (UseEngram=yes solo si también está instalado)
 $hasEngram = ($UseEngram -eq "yes") -and [bool](Get-Command engram -ErrorAction SilentlyContinue)
+$graphifyCommand = Resolve-GraphifyCommand
+
+if ($InstallGraphify -eq "yes" -and -not $graphifyCommand) {
+    $uvCommand = Get-Command uv -ErrorAction SilentlyContinue
+    if ($uvCommand) {
+        Write-Host "     Graphify    : instalando paquete oficial graphifyy con uv..." -ForegroundColor Yellow
+        & $uvCommand.Source tool install graphifyy
+        $graphifyCommand = Resolve-GraphifyCommand
+    } else {
+        Write-Host "     Graphify    : uv no encontrado; instala uv y vuelve a correr setup.ps1" -ForegroundColor Yellow
+        Write-Host "                    Windows: winget install astral-sh.uv" -ForegroundColor DarkYellow
+    }
+}
+$hasGraphify = ($InstallGraphify -eq "yes") -and [bool]$graphifyCommand
 
 $installClaude = ($Tool -eq "claude" -or $Tool -eq "both")
 $installCodex  = ($Tool -eq "codex"  -or $Tool -eq "both")
@@ -336,6 +387,7 @@ $installCodex  = ($Tool -eq "codex"  -or $Tool -eq "both")
 Write-Host "     Claude Code : $(if ($hasClaude) { '✓ detectado' } else { '✗ no encontrado' })"
 Write-Host "     Codex       : $(if ($hasCodex)  { '✓ detectado' } else { '✗ no encontrado' })"
 Write-Host "     Engram      : $(if ($hasEngram) { '✓ detectado' } else { '✗ no encontrado' })"
+Write-Host "     Graphify    : $(if ($hasGraphify) { '✓ detectado' } else { '✗ no encontrado' })"
 Write-Host ""
 Write-Host "     Instalar en: $(if ($installClaude -and $installCodex) { 'Claude Code + Codex' } elseif ($installClaude) { 'Claude Code' } elseif ($installCodex) { 'Codex' } else { 'ninguno detectado — usa -Tool claude|codex|both' })" -ForegroundColor Cyan
 
@@ -778,6 +830,83 @@ if ($InstallYaloSkills -ne "no") {
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
+# FASE 3.6 — Graphify: registrar la skill oficial después de desplegar skills
+# ─────────────────────────────────────────────────────────────────────────────
+if ($hasGraphify) {
+    Write-Host ""
+    Write-Host "[ 3.6 ] Instalando skill oficial de Graphify..." -ForegroundColor Yellow
+
+    if ($installClaude) {
+        $claudeArgs = @("install")
+        if ($IsWin) { $claudeArgs += @("--platform", "windows") }
+        & $graphifyCommand @claudeArgs
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "  OK → Graphify registrado en Claude Code" -ForegroundColor Green
+        } else {
+            Write-Host "  ! Graphify no pudo registrar la skill en Claude Code" -ForegroundColor Yellow
+        }
+    }
+
+    if ($installCodex) {
+        & $graphifyCommand install --platform codex
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "  OK → Graphify registrado en Codex" -ForegroundColor Green
+        } else {
+            Write-Host "  ! Graphify no pudo registrar la skill en Codex" -ForegroundColor Yellow
+        }
+    }
+} else {
+    Write-Host ""
+    Write-Host "[ 3.6 ] Graphify — omitido o no disponible" -ForegroundColor DarkGray
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# FASE 3.7 — Nai CLI: compilar y registrar el comando global
+# ─────────────────────────────────────────────────────────────────────────────
+$naiCliInstalado = $false
+if ($InstallNaiCli -eq "yes") {
+    Write-Host ""
+    Write-Host "[ 3.7 ] Instalando Nai CLI..." -ForegroundColor Yellow
+    $naiCliDir = Join-Path $ScriptDir "nai-cli"
+    $npmNombre = if ($IsWin) { "npm.cmd" } else { "npm" }
+    $npmCli = Get-Command $npmNombre -ErrorAction SilentlyContinue
+
+    if (-not (Test-Path (Join-Path $naiCliDir "package.json"))) {
+        Write-Host "  ! nai-cli/package.json no encontrado" -ForegroundColor Yellow
+    } elseif (-not $npmCli) {
+        Write-Host "  ! npm no encontrado; Nai CLI no pudo instalarse" -ForegroundColor Yellow
+    } else {
+        Push-Location $naiCliDir
+        try {
+            & $npmCli.Source install --no-audit --no-fund
+            if ($LASTEXITCODE -eq 0) {
+                & $npmCli.Source link
+                $naiCliInstalado = ($LASTEXITCODE -eq 0)
+                if ($naiCliInstalado -and $IsWin) {
+                    $npmPrefix = (& $npmCli.Source prefix -g | Select-Object -First 1).Trim()
+                    $naiPs1 = Join-Path $npmPrefix "nai.ps1"
+                    $naiPs1Deshabilitado = Join-Path $npmPrefix "nai.ps1.disabled"
+                    if ((Split-Path -Leaf $naiPs1) -eq "nai.ps1" -and (Test-Path -LiteralPath $naiPs1)) {
+                        Move-Item -LiteralPath $naiPs1 -Destination $naiPs1Deshabilitado -Force
+                    }
+                }
+            }
+        } finally {
+            Pop-Location
+        }
+
+        if ($naiCliInstalado) {
+            Write-Host "  OK → comando nai instalado globalmente" -ForegroundColor Green
+        } else {
+            Write-Host "  ! Nai CLI no pudo instalarse" -ForegroundColor Yellow
+        }
+    }
+} else {
+    Write-Host ""
+    Write-Host "[ 3.7 ] Nai CLI — omitido" -ForegroundColor DarkGray
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
 # FASE 4 — Engram compartido (si está disponible)
 # ─────────────────────────────────────────────────────────────────────────────
 if ($hasEngram -and $installClaude -and $installCodex) {
@@ -1039,6 +1168,20 @@ if ($UseEngram -eq "yes") {
     else                                                  { & $bad "Engram no encontrado — instalalo manualmente" }
 }
 
+# Graphify
+if ($InstallGraphify -eq "yes") {
+    $graphifyInstalled = Resolve-GraphifyCommand
+    if ($graphifyInstalled) { & $ok "Graphify disponible" }
+    else                     { & $bad "Graphify no encontrado — instala uv y vuelve a correr setup.ps1" }
+}
+
+# Nai CLI
+if ($InstallNaiCli -eq "yes") {
+    $naiCommand = Get-Command nai -ErrorAction SilentlyContinue
+    if ($naiCommand) { & $ok "Nai CLI disponible" }
+    else             { & $bad "Nai CLI no encontrado — vuelve a correr setup.ps1" }
+}
+
 Write-Host ""
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -1051,6 +1194,7 @@ Write-Host "╚═════════════════════�
 Write-Host ""
 if ($installClaude) { Write-Host "  Claude Code → ~/.claude/commands/ | ~/.claude/settings.json" -ForegroundColor Blue }
 if ($installCodex)  { Write-Host "  Codex       → ~/.codex/skills/    | ~/.codex/config.toml"    -ForegroundColor Magenta }
+if ($naiCliInstalado) { Write-Host "  Nai CLI     → comando global nai" -ForegroundColor Cyan }
 Write-Host ""
 Write-Host "  Próximos pasos:"
 if (-not (Test-Path "$ScriptDir\mcp.env")) {

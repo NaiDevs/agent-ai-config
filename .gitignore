@@ -15,6 +15,11 @@ hooks/on-session-stop.ps1
 # ─── Directorios temporales ───────────────────────────────────────────────────
 tmp/
 temp/
+graphify-out/
+nai-cli/node_modules/
+nai-cli/dist/
+mcp-servers/**/node_modules/
+mcp-servers/**/dist/
 
 # ─── Sistema operativo ────────────────────────────────────────────────────────
 .DS_Store

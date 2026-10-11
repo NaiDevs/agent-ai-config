@@ -38,6 +38,7 @@ Reiniciar Claude Code y/o Codex después del setup.
 | Claude Code | cualquier | Si vas a usar Claude Code |
 | Codex | cualquier | Si vas a usar Codex |
 | engram | opcional | Knowledge graph MCP adicional |
+| uv | cualquiera | Instalación aislada de Graphify |
 
 ---
 
@@ -103,6 +104,7 @@ Opciones disponibles:
 .\setup.ps1 -Tool both                # ambos (default)
 .\setup.ps1 -ProjectsRoot "D:\Work"   # carpeta de proyectos personalizada
 .\setup.ps1 -UseEngram yes            # forzar Engram sin preguntar
+.\setup.ps1 -InstallGraphify yes       # instalar Graphify y su skill oficial
 .\setup.ps1 -SkipRegistryOverwrite    # conservar tu projects-registry.md local
 ```
 
@@ -129,6 +131,7 @@ Cerrar y reabrir Claude Code y/o Codex.
 | Registry de proyectos | `~/.claude/projects-registry.md` |
 | Memoria Engram | `~/.claude/projects/.../memory/*.md` |
 | MCPs (DBs, GitHub, memory) | `~/.claude/settings.json` → `mcpServers` |
+| Skill oficial Graphify | `~/.claude/skills/graphify/` |
 | Hook commits → Engram | `~/.claude/hooks/on-git-commit.ps1` |
 | Hook Stop → Engram | `~/.claude/settings.json` → `hooks.Stop` (agent) |
 | Auto-update en SessionStart | `~/.claude/settings.json` → `hooks.SessionStart` |
@@ -142,6 +145,7 @@ Cerrar y reabrir Claude Code y/o Codex.
 | Registry de proyectos | `~/.codex/projects-registry.md` |
 | Memoria Engram | `~/.codex/memory/*.md` |
 | MCPs (DBs, GitHub, filesystem) | `~/.codex/config.toml` → `[mcp_servers.*]` |
+| Skill oficial Graphify | `~/.codex/skills/graphify/` |
 | Permisos de escritura | `~/.codex/config.toml` → `[approvals]` |
 | Hook commits → Engram | `~/.codex/config.toml` → `[[PostToolUse]]` |
 
@@ -149,6 +153,7 @@ Cerrar y reabrir Claude Code y/o Codex.
 
 - Los tokens de `mcp.env` se cargan como variables de entorno del sistema — ambas herramientas los leen automáticamente
 - Si **engram** está instalado, ambas herramientas comparten la misma base de conocimiento
+- Si **Graphify** está habilitado, ambas herramientas reciben su skill oficial; cada repositorio mantiene su propio `graphify-out/`
 - `auto-update.ps1` sincroniza el repo en cada inicio de sesión
 
 ---
@@ -219,6 +224,67 @@ El sistema funciona igual — solo usando los archivos `memory/*.md`. El MCP de 
 # Ver cambios recientes
 Get-Content ~/.claude/projects/.../memory/changes-log.md | Select-Object -Last 20
 ```
+
+---
+
+## Grafo de código (Graphify)
+
+Graphify complementa a Engram: analiza el estado actual del código y genera `graphify-out/graph.json`, mientras Engram conserva decisiones y contexto histórico.
+
+El setup usa el paquete oficial `graphifyy` y registra la skill mantenida por Graphify; no mantiene una copia propia en `commands/`.
+
+```powershell
+# Instalación reproducible para Claude Code y Codex
+.\setup.ps1 -Tool both -InstallGraphify yes
+
+# En un repositorio de aplicación
+graphify .
+
+# O resolver el repositorio por alias desde projects-registry.md
+/proyecto grafo "yalo console"        # Claude Code
+$proyecto grafo "yalo console"        # Codex
+
+# También funciona hablando normalmente
+mostrame el grafo de yalo console
+abrime el grapho de yalo console
+preguntale al grafo de yalo console cómo funciona la autenticación
+
+# Actualizar solo archivos modificados
+graphify update .
+
+# Consultar el grafo
+graphify query "qué conecta autenticación con la base de datos"
+graphify path "AuthService" "UserRepository"
+```
+
+Los índices son locales y separados por repositorio. `graphify-out/` no debe guardarse en Engram ni centralizarse dentro de `agent-ai-config`.
+
+No es necesario memorizar comandos. Frases como `mostrame el grafo de <alias>`, `abrime el grapho de <alias>` o `preguntale al grafo de <alias> ...` construyen la ruta usando el alias, la carpeta y el path base definidos en el registry activo. El visor queda en `graphify-out/graph.html` y se abre en el navegador predeterminado.
+
+---
+
+## Nai CLI
+
+Nai es la terminal unificada para abrir un proyecto del registry y trabajar con Claude Code o Codex conservando sesiones, handoffs y métricas por proveedor.
+
+```powershell
+# setup.ps1 lo instala globalmente por defecto
+.\setup.ps1 -Tool both
+
+nai "yalo console"
+nai "yalo console" --claude
+nai "yalo console" --codex
+nai status
+nai list
+```
+
+Dentro de Nai se puede escribir `usá Claude`, `pasate a Codex`, `estado`, `proyectos`, `salir` o una solicitud normal. El estado local queda en `~/.nai/state.json`; no guarda credenciales.
+
+Durante cada tarea, Nai transmite el progreso de Claude o Codex en tiempo real: análisis, herramientas, comandos y archivos modificados. Debajo del prompt mantiene visible el modelo activo, los tokens acumulados y el porcentaje de contexto cuando el proveedor lo informa.
+
+El prompt admite pegado directo de imágenes con `Ctrl+V`, archivos arrastrados como rutas y el comando alternativo `pegar imagen [pedido]`.
+
+El código vive en `nai-cli/` y se puede validar de forma aislada con `npm test`.
 
 ---
 
@@ -505,7 +571,8 @@ NUEVO_PROYECTO_DEV=postgresql://usuario:password@host:5432/nombre_db
 
 | Feature | Claude Code | Codex |
 |---|---|---|
-| MCP memory (knowledge graph) | ✅ | ❌ No soporta |
+| MCP memory genérico | ✅ | ❌ No configurado |
+| Engram MCP | ✅ | ✅ cuando `engram` está instalado |
 | Hook Stop (agent Engram) | ✅ | ❌ Solo command hooks |
 | Hooks SessionStart | ✅ | ❌ |
 | Skills en `commands/` | ✅ | Via `skills/<nombre>/SKILL.md` |

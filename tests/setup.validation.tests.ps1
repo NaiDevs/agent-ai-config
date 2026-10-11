@@ -1,4 +1,4 @@
-# tests/setup.validation.tests.ps1
+﻿# tests/setup.validation.tests.ps1
 # Pester v5 — valida que setup.ps1 instala los archivos correctos
 # Uso: Invoke-Pester ./tests/setup.validation.tests.ps1 -Output Detailed
 
@@ -126,6 +126,26 @@ Describe "Repo — archivos criticos" {
         $lines  = Get-Content $memPath | Where-Object { $_ -match '^\- \[' }
         $unique = $lines | Select-Object -Unique
         $lines.Count | Should -Be $unique.Count
+    }
+    It "setup.ps1 permite instalar Graphify de forma opcional" {
+        $setup = Get-Content "$ScriptDir\setup.ps1" -Raw -ErrorAction Stop
+        $setup | Should -Match 'InstallGraphify'
+        $setup | Should -Match 'uvCommand\.Source tool install graphifyy'
+        $setup | Should -Match 'install --platform codex'
+    }
+    It "proyecto integra Graphify con aliases del registry" {
+        $proyecto = Get-Content "$ScriptDir\commands\proyecto.md" -Raw -ErrorAction Stop
+        $proyecto | Should -Match '/proyecto grafo \[alias\]'
+        $proyecto | Should -Match 'projects-registry\.md'
+        $proyecto | Should -Match 'graphify-out/graph\.html'
+        $proyecto | Should -Match 'mostrame el grafo de yalo console'
+        $proyecto | Should -Match 'grafo.*,.*grapho.*,.*graph.*,.*graphify'
+    }
+    It "setup.ps1 instala Nai CLI" {
+        $setup = Get-Content "$ScriptDir\setup.ps1" -Raw -ErrorAction Stop
+        Test-Path "$ScriptDir\nai-cli\package.json" | Should -BeTrue
+        $setup | Should -Match 'InstallNaiCli'
+        $setup | Should -Match 'npmCli\.Source link'
     }
 }
 
