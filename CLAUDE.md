@@ -95,6 +95,8 @@ Cuando el usuario pida algo relacionado con alguna de estas tecnologías o accio
 | Si el usuario menciona... | Invocar |
 |---|---|
 | crear api / nueva api / api desde cero / nueva solución .NET / nuevo proyecto .NET | `/dotnet` |
+| crear fe angular / nuevo proyecto angular / nueva app angular | `/angular` |
+| crear fe react / nuevo proyecto react / nueva app react / nueva app vite | `/nextjs` |
 | hacer commit / crear commit / mensaje de commit | `/commit` |
 | crear PR / pull request / abrir PR | `/pr` |
 | ticket Jira / epic / historia / tarea Jira / crear issue | `/jira` |
@@ -323,6 +325,102 @@ Identificar tipo de endpoint (público/interno, con auth, toca BD, flujo crític
 → verificar que cada prueba puede fallar por una razón real
 → eliminar cualquier prueba que duplique lo que ya cubre otra → commit
 ```
+
+### Crear FE Angular desde cero loop
+
+Patrón de referencia: YaloConsole (Angular 15+, standalone, Tailwind + Angular Material).
+
+**Estructura de carpetas**
+```
+src/
+├── app/
+│   ├── core/                   ← Singleton, cargado una sola vez
+│   │   ├── auth/               ← auth.service.ts, auth.guard.ts, auth-config.ts
+│   │   ├── interceptors/       ← auth.interceptor.ts y cualquier interceptor global
+│   │   ├── layout/             ← layouts (main, empty) + enums de layout
+│   │   ├── services/           ← servicios globales y de dominio transversal
+│   │   ├── interfaces/         ← interfaces globales de la app
+│   │   ├── constants/          ← constantes globales
+│   │   └── resolvers/          ← route resolvers
+│   ├── modules/                ← Features, cada una lazy-loaded
+│   │   └── [feature]/          ← componentes, servicios e interfaces propios del módulo
+│   └── shared/                 ← Reutilizable entre módulos
+│       ├── components/         ← UI components compartidos (modal, table, paginator, toast...)
+│       ├── services/           ← servicios compartidos (theme, media-watcher)
+│       ├── utils/              ← helpers y utilidades puras
+│       ├── operators/          ← RxJS operators custom
+│       └── animations/         ← animaciones reutilizables
+├── assets/                     ← brand/, icons/, img/
+├── environments/               ← environment.ts + environment.prod.ts
+└── styles/                     ← SCSS global + tailwind/
+```
+
+**Convenciones obligatorias**
+- Todos los componentes: `standalone: true` — sin NgModules
+- Inyección: siempre `inject()` — nunca constructor DI
+- Formularios: `ReactiveFormsModule` — nunca template-driven para forms complejos
+- Rutas: lazy loading en todos los módulos (`loadComponent` o `loadChildren`)
+- HTTP: interceptor de auth en `core/interceptors/` — nunca manejar tokens en servicios individuales
+- Estilos: Tailwind para layout/utilidades, SCSS por componente para overrides de Material
+- Nunca `any` en TypeScript
+
+**Flujo de creación**
+```
+ng new NombreApp --routing --style=scss --standalone
+→ instalar Angular Material + Tailwind
+→ crear estructura core/ modules/ shared/
+→ configurar auth.guard + auth.interceptor en core/
+→ configurar layouts (main, empty) en core/layout/
+→ configurar environments/ con variables base
+→ crear primer módulo feature con lazy loading
+→ verificar que compila → aplicar FE Testing loop al primer componente → commit
+```
+
+---
+
+### Crear FE React desde cero loop
+
+Patrón de referencia: yalo-trackeo (React 19 + Vite + Tailwind v4 + Zustand + React Router v7 + Supabase).
+
+**Estructura de carpetas**
+```
+src/
+├── components/     ← Todos los componentes, sin subcarpetas por feature (flat)
+├── routes/         ← Una página por archivo — cada archivo es una ruta
+├── store/          ← Zustand stores: auth.ts, hydrate.ts, persist.ts, realtime.ts
+├── lib/            ← Utilidades, hooks, helpers, selectores, funciones puras
+│   ├── hooks.ts
+│   ├── functions.ts
+│   ├── selectors.ts
+│   └── supabase.ts
+├── ds/             ← Design system propio (tokens, componentes base)
+├── data/           ← Tipos, entidades, constantes de dominio
+└── assets/         ← Fuentes, imágenes, badges
+```
+
+**Convenciones obligatorias**
+- Stack fijo: React 19 + Vite + Tailwind v4 + Zustand + React Router v7
+- Estado global: Zustand — un store por dominio (`auth`, `realtime`, etc.)
+- Rutas: un archivo por página en `routes/` — sin router config centralizado
+- Componentes: flat en `components/` — no crear subcarpetas por feature
+- Hooks custom: en `lib/hooks.ts` — no crear archivos `use*.ts` sueltos
+- Supabase: cliente centralizado en `lib/supabase.ts` — nunca instanciar en componentes
+- Estilos: Tailwind v4 exclusivamente — sin CSS Modules ni SCSS
+- Nunca `any` en TypeScript — tipos en `lib/entities.ts` o `data/`
+
+**Flujo de creación**
+```
+npm create vite@latest NombreApp -- --template react-ts
+→ instalar Tailwind v4 + Zustand + React Router v7 + Supabase
+→ crear estructura components/ routes/ store/ lib/ ds/ data/
+→ configurar supabase.ts en lib/ con cliente único
+→ crear store de auth con Zustand
+→ configurar rutas base en main.tsx con React Router
+→ crear primera página en routes/ + primer componente
+→ verificar que compila → aplicar FE Testing loop al primer componente → commit
+```
+
+---
 
 ### FE Testing loop
 
