@@ -86,6 +86,7 @@ Cuando el usuario pida algo relacionado con alguna de estas tecnologías o accio
 | Swagger / OpenAPI / SwaggerOperation / ProducesResponseType / documentar API | `/swagger` |
 | test / spec / unit test / e2e / mock / jest / karma / vitest / xUnit | `/testing` |
 | nuevo endpoint / nueva función en API / agregar prueba a endpoint | `/testing` |
+| nuevo componente / nueva página / nueva vista / nueva pantalla FE | `/testing` |
 | eslint / prettier / tslint / lint / formatear código / regla eslint | `/linting` |
 | PDF / Excel / QuestPDF / ClosedXML / ExcelJS / pdfmake / reporte / exportar | `/docs` |
 | Zustand / store / estado global / persist / slice zustand | `/zustand` |
@@ -240,6 +241,37 @@ Al crear o modificar un endpoint o función en una API, determinar qué pruebas 
 
 ```
 Identificar tipo de endpoint (público/interno, con auth, toca BD, flujo crítico)
+→ aplicar tabla de decisión → implementar solo las que aplican
+→ verificar que cada prueba puede fallar por una razón real → commit
+```
+
+### FE Testing loop
+
+Al crear o modificar un componente, página o vista en el frontend, determinar qué pruebas tienen sentido según su naturaleza — no crear pruebas por cumplir.
+
+**Mínimo obligatorio en cualquier componente nuevo:**
+- Unitaria (si tiene lógica) + Componente siempre
+
+**Tabla de decisión:**
+
+| Tipo | Cuándo tiene sentido |
+|---|---|
+| **Unitaria** | El componente tiene lógica aislable: pipes, helpers, cálculos, transformaciones |
+| **Componente** | Siempre — renderizado correcto, inputs/outputs, estados (loading, error, vacío) |
+| **Integración** | El componente interactúa con servicios, stores o múltiples componentes hijos |
+| **E2E** | Solo flujos críticos: login, checkout, formularios de alta, flujos de pago |
+| **Regresión visual** | Componentes de UI compartidos o design system — detectar cambios visuales no intencionales |
+| **Accesibilidad** | Componentes públicos o con requisito legal/UX: formularios, modales, navegación |
+| **Rendimiento** | Listas largas, dashboards con muchos datos, componentes con animaciones pesadas |
+| **Compatibilidad** | La app tiene requisito de soporte multi-navegador o dispositivos específicos |
+| **Usabilidad** | Flujos complejos de usuario: wizards, formularios multi-paso, onboarding |
+| **Seguridad** | Componentes que manejan tokens, datos sensibles o renderizan input del usuario |
+| **Smoke** | En deploy — verificar que las rutas principales cargan y responden |
+
+**Criterio de corte:** si el tipo de prueba no detecta un fallo real posible en ese componente específico → no crearla.
+
+```
+Identificar naturaleza del componente (UI puro, con lógica, conectado a servicios, flujo crítico)
 → aplicar tabla de decisión → implementar solo las que aplican
 → verificar que cada prueba puede fallar por una razón real → commit
 ```
