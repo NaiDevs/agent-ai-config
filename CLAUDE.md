@@ -94,6 +94,7 @@ Cuando el usuario pida algo relacionado con alguna de estas tecnologías o accio
 ### Flujo de trabajo y proyecto
 | Si el usuario menciona... | Invocar |
 |---|---|
+| crear api / nueva api / api desde cero / nueva solución .NET / nuevo proyecto .NET | `/dotnet` |
 | hacer commit / crear commit / mensaje de commit | `/commit` |
 | crear PR / pull request / abrir PR | `/pr` |
 | ticket Jira / epic / historia / tarea Jira / crear issue | `/jira` |
@@ -211,6 +212,74 @@ Identificar todos los repos afectados → ordenar por dependencia (BD → API �
 → implementar en orden, compilar cada uno antes de avanzar al siguiente
 → verificar contratos entre repos (shapes de request/response compatibles)
 → commit por repo con referencia cruzada → push todos antes de abrir PR
+```
+
+### Crear API desde cero loop
+
+Patrón de referencia: YaloVendoEntrego (.NET 8). Seguir esta estructura siempre.
+
+**1. Solución y proyectos**
+```
+NombreApi.sln
+├── NombreApi/                  ← Entry point: controllers, middlewares, extensions, Program.cs
+├── Module.Core/                ← Contratos puros: interfaces, DTOs, entidades, enums, Result<T>
+├── Module.Infrastructure/      ← Implementaciones: repositories, DbContext, migraciones
+├── Module.Service/             ← Lógica de negocio: services, security
+└── NombreApi.Tests/            ← Pruebas según API Testing loop
+```
+
+**2. Program.cs — orden obligatorio**
+```
+Secrets (AWS o env vars) → Serilog → Controllers → Auth (JWT + ApiKey) → Authorization
+→ API Versioning → Swagger → CORS → ApplicationServices (DI) → HealthChecks
+→ app.UseMiddleware<RequestResponseLoggingMiddleware>()
+→ UseHttpsRedirection → UseCors → UseAuthentication → UseAuthorization
+→ MapControllers → MapHealthChecks("/health").AllowAnonymous()
+→ public partial class Program { }   ← necesario para WebApplicationFactory en tests
+```
+
+**3. Module.Core — lo que va aquí**
+- `Interfaces/`: `IXxxRepository` e `IXxxService` por cada módulo
+- `DTOs/`: request/response DTOs + `Result<T>` + `SuccessResponse<T>` + `ApiErrorResponseDto`
+- `Entities/`: entidades de dominio y entidades de BD (subcarpeta `Db/`)
+- `Enums/`: enumeraciones de dominio
+- `Configuration/`: clases de opciones tipadas (JWT, AWS, conexiones)
+
+**4. Module.Infrastructure — lo que va aquí**
+- `Repositories/`: implementaciones de `IXxxRepository` con EF Core o Dapper
+- Un `DbContext` por base de datos; múltiples si hay varias
+- Nunca lógica de negocio aquí — solo acceso a datos
+
+**5. Module.Service — lo que va aquí**
+- `Services/`: implementaciones de `IXxxService`; orquesta repositories, nunca toca BD directo
+- `Security/`: validaciones de auth, claims, roles
+
+**6. ApiYaloVendoEntrego — lo que va aquí**
+- `Controllers/`: solo recibe, delega al service, responde — sin lógica de negocio
+- `Extensions/`: métodos de extensión para registrar servicios en DI (`AddApplicationServices`, `AddCorsConfiguration`)
+- `Middlewares/`: `RequestResponseLoggingMiddleware` y cualquier middleware transversal
+- `Authentication/`: handlers de autenticación custom (ApiKey, etc.)
+- `SwaggerTags.cs`: definición de grupos/dominios del Swagger
+- `appsettings.json` + `appsettings.Development.json`
+
+**7. Convenciones obligatorias**
+- Respuestas: `SuccessResponse<T>` para 2xx, `ApiErrorResponseDto` (RFC 7807) para errores
+- Patrón Result: `Result<T>.Ok()`, `Result<T>.NotFound()`, `Result<T>.BadRequest()` — nunca throw para flujos de negocio
+- Swagger completo desde el inicio: `[SwaggerOperation]`, `[ProducesResponseType]`, `OperationId`, XML comments
+- API Versioning activo desde el inicio — nunca agregar versiones después
+- Health check en `/health` siempre anónimo
+- Logging estructurado con Serilog en toda la solución
+- `public partial class Program { }` al final del Program.cs — requerido para tests
+
+**8. Flujo de creación**
+```
+Crear solución y 4 proyectos → configurar referencias entre proyectos
+→ Module.Core: interfaces + DTOs + Result<T> + SuccessResponse<T> + ApiErrorResponseDto
+→ Module.Infrastructure: DbContext + repositories
+→ Module.Service: services
+→ ApiNombre: Program.cs + Extensions/AddApplicationServices + Controllers + Swagger
+→ NombreApi.Tests: WebApplicationFactory + primer smoke test de /health
+→ verificar que compila → aplicar API Testing loop al primer endpoint real → commit
 ```
 
 ### API Testing loop
