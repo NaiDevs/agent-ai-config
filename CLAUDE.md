@@ -85,6 +85,7 @@ Cuando el usuario pida algo relacionado con alguna de estas tecnologías o accio
 |---|---|
 | Swagger / OpenAPI / SwaggerOperation / ProducesResponseType / documentar API | `/swagger` |
 | test / spec / unit test / e2e / mock / jest / karma / vitest / xUnit | `/testing` |
+| nuevo endpoint / nueva función en API / agregar prueba a endpoint | `/testing` |
 | eslint / prettier / tslint / lint / formatear código / regla eslint | `/linting` |
 | PDF / Excel / QuestPDF / ClosedXML / ExcelJS / pdfmake / reporte / exportar | `/docs` |
 | Zustand / store / estado global / persist / slice zustand | `/zustand` |
@@ -211,6 +212,38 @@ Identificar todos los repos afectados → ordenar por dependencia (BD → API �
 → commit por repo con referencia cruzada → push todos antes de abrir PR
 ```
 
+### API Testing loop
+
+Al crear o modificar un endpoint o función en una API, determinar qué pruebas tienen sentido — no crear pruebas por cumplir.
+
+**Mínimo obligatorio en cualquier endpoint nuevo:**
+- Unitaria (si hay lógica aislable) + Funcional/endpoint siempre
+
+**Tabla de decisión:**
+
+| Tipo | Cuándo tiene sentido |
+|---|---|
+| **Unitaria** | Hay lógica de negocio aislable: validaciones, cálculos, transformaciones |
+| **Integración** | El endpoint toca BD, servicios externos o cruza múltiples capas |
+| **Funcional / endpoint** | Siempre — verificar request/response, status codes, casos de error |
+| **Contrato** | El endpoint es consumido por otro sistema o frontend con contrato definido |
+| **E2E** | Solo flujos críticos de negocio: autenticación, checkout, facturación |
+| **Regresión** | Se modificó un endpoint existente con comportamiento ya probado |
+| **Smoke** | En deploy — verificar que el endpoint responde antes de correr el resto |
+| **Rendimiento** | El endpoint es llamado frecuentemente o tiene SLA definido |
+| **Carga / estrés / picos** | Hay evidencia de tráfico alto o requisito explícito del cliente |
+| **Seguridad** | El endpoint maneja auth, autorización, datos sensibles o input de usuario |
+| **Validación de datos** | El endpoint acepta input del usuario o de sistemas externos |
+| **Fuzzing** | Endpoint público con input no estructurado o alto riesgo de inyección |
+
+**Criterio de corte:** si el tipo de prueba no detecta un fallo real posible en ese contexto específico → no crearla.
+
+```
+Identificar tipo de endpoint (público/interno, con auth, toca BD, flujo crítico)
+→ aplicar tabla de decisión → implementar solo las que aplican
+→ verificar que cada prueba puede fallar por una razón real → commit
+```
+
 ### SQL Server SP loop
 ```
 Hacer golden-master del SP antes de tocar (SELECT output actual como referencia) →
@@ -221,3 +254,7 @@ agregar índices covering: CREATE NONCLUSTERED INDEX ... INCLUDE (columnas del S
 aplicar en DEV → validar con QA que resultado coincide con golden-master →
 aplicar en PROD → medir tiempo después y documentar mejora
 ```
+
+# graphify
+- **graphify** (`~/.claude/skills/graphify/SKILL.md`) - any input to knowledge graph. Trigger: `/graphify`
+When the user types `/graphify`, use the installed graphify skill or instructions before doing anything else.
