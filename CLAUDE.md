@@ -239,10 +239,20 @@ Al crear o modificar un endpoint o función en una API, determinar qué pruebas 
 
 **Criterio de corte:** si el tipo de prueba no detecta un fallo real posible en ese contexto específico → no crearla.
 
+**Criterio de cantidad:** proporcional a la complejidad. Cubrir happy path + casos de error esperados + edge cases críticos. Nunca probar permutaciones redundantes del mismo comportamiento.
+
+| Complejidad del endpoint | Cantidad orientativa |
+|---|---|
+| CRUD simple sin lógica | 3–5 pruebas funcionales |
+| Con validaciones o reglas de negocio | 5–10 pruebas |
+| Con auth, roles o datos sensibles | +3–5 pruebas de seguridad/auth |
+| Flujo crítico o multi-servicio | las necesarias para cubrir cada rama real |
+
 ```
 Identificar tipo de endpoint (público/interno, con auth, toca BD, flujo crítico)
 → aplicar tabla de decisión → implementar solo las que aplican
-→ verificar que cada prueba puede fallar por una razón real → commit
+→ verificar que cada prueba puede fallar por una razón real
+→ eliminar cualquier prueba que duplique lo que ya cubre otra → commit
 ```
 
 ### FE Testing loop
@@ -270,10 +280,20 @@ Al crear o modificar un componente, página o vista en el frontend, determinar q
 
 **Criterio de corte:** si el tipo de prueba no detecta un fallo real posible en ese componente específico → no crearla.
 
+**Criterio de cantidad:** proporcional a la complejidad. Cubrir happy path + edge cases críticos + estados de error. Nunca probar permutaciones redundantes del mismo comportamiento.
+
+| Complejidad del componente | Cantidad orientativa |
+|---|---|
+| UI puro, sin lógica (botón, card, label) | 2–4 pruebas de componente |
+| Con lógica simple (validación, toggle, filtro) | 4–8 pruebas |
+| Conectado a servicios o store | 6–12 pruebas |
+| Flujo crítico o multi-paso | las necesarias para cubrir cada rama real |
+
 ```
 Identificar naturaleza del componente (UI puro, con lógica, conectado a servicios, flujo crítico)
 → aplicar tabla de decisión → implementar solo las que aplican
-→ verificar que cada prueba puede fallar por una razón real → commit
+→ verificar que cada prueba puede fallar por una razón real
+→ eliminar cualquier prueba que duplique lo que ya cubre otra → commit
 ```
 
 ### SQL Server SP loop
