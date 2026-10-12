@@ -353,3 +353,4 @@
 ## Session df0a0271-26b0-4642-89a8-6664e2e5b97b
 
 2026-10-12 | YALO | GENERAL | Activación proyecto yalo console: skill proyecto resolvió aliases desde projects-registry.md — yalo console (YaloConsole, Node/TS FE) en rama feat/naidelyn/ventas (limpia, último commit vendedor reassignment 2026-10-06); yalo console api (YALO_API_Administrator, Node/TS) sin upstream tracking. Lanzado status en paralelo via subagents Haiku
+2026-10-12 | YALO | CONFIG | Sales Pipeline: búsqueda por organización con signal searchQuery='', sort alfabético por columna con alphaStages signal, botón ArrowUpAZ se resalta azul/violeta/verde según zona — icono ArrowUpAZ registrado en lucide-icons.ts
