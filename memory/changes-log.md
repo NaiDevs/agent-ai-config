@@ -356,3 +356,4 @@
 2026-10-12 | YALO | CONFIG | Sales Pipeline: búsqueda por organización con signal searchQuery='', sort alfabético por columna con alphaStages signal, botón ArrowUpAZ se resalta azul/violeta/verde según zona — icono ArrowUpAZ registrado en lucide-icons.ts
 2026-10-12 | YALO | GENERAL | Sesión iniciada: trabajo en yalo console api y fe — usuario autenticó pero token OAuth expiró (401) interrumpiendo sesión
 2026-10-12 | YALO | CONFIG | Search bar yalo console: estandarización de estilos con componente `yalo-search` — mismo fondo gris, icono tamaño 16, clase `input input-default` para consistencia visual
+2026-10-12 | YALO | DECISION | Validación permisos reasignación asesor: línea 92 de componente verifica `!editing || !isManagerOrAdmin` para mostrar select; sales_advisor ve nombre pero no puede reasignar; solo manager/admin pueden reasignar con modal de motivo (línea 216) — arquitectura de control acceso validada en CRM deals
