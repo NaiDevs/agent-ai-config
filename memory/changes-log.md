@@ -2,6 +2,7 @@
 
 - 2026-10-12 | yalo console | commit | feat(ventas): búsqueda, orden y mejoras a la ficha del deal
 - 2026-10-12 | yalo console api | commit | feat(crm-deals): agrega endpoint DELETE para archivar deal con motivo
+- 2026-10-12 | YALO | DECISION | CRM-Onboarding: espeja actividades a múltiples canales Slack (ventas-yalotech via n8n, sac-yalo via bot directo) con persistencia de hilo SAC
 
 ## Session 3c9c30c4-debc-41af-b4cc-2be6b6929e21
 
