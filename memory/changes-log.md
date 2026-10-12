@@ -1,5 +1,7 @@
 # ENGRAM Memory - Changes Log
 
+- 2026-10-12 | yalo console api | commit | feat(crm): agrega calendario de actividades con recordatorios (cron Slack DM + Crm-notifications)
+- 2026-10-12 | yalo console | commit | feat(calendario): agrega modulo de calendario CRM (dia/semana/mes, drag-drop, recordatorios in-app)
 - 2026-10-12 | yalo console | commit | feat(ventas): búsqueda, orden y mejoras a la ficha del deal
 - 2026-10-12 | yalo console api | commit | feat(crm-deals): agrega endpoint DELETE para archivar deal con motivo
 - 2026-10-12 | YALO | DECISION | CRM-Onboarding: espeja actividades a múltiples canales Slack (ventas-yalotech via n8n, sac-yalo via bot directo) con persistencia de hilo SAC
