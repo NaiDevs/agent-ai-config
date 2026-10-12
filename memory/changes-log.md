@@ -386,3 +386,4 @@
 ## Session df0a0271-26b0-4642-89a8-6664e2e5b97b (continuación)
 
 2026-10-12 | YALO | BUG | Calendar component Angular binding syntax: `[class.dark:bg-blue-900/10]` causaba compilación fallida — Angular template parser ve `:` como separador y no reconoce `dark:` como modifier Tailwind, rompe AST del template. El error subía al importador como "Cannot find module". Fix: remover binding `[class.dark:bg-blue-900/10]`, `bg-blue-50` ya proporciona suficiente feedback visual en hover (commit fa20d1f en rama feat/naidelyn/ventas)
+2026-10-12 | yalo console | DECISION | Build limpio en rama feat/naidelyn/ventas (pusheado) — Calendario de actividades compila correctamente y disponible en ruta `/sales/calendar`
