@@ -363,3 +363,10 @@
 2026-10-12 | YALO | FEATURE | Eliminación de deals: implementado DELETE /api/crm-deals/:id con body `{ reason }` (archiva deal + registra actividad note + log auditoría DELETE_DEAL) en API; frontend drawer con botón rojo "Eliminar deal" + modal textarea motivo obligatorio (optimistic delete de store, llamada API, cierre drawer) — rama feat/naidelyn/ventas (FE) y rama API actual
 2026-10-12 | YALO | BUG | Barra de acciones panel deal: reemplazó tres elementos `absolute` (conflictos right-10/right-12/right-4) por `flex items-center justify-between` al tope — chip de duplicado a izquierda, trash + X a derecha. confirmDelete() corregido: usa `this._dealId()` en vez de `this.dealId` (setter @Input)
 2026-10-12 | YALO | BUG | Merger de deals: corregidos 4 bugs — (1) quotationNumber no se guardaba al reasignar: agregado en body del PATCH; (2) chip "Posible duplicado" aparecía para closed_lost: excluye stage !== 'closed_lost' en computed; (3) candidatos de merge incluían closed_lost: mismo filtro en openMergeModal; (4) drawer colgado tras merge archivador deal actual: llama cerrarDrawer() si keepCurrentDeal = false
+2026-10-12 | YALO | FEATURE | Sales Pipeline: búsqueda por organización + orden alfabético con signal alphaStages; botón ArrowUpAZ resalta (azul/violeta/verde por zona)
+2026-10-12 | YALO | FEATURE | Ficha deal header: barra de acciones fija (flex, no absolute) con chip "Posible duplicado" izquierda + trash/cerrar derecha
+2026-10-12 | YALO | FEATURE | Etapa editable: campo stage en formulario deal como dropdown con 9 etapas; asesor editable por cualquier usuario con permiso (no solo manager/admin)
+2026-10-12 | YALO | FEATURE | Eliminar deal: botón trash (solo si canEdit) + modal textarea motivo obligatorio → archiva + actividad nota + log auditoría; endpoint DELETE /api/crm-deals/:id
+2026-10-12 | YALO | BUG | quotationNumber no persistía: agregado en body PATCH /crm-deals/:id al reasignar asesor
+2026-10-12 | YALO | BUG | closed_lost en chip duplicado: excluye stage='closed_lost' del filtro de candidatos merge
+2026-10-12 | YALO | BUG | Drawer post-merge: cerrarDrawer() correctamente cuando deal archivado en merge
