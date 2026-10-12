@@ -376,3 +376,7 @@
 2026-10-12 | YALO | FEATURE | Onboarding activity notifications: nuevo método `pushOnboardingActivity()` en CrmDealSlackService — si hay dealId, llama `pushDealActivity` (→ n8n → ventas-yalotech con hilo del deal) y en paralelo hace `postMessage` directo al canal SAC (C07B6MT3JCC por defecto). Integración en crm-activities.service.ts: cuando `scopeType === 'onboarding'`, invoca el nuevo método — rama feat/naidelyn/ventas, compilación limpia
 2026-10-12 | YALO | CONFIG | Slack onboarding threading: migración BD requiere ALTER TABLE "Crm-onboarding" ADD COLUMN IF NOT EXISTS "slackSacThreadTs" text; — ventas-yalotech continúa con hilos por deal vía n8n, sac-yalo ahora usa slackSacThreadTs para replies
 2026-10-12 | YALO | DECISION | Calendario de actividades: requerimiento nuevo explorando estructura CRM activities — skill brainstorming invocado, subagent Explore analizando entity/DTOs/service/controller/filtering
+
+## Session 61373d74-777b-4c93-a149-5fa7c395f54d
+
+2026-10-12 | YALO | CONFIG | GitHub App creation para yalo-trackeo webhook: pasos en GitHub Settings→Developer settings→GitHub Apps (nombre, Homepage URL, Webhook URL en Edge Function, Webhook secret con `openssl rand -hex 20`), permisos mínimos (Contents:Read, Pull requests:Read, Metadata:Read), generación Private Key (.pem), instalación en Yalo-Technologies org, y flujo JWT para obtener installation_access_token
