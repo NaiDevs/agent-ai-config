@@ -133,6 +133,62 @@ Cuando el usuario pida algo relacionado con alguna de estas tecnologías o accio
 
 ---
 
+## Convenciones de nombres
+
+### .NET / ASP.NET Core
+| Elemento | Convención | Ejemplo |
+|---|---|---|
+| Clases, interfaces, enums | PascalCase | `OrderService`, `IOrderRepository` |
+| Métodos y propiedades públicas | PascalCase | `GetOrderById()`, `TotalAmount` |
+| Variables locales y parámetros | camelCase | `orderId`, `totalAmount` |
+| Campos privados | `_camelCase` | `_orderRepository` |
+| Archivos | igual que la clase | `OrderService.cs`, `IOrderRepository.cs` |
+| DTOs | sufijo `Dto` | `OrderDto`, `CreateOrderDto` |
+| Interfaces | prefijo `I` | `IOrderService` |
+
+### Angular
+| Elemento | Convención | Ejemplo |
+|---|---|---|
+| Archivos y carpetas | kebab-case | `order-list.component.ts`, `order-detail/` |
+| Clases | PascalCase | `OrderListComponent`, `AuthService` |
+| Variables, métodos | camelCase | `orderId`, `getOrders()` |
+| Signals | camelCase + tipo claro | `orders = signal<Order[]>([])` |
+| Componentes | sufijo `Component` | `OrderListComponent` |
+| Servicios | sufijo `Service` | `OrderService` |
+| Guards | sufijo `Guard` | `AuthGuard` |
+| Interceptors | sufijo `Interceptor` | `AuthInterceptor` |
+| Pipes | sufijo `Pipe` | `DateFormatPipe` |
+| Interfaces/tipos | PascalCase, sin prefijo `I` | `Order`, `OrderDetail` |
+
+### React / TypeScript
+| Elemento | Convención | Ejemplo |
+|---|---|---|
+| Componentes (archivos y clase) | PascalCase | `OrderList.tsx`, `function OrderList()` |
+| Carpetas | kebab-case o PascalCase según el proyecto | seguir el patrón del repo |
+| Hooks custom | prefijo `use` + camelCase | `useOrders`, `useAuth` |
+| Stores Zustand | camelCase + sufijo descriptivo | `authStore`, `useAuthStore` |
+| Utilidades y helpers | camelCase | `formatDate()`, `getTotal()` |
+| Tipos e interfaces | PascalCase | `Order`, `OrderDetail` |
+| Constantes | UPPER_SNAKE_CASE | `MAX_RETRIES`, `API_URL` |
+
+### NestJS
+| Elemento | Convención | Ejemplo |
+|---|---|---|
+| Archivos | kebab-case con sufijo | `orders.controller.ts`, `orders.service.ts` |
+| Clases | PascalCase con sufijo | `OrdersController`, `OrdersService` |
+| DTOs | PascalCase + sufijo `Dto` | `CreateOrderDto`, `UpdateOrderDto` |
+| Módulos | sufijo `Module` | `OrdersModule` |
+| Entidades TypeORM | PascalCase sin sufijo | `Order`, `OrderItem` |
+
+### General (todos los stacks)
+- Nombres descriptivos en español o inglés — nunca mezclar idiomas en el mismo archivo
+- Sin abreviaciones ambiguas: `getOrg()` no, `getOrganization()` sí
+- Booleans: prefijo `is`, `has`, `can` — `isLoading`, `hasPermission`, `canEdit`
+- Colecciones: siempre plural — `orders`, `users`, `items`
+- Funciones: verbo + sustantivo — `getOrder()`, `createUser()`, `validateInput()`
+
+---
+
 ## Loops de desarrollo
 
 ### Development loop
@@ -215,6 +271,30 @@ Identificar todos los repos afectados → ordenar por dependencia (BD → API �
 → verificar contratos entre repos (shapes de request/response compatibles)
 → commit por repo con referencia cruzada → push todos antes de abrir PR
 ```
+
+### Onboarding a repo desconocido loop
+
+Al caer en un repo nuevo o sin contexto, entender antes de tocar.
+
+```
+1. README → entender propósito, cómo correr, variables de entorno requeridas
+2. package.json / *.csproj / *.sln → dependencias, scripts disponibles, versión del framework
+3. Estructura de carpetas → identificar el patrón arquitectónico (capas, módulos, features)
+4. Entry point → Program.cs / main.ts / App.tsx / app.config.ts → cómo arranca todo
+5. git log --oneline -20 → qué se ha trabajado recientemente, qué áreas están activas
+6. Buscar tests existentes → ¿tienen? ¿qué cubren? → entender las partes críticas
+7. Buscar el patrón de auth → cómo se maneja auth y permisos
+8. Buscar un ejemplo de la entidad principal → cómo fluye de controller/route → service → repo/store
+9. NO proponer cambios hasta completar los pasos anteriores
+```
+
+**Señales de alerta al explorar:**
+- Sin tests → tocar con cuidado, cambios pueden romper sin saberlo
+- Sin README o desactualizado → preguntar antes de asumir
+- Mezcla de patrones → respetar el patrón dominante, no introducir uno nuevo
+- Variables hardcodeadas → no replicar, pero no eliminar sin entender por qué están
+
+---
 
 ### Crear API desde cero loop
 
