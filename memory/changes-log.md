@@ -382,3 +382,7 @@
 ## Session 61373d74-777b-4c93-a149-5fa7c395f54d
 
 2026-10-12 | YALO | CONFIG | GitHub App creation para yalo-trackeo webhook: pasos en GitHub Settings→Developer settings→GitHub Apps (nombre, Homepage URL, Webhook URL en Edge Function, Webhook secret con `openssl rand -hex 20`), permisos mínimos (Contents:Read, Pull requests:Read, Metadata:Read), generación Private Key (.pem), instalación en Yalo-Technologies org, y flujo JWT para obtener installation_access_token
+
+## Session df0a0271-26b0-4642-89a8-6664e2e5b97b (continuación)
+
+2026-10-12 | YALO | BUG | Calendar component Angular binding syntax: `[class.dark:bg-blue-900/10]` causaba compilación fallida — Angular template parser ve `:` como separador y no reconoce `dark:` como modifier Tailwind, rompe AST del template. El error subía al importador como "Cannot find module". Fix: remover binding `[class.dark:bg-blue-900/10]`, `bg-blue-50` ya proporciona suficiente feedback visual en hover (commit fa20d1f en rama feat/naidelyn/ventas)
