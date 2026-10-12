@@ -370,3 +370,4 @@
 2026-10-12 | YALO | BUG | quotationNumber no persistía: agregado en body PATCH /crm-deals/:id al reasignar asesor
 2026-10-12 | YALO | BUG | closed_lost en chip duplicado: excluye stage='closed_lost' del filtro de candidatos merge
 2026-10-12 | YALO | BUG | Drawer post-merge: cerrarDrawer() correctamente cuando deal archivado en merge
+2026-10-12 | YALO | FEATURE | Onboarding activity notifications: nuevo método `pushOnboardingActivity()` en CrmDealSlackService — si hay dealId, llama `pushDealActivity` (→ n8n → ventas-yalotech con hilo del deal) y en paralelo hace `postMessage` directo al canal SAC (C07B6MT3JCC por defecto, configurable via SLACK_SAC_CHANNEL_ID env var). Integramiento en crm-activities.service.ts: cuando `scopeType === 'onboarding'`, invoca el nuevo método con datos de la actividad — rama feat/naidelyn/ventas, compilación limpia
