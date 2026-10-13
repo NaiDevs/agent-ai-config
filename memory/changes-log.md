@@ -401,3 +401,7 @@
 2026-10-12 | YALO | FEATURE | Calendario CRM (Sales→Calendar): componente Angular calendar-component compilando correctamente en rama feat/naidelyn/ventas — estructura grid views (día/semana/mes), drag-drop activities, recordatorios in-app; ruta `/sales/calendar` activa tras permisos módulo
 2026-10-12 | YALO | CONFIG | Slack onboarding threading refactor: método `pushOnboardingActivity()` en CrmDealSlackService integra ventas-yalotech (n8n con hilo del deal) y sac-yalo C07B6MT3JCC (directo con slackSacThreadTs BD) en paralelo — integración en crm-activities.service.ts cuando scopeType='onboarding'
 2026-10-12 | YALO | CONFIG | Permisos módulo calendario: localStorage cache 'permissions_modules' requiere logout/login para refrescar; módulo solo visible si RolesXPermissionsModules tiene row para roleId + permissionModuleId=1115
+
+## Session df0a0271-26b0-4642-89a8-6664e2e5b97b (final - Styling calendario)
+
+2026-10-13 | YALO | CONFIG | Calendario: agrega fondos al grid de día/semana/mes — `bg-white dark:bg-neutral-950` en contenedores principales, `border-neutral-200` en light mode para bordes más visibles (vs `dark:border-neutral-800/60`), commit cd093d2 pusheado a feat/naidelyn/ventas
