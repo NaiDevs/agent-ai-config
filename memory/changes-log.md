@@ -406,4 +406,6 @@
 
 2026-10-13 | YALO | CONFIG | Calendario: agrega fondos al grid de día/semana/mes — `bg-white dark:bg-neutral-950` en contenedores principales, `border-neutral-200` en light mode para bordes más visibles (vs `dark:border-neutral-800/60`), commit cd093d2 pusheado a feat/naidelyn/ventas
 
+2026-10-13 | YALO | DECISION | YALO-Agendo-FE navegación por rubro: análisis de arquitectura — rubro de organización viene de API o se almacena en JWT/localStorage/settings del tenant; determina si shell debe solicitarlo cada vez o leerlo de datos ya cargados; session 948e2820 explorando contexto (repo Angular standalone + signals, navegación hardcodeada en layout.ts sin concepto de rubro)
+
 2026-10-13 | general | GENERAL | Claude Docs: no tiene flujo de "solicitar acceso" como Google Drive; doc está en cuenta del usuario que lo creó, solo él puede compartirlo manualmente (botón Share en el doc)
