@@ -429,3 +429,12 @@
 ## Session df0a0271-26b0-4642-89a8-6664e2e5b97b (final - Resumido)
 
 2026-10-13 | YALO | GENERAL | Sesión iniciada con naveg ación de proyecto via skill proyecto y login; acceso a yalo console (FE Node/TS) y yalo console api (Node/TS) en rama feat/naidelyn/ventas
+
+## Session df0a0271-26b0-4642-89a8-6664e2e5b97b (Engram - Stop Hook Log)
+
+2026-10-13 | YALO | FEATURE | Sales Pipeline completo: búsqueda/ordenamiento, ficha deal editable con eliminar, merger duplicados, onboarding activity notifications multi-canal Slack (ventas+SAC)
+2026-10-13 | YALO | FEATURE | Calendario CRM (día/semana/mes): componente Angular calendar-component compilando, grid views con drag-drop activities, recordatorios in-app, ruta /sales/calendar — rama feat/naidelyn/ventas activa
+2026-10-13 | YALO | DECISION | Onboarding activity notifications refactor: método pushOnboardingActivity() integra ventas-yalotech (n8n con hilo deal) + sac-yalo (C07B6MT3JCC directo con slackSacThreadTs BD) — migration ADD COLUMN slackSacThreadTs text
+2026-10-13 | YALO | DECISION | KPIs MRR/ARR enterprise-trial: query findEnterpriseTrialOrganizations extrae orgs status=trialing+enterprise=true, inserta trial IDs con mrr=0 en currentMrr — consistencia KPI card vs drilldown
+2026-10-13 | YALO | DECISION | Shell dinámico Yalo Agendo: configuración dinámica por rubro (codtiponegocio_agendo) via tabla yc_configuracionesrubros — vocabulario, módulos, campos personalizados, tipos recursos sin hardcode
+2026-10-13 | YALO | CONFIG | crm_deals columna slackThreadTs: vincula deal a hilo Slack del onboarding correspondiente para threading multi-canal consistente (ventas via n8n + SAC directo)
