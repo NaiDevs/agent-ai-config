@@ -409,3 +409,6 @@
 2026-10-13 | YALO | DECISION | YALO-Agendo-FE navegación por rubro: análisis de arquitectura — rubro de organización viene de API o se almacena en JWT/localStorage/settings del tenant; determina si shell debe solicitarlo cada vez o leerlo de datos ya cargados; session 948e2820 explorando contexto (repo Angular standalone + signals, navegación hardcodeada en layout.ts sin concepto de rubro)
 
 2026-10-13 | general | GENERAL | Claude Docs: no tiene flujo de "solicitar acceso" como Google Drive; doc está en cuenta del usuario que lo creó, solo él puede compartirlo manualmente (botón Share en el doc)
+2026-10-13 | YALO | DECISION | Arquitectura shell Yalo Agendo: navegación dinámica por rubro (codtiponegocio_agendo) desde API — tres tickets GENERAL propuestos (1) Migración BD multi-rubro en dbyaloauth/dbyalocobro, (2) Endpoint GET /configuracion expone rubro + enabled_modules, (3) ShellService con signals reactivos en FE para sidebar data-driven
+2026-10-13 | YALO | GENERAL | Breakdown tickets Yalo Agendo: 8 tickets completos (2 migraciones BD, 2 APIs, 4 FE) ordenados por dependencias — catálogo de rubros y ShellService en paralelo con APIs, layout refactor y moduleGuard al final
+2026-10-13 | YALO | GENERAL | Shell dinámico Yalo Agendo: propuesta condensada a 3 tickets GENERAL focalizados en arquitectura core (BD + API + FE reactivo)
