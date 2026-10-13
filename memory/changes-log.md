@@ -1,5 +1,6 @@
 # ENGRAM Memory - Changes Log
 
+- 2026-10-13 | yalo console api | commit | feat(crm-cockpit): incluye orgs enterprise+trialing como clientes activos con MRR real
 - 2026-10-12 | yalo console api | commit | feat(crm): agrega calendario de actividades con recordatorios (cron Slack DM + Crm-notifications)
 - 2026-10-12 | yalo console | commit | feat(calendario): agrega modulo de calendario CRM (dia/semana/mes, drag-drop, recordatorios in-app)
 - 2026-10-12 | yalo console | commit | feat(ventas): búsqueda, orden y mejoras a la ficha del deal
@@ -412,6 +413,7 @@
 2026-10-13 | YALO | DECISION | Arquitectura shell Yalo Agendo: navegación dinámica por rubro (codtiponegocio_agendo) desde API — tres tickets GENERAL propuestos (1) Migración BD multi-rubro en dbyaloauth/dbyalocobro, (2) Endpoint GET /configuracion expone rubro + enabled_modules, (3) ShellService con signals reactivos en FE para sidebar data-driven
 2026-10-13 | YALO | GENERAL | Breakdown tickets Yalo Agendo: 8 tickets completos (2 migraciones BD, 2 APIs, 4 FE) ordenados por dependencias — catálogo de rubros y ShellService en paralelo con APIs, layout refactor y moduleGuard al final
 2026-10-13 | YALO | GENERAL | Shell dinámico Yalo Agendo: propuesta condensada a 3 tickets GENERAL focalizados en arquitectura core (BD + API + FE reactivo)
+2026-10-13 | YALO | DECISION | KPIs MRR/ARR enterprise-trial: query findEnterpriseTrialOrganizations extrae orgs status 'trialing' + enterprise=true, inserta con mrr=0 en currentMrr; drilldown UNION active_mrr + enterprise_trials para consistencia entre KPI card y detail
 
 ## Session df0a0271-26b0-4642-89a8-6664e2e5b97b (final - KPIs Enterprise Trial)
 
