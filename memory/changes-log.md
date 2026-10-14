@@ -1,5 +1,9 @@
 # ENGRAM Memory - Changes Log
 
+## Session 20e46849-50f1-4ec2-ac6b-011f93d56228
+
+2026-10-14 | YALO | GENERAL | Activación proyectos yalo-trackeo (web) y yalo-trackeo-desktop — rama feat-mcp-servidor (limpio, último commit 2026-10-07), rama claude/yalo-trackeo-desktop-mvp-sg0b9f (limpio, último commit 2026-09-26), ambos sin upstream remoto configurado
+
 - 2026-10-14 | yalo console api | commit | fix(crm-deals): alinea cálculo BANT con lógica del FE y cambia tipo de columna a float
 - 2026-10-14 | yalo console api | commit | fix(slack): escapa caracteres especiales en todos los servicios que envían mensajes
 - 2026-10-14 | yalo console | commit | fix(crm-deals): corrige URL doble /api en búsqueda y fusión de deals
