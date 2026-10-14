@@ -456,3 +456,4 @@
 2026-10-14 | YALO | GENERAL | Investigación: fusionar cuentas en yalo console api y fe — validación de funcionalidad pendiente (background task registrado pero no completado)
 2026-10-14 | YALO | GENERAL | Verificación funcionalidad: revisión de componente fusionar deals en FE iniciada (subagent running)
 2026-10-14 | YALO | BUG | URLs dobles /api/api: corregidos bugs en mergeCandidates() y searchMergeCandidates() — ambas funciones tenían ruta duplicada con doble prefijo `/api`, causando 404 en flujo de fusión de deals
+2026-10-14 | YALO | BUG | qualificationScore decimales: migración BD Crm-dealBant int→float con recálculo de scores (CASE WHEN need/authority/budget/timing) para permitir puntajes decimales (manager=0.5, 30_days=0.5) — script completo ALTER TABLE + UPDATE + SELECT en dbyaloconsole
