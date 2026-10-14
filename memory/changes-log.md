@@ -445,3 +445,4 @@
 ## Session aa132ec4-399e-4eca-8a37-acf7b3d75256
 
 2026-10-14 | YALO | DECISION | Compartir módulos entre proyectos: nuevo proyecto (Angular FE + .NET API) comparte módulos con YALO BO existente; requerimiento eliminar duplicación de código y mantenimiento — API separada pero BD compartida; arquitectura SharedServices + Shared Components layers propuesto en sesión de brainstorming
+2026-10-14 | YALO | DECISION | Arquitectura compartida: 3 opciones evaluadas — (A) Agendo API llama BO API (HTTP) con riesgos de acoplamiento/latencia; (B) Shared Class Library .NET + Angular libs local [RECOMENDADA] con Shared.Core project reference y monorepo Nx FE; (C) Monorepo unificado (máxima reutilización pero migración grande). Propuesta: Opción B con YaloShared .sln para Backend (.NET project references) + libs folder Nx Angular para Frontend; un solo lugar para cambios de modelos DTOs/contratos, cada API con lógica propia pero compartiendo contrato
