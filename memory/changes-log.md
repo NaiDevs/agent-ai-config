@@ -454,3 +454,4 @@
 2026-10-14 | YALO | DECISION | Micro-repos compartidos: dos repos nuevos (yalo-shared-fe + YaloShared.Core) como deps npm/NuGet para BO API/FE y Agendo API/FE — elimina duplicación de código, modelos DTOs compartidos, SharedServices layer (reutilizado en múltiples proyectos)
 2026-10-14 | YALO | GENERAL | Investigación: fusionar cuentas en yalo console api y fe — validación de funcionalidad pendiente (background task registrado pero no completado)
 2026-10-14 | YALO | GENERAL | Verificación funcionalidad: revisión de componente fusionar deals en FE iniciada (subagent running)
+2026-10-14 | YALO | BUG | URLs dobles /api/api: corregidos bugs en mergeCandidates() y searchMergeCandidates() — ambas funciones tenían ruta duplicada con doble prefijo `/api`, causando 404 en flujo de fusión de deals
