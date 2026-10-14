@@ -441,3 +441,7 @@
 2026-10-13 | YALO | DECISION | Shell dinámico Yalo Agendo: configuración dinámica por rubro (codtiponegocio_agendo) via tabla yc_configuracionesrubros — vocabulario, módulos, campos personalizados, tipos recursos sin hardcode
 2026-10-13 | YALO | CONFIG | crm_deals columna slackThreadTs: vincula deal a hilo Slack del onboarding correspondiente para threading multi-canal consistente (ventas via n8n + SAC directo)
 2026-10-13 | YALO | BUG | deal.slackThreadTs duplicaba SAC thread ts: n8n webhook intenta reply en thread incorrecto (SAC en lugar de ventas-yalotech) causando error silencioso — fix: UPDATE crm_deals SET "slackThreadTs" = NULL WHERE "dealId" = 74 para recrear hilo correcto en próxima actividad
+
+## Session aa132ec4-399e-4eca-8a37-acf7b3d75256
+
+2026-10-14 | YALO | DECISION | Compartir módulos entre proyectos: nuevo proyecto (Angular FE + .NET API) comparte módulos con YALO BO existente; requerimiento eliminar duplicación de código y mantenimiento — API separada pero BD compartida; arquitectura SharedServices + Shared Components layers propuesto en sesión de brainstorming
