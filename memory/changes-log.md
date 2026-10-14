@@ -452,3 +452,4 @@
 ## Session 033d9b27-1375-484b-b830-fd66a4db54b1
 
 2026-10-14 | YALO | DECISION | Micro-repos compartidos: dos repos nuevos (yalo-shared-fe + YaloShared.Core) como deps npm/NuGet para BO API/FE y Agendo API/FE — elimina duplicación de código, modelos DTOs compartidos, SharedServices layer (reutilizado en múltiples proyectos)
+2026-10-14 | YALO | GENERAL | Investigación: fusionar cuentas en yalo console api y fe — validación de funcionalidad pendiente (background task registrado pero no completado)
