@@ -457,3 +457,8 @@
 2026-10-14 | YALO | GENERAL | Verificación funcionalidad: revisión de componente fusionar deals en FE iniciada (subagent running)
 2026-10-14 | YALO | BUG | URLs dobles /api/api: corregidos bugs en mergeCandidates() y searchMergeCandidates() — ambas funciones tenían ruta duplicada con doble prefijo `/api`, causando 404 en flujo de fusión de deals
 2026-10-14 | YALO | BUG | qualificationScore decimales: migración BD Crm-dealBant int→float con recálculo de scores (CASE WHEN need/authority/budget/timing) para permitir puntajes decimales (manager=0.5, 30_days=0.5) — script completo ALTER TABLE + UPDATE + SELECT en dbyaloconsole
+
+## Session 033d9b27-1375-484b-b830-fd66a4db54b1 (Engram Verification)
+
+2026-10-14 | YALO | DECISION | Arquitectura compartida: yalo-shared-fe + YaloShared.Core para BO/Agendo — elimina duplicación DTOs, SharedServices reutilizable, npm/NuGet deps
+2026-10-14 | YALO | BUG | Fusión deals: URLs /api/api en mergeCandidates + qualificationScore int→float migrado en BD Crm-dealBant; testing pendiente
