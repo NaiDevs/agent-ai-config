@@ -489,6 +489,10 @@
 
 ## Session 0b465d39-b776-4e81-a1a8-6aefaa6c0645
 
+2026-10-14 | YALO | DECISION | Análisis multi-ángulo rama Fix/Amy/noti (yalo-trackeo): 3 finders paralelos evaluando correctness (diff scan, removed behavior), reutilización (cross-file tracer, helpers duplicados), y eficiencia (simplificación, redundancia, altitude). Archivos revisados: supabase/functions/slack-send/index.ts, app/src/routes/Qa.tsx, app/src/store/index.ts, app/src/store/hydrate.ts, app/src/store/realtime.ts, app/src/data/types.ts, supabase/migrations/20261014175046_qa_return_server_integrity.sql — subagents a88d15b1366d8bf03 (Finder A+B), ab2ac0848f290b908 (Finder C+Reuse), a8666893cacd1935e (Finder Simplification+Efficiency+Altitude) corriendo en paralelo para detectar bugs, code-smells y oportunidades de mejora arquitectónica antes de merge a main
+
+## Session 0b465d39-b776-4e81-a1a8-6aefaa6c0645
+
 2026-10-14 | YALO | GENERAL | Rama fix/amy/noti — Amy Valeria 18 commits (98 archivos +18,223 -964 líneas): Sistema de Notificaciones (migraciones SQL + Edge Functions DM Slack + notif in-app), API Tickets (ticket-api, admin, webhook-dispatch + docs 804 líneas), Módulo QA refactorizado, Exportaciones (Excel/PDF timesheet), Mensajería masiva (WhatsApp + Email), Store/Types/JWT updates, integridad sincronización
 2026-10-14 | YALO | DECISION | Sistema QA → Dev notifications: `confirmReturnToDev()` frontend → Edge Function `slack-send` con `kind: 'qa-return'`; `ensureTaskInQa()` + `applyQaTaskReturn()` store; Edge Function valida permisos, persiste intentos en array con control concurrencia, notifica assignee+sender en BD, postea a Slack DM, registra en `slack_envios`; fallback local localStorage si Supabase offline; 2 migraciones SQL (v1 simplificado, v2 completo 244 líneas con triggers RLS+notificaciones); deduplicación por ID en hidratación
 2026-10-14 | YALO | BUG | QA notification system riesgos: (1) `slackDevChannel` hardcodeado DEFAULT_DEV_SLACK_TARGET='', debería cargar desde CFG0 BD; (2) duplicación notificaciones posible (trigger BD + Edge Function ambos insertan), verificar que solo uno actúa; (3) si migración v1 ejecutada en prod requiere cleanup antes de v2
