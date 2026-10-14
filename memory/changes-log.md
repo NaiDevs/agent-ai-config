@@ -463,3 +463,4 @@
 2026-10-14 | YALO | DECISION | Arquitectura compartida: yalo-shared-fe + YaloShared.Core para BO/Agendo — elimina duplicación DTOs, SharedServices reutilizable, npm/NuGet deps
 2026-10-14 | YALO | BUG | Fusión deals: URLs /api/api en mergeCandidates + qualificationScore int→float migrado en BD Crm-dealBant; testing pendiente
 2026-10-14 | YALO | CONFIG | Real-time updates header CRM: grade y score del deal-header se actualizan en tiempo real mientras editas draft, solo persisten a BD al clickear Listo
+2026-10-14 | YALO | CONFIG | Caracteres especiales en mensajes Slack: investigación de pirateo/corrupción de caracteres (ñ, é, ü, etc.) en envíos masivos — revisar encoding UTF-8 en Edge Functions wa-send-bulk y email builders
