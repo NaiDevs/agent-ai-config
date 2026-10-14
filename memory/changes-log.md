@@ -1,5 +1,10 @@
 # ENGRAM Memory - Changes Log
 
+- 2026-10-14 | yalo console api | commit | fix(crm-deals): alinea cálculo BANT con lógica del FE y cambia tipo de columna a float
+- 2026-10-14 | yalo console api | commit | fix(slack): escapa caracteres especiales en todos los servicios que envían mensajes
+- 2026-10-14 | yalo console | commit | fix(crm-deals): corrige URL doble /api en búsqueda y fusión de deals
+- 2026-10-14 | yalo console | commit | feat(crm-deals): BANT con patrón draft, guarda en BD solo al dar Listo
+- 2026-10-14 | yalo console | commit | perf(crm-catalogs): agrega guards para evitar llamadas duplicadas al API en carga
 - 2026-10-14 | YALO | DECISION | Micro-repos compartidos: dos repos nuevos (yalo-shared-fe + YaloShared.Core) como deps npm/NuGet para BO API/FE y Agendo API/FE — elimina duplicación de código, modelos DTOs compartidos, SharedServices layer
 - 2026-10-13 | yalo console api | commit | feat(crm-cockpit): incluye orgs enterprise+trialing como clientes activos con MRR real
 - 2026-10-12 | yalo console api | commit | feat(crm): agrega calendario de actividades con recordatorios (cron Slack DM + Crm-notifications)
