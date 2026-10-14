@@ -486,3 +486,7 @@
 2026-10-14 | YALO | CONFIG | Release tag v0.1.11 yalo-trackeo-desktop: workflow GitHub Actions release.yml se dispara automáticamente con push del tag `v*`, compila Windows (NSIS installer + zip firmado), macOS universal (DMG + app.tar.gz firmado), sube instaladores + updater.json a Supabase Storage, banner de actualización automático en usuarios con versiones anteriores
 2026-10-14 | yalo-trackeo-desktop | CONFIG | CI/CD workflow refactor: separa build-windows y build-macos en jobs independientes, macOS con continue-on-error (no bloquea publish sin secrets Apple), publish solo depende de build-windows — solución para entornos donde certificados Apple no están configurados
 2026-10-14 | yalo-trackeo-desktop | CONFIG | publish-release.mjs refactor: macOS compilación opcional, flujo reordenado — `build-windows` requerido+bloquea publish, `build-macos` con continue-on-error (fallos silenciosos), `publish` sube solo artefactos compilados (si macOS falla, sube solo Windows installer + updater.json solo con windows-x86_64)
+
+## Session 0b465d39-b776-4e81-a1a8-6aefaa6c0645
+
+2026-10-14 | YALO | GENERAL | Rama fix/amy/noti — Amy Valeria 18 commits (98 archivos +18,223 -964 líneas): Sistema de Notificaciones (migraciones SQL + Edge Functions DM Slack + notif in-app), API Tickets (ticket-api, admin, webhook-dispatch + docs 804 líneas), Módulo QA refactorizado, Exportaciones (Excel/PDF timesheet), Mensajería masiva (WhatsApp + Email), Store/Types/JWT updates, integridad sincronización
