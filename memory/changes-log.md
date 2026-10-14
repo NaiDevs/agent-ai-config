@@ -1,5 +1,6 @@
 # ENGRAM Memory - Changes Log
 
+- 2026-10-14 | YALO | DECISION | Micro-repos compartidos: dos repos nuevos (yalo-shared-fe + YaloShared.Core) como deps npm/NuGet para BO API/FE y Agendo API/FE — elimina duplicación de código, modelos DTOs compartidos, SharedServices layer
 - 2026-10-13 | yalo console api | commit | feat(crm-cockpit): incluye orgs enterprise+trialing como clientes activos con MRR real
 - 2026-10-12 | yalo console api | commit | feat(crm): agrega calendario de actividades con recordatorios (cron Slack DM + Crm-notifications)
 - 2026-10-12 | yalo console | commit | feat(calendario): agrega modulo de calendario CRM (dia/semana/mes, drag-drop, recordatorios in-app)
