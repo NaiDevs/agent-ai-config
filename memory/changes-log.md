@@ -2,6 +2,9 @@
 
 ## Session 20e46849-50f1-4ec2-ac6b-011f93d56228
 
+2026-10-14 | yalo-trackeo-desktop | feat | UpdateBanner reescrito como modal forzado (sin dismiss), PromptIdle y UpdateBanner ahora llaman show()+setFocus() para restaurar ventana minimizada, sleep detection mejorada con PBT_APMRESUMESUSPEND+PBT_APMRESUMEAUTOMATIC en windows.rs
+2026-10-14 | yalo-trackeo | feat | Pausas trackeables implementadas: migración SQL (trackeable+description+suggested_minutes en time_pauses), modelo TimePause/PauseReason actualizado, pauseTimer con snapshot, resumeTimer crea tarea+TimeEntry manual, PauseTimerModal con texto dinámico y campo descripción, TimerChip con countdown y auto-resume, toggle trackeable en Settings — 2 commits en feat-mcp-servidor
+
 2026-10-14 | YALO | GENERAL | Activación proyectos yalo-trackeo (web) y yalo-trackeo-desktop — rama feat-mcp-servidor (limpio, último commit 2026-10-07), rama claude/yalo-trackeo-desktop-mvp-sg0b9f (limpio, último commit 2026-09-26), ambos sin upstream remoto configurado
 
 - 2026-10-14 | yalo console api | commit | fix(crm-deals): alinea cálculo BANT con lógica del FE y cambia tipo de columna a float
