@@ -525,6 +525,8 @@
 
 2026-10-14 | YALO | BUG | Code review multi-ángulo Fix/Amy/noti: 6 candidatos accionables identificados via 3 subagents paralelos (A2 notif invisible si sent_by=null, A6 attempt sin id, A3 UUID v4 regex estricta, B3 requestId fallido no limpiado catch, B2 race condition dedup, A4 slackWarning undefined) — mayor riesgo es notificación silenciosa al Dev y race condition en offline fallback, menor riesgo en borde cases regex/undefined. Finders también reportan oportunidades: dedup código SQL resolve_qa_target_uid, consolidar mapQaTask cross-file, paralelizar getWorkspaceMemberUserId 50% perf gain, gestionar blob URL cleanup memory leak
 
+2026-10-14 | yalo-trackeo-desktop | BUG | UpdateBanner delay 3s — evento `update` del updater emitía antes de montar listener en frontend causando pérdida de evento; fix agrega delay de 3 segundos para sincronizar con ciclo de mount de componente UpdateBanner, CI deploy v0.1.13 en progreso
+
 ## Session 20e46849-50f1-4ec2-ac6b-011f93d56228 (continuación - Pausas Trackeables)
 
 2026-10-15 | YALO | FEATURE | feat(time-ingest): crea tarea y time_entry al reanudar pausa trackeable — supabase/functions/time-ingest/index.ts agrega trackeable/suggestedMinutes al Body y insert de time_pauses; expande acción resume para crear tarea nueva (ID prefix-N) y time_entry con duración pausa cuando trackeable=true
