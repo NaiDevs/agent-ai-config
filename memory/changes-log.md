@@ -1,5 +1,9 @@
 # ENGRAM Memory - Changes Log
 
+## Session 0b465d39-b776-4e81-a1a8-6aefaa6c0645
+
+- 2026-10-14 | yalo-trackeo | commit | docs(qa): agrega feedback de revisión de código para Amy — rama Fix/Amy/noti
+
 ## Session 20e46849-50f1-4ec2-ac6b-011f93d56228
 
 2026-10-14 | yalo-trackeo-desktop | feat | UpdateBanner reescrito como modal forzado (sin dismiss), PromptIdle y UpdateBanner ahora llaman show()+setFocus() para restaurar ventana minimizada, sleep detection mejorada con PBT_APMRESUMESUSPEND+PBT_APMRESUMEAUTOMATIC en windows.rs
