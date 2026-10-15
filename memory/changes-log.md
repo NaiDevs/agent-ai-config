@@ -427,6 +427,13 @@
 
 2026-10-13 | general | GENERAL | Claude Docs: no tiene flujo de "solicitar acceso" como Google Drive; doc está en cuenta del usuario que lo creó, solo él puede compartirlo manualmente (botón Share en el doc)
 2026-10-13 | YALO | DECISION | Arquitectura shell Yalo Agendo: navegación dinámica por rubro (codtiponegocio_agendo) desde API — tres tickets GENERAL propuestos (1) Migración BD multi-rubro en dbyaloauth/dbyalocobro, (2) Endpoint GET /configuracion expone rubro + enabled_modules, (3) ShellService con signals reactivos en FE para sidebar data-driven
+
+## Session 0b465d39-b776-4e81-a1a8-6aefaa6c0645
+
+2026-10-14 | YALO | BUG | requestId idempotencia: Bug crítico — si reintento con requestId falla silenciosamente (edge case: primer intento quedó a medias), el siguiente intento no ejecutará correctamente. Requiere validación robusta de idempotencia en Edge Function + rollback en transacciones incompletas
+2026-10-14 | YALO | BUG | Duplicación notificaciones QA: Riesgo identificado — triggers BD (notify_on_qa_return en migraciones) y Edge Function (slack-send handleQaReturn) ambos insertan en tabla notifications, pueden generar duplicados. Requiere validar que solo UNO de los dos hace la inserción
+2026-10-14 | YALO | BUG | hardcoding slackDevChannel: Field slackDevChannel en Qa.tsx está hardcodeado a `DEFAULT_DEV_SLACK_TARGET = ''` en lugar de cargar desde CFG0 en BD. Notificaciones QA retorno a Dev envían a canal incorrecto si config no está sincronizada
+2026-10-14 | YALO | DECISION | QA Return to Dev flujo completo: 18 commits de Amy (~18K líneas). FE: Qa.tsx confirmReturnToDev() con fallback local Zustand. Backend: slack-send refactored kind='qa-return'→handleQaReturn() valida permisos+guarda BD+crea notificaciones. BD: triggers AFTER UPDATE qa_tasks validando permiso editar_tarea+notificando assignee. Integridad: RLS+server-side robusto, concurrency control en attempts array, fallback sin fallo silencioso
 2026-10-13 | YALO | GENERAL | Breakdown tickets Yalo Agendo: 8 tickets completos (2 migraciones BD, 2 APIs, 4 FE) ordenados por dependencias — catálogo de rubros y ShellService en paralelo con APIs, layout refactor y moduleGuard al final
 2026-10-13 | YALO | GENERAL | Shell dinámico Yalo Agendo: propuesta condensada a 3 tickets GENERAL focalizados en arquitectura core (BD + API + FE reactivo)
 2026-10-13 | YALO | DECISION | KPIs MRR/ARR enterprise-trial: query findEnterpriseTrialOrganizations extrae orgs status 'trialing' + enterprise=true, inserta con mrr=0 en currentMrr; drilldown UNION active_mrr + enterprise_trials para consistencia entre KPI card y detail
