@@ -478,6 +478,10 @@
 2026-10-14 | YALO | BUG | URLs dobles /api/api: corregidos bugs en mergeCandidates() y searchMergeCandidates() — ambas funciones tenían ruta duplicada con doble prefijo `/api`, causando 404 en flujo de fusión de deals
 2026-10-14 | YALO | BUG | qualificationScore decimales: migración BD Crm-dealBant int→float con recálculo de scores (CASE WHEN need/authority/budget/timing) para permitir puntajes decimales (manager=0.5, 30_days=0.5) — script completo ALTER TABLE + UPDATE + SELECT en dbyaloconsole
 
+## Session 0b465d39-b776-4e81-a1a8-6aefaa6c0645
+
+2026-10-14 | YALO | DECISION | QA feedback amplificación: documento `docs/feedback-amy-noti.md` (yalo-trackeo) registra 18 commits + features complejos: QA return to dev (Edge Function slack-send + triggers BD validación permisos), notificaciones duplicadas (triggers vs EF), hardcoding canal dev Slack, requestId idempotencia — validación de integridad crítica en flujo QA+Slack multi-canal. Mismo directorio que spec cliente Tauri (rama feat-mcp-servidor)
+
 ## Session 033d9b27-1375-484b-b830-fd66a4db54b1 (Engram Verification)
 
 2026-10-14 | YALO | DECISION | Arquitectura compartida: yalo-shared-fe + YaloShared.Core para BO/Agendo — elimina duplicación DTOs, SharedServices reutilizable, npm/NuGet deps
