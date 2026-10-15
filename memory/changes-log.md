@@ -524,3 +524,8 @@
 2026-10-14 | YALO | FEATURE | QA return notifications system: Edge Function slack-send maneja `kind: 'qa-return'` con permisos validados, persiste intentos JSONB con idempotencia requestId UUID, notifica assignee+sender en BD, postea Slack DM, fallback localStorage si offline — rama Fix/Amy/noti Amy Valeria Fajardo Sabillon
 
 2026-10-14 | YALO | BUG | Code review multi-ángulo Fix/Amy/noti: 6 candidatos accionables identificados via 3 subagents paralelos (A2 notif invisible si sent_by=null, A6 attempt sin id, A3 UUID v4 regex estricta, B3 requestId fallido no limpiado catch, B2 race condition dedup, A4 slackWarning undefined) — mayor riesgo es notificación silenciosa al Dev y race condition en offline fallback, menor riesgo en borde cases regex/undefined. Finders también reportan oportunidades: dedup código SQL resolve_qa_target_uid, consolidar mapQaTask cross-file, paralelizar getWorkspaceMemberUserId 50% perf gain, gestionar blob URL cleanup memory leak
+
+## Session 20e46849-50f1-4ec2-ac6b-011f93d56228 (continuación - Pausas Trackeables)
+
+2026-10-15 | YALO | FEATURE | feat(time-ingest): crea tarea y time_entry al reanudar pausa trackeable — supabase/functions/time-ingest/index.ts agrega trackeable/suggestedMinutes al Body y insert de time_pauses; expande acción resume para crear tarea nueva (ID prefix-N) y time_entry con duración pausa cuando trackeable=true
+2026-10-15 | YALO | FEATURE | feat(pausa-trackeable): agrega countdown y auto-reanudación en Desktop — src-tauri/src/api.rs campos trackeable/suggested_minutes en PausaRemota; comandos.rs popula desde PauseReason; ipc.ts type actualizado; Timer.tsx countdown regresivo en .timer-value + auto-resume con ref guard; index.css animación timerPulse para overflow
