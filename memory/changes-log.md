@@ -447,6 +447,10 @@
 
 ## Session df0a0271-26b0-4642-89a8-6664e2e5b97b (final - KPIs Enterprise Trial)
 
+## Session b244a219-4c94-4142-8337-320fd12a1d08
+
+2026-10-15 | YALO | DECISION | Arquitectura Module Federation (remotes MFE): 5 repos nuevos bajo Yalo-Technologies/ (yalo-mfe-contracts TypeScript puro, yalo-mfe-clientes/catalogo/colaboradores Angular 21 Web Components, yalo-mfe-design-system opcional) + 3 repos existentes con cambios mínimos (YaloPOSBackoffice/YALO-Agendo-FE agregan loader de remotes, YALO-Agendo-API replica endpoints clientes/catálogo/colaboradores del BO API) — cada remote produce main.js bundleado dinámicamente por shell, no index.html; distribución en GitHub Packages para yalo-mfe-contracts, documentación de arquitectura presentada por secciones
+
 2026-10-13 | YALO | DECISION | KPIs enterprise-trial organizations: nuevo query `findEnterpriseTrialOrganizations` extrae codorganizacion distintos con status Stripe 'trialing' + enterprise=true (respeta filtro país, excluye esprueba). Service `buildKpis` inserta trial IDs con mrr=0 en currentMrr (suma activeCustomers sin distorsionar mrrTotalUsd/arpu). Query drilldown `findKpiOrganizations` UNION active_mrr + enterprise_trials (duplicados excluidos) para consistencia entre card-click y número KPI
 2026-10-13 | YALO | DECISION | Configuración dinámica por rubro (codtiponegocio_agendo): tabla yc_configuracionesrubros en dbyaloauth con ~15 filas/org — vocabulario (vocab_cliente, vocab_cita, vocab_recurso, vocab_catalogo), tiempo/intervalo (unidad_tiempo, intervalo_minutos), vistas (vista_principal), módulos (enabled_modules, canales), tipos de recursos (tipo_recursos), reglas (reglas_reserva), campos personalizados (campos_cliente, campos_reserva), y meta (codplantilla origen: salon/hotel/restaurante). Persistencia en BD permite ajuste granular desde UI sin código, vs constantes hardcodeadas
 2026-10-13 | YALO | commit | feat(crm-cockpit): incluye orgs enterprise+trialing como clientes activos con MRR real (commit 75e6566 en fix/naidelyn/caracteres-especiales-slack)
