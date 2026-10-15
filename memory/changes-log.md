@@ -489,6 +489,8 @@
 
 ## Session 0b465d39-b776-4e81-a1a8-6aefaa6c0645
 
+2026-10-14 | YALO | CONFIG | 9 migraciones aplicadas exitosamente en yalo-trackeo: close_orphan_time_entries, tracking_alerts_permissions, tracking_integrity_email, device_sync_integrity, notif_skip_self_complete, qa_board_id (no-op), equipo_avatar_url, qa_return_notification, qa_return_server_integrity — pendiente: deploy Edge Function `notif-dm` para completar flujo Amy
+
 2026-10-14 | YALO | DECISION | Análisis multi-ángulo rama Fix/Amy/noti (yalo-trackeo): 3 finders paralelos evaluando correctness (diff scan, removed behavior), reutilización (cross-file tracer, helpers duplicados), y eficiencia (simplificación, redundancia, altitude). Archivos revisados: supabase/functions/slack-send/index.ts, app/src/routes/Qa.tsx, app/src/store/index.ts, app/src/store/hydrate.ts, app/src/store/realtime.ts, app/src/data/types.ts, supabase/migrations/20261014175046_qa_return_server_integrity.sql — subagents a88d15b1366d8bf03 (Finder A+B), ab2ac0848f290b908 (Finder C+Reuse), a8666893cacd1935e (Finder Simplification+Efficiency+Altitude) corriendo en paralelo para detectar bugs, code-smells y oportunidades de mejora arquitectónica antes de merge a main
 
 ## Session 0b465d39-b776-4e81-a1a8-6aefaa6c0645
