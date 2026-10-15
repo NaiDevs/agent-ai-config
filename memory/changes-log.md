@@ -8,6 +8,7 @@
 
 2026-10-14 | yalo-trackeo-desktop | feat | UpdateBanner reescrito como modal forzado (sin dismiss), PromptIdle y UpdateBanner ahora llaman show()+setFocus() para restaurar ventana minimizada, sleep detection mejorada con PBT_APMRESUMESUSPEND+PBT_APMRESUMEAUTOMATIC en windows.rs
 2026-10-14 | yalo-trackeo | tag v0.2.0 | fix(trackeo): corrige countdown de pausas y normaliza campo trackeable — release pausas trackeables
+2026-10-15 | yalo-trackeo | commit | fix(rls): permite a cualquier miembro del workspace leer time_entries
 2026-10-15 | yalo-trackeo | commit | feat(permisos): agrega permiso granular "Ver tiempo del equipo"
 2026-10-15 | yalo-trackeo-desktop | fix | detecta cierre de tapa en Modern Standby via GUID_MONITOR_POWER_ON — v0.1.14
 2026-10-14 | yalo-trackeo | feat | Pausas trackeables implementadas: migración SQL (trackeable+description+suggested_minutes en time_pauses), modelo TimePause/PauseReason actualizado, pauseTimer con snapshot, resumeTimer crea tarea+TimeEntry manual, PauseTimerModal con texto dinámico y campo descripción, TimerChip con countdown y auto-resume, toggle trackeable en Settings — 2 commits en feat-mcp-servidor
