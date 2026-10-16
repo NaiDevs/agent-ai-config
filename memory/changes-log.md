@@ -392,6 +392,7 @@
 ## Session b244a219-4c94-4142-8337-320fd12a1d08
 
 2026-10-15 | YALO | DECISION | Arquitectura MFE (Micro Frontend) — Polyrepo + Custom Elements Angular 21 como remotes (yalo-mfe-clientes, yalo-mfe-catalogo, yalo-mfe-colaboradores) con contrato @yalo/mfe-contracts compartido. Shell (BO Angular 15 + Agendo) carga remotes vía manifest JSON por ambiente (S3 bucket yalo-mfe-static). Decisión: rechazar Module Federation por incompatibilidad versiones Angular (15 vs 21). Frontera física entre repos, ownership claro por equipo en paralelo, rolling upgrades independientes por remote.
+- 2026-10-15 | yalo-mfe-contracts | commit | feat(contratos-mfe): agrega contrato compartido para microfrontends
 2026-10-12 | YALO | CONFIG | Sales Pipeline: búsqueda por organización con signal searchQuery='', sort alfabético por columna con alphaStages signal, botón ArrowUpAZ se resalta azul/violeta/verde según zona — icono ArrowUpAZ registrado en lucide-icons.ts
 2026-10-12 | YALO | GENERAL | Sesión iniciada: trabajo en yalo console api y fe — usuario autenticó pero token OAuth expiró (401) interrumpiendo sesión
 2026-10-12 | YALO | CONFIG | Search bar yalo console: estandarización de estilos con componente `yalo-search` — mismo fondo gris, icono tamaño 16, clase `input input-default` para consistencia visual
