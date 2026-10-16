@@ -566,3 +566,4 @@
 ## Session 23b91669-7769-4b08-8a6e-d6e392f380a3
 
 2026-10-16 | YALO | CONFIG | Agendo Onboarding UI: usuario solicita importación de diseño desde claude.ai design MCP (proyecto 653e2cac-4c17-4a9a-840b-783ee1b3b740) e implementación — sesión bloqueada por requerimiento de autenticación (design-login y /login no completados en prompt CLI)
+- 2026-10-16 | yalo-trackeo | commit | fix(qa): permite restaurar evidencias faltantes (Fix/Amy/noti)
