@@ -562,3 +562,7 @@
 2026-10-15 | YALO | DECISION | Seguridad Module Federation: token scoped corta duración para remote (no JWT usuario), SRI hashes en manifest validados antes ejecución, CSP restrictivo (script-src self + cdn.yalo.com), S3 privado via OAC CloudFront, CORS whitelist dominios shells, manifest TTL 30-60s (rollback rápido) vs main.js 30 días hashnamed
 2026-10-15 | YALO | DECISION | Arquitectura MFE (Micro Frontend) — Polyrepo + Custom Elements Angular 21 como remotes (yalo-mfe-clientes, yalo-mfe-catalogo, yalo-mfe-colaboradores) con contrato @yalo/mfe-contracts compartido. Shell (BO Angular 15 + Agendo) carga remotes vía manifest JSON por ambiente (S3 bucket yalo-mfe-static). Decisión: rechazar Module Federation por incompatibilidad versiones Angular (15 vs 21). Frontera física entre repos, ownership claro por equipo en paralelo, rolling upgrades independientes por remote.
 - 2026-10-15 | yalo-mfe-contracts | commit | docs(arquitectura-mfe): documenta integración completa de YALO
+
+## Session 23b91669-7769-4b08-8a6e-d6e392f380a3
+
+2026-10-16 | YALO | CONFIG | Agendo Onboarding UI: usuario solicita importación de diseño desde claude.ai design MCP (proyecto 653e2cac-4c17-4a9a-840b-783ee1b3b740) e implementación — sesión bloqueada por requerimiento de autenticación (design-login y /login no completados en prompt CLI)
