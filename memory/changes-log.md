@@ -3,6 +3,7 @@
 ## Session 0b465d39-b776-4e81-a1a8-6aefaa6c0645
 
 - 2026-10-14 | yalo-trackeo | commit | docs(qa): agrega feedback de revisión de código para Amy — rama Fix/Amy/noti
+- 2026-10-15 | yalo-trackeo | GENERAL | feedback-amy-noti.md modificado sin commitear — rama fix/Amy/noti con cambios en documentación de notificaciones (estado, motivos, compactación de avisos, formato de fechas)
 
 ## Session 20e46849-50f1-4ec2-ac6b-011f93d56228
 
