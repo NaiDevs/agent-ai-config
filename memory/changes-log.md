@@ -1,5 +1,9 @@
 # ENGRAM Memory - Changes Log
 
+## Session 4251dca8-8196-41b5-a2d2-7d2792c9025e
+
+- 2026-10-17 | yalo console api | feat | OCR recibos transferencia: AwsTextractService (S3 upload + polling GetExpenseAnalysis), endpoint POST /organizations/ocr-receipt (JWT, sharp PNG, banco+cuenta query params), DTOs + helpers de validación, script SQL para systemrootconfig(terminosClaveValidarRecibo). Fix: Blocks en GetExpenseAnalysis vienen en ExpenseDocument.Blocks no a nivel raíz. Credenciales AWS vienen de Secrets Manager secreto yalocore/keys (igual que bo api).
+
 ## Session 0b465d39-b776-4e81-a1a8-6aefaa6c0645
 
 - 2026-10-14 | yalo-trackeo | commit | docs(qa): agrega feedback de revisión de código para Amy — rama Fix/Amy/noti
