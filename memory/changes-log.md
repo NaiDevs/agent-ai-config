@@ -388,6 +388,7 @@
 ## Session 4251dca8-8196-41b5-a2d2-7d2792c9025e
 
 2026-10-17 | YALO | BUG | GetExpenseAnalysisCommandOutput de AWS Textract — `Blocks` no existe a nivel raíz, están dentro de `ExpenseDocument.Blocks` — fix en AwsTextractService: extrae bloques con `flatMap((d) => d.Blocks ?? [])` desde expenseDocs en analyzeExpense()
+2026-10-17 | YALO | GENERAL | PR Review: feat(organization): indicador de prórroga de pago (PR 11659 API + PR 11658 FE) — skill /review activado para análisis arquitectura, calidad y seguridad de cambios
 
 ## Session 0b465d39-b776-4e81-a1a8-6aefaa6c0645
 
