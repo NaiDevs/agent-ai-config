@@ -381,6 +381,10 @@
 2026-10-11 | NAI | DECISION | Loops de arquitectura FE: YaloConsole (Angular) con core/modules lazy-loaded/shared standalone + inject(); yalo-trackeo (React) con components flat/routes por página/store Zustand — documentación de patrones en CLAUDE.md, commit a83662a pusheado
 2026-10-11 | NAI | CONFIG | agent-ai-config .gitignore: actualización permanente para excluir `mcp-servers/**/node_modules/` y `mcp-servers/**/dist/` — previene tracking de dependencias transitorias de MCP servers locales y compilados
 
+## Session 4251dca8-8196-41b5-a2d2-7d2792c9025e
+
+2026-10-17 | YALO | BUG | GetExpenseAnalysisCommandOutput de AWS Textract — `Blocks` no existe a nivel raíz, están dentro de `ExpenseDocument.Blocks` — fix en AwsTextractService: extrae bloques con `flatMap((d) => d.Blocks ?? [])` desde expenseDocs en analyzeExpense()
+
 ## Session 0b465d39-b776-4e81-a1a8-6aefaa6c0645
 
 2026-10-14 | YALO | GENERAL | Activación proyecto yalo-trackeo: rama Fix/Amy/noti (limpia, último commit 2026-10-14 deno-Amy de Amy Valeria Fajardo); revisión de 425 commits en rama con desarrollo de notificaciones (Amy) + trabajo previo de Naidelyn
