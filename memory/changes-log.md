@@ -567,3 +567,7 @@
 
 2026-10-16 | YALO | CONFIG | Agendo Onboarding UI: usuario solicita importación de diseño desde claude.ai design MCP (proyecto 653e2cac-4c17-4a9a-840b-783ee1b3b740) e implementación — sesión bloqueada por requerimiento de autenticación (design-login y /login no completados en prompt CLI)
 - 2026-10-16 | yalo-trackeo | commit | fix(qa): permite restaurar evidencias faltantes (Fix/Amy/noti)
+
+## Session 8c7d5a28-62ff-4eb5-b0d0-1f6c4f90197a
+
+2026-10-17 | YALO | DECISION | Flujo verificación pagos YaloBO: (1) Guard ActiveSuscriptionGuard hace GET /Subscripcion/Verificar en cada navegación (fuente única de verdad desde Stripe); (2) HistorialPagosComponent carga /Stripe/Payments/List + /Stripe/Payments/Subs/Next (facturas de Stripe, sin datos Console); (3) Problema raíz: pagos por transferencia manual registrados en Console no actualizan Stripe automáticamente — Console los muestra activos pero BO/POS los bloquean porque Guard valida contra Stripe. Casos: Santa Lucía (11 sep registrado en Console, bloqueado BO 21 sep) y Rentable (octubre como anticipo). Investigación pendiente: ¿Console activa suscripción en Stripe al registrar transferencia o solo en BD local?
