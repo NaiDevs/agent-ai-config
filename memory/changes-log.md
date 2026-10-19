@@ -601,3 +601,7 @@
 2026-10-17 | YALO | DECISION | Endpoint OCR recibos: POST /organizations/ocr-receipt (YaloConsole API NestJS) — extrae monto/referencia/fecha/banco desde recibos pago usando AWS Textract (StartExpenseAnalysis + polling S3), pre-rellena formularios sin modificar uploadImagePay; implementado y committeado, falta: DB config (script SQL systemrootconfig terminosClaveValidarRecibo), env vars AWS (ACCESS_KEY, SECRET_KEY, REGION, S3_BUCKET, S3_RECEIPTS_PREFIX)
 2026-10-17 | YALO | CONFIG | Code review PRs indicador prórroga pago (#11658/#11659): 2 WARN seguridad (LastActivityGuard GET :id/gracePeriods, reload() en componente), 2 WARN datos (since="" vs null, console.error prod), 4 NOTES UX/lógica — 0 BLOCKERs, aprobado con revisiones
 2026-10-17 | YALO | DECISION | Multi-comprobantes OCR: opciones batch vs individual — si validación independiente (recibo/banco distinto) suficiente Opción A (llamadas por separado); si suma requerida→Opción B (endpoint batch con batchId para verificación multi-comprobante)
+
+## Session e24fa3b3-6d2e-4833-9913-69ab74c4c6f9
+
+- 2026-10-19 | NAI | DECISION | Investigación repos Engram + gentle-ai: análisis de arquitectura del agente de memory Naidelyn (subagent background ab0ccfa91aee33c45 para análisis comparativo de ambos repos)
