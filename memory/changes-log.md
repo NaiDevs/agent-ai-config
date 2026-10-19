@@ -3,6 +3,7 @@
 ## Session 4251dca8-8196-41b5-a2d2-7d2792c9025e
 
 - 2026-10-17 | yalo console api | feat | OCR recibos transferencia: AwsTextractService (S3 upload + polling GetExpenseAnalysis), endpoint POST /organizations/ocr-receipt (JWT, sharp PNG, banco+cuenta query params), DTOs + helpers de validación, script SQL para systemrootconfig(terminosClaveValidarRecibo). Fix: Blocks en GetExpenseAnalysis vienen en ExpenseDocument.Blocks no a nivel raíz. Credenciales AWS vienen de Secrets Manager secreto yalocore/keys (igual que bo api).
+- 2026-10-17 | yalo console fe | feat | OCR disparado bidireccional: ngOnInit subscribe a cambios de banco + fileUpload subscribe a cambios de imagen — OCR se ejecuta cuando ambos valores están presentes (bank selected + file loaded). Imports: `distinctUntilChanged` agregado a RxJS operators para evitar emisiones duplicadas en confirm-payment.component.ts. Cambios compilados sin errores; ng serve reloading automáticamente.
 
 ## Session 0b465d39-b776-4e81-a1a8-6aefaa6c0645
 
