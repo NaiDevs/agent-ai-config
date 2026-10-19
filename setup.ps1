@@ -981,17 +981,8 @@ if ($installClaude) {
         )
     }
 
-    $engramPrompt = "Eres el sistema de memoria Engram de $UserDisplayName. Primero usa ToolSearch con query 'select:mcp__engram__mem_session_end' para cargar el schema. Luego llama mcp__engram__mem_session_end para cerrar la sesion actual. Si alguna herramienta no esta disponible, termina sin hacer nada. Responde solo 'ok' o 'trivial'."
-
     $stopHook = [PSCustomObject]@{
         hooks = @(
-            [PSCustomObject]@{
-                type          = "agent"
-                model         = "claude-haiku-4-5-20251001"
-                prompt        = $engramPrompt
-                timeout       = 60
-                statusMessage = "Actualizando Engram..."
-            },
             [PSCustomObject]@{
                 type    = "command"
                 command = "& '$syncScript' -Silent"
