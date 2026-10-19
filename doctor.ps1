@@ -49,6 +49,18 @@ if (Get-Command npm -ErrorAction SilentlyContinue) {
     err "npm — no encontrado"
 }
 
+if (Get-Command go -ErrorAction SilentlyContinue) {
+    ok "Go $(go version 2>$null)"
+} else {
+    err "Go — no encontrado. Instala desde https://go.dev/dl/ (requerido para Engram)"
+}
+
+if (Get-Command jq -ErrorAction SilentlyContinue) {
+    ok "jq $(jq --version 2>$null)"
+} else {
+    err "jq — no encontrado. Instala con: winget install jqlang.jq (requerido por engram setup claude-code)"
+}
+
 if (Get-Command pwsh -ErrorAction SilentlyContinue) {
     ok "PowerShell 7 $(pwsh --version 2>$null)"
 } else {
@@ -203,7 +215,7 @@ Write-Host "[ Engram ]" -ForegroundColor Blue
 if (Get-Command engram -ErrorAction SilentlyContinue) {
     ok "engram $(engram --version 2>$null)"
 } else {
-    warn "engram — no encontrado. La memoria MCP no estara disponible. El sistema funciona igual con archivos."
+    err "engram — no encontrado. Instala con: go install github.com/Gentleman-Programming/engram/v3/cmd/engram@latest"
 }
 
 Write-Host ""

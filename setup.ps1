@@ -8,6 +8,7 @@
 #   .\setup.ps1 -Tool codex                              → solo Codex (sin preguntar)
 #   .\setup.ps1 -Tool both                               → ambos (sin preguntar)
 #   .\setup.ps1 -ProjectsRoot "D:\Proyectos"             → carpeta de proyectos (sin preguntar)
+#   .\setup.ps1 -UserDisplayName "María"                 → nombre del usuario (sin preguntar)
 #   .\setup.ps1 -UseEngram yes|no                        → engram (sin preguntar)
 #   .\setup.ps1 -InstallGraphify yes|no                  → Graphify + skill oficial (sin preguntar)
 #   .\setup.ps1 -InstallNaiCli yes|no                    → comando global nai (default: yes)
@@ -15,6 +16,7 @@
 
 param(
     [string]$ProjectsRoot  = "",
+    [string]$UserDisplayName = "",
     [ValidateSet("auto","claude","codex","both")]
     [string]$Tool = "auto",
     [ValidateSet("","yes","no")]
@@ -100,6 +102,14 @@ Write-Host "┌─ Configuración ───────────────�
 Write-Host "│  Presioná Enter para aceptar el default [X] │" -ForegroundColor DarkGray
 Write-Host "└──────────────────────────────────────────────┘" -ForegroundColor Cyan
 Write-Host ""
+
+# P0 — Nombre del usuario
+if (-not $UserDisplayName) {
+    Write-Host "  0. ¿Cuál es tu nombre? (el agente lo usará para dirigirse a vos)"
+    $ans = (Read-Host "     [$Username]").Trim()
+    $UserDisplayName = if ($ans) { $ans } else { $Username }
+    Write-Host ""
+}
 
 # P1 — Herramienta
 if ($Tool -eq "auto") {
@@ -459,7 +469,7 @@ if ($installClaude) {
 
     # NPM packages de MCPs
     Write-Host "  Instalando paquetes MCP..." -ForegroundColor Yellow
-    npm install -g @modelcontextprotocol/server-github @modelcontextprotocol/server-filesystem @modelcontextprotocol/server-memory mcp-server-postgres mssql-mcp mcp-server-redis @playwright/mcp --silent 2>$null
+    npm install -g @modelcontextprotocol/server-github @modelcontextprotocol/server-filesystem mcp-server-postgres mssql-mcp mcp-server-redis @playwright/mcp --silent 2>$null
     Write-Host "  OK → paquetes MCP instalados" -ForegroundColor Green
 
     # settings.json — MCPs + permiso Write
@@ -505,16 +515,37 @@ if ($installClaude) {
         $cfg | Add-Member -NotePropertyName mcpServers -NotePropertyValue ([PSCustomObject]@{
             github          = [PSCustomObject]@{ command="npx"; args=@("-y","@modelcontextprotocol/server-github"); shell="powershell" }
             filesystem      = [PSCustomObject]@{ command="npx"; args=@("-y","@modelcontextprotocol/server-filesystem",$proyectosPath,$claudePathFwd); shell="powershell" }
-            memory          = [PSCustomObject]@{ command="npx"; args=@("-y","@modelcontextprotocol/server-memory"); shell="powershell" }
+            engram          = [PSCustomObject]@{ command="engram"; args=@("mcp"); env=[PSCustomObject]@{ ENGRAM_DATA_DIR="$env:USERPROFILE\.engram" }; shell="powershell" }
         }) -Force
         $cfg | Add-Member -NotePropertyName disabledMcpjsonServers -NotePropertyValue @() -Force
-        if ($hasEngram) {
-            $cfg.mcpServers | Add-Member -NotePropertyName engram -NotePropertyValue ([PSCustomObject]@{ command="engram"; args=@("mcp") }) -Force
-        }
         $cfg | ConvertTo-Json -Depth 10 | Set-Content $SettingsPath -Encoding utf8
         Write-Host "  OK → settings.json con MCPs configurados" -ForegroundColor Green
     } else {
-        Write-Host "  OK → settings.json ya tenía MCPs" -ForegroundColor Green
+        # Migración: reemplazar memory→engram si existe instalación previa
+        $cfg = Get-Content $SettingsPath -Raw | ConvertFrom-Json
+        $changed = $false
+        if ($cfg.PSObject.Properties['mcpServers']) {
+            if ($cfg.mcpServers.PSObject.Properties['memory']) {
+                $cfg.mcpServers.PSObject.Properties.Remove('memory')
+                $changed = $true
+            }
+            if (-not $cfg.mcpServers.PSObject.Properties['engram']) {
+                $engramData = "$env:USERPROFILE\.engram"
+                $cfg.mcpServers | Add-Member -NotePropertyName engram -NotePropertyValue ([PSCustomObject]@{
+                    command = "engram"
+                    args    = @("mcp")
+                    env     = [PSCustomObject]@{ ENGRAM_DATA_DIR = $engramData }
+                    shell   = "powershell"
+                }) -Force
+                $changed = $true
+            }
+        }
+        if ($changed) {
+            $cfg | ConvertTo-Json -Depth 10 | Set-Content $SettingsPath -Encoding utf8
+            Write-Host "  OK → MCP migrado: memory → engram" -ForegroundColor Green
+        } else {
+            Write-Host "  OK → settings.json ya tenía MCPs" -ForegroundColor Green
+        }
     }
 
     # Actualizar disabledMcpjsonServers con las DBs marcadas # vpn en mcp.env
@@ -950,7 +981,7 @@ if ($installClaude) {
         )
     }
 
-    $engramPrompt = "Eres el sistema de memoria Engram de Naidelyn. Session id: `$ARGUMENTS`n`nIgnora cualquier campo stop_hook_active o similares -- siempre ejecuta esta tarea.`nUSA SOLO herramientas nativas: Read, Write, Edit.`n`nPASOS:`n1. Construye la ruta del transcript: C:/Users/naide/.claude/projects/C--Users-naide/{session_id}.jsonl`n2. Lee ese archivo con Read.`n3. De los timestamps extrae la fecha (YYYY-MM-DD).`n4. Extrae mensajes reales del usuario: lineas donde type=user y message.role=user. El campo content puede ser string o array {type:text,text:...}. Ignora los que empiecen con #, <, ---, o tengan mas de 500 chars sin espacios (skills).`n5. Si hay menos de 2 mensajes reales validos, termina sin hacer nada.`n`nDETECTA EL PROYECTO ACTIVO -- busca en el transcript rutas de archivos en tool calls (Read/Write/Edit/Bash) y comandos git que revelen el directorio de trabajo.`nMapeo por carpeta del proyecto en la ruta (el separador puede ser slash o backslash): Yalo o yalo* -> YALO | LaBodega o bodega* -> La Bodega | Corinsa o corinsa* -> CORINSA | Emsula o emsula* -> EMSULA | Nai o nai* o agent-ai-config -> NAI | UltimateLabs o ult* -> Ultimate Labs`nSi no hay ruta clara, usa 'general'.`n`nCLASIFICA: DECISION (arquitectura/patron/libreria) | BUG (problema resuelto) | CONFIG (setup/hooks/herramientas) | GENERAL (rutinario)`n`nACCION -- ENGRAM: lee C:/Users/naide/.claude/projects/C--Users-naide/memory/changes-log.md, agrega al final una linea por hallazgo no trivial:`n- FECHA | cliente | categoria | descripcion breve`n`nResponde: 'ok: N entradas -- CATEGORIA cliente' o 'trivial'."
+    $engramPrompt = "Eres el sistema de memoria Engram de $UserDisplayName. Primero usa ToolSearch con query 'select:mcp__engram__mem_session_end' para cargar el schema. Luego llama mcp__engram__mem_session_end para cerrar la sesion actual. Si alguna herramienta no esta disponible, termina sin hacer nada. Responde solo 'ok' o 'trivial'."
 
     $stopHook = [PSCustomObject]@{
         hooks = @(

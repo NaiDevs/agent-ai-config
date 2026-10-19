@@ -35,9 +35,10 @@ Reiniciar Claude Code y/o Codex después del setup.
 | Git | 2.x | Obligatorio |
 | Node.js + npm | 18+ | MCPs via `npx` |
 | PowerShell | 5.1 (Windows) / 7+ (Mac/Linux) | Scripts de setup y hooks |
+| Go | 1.21+ | Compilar e instalar Engram Go binary |
+| jq | 1.6+ | Requerido por `engram setup claude-code` |
 | Claude Code | cualquier | Si vas a usar Claude Code |
 | Codex | cualquier | Si vas a usar Codex |
-| engram | opcional | Knowledge graph MCP adicional |
 | uv | cualquiera | Instalación aislada de Graphify |
 
 ---
@@ -193,6 +194,34 @@ La memoria Engram es para contexto técnico (qué proyecto, qué stack, qué dec
 ```
 
 El script revisa: git, Node.js, Claude Code, Codex, engram, `mcp.env`, variables de entorno, archivos instalados, JSON/TOML válidos.
+
+---
+
+## Instalación de Engram (Go binary)
+
+Engram es el sistema de memoria del agente. Requiere Go 1.21+ y jq instalados.
+
+```powershell
+# 1. Instalar Go desde https://go.dev/dl/ (Windows amd64)
+# 2. Instalar jq
+winget install jqlang.jq
+
+# 3. Instalar el binario Engram
+go install github.com/Gentleman-Programming/engram/v3/cmd/engram@latest
+
+# 4. Verificar
+engram --version   # debe mostrar: engram 3.x.x
+
+# 5. Setup automático para Claude Code (agrega plugin + marketplace)
+engram setup claude-code
+# Responder "y" cuando pregunte si agregar al allowlist
+
+# 6. Reiniciar Claude Code
+```
+
+El binario queda en `%USERPROFILE%\go\bin\engram.exe`. El storage SQLite queda en `%USERPROFILE%\.engram\engram.db`.
+
+> **Nota Windows:** si `engram` no se encuentra después de instalar Go, abrir una terminal nueva para que el PATH se actualice.
 
 ---
 
@@ -357,7 +386,7 @@ Hay dos tipos de integración: **conectores cloud** (disponibles en claude.ai si
 | **Firebase Admin** | ❌ | ⚙️ opcional | Si tienes proyectos FCM activos |
 | **AWS** | ❌ | ⚙️ opcional | Si usas Secrets Manager, S3, SES directamente |
 | **Azure** | ❌ | ⚙️ opcional | Si tienes servicios Azure que Codex necesita consultar |
-| **Engram/memory** | ❌ | ✅ obligatorio | Memoria persistente entre sesiones |
+| **Engram** | ❌ | ✅ obligatorio | Memoria persistente entre sesiones (Go binary v3+) |
 
 ---
 
