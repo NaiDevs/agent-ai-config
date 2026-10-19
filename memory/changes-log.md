@@ -1,5 +1,9 @@
 # ENGRAM Memory - Changes Log
 
+## Session config-engram-go-migration
+
+- 2026-10-18 | NAI | CONFIG | Migración a Engram Go oficial (v3.4.0): instalado via `go install`, reemplazado MCP memory (@modelcontextprotocol/server-memory) por binario nativo `engram mcp`. Stop hook simplificado a mem_session_finalize. 20 tools mcp__engram__* en allowlist.
+
 ## Session 4251dca8-8196-41b5-a2d2-7d2792c9025e
 
 - 2026-10-17 | yalo console api | feat | OCR recibos transferencia: AwsTextractService (S3 upload + polling GetExpenseAnalysis), endpoint POST /organizations/ocr-receipt (JWT, sharp PNG, banco+cuenta query params), DTOs + helpers de validación, script SQL para systemrootconfig(terminosClaveValidarRecibo). Fix: Blocks en GetExpenseAnalysis vienen en ExpenseDocument.Blocks no a nivel raíz. Credenciales AWS vienen de Secrets Manager secreto yalocore/keys (igual que bo api).
@@ -610,3 +614,4 @@
 ## Session e24fa3b3-6d2e-4833-9913-69ab74c4c6f9
 
 - 2026-10-19 | NAI | DECISION | Investigación repos Engram + gentle-ai: análisis de arquitectura del agente de memory Naidelyn (subagent background ab0ccfa91aee33c45 para análisis comparativo de ambos repos)
+2026-10-19 | NAI | CONFIG | Auto-mode bloqueó edición settings.json: intento de reemplazar MCP `memory` por `engram` + actualizar allowlist de permisos fue bloqueado por sistema auto-mode (razón: protección de settings.json contra cambios de permisos sin autorización explícita del usuario). Requiere confirmación manual para proceder.
