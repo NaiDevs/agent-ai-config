@@ -97,6 +97,7 @@
 2026-09-30 | yalo trackeo | BUG | Indicador visual (puntito) en campo de fecha "MAR 29" desalineaba fila â€” removido, solo aplica cambio de color (brand azul) al marcar como destacado
 
 ## Session 403530a7-7dff-4b6a-ba43-7eea3875745f
+- 2026-10-20 | YaloConsole | commit | feat(equipo-oficina): agrega módulo de inventario para equipos de oficina
 
 2026-09-30 | YALO | DECISION | YA-143 (BitÃ¡cora pedidos cliente): nuevo endpoint GET /api/contingencias/clientes/pedidos + componente BitacoraPedidosClienteComponent con bÃºsqueda por cliente (nombre/telÃ©fono/cÃ³digo) y muestra facturas
 2026-09-30 | YALO | DECISION | YA-144 (Actualizar info cliente): nuevo endpoint PATCH /api/contingencias/clientes/:codCliente + modal de ediciÃ³n en yalo-vendo-entrego categorÃ­a Clientes (referencia campos yalo bo)
