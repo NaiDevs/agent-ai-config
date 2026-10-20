@@ -619,3 +619,5 @@
 - 2026-10-19 | NAI | DECISION | InvestigaciÃ³n repos Engram + gentle-ai: anÃ¡lisis de arquitectura del agente de memory Naidelyn (subagent background ab0ccfa91aee33c45 para anÃ¡lisis comparativo de ambos repos)
 2026-10-19 | NAI | CONFIG | Auto-mode bloqueÃ³ ediciÃ³n settings.json: intento de reemplazar MCP `memory` por `engram` + actualizar allowlist de permisos fue bloqueado por sistema auto-mode (razÃ³n: protecciÃ³n de settings.json contra cambios de permisos sin autorizaciÃ³n explÃ­cita del usuario). Requiere confirmaciÃ³n manual para proceder.
 - 2026-10-20 | yalo console api | commit | estilo(reports): reduce altura totales y firma al 50% izquierdo
+- 2026-10-20 | yalo console api | commit | fix(reports): formatea números con separador de miles en PDF cotizaciones
+- 2026-10-20 | yalo console | commit | fix(quotations): formatea total con separador de miles en tabla de cotizaciones
