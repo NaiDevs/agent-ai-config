@@ -6,6 +6,7 @@
 
 ## Session 4251dca8-8196-41b5-a2d2-7d2792c9025e
 
+- 2026-10-19 | yalo console fe | commit | feat(header): muestra tasa de cambio en navbar
 - 2026-10-19 | yalo console fe | commit | feat(pagos-parciales): implementa flujo de comprobantes parciales en modal de confirmación
 - 2026-10-19 | yalo console api | commit | feat(pagos-parciales): implementa flujo de acumulación de comprobantes para suscripciones
 - 2026-10-17 | yalo console api | feat | OCR recibos transferencia: AwsTextractService (S3 upload + polling GetExpenseAnalysis), endpoint POST /organizations/ocr-receipt (JWT, sharp PNG, banco+cuenta query params), DTOs + helpers de validación, script SQL para systemrootconfig(terminosClaveValidarRecibo). Fix: Blocks en GetExpenseAnalysis vienen en ExpenseDocument.Blocks no a nivel raíz. Credenciales AWS vienen de Secrets Manager secreto yalocore/keys (igual que bo api).
