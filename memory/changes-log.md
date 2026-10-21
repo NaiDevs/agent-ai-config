@@ -622,3 +622,4 @@
 - 2026-10-20 | yalo console api | commit | estilo(reports): reduce altura totales y firma al 50% izquierdo
 - 2026-10-20 | yalo console api | commit | fix(reports): formatea números con separador de miles en PDF cotizaciones
 - 2026-10-20 | yalo console | commit | fix(quotations): formatea total con separador de miles en tabla de cotizaciones
+- 2026-10-21 | yalo console api | commit | feat(office-equipment): agrega módulo de inventario de equipos de oficina
