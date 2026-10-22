@@ -3,6 +3,7 @@
 ## Session config-engram-go-migration
 
 - 2026-10-18 | NAI | CONFIG | MigraciÃ³n a Engram Go oficial (v3.4.0): instalado via `go install`, reemplazado MCP memory (@modelcontextprotocol/server-memory) por binario nativo `engram mcp`. Stop hook simplificado a mem_session_finalize. 20 tools mcp__engram__* en allowlist.
+- 2026-10-22 | yalo-mfe-catalogo-inventario | commit | feat(catalogo,inventario): agrega sub-rutas y componentes por sección
 
 ## Session 7a9202c9-50e5-437f-8359-42815cb59cbd
 
