@@ -628,3 +628,4 @@
 - 2026-10-20 | yalo console | commit | fix(quotations): formatea total con separador de miles en tabla de cotizaciones
 - 2026-10-21 | yalo console api | commit | feat(office-equipment): agrega módulo de inventario de equipos de oficina
 - 2026-10-21 | yalo trackeo | commit | feat(storage): migra subida de imágenes de Supabase a S3 vía Lambda
+- 2026-10-21 | yalo trackeo | commit | fix(forms): corrige validacion de chips con multiple seleccion
