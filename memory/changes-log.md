@@ -630,3 +630,5 @@
 - 2026-10-21 | yalo console api | commit | feat(office-equipment): agrega módulo de inventario de equipos de oficina
 - 2026-10-21 | yalo trackeo | commit | feat(storage): migra subida de imágenes de Supabase a S3 vía Lambda
 - 2026-10-21 | yalo trackeo | commit | fix(forms): corrige validacion de chips con multiple seleccion
+- 2026-10-23 | naide | commit | feat(catalogo-inventario): completa pantallas y flujos del MFE (feat/pantallas-catalogo-inventario)
+- 2026-10-23 | naide | commit | feat(shell): integra cat├ílogo e inventario mediante federaci├│n (feat/naidelyn/estructura)
