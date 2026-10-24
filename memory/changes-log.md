@@ -632,3 +632,7 @@
 - 2026-10-21 | yalo trackeo | commit | fix(forms): corrige validacion de chips con multiple seleccion
 - 2026-10-23 | naide | commit | feat(catalogo-inventario): completa pantallas y flujos del MFE (feat/pantallas-catalogo-inventario)
 - 2026-10-23 | naide | commit | feat(shell): integra cat├ílogo e inventario mediante federaci├│n (feat/naidelyn/estructura)
+- 2026-10-23 | naide | commit | feat(clientes): implementa gesti├│n de clientes como microfrontend (main)
+- 2026-10-23 | naide | commit | feat(shell): integra autenticaci├│n y navegaci├│n de microfrontends (feat/naidelyn/estructura)
+- 2026-10-23 | naide | commit | feat(catalogo): conecta productos e inventario con la API (feat/pantallas-catalogo-inventario)
+- 2026-10-23 | naide | commit | feat(core): agrega autenticaci├│n y endpoints de clientes y productos (feat/naidelyn/reestructura)
