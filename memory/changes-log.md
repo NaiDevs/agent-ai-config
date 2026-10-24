@@ -640,3 +640,4 @@
 - 2026-10-24 | naide | commit | feat(inventario): conecta listados con endpoints reales (feat/pantallas-catalogo-inventario)
 - 2026-10-24 | naide | commit | feat(inventario): conecta ajustes y movimientos con la API (feat/pantallas-catalogo-inventario)
 - 2026-10-24 | naide | commit | feat(inventario): conecta proveedores y bodegas con la API (feat/pantallas-catalogo-inventario)
+- 2026-10-24 | naide | commit | fix(api): apunta el MFE al backend de Yalo BO (feat/pantallas-catalogo-inventario)
