@@ -636,3 +636,4 @@
 - 2026-10-23 | naide | commit | feat(shell): integra autenticaci├│n y navegaci├│n de microfrontends (feat/naidelyn/estructura)
 - 2026-10-23 | naide | commit | feat(catalogo): conecta productos e inventario con la API (feat/pantallas-catalogo-inventario)
 - 2026-10-23 | naide | commit | feat(core): agrega autenticaci├│n y endpoints de clientes y productos (feat/naidelyn/reestructura)
+- 2026-10-24 | naide | commit | feat(apoyo): agrega pantalla de soporte al shell (feat/naidelyn/estructura)
