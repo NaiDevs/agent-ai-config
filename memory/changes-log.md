@@ -644,3 +644,4 @@
 - 2026-10-24 | naide | commit | feat(inventario): expone endpoints desde Yalo Agendo (feat/naidelyn/reestructura)
 - 2026-10-24 | naide | commit | fix(api): consume inventario desde Yalo Agendo (feat/pantallas-catalogo-inventario)
 - 2026-10-24 | naide | commit | feat(inventario): implementa endpoints en Core (feat/naidelyn/reestructura)
+- 2026-10-24 | naide | commit | feat(documentos): agrega endpoints de inventario en Core (feat/naidelyn/reestructura)
