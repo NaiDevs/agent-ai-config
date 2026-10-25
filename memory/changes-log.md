@@ -1,5 +1,10 @@
 ﻿# ENGRAM Memory - Changes Log
 
+## Session 84ee29d2-08e4-4345-ad73-d36dc53bb5de
+
+- 2026-10-25 | yalo agendo | commit | feat(workspace): agrega script de inicio orquestado para workspace local
+- 2026-10-25 | yalo agendo api | commit | feat(certificados): implementa módulo completo de certificados
+
 ## Session config-engram-go-migration
 
 - 2026-10-18 | NAI | CONFIG | MigraciÃ³n a Engram Go oficial (v3.4.0): instalado via `go install`, reemplazado MCP memory (@modelcontextprotocol/server-memory) por binario nativo `engram mcp`. Stop hook simplificado a mem_session_finalize. 20 tools mcp__engram__* en allowlist.
