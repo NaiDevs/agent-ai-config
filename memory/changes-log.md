@@ -646,3 +646,4 @@
 - 2026-10-24 | naide | commit | feat(inventario): implementa endpoints en Core (feat/naidelyn/reestructura)
 - 2026-10-24 | naide | commit | feat(documentos): agrega endpoints de inventario en Core (feat/naidelyn/reestructura)
 - 2026-10-24 | naide | commit | fix(documentos): elimina el 401 en listados de inventario (feat/naidelyn/reestructura)
+- 2026-10-25 | naide | commit | feat(agenda): completa calendario y flujos de reservas (feat/naidelyn/estructura)
