@@ -659,3 +659,4 @@
 - 2026-10-26 | naide | commit | feat(personas): agrega colaboradores, roles y certificados (feat/naidelyn/clientes-core)
 - 2026-10-26 | naide | commit | tarea(federacion): limpia artefactos locales del MFE (feat/pantallas-catalogo-inventario)
 - 2026-10-26 | naide | commit | feat(contratos-mfe): restaura contrato compartido y documentación (main)
+- 2026-10-26 | yalo agendo api | commit | feat(recursos): agrega columnas de duración y precio variable a pro_productos
