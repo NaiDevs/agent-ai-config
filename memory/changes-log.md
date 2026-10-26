@@ -658,3 +658,4 @@
 - 2026-10-25 | naide | commit | feat(agenda): completa calendario y flujos de reservas (feat/naidelyn/estructura)
 - 2026-10-26 | naide | commit | feat(personas): agrega colaboradores, roles y certificados (feat/naidelyn/clientes-core)
 - 2026-10-26 | naide | commit | tarea(federacion): limpia artefactos locales del MFE (feat/pantallas-catalogo-inventario)
+- 2026-10-26 | naide | commit | feat(contratos-mfe): restaura contrato compartido y documentación (main)
