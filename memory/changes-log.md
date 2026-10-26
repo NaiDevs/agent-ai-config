@@ -6,6 +6,8 @@
 - 2026-10-25 | yalo agendo api | commit | feat(certificados): implementa módulo completo de certificados
 - 2026-10-25 | yalo mfe catalogo inventario | commit | feat(recursos): conecta módulo con la API real de Yalo Agendo
 - 2026-10-25 | yalo agendo api | commit | feat(recursos): agrega módulo completo de recursos a la API
+- 2026-10-25 | yalo mfe catalogo inventario | commit | feat(servicios): agrega sección "Recursos que consume" conectada al API
+- 2026-10-25 | yalo agendo api | commit | feat(recursos): agrega endpoints GET/PUT por-servicio para recursos consumidos
 
 ## Session config-engram-go-migration
 
