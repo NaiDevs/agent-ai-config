@@ -663,3 +663,4 @@
 - 2026-10-26 | naide | commit | feat(contratos-mfe): restaura contrato compartido y documentación (main)
 - 2026-10-26 | yalo agendo api | commit | feat(recursos): agrega columnas de duración y precio variable a pro_productos
 - 2026-10-26 | yalo agendo api | commit | feat(productos): mapea tipoduracion, duracionmaxima y preciovariable en la capa de datos
+- 2026-10-27 | naide | commit | feat(health): unifica ruta y verifica las tres bases de datos (feat/naidelyn/reestructura)
