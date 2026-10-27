@@ -8,6 +8,7 @@
 - 2026-10-25 | yalo agendo api | commit | feat(recursos): agrega módulo completo de recursos a la API
 - 2026-10-25 | yalo mfe catalogo inventario | commit | feat(servicios): agrega sección "Recursos que consume" conectada al API
 - 2026-10-25 | yalo agendo api | commit | feat(recursos): agrega endpoints GET/PUT por-servicio para recursos consumidos
+- 2026-10-27 | yalo agendo | commit | feat(recursos): agrega módulo de recursos y corrige validación de sesión
 - 2026-10-27 | yalo bo api | commit | feat(liquidaciones): agrega código cliente YALO, zona y número de factura en órdenes pendientes
 - 2026-10-27 | yalo bo | commit | feat(liquidaciones): rediseña historial de órdenes pendientes como tabla con columnas YALO
 
