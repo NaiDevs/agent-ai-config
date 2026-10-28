@@ -97,6 +97,8 @@
 2026-09-29 | yalo trackeo | commit | feat(novedades): envio masivo WhatsApp via Edge Function wa-send-bulk
 2026-09-29 | yalo trackeo | commit | fix(wa): corrige token y saltos de lÃ­nea en envÃ­os WhatsApp
 2026-09-29 | YALO | DECISION | Deploy wa-send-bulk exitoso (status ACTIVE): procesa cartera completa en lotes paralelos (10 registros server-side simultÃ¡neos) sin bloqueo cliente; commit 486b960
+2026-10-28 | yalo console | commit | feat(equipment): agrega eliminar en marcas/categorias/equipo y refactoriza no-series a relacional
+2026-10-28 | yalo console api | commit | feat(equipment): migra serial/status/ubicacion a tablas relacionales y agrega eliminacion
 2026-09-29 | YALO | CONFIG | WhatsApp Meta Cloud API: sandbox mode requiere agregar phone numbers como test recipients en Meta Business Manager â€” code correcto, issue es restricciÃ³n Meta en modo Development
 2026-09-29 | YALO | BUG | WhatsApp Meta: nÃºmero +50495349633 (Naidelyn) marcado como spam en Business Account â€” API retorna messageId pero Meta no entrega; soluciÃ³n requiere desbloquear en Phone Numbers Manager o revisar restricciÃ³n de calidad de cuenta
 2026-09-29 | YALO | CONFIG | WhatsApp: saltos de lÃ­nea en parÃ¡metros de plantilla NO son soportados por Meta Cloud API â€” redeploy v6/v20 usa formato en lÃ­nea plana (sin \n) como workaround validado
