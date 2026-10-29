@@ -102,6 +102,7 @@
 2026-10-28 | yalo console | commit | feat(equipment): agrega eliminar en marcas/categorias/equipo y refactoriza no-series a relacional
 2026-10-28 | yalo console api | commit | feat(equipment): migra serial/status/ubicacion a tablas relacionales y agrega eliminacion
 2026-09-29 | YALO | CONFIG | WhatsApp Meta Cloud API: sandbox mode requiere agregar phone numbers como test recipients en Meta Business Manager â€” code correcto, issue es restricciÃ³n Meta en modo Development
+- 2026-10-29 | yalo-trackeo-desktop | commit | fix(timer): corrige contador congelado al trackear un ticket
 2026-09-29 | YALO | BUG | WhatsApp Meta: nÃºmero +50495349633 (Naidelyn) marcado como spam en Business Account â€” API retorna messageId pero Meta no entrega; soluciÃ³n requiere desbloquear en Phone Numbers Manager o revisar restricciÃ³n de calidad de cuenta
 2026-09-29 | YALO | CONFIG | WhatsApp: saltos de lÃ­nea en parÃ¡metros de plantilla NO son soportados por Meta Cloud API â€” redeploy v6/v20 usa formato en lÃ­nea plana (sin \n) como workaround validado
 2026-09-29 | yalo trackeo | commit | feat(novedades): agrega envÃ­o masivo por correo a toda la cartera
