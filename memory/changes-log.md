@@ -97,6 +97,8 @@
 2026-09-29 | yalo trackeo | commit | feat(novedades): envio masivo WhatsApp via Edge Function wa-send-bulk
 2026-09-29 | yalo trackeo | commit | fix(wa): corrige token y saltos de lÃ­nea en envÃ­os WhatsApp
 2026-09-29 | YALO | DECISION | Deploy wa-send-bulk exitoso (status ACTIVE): procesa cartera completa en lotes paralelos (10 registros server-side simultÃ¡neos) sin bloqueo cliente; commit 486b960
+- 2026-10-29 | yalo monitor | commit | feat(filtros): agrega filtros de territorio y vendedor para cuentas Yalo Vendo
+- 2026-10-29 | yalo monitor api | commit | feat(filtros): agrega endpoints /Zonas y /Vendedores; filtra ordenes por territorio y vendedor
 2026-10-28 | yalo console | commit | feat(equipment): agrega eliminar en marcas/categorias/equipo y refactoriza no-series a relacional
 2026-10-28 | yalo console api | commit | feat(equipment): migra serial/status/ubicacion a tablas relacionales y agrega eliminacion
 2026-09-29 | YALO | CONFIG | WhatsApp Meta Cloud API: sandbox mode requiere agregar phone numbers como test recipients en Meta Business Manager â€” code correcto, issue es restricciÃ³n Meta en modo Development
