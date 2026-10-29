@@ -672,3 +672,5 @@
 - 2026-10-27 | yalo console api | commit | feat(permisos): agrega script de permisos para modulo YaloCobro
 - 2026-10-28 | naide | commit | feat(sync): ejecuta cat├ílogos cada 15 minutos sin alertas (feat/integracion-facturacion-monitor)
 - 2026-10-28 | yalo spc delasa | commit | feat(sync): ejecuta catálogos cada 15 minutos sin alertas
+- 2026-10-29 | naide | commit | feat(facturacion): corrige correlativos y agrega ├│rdenes por factura (development)
+- 2026-10-29 | naide | commit | feat(console): actualiza facturas, notas de cr├⌐dito y permisos (development)
