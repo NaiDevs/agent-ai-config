@@ -679,3 +679,5 @@
 - 2026-10-29 | naide | commit | feat(roles): mejora la visualizaci├│n de permisos en el panel (development)
 - 2026-10-29 | naide | commit | feat(roles): organiza m├│dulos y contadores de permisos (development)
 - 2026-10-29 | yalo console | commit | feat(roles): organiza módulos y contadores de permisos
+- 2026-10-29 | YALO_API_Administrator | commit | feat(permisos): registra acciones por contingencia YaloCobro (development)
+- 2026-10-29 | YaloConsole | commit | feat(contingencias): controla acceso por acci├│n en YaloCobro (development)
