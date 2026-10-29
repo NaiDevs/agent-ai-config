@@ -674,3 +674,4 @@
 - 2026-10-28 | yalo spc delasa | commit | feat(sync): ejecuta catálogos cada 15 minutos sin alertas
 - 2026-10-29 | naide | commit | feat(facturacion): corrige correlativos y agrega ├│rdenes por factura (development)
 - 2026-10-29 | naide | commit | feat(console): actualiza facturas, notas de cr├⌐dito y permisos (development)
+- 2026-10-29 | naide | commit | feat(roles): mejora la visualizaci├│n de permisos en el panel (development)
