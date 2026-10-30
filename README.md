@@ -155,6 +155,7 @@ Cerrar y reabrir Claude Code y/o Codex.
 - Los tokens de `mcp.env` se cargan como variables de entorno del sistema — ambas herramientas los leen automáticamente
 - Si **engram** está instalado, ambas herramientas comparten la misma base de conocimiento
 - Si **Graphify** está habilitado, ambas herramientas reciben su skill oficial; cada repositorio mantiene su propio `graphify-out/`
+- El MCP opcional `yalo-pos-prod-ro` consulta las bases de producción de YALO POS con cuentas PostgreSQL dedicadas de solo lectura. Las cadenas se cargan desde [`mcp-servers/yalo-pos-readonly/connections.local.env`](mcp-servers/yalo-pos-readonly/README.md); el plugin instalable vive en `YALO-PLUGINS`.
 - `auto-update.ps1` sincroniza el repo en cada inicio de sesión
 
 ---

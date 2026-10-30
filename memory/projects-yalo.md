@@ -24,12 +24,14 @@ Base path: `C:\Users\naide\OneDrive\Documentos\Proyectos\YALO\`
 | yalo monitor     | YALO_APP_MonitorPedidos    | Node/TS    | Monitor pedidos UI      |
 | yalo monitor api | YALO_API_MonitorPedidos    | C#/.NET    | Monitor pedidos API     |
 | yalo pos api     | YaloCobroApiNew            | C#/.NET    | API cobros              |
+| yalo api pos     | YALO-API-POS               | C#/.NET 8  | API del POS             |
 | yalo reporteria  | YALO-API-DataReporteria    | C#/.NET    | API reportería          |
 | yalo external leg| YALO-API-ExternalService   | C#/.NET    | API servicio externo    |
 | yalo signalr     | YALO-API-SignalR           | C#/.NET    | API tiempo real         |
 | yalo stripe      | YALO-API-Stripe            | C#/.NET    | API pagos Stripe        |
 | yalo whastapp    | YALO-API-WS                | C#/.NET    | API WebSockets          |
 | yalo pos fe      | YALO-APP-CAP               | Node/TS    | App CAP                 |
+| yalo fe pos      | YALO-FE-POS                | Angular 15/Ionic | App POS         |
 | yalo trackeo     | yalo-trackeo               | Supabase   | Tracker Jira/GitHub/Slack |
 
 **yalo trackeo (Supabase Edge Functions):**
@@ -47,5 +49,5 @@ Base path: `C:\Users\naide\OneDrive\Documentos\Proyectos\YALO\`
 | yalo invoice     | fx-create-invoice          | —          | Generador facturas      |
 | yalo pos encoder | esc-pos-encoder-previewer  | Node/TS    | Encoder ESC/POS         |
 
-Workspaces: `yalo bo` (bo + bo api), `yalo pedidos` (monitor + monitor api), `yalo full` (bo + bo api + signalr).
+Workspaces: `yalo bo` (bo + bo api), `yalo pos app` (fe pos + api pos), `yalo pedidos` (monitor + monitor api), `yalo full` (bo + bo api + signalr).
 Ver tabla completa en [[projects-workspaces]] y `~/.claude/projects-registry.md`.

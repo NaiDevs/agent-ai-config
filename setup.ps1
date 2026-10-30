@@ -366,6 +366,21 @@ if (Test-Path $EnvFile) {
     Write-Host "     mcp.env no encontrado — copia mcp.env.example → mcp.env y llena los valores" -ForegroundColor DarkYellow
 }
 
+$readonlyConnectionsFile = Join-Path $ScriptDir "mcp-servers\yalo-pos-readonly\connections.local.env"
+if (Test-Path $readonlyConnectionsFile) {
+    foreach ($rawLine in (Get-Content $readonlyConnectionsFile)) {
+        if ($rawLine -match '^\s*(YALO_DB_URL_YALO_COBRO|YALO_DB_URL_YALO_AUTH)\s*=\s*(.+?)\s*$') {
+            $key = $matches[1]
+            $value = $matches[2].Trim()
+            if ($value) {
+                [System.Environment]::SetEnvironmentVariable($key, $value, "User")
+                [System.Environment]::SetEnvironmentVariable($key, $value, "Process")
+                $envVars[$key] = $value
+            }
+        }
+    }
+}
+
 # ─────────────────────────────────────────────────────────────────────────────
 # FASE 1 — Detectar herramientas instaladas
 # ─────────────────────────────────────────────────────────────────────────────

@@ -13,6 +13,7 @@ Workspaces son grupos de proyectos que se trabajan simultáneamente. Al activar 
 | Workspace           | Proyectos                                              | Descripción                    |
 |---------------------|--------------------------------------------------------|--------------------------------|
 | yalo pos            | yalo bo, yalo bo api                                   | POS frontend + backend         |
+| yalo pos app        | yalo fe pos, yalo api pos                              | App POS + API                  |
 | yalo pedidos        | yalo monitor, yalo monitor api                         | Monitor de pedidos full stack  |
 | yalo full           | yalo bo, yalo bo api, yalo signalr                     | POS con tiempo real            |
 | bodega shop         | bodega ecom, bodega bo api                             | E-commerce web + API           |

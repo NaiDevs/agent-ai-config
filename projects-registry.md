@@ -15,12 +15,14 @@
 | yalo monitor     | YALO_APP_MonitorPedidos    | Node/TS    | Monitor pedidos UI      |
 | yalo monitor api | YALO_API_MonitorPedidos    | C#/.NET    | Monitor pedidos API     |
 | yalo pos api     | YaloCobroApiNew            | C#/.NET    | API cobros              |
+| yalo api pos     | YALO-API-POS               | C#/.NET 8  | API del POS             |
 | yalo reporteria  | YALO-API-DataReporteria    | C#/.NET    | API reportería          |
 | yalo external leg| YALO-API-ExternalService   | C#/.NET    | API servicio externo    |
 | yalo signalr     | YALO-API-SignalR           | C#/.NET    | API tiempo real         |
 | yalo stripe      | YALO-API-Stripe            | C#/.NET    | API pagos Stripe        |
 | yalo whastapp    | YALO-API-WS                | C#/.NET    | API WebSockets          |
 | yalo pos fe      | YALO-APP-CAP               | Node/TS    | App CAP                 |
+| yalo fe pos      | YALO-FE-POS                | Angular 15/Ionic | App POS         |
 | yalo dashboard   | YALO-Dashboard-API         | C#/.NET    | Dashboard API           |
 | yalo external    | YALO-ExternalService       | C#/.NET    | Servicio externo        |
 | yalo spc delasa  | yalo-spc-delasa            | C#/.NET    | Integración Delasa      |
@@ -102,7 +104,7 @@
 
 | Alias / Grupo                              | Jira Key | Proyecto Jira           |
 |--------------------------------------------|----------|-------------------------|
-| yalo bo, yalo bo api, yalo pos api, yalo reporteria, yalo signalr, yalo stripe, yalo whastapp, yalo pos fe, yalo dashboard, yalo external, yalo external leg, yalo spc delasa, yalo console, yalo console api, yalo invoice, yalo pos encoder, yalo monitor, yalo monitor api | YAL | YALOCobro |
+| yalo bo, yalo bo api, yalo pos api, yalo api pos, yalo reporteria, yalo signalr, yalo stripe, yalo whastapp, yalo pos fe, yalo fe pos, yalo dashboard, yalo external, yalo external leg, yalo spc delasa, yalo console, yalo console api, yalo invoice, yalo pos encoder, yalo monitor, yalo monitor api | YAL | YALOCobro |
 | yalo vendo                                 | YV       | YaloVendo               |
 | yalo agendo, yalo agendo api               | YALOAG   | YaloAgendo              |
 | bodega * (todos)                           | LBO      | LaBodega                |
@@ -117,6 +119,7 @@
 | Workspace           | Proyectos                                              | Descripción                    |
 |---------------------|--------------------------------------------------------|--------------------------------|
 | yalo bo             | yalo bo, yalo bo api, yalo vendo                       | POS frontend + backend + vendo |
+| yalo pos app        | yalo fe pos, yalo api pos                              | App POS + API                   |
 | yalo pedidos        | yalo monitor, yalo monitor api                         | Monitor de pedidos full stack  |
 | yalo full           | yalo bo, yalo bo api, yalo signalr                     | POS con tiempo real            |
 | bodega shop         | bodega ecom, bodega bo api                             | E-commerce web + API           |

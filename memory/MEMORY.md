@@ -7,6 +7,7 @@
 - [Config agent-config](setup-claude-config.md) — Repo portable de configuración, cómo sincronizar entre dispositivos
 - [Nai CLI como control plane](decision-nai-cli.md) — CLI único dentro de agent-ai-config para alternar Claude/Codex, resolver aliases, conservar sesiones y medir consumo
 - [Proyectos YALO](projects-yalo.md) — 22 subproyectos POS/pagos, aliases `yalo *`
+- [YALO POS app + API](projects-yalo-pos.md) — contexto técnico de YALO-FE-POS y YALO-API-POS
 - [Proyectos La Bodega](projects-labodega.md) — 10 subproyectos ecommerce, aliases `bodega *`
 - [Proyectos CORINSA](projects-corinsa.md) — 7 subproyectos BI/CPA, aliases `corinsa *` y `cpa *`
 - [CPA lógica en SPs](decision-cpa-logica-en-sps.md) — la lógica de negocio de CPA vive en Stored Procedures de SQL Server, no en el código; raíz de los bugs recurrentes del backlog
