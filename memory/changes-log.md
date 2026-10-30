@@ -688,3 +688,6 @@
 - 2026-10-30 | YALO-Agendo-FE | commit | fix(federaci├│n): corrige compilaci├│n con entorno de CI (feat/naidelyn/estructura)
 - 2026-10-30 | yalo agendo | commit | fix(federación): corrige compilación con entorno de CI
 - 2026-10-30 | yalo-trackeo | commit | fix(tareas): permite cambiar estados sin tiempo y evita avisos duplicados (feat-mcp-servidor)
+- 2026-10-30 | agent-ai-config | commit | feat: documenta POS y agrega MCP de lectura de producci├│n (feat/yalo-pos-readonly-mcp)
+- 2026-10-30 | YALO-SKILLS | commit | docs: integra plugin de lectura POS en skill de base de datos (docs/yalo-pos-readonly-mcp)
+- 2026-10-30 | YALO-PLUGINS | commit | feat: agrega plugin MCP de lectura de producci├│n POS (feat/yalo-pos-readonly-mcp)
