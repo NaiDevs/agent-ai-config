@@ -687,3 +687,4 @@
 - 2026-10-29 | YaloConsole | commit | feat(contingencias): controla acceso por acci├│n en YaloCobro (development)
 - 2026-10-30 | YALO-Agendo-FE | commit | fix(federaci├│n): corrige compilaci├│n con entorno de CI (feat/naidelyn/estructura)
 - 2026-10-30 | yalo agendo | commit | fix(federación): corrige compilación con entorno de CI
+- 2026-10-30 | yalo-trackeo | commit | fix(tareas): permite cambiar estados sin tiempo y evita avisos duplicados (feat-mcp-servidor)
