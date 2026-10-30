@@ -30,7 +30,7 @@ Si `PUBLIC` u otro rol heredado concede `CREATE`, `INSERT`, `UPDATE`, `DELETE` o
 
 En `connections.local.env` del mismo directorio, pegar `YALO_DB_URL_YALO_COBRO` y/o `YALO_DB_URL_YALO_AUTH` con la cuenta nueva. El archivo está ignorado por Git; no copiar cadenas de conexión de la API. Si se necesita una CA privada, configurar `sslrootcert` en la URL; ver [TLS en node-postgres](https://node-postgres.com/features/ssl).
 
-Después, ejecutar `setup.ps1 -Tool both` desde la raíz de `agent-ai-config` para cargar las variables en el entorno de usuario. Instalar `yalo-datos-readonly` desde `YALO-PLUGINS` para registrar el MCP en Claude Code y Codex. Reiniciar ambas herramientas. Si las dos cadenas están vacías, el servidor no inicia.
+Después, ejecutar `setup.ps1 -Tool both` desde la raíz de `agent-ai-config`. El setup carga las variables en el entorno de usuario e instala `yalo-datos-readonly` desde `YALO-PLUGINS` en Claude Code y Codex. Reiniciar ambas herramientas. Si las dos cadenas están vacías, el servidor no inicia.
 
 ## Validación local
 

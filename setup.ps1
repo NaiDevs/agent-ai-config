@@ -12,6 +12,7 @@
 #   .\setup.ps1 -UseEngram yes|no                        → engram (sin preguntar)
 #   .\setup.ps1 -InstallGraphify yes|no                  → Graphify + skill oficial (sin preguntar)
 #   .\setup.ps1 -InstallNaiCli yes|no                    → comando global nai (default: yes)
+#   .\setup.ps1 -InstallYaloPlugins yes|no               → MCP de lectura YALO POS (default: yes)
 #   .\setup.ps1 -SkipRegistryOverwrite                   → no sobreescribir projects-registry.md
 
 param(
@@ -27,7 +28,9 @@ param(
     [string]$InstallNaiCli = "yes",
     [switch]$SkipRegistryOverwrite,
     [ValidateSet("","yes","no")]
-    [string]$InstallYaloSkills = ""
+    [string]$InstallYaloSkills = "",
+    [ValidateSet("yes","no")]
+    [string]$InstallYaloPlugins = "yes"
 )
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -214,6 +217,7 @@ Write-Host "  Engram       : $UseEngram" -ForegroundColor Cyan
 Write-Host "  Graphify     : $InstallGraphify" -ForegroundColor Cyan
 Write-Host "  Nai CLI      : $InstallNaiCli" -ForegroundColor Cyan
 Write-Host "  YALO Skills  : $InstallYaloSkills" -ForegroundColor Cyan
+Write-Host "  YALO Plugins : $InstallYaloPlugins" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "─────────────────────────────────────────────────────────────────" -ForegroundColor DarkGray
 Write-Host ""
@@ -873,6 +877,26 @@ if ($InstallYaloSkills -ne "no") {
 } else {
     Write-Host ""
     Write-Host "[ 3.5 ] YALO-SKILLS — omitido (no seleccionado)" -ForegroundColor DarkGray
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# FASE 3.5.1 — Registrar el MCP de lectura desde YALO-PLUGINS
+# ─────────────────────────────────────────────────────────────────────────────
+if ($InstallYaloPlugins -eq "yes") {
+    Write-Host ""
+    Write-Host "[ 3.5.1 ] Instalando YALO-PLUGINS..." -ForegroundColor Yellow
+    $yaloPluginsDeployScript = Join-Path $ScriptDir "yalo-plugins-deploy.ps1"
+    if (Test-Path $yaloPluginsDeployScript) {
+        & $yaloPluginsDeployScript -Tool $Tool
+        if ($LASTEXITCODE -ne 0) {
+            Write-Host "  ! YALO-PLUGINS no se pudo instalar por completo" -ForegroundColor Yellow
+        }
+    } else {
+        Write-Host "  ! yalo-plugins-deploy.ps1 no encontrado en el repo" -ForegroundColor Yellow
+    }
+} else {
+    Write-Host ""
+    Write-Host "[ 3.5.1 ] YALO-PLUGINS — omitido" -ForegroundColor DarkGray
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
