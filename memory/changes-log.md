@@ -685,3 +685,5 @@
 - 2026-10-29 | yalo console | commit | feat(roles): organiza módulos y contadores de permisos
 - 2026-10-29 | YALO_API_Administrator | commit | feat(permisos): registra acciones por contingencia YaloCobro (development)
 - 2026-10-29 | YaloConsole | commit | feat(contingencias): controla acceso por acci├│n en YaloCobro (development)
+- 2026-10-30 | YALO-Agendo-FE | commit | fix(federaci├│n): corrige compilaci├│n con entorno de CI (feat/naidelyn/estructura)
+- 2026-10-30 | yalo agendo | commit | fix(federación): corrige compilación con entorno de CI
