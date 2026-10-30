@@ -4,6 +4,7 @@
 
 - 2026-10-25 | yalo agendo | commit | feat(workspace): agrega script de inicio orquestado para workspace local
 - 2026-10-29 | yalo-trackeo-desktop | commit | feat(updater): chequea actualizaciones al sincronizar, no solo al arranque
+- 2026-10-29 | yalo-trackeo-desktop | commit | feat(timer): acumula tiempo de tickets igual que tareas en el desktop
 - 2026-10-25 | yalo agendo api | commit | feat(certificados): implementa módulo completo de certificados
 - 2026-10-25 | yalo mfe catalogo inventario | commit | feat(recursos): conecta módulo con la API real de Yalo Agendo
 - 2026-10-25 | yalo agendo api | commit | feat(recursos): agrega módulo completo de recursos a la API
