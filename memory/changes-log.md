@@ -708,3 +708,4 @@
 - 2026-10-31 | agent-ai-config | commit | Permitir lectura segura de Engram en vivo por proyecto (master)
 - 2026-10-31 | agent-ai-config | commit | Registrar sincronizacion Engram real en Android cifrado (master)
 - 2026-10-31 | agent-ai-config | commit | Probar revocacion durante exportacion movil (master)
+- 2026-10-31 | agent-ai-config | commit | Probar corte y reintento de descarga por paginas (master)
