@@ -18,6 +18,7 @@ temp/
 graphify-out/
 nai-cli/node_modules/
 nai-cli/dist/
+nai-bridge/node_modules/
 mcp-servers/**/node_modules/
 mcp-servers/**/dist/
 

@@ -6,7 +6,8 @@ import { join } from 'node:path';
 import { createIdentity, validateIdentity, createInvitation, respondToInvitation, confirmInvitation, finalizePairing, encodePairing, decodePairing } from '../src/pairing.mjs';
 import { DeviceStore } from '../src/devices.mjs';
 import { PairSession } from '../src/pair-session.mjs';
-import { runDeviceCommand } from '../src/device-commands.mjs';
+import { runDeviceCommand, runPairCommand } from '../src/device-commands.mjs';
+import QRCode from 'qrcode';
 
 const NOW = 1000000;
 const host = createIdentity('PC');
@@ -110,6 +111,18 @@ test('La salida del CLI no incluye clave privada', async t => {
   const { a } = await stores(t);
   const info = await runDeviceCommand(['info'], a);
   assert.ok(!JSON.stringify(info).includes('PRIVATE KEY'));
+});
+
+test('invitacion QR produce SVG escaneable sin clave privada', async t => {
+  const { a } = await stores(t);
+  const result = await runPairCommand(['invite', '--qr'], a, () => NOW);
+  t.after(() => fs.rm(result.qrPath, { force: true }));
+  const svg = await fs.readFile(result.qrPath, 'utf8');
+  assert.equal(svg, await QRCode.toString(result.invitation,
+    { type: 'svg', errorCorrectionLevel: 'M', margin: 4, width: 768 }));
+  assert.equal(decodePairing(result.invitation).deviceId, (await a.identity()).deviceId);
+  assert.ok(!JSON.stringify(result).includes('PRIVATE KEY'));
+  if (process.platform !== 'win32') assert.equal((await fs.stat(result.qrPath)).mode & 0o077, 0);
 });
 test('Directorio y claves con permisos privados en POSIX', async t => {
   const { a } = await stores(t);

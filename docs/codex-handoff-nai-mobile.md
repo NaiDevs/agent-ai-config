@@ -6,7 +6,9 @@
 - `nai-bridge`: 65/65 pruebas locales pasan, incluidas TLS 1.3, permisos por proyecto, revocación y la ruta de comandos `transport pull` / `transport serve --lan --memory`. Se corrigió el fixture TLS que omitía la versión de identidad.
 - `transport pull` ahora valida manifiesto, páginas y digest sin persistir datos por defecto. La persistencia de memorias remotas queda reservada a pruebas sintéticas con un destino temporal explícito, hasta implementar cifrado local.
 - `flutter doctor -v`: Flutter 3.47.6 y Android SDK 36 presentes. Faltan Android cmdline-tools y el estado de licencias es desconocido. ADB no detectó teléfono Android.
-- El workflow Flutter ahora sube el APK debug como artefacto de la ejecución durante siete días. Verificar CI y descarga después de publicar el commit.
+- El workflow Flutter ahora sube el APK debug como artefacto de la ejecución durante siete días.
+- CI del commit `78f9bbc`: el build y `Upload debug APK` finalizaron correctamente en https://github.com/NaiDevs/agent-ai-config/actions/runs/41157788999 . Artefacto `nai-mobile-debug-apk` confirmado por API de GitHub (90.7 MB, vigente).
+- `node nai-bridge/src/cli.mjs pair invite --qr` genera un SVG temporal de la invitación firmada para escanear desde Android; el archivo solo contiene el token público y caduca con la invitación.
 - Sigue prohibida la importación de memorias privadas a SQLite sin cifrado local. Las pruebas Android–Windows requieren un teléfono visible por ADB y emparejamiento físico.
 
 ## Meta del proyecto
