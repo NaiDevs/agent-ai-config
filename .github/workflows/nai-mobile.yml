@@ -19,9 +19,6 @@ jobs:
         with:
           channel: stable
           cache: true
-      - name: Generate native Android project
-        working-directory: nai-mobile
-        run: flutter create --platforms=android --project-name=nai_mobile --org=tech.naidevs .
       - name: Resolve dependencies
         working-directory: nai-mobile
         run: flutter pub get
@@ -34,3 +31,10 @@ jobs:
       - name: Build debug APK
         working-directory: nai-mobile
         run: flutter build apk --debug
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: nai-mobile-debug-apk
+          path: nai-mobile/build/app/outputs/flutter-apk/app-debug.apk
+          if-no-files-found: error
+          retention-days: 7

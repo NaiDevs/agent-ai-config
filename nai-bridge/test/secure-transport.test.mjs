@@ -1,14 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createHash, generateKeyPairSync } from 'node:crypto';
 import tls from 'node:tls';
+import { createIdentity } from '../src/pairing.mjs';
 import { createTlsCredentials, listenSecure, pingSecure } from '../src/secure-transport.mjs';
 
-function identity(name) {
-  const pair=generateKeyPairSync('ed25519');
-  const publicKey=pair.publicKey.export({type:'spki',format:'der'}).toString('base64url');
-  return {name,deviceId:'device:'+createHash('sha256').update(Buffer.from(publicKey,'base64url')).digest('hex'),publicKey,privateKey:pair.privateKey.export({format:'pem',type:'pkcs8'}).toString()};
-}
+const identity = createIdentity;
 class Store {
   constructor(id) { this.id=id;this.entries=[]; }
   async identity() {return this.id;}

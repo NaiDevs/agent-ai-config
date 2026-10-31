@@ -60,7 +60,7 @@ async function principal() {
     process.stdout.write(`Nai Bridge: http://127.0.0.1:${puertoReal}/v1/health (sin acceso a memorias)\n`);
     return;
   }
-  throw new Error("Uso: nai-bridge doctor | inspect --project NOMBRE | snapshot --project NOMBRE | device [accion] | pair [accion] | transport [serve|ping] | serve [puerto]");
+  throw new Error("Uso: nai-bridge doctor | inspect --project NOMBRE | snapshot --project NOMBRE | device [accion] | pair [accion] | transport [serve|ping|pull] | serve [puerto]");
 }
 principal().catch(error => {
   process.stderr.write(`${error instanceof Error ? error.message : String(error)}\n`);

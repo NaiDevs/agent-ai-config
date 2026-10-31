@@ -7,7 +7,7 @@ import { promisify } from 'node:util';
 import tls from 'node:tls';
 import { AlmacenSnapshots } from './snapshot.mjs';
 import { canReadProject, validateProjectScope } from './devices.mjs';
-import { describeSnapshot, pageSnapshot, readAvailableSnapshot, remoteSnapshotStore, checkDownloadedSnapshot } from './snapshot-wire.mjs';
+import { describeSnapshot, pageSnapshot, readAvailableSnapshot, checkDownloadedSnapshot } from './snapshot-wire.mjs';
 
 const exec = promisify(execFile);
 const MAX_FRAME = 4096;
@@ -44,13 +44,25 @@ export async function createTlsCredentials(identity, options = {}) {
     const keyPath = join(directory, 'key.pem');
     const certPath = join(directory, 'cert.pem');
     await fs.writeFile(keyPath, identity.privateKey, { mode: 0o600, flag: 'wx' });
-    try {
-      await (options.openssl ?? exec)('openssl', [
-        'req', '-new', '-x509', '-key', keyPath, '-out', certPath, '-days', '30',
-        '-subj', '/CN=nai-bridge', '-addext', 'basicConstraints=critical,CA:FALSE',
-        '-addext', 'keyUsage=critical,digitalSignature',
-      ], { timeout: 10000, windowsHide: true, maxBuffer: 8192 });
-    } catch { throw new Error('No fue posible generar el certificado. Instala OpenSSL para habilitar TLS.'); }
+    const args = ['req', '-new', '-x509', '-key', keyPath, '-out', certPath, '-days', '30',
+      '-subj', '/CN=nai-bridge', '-addext', 'basicConstraints=critical,CA:FALSE',
+      '-addext', 'keyUsage=critical,digitalSignature'];
+    const candidates = process.platform === 'win32' && !options.openssl
+      ? ['openssl', join(process.env.ProgramFiles ?? 'C:\\Program Files', 'Git', 'usr', 'bin', 'openssl.exe'),
+          join(process.env.ProgramFiles ?? 'C:\\Program Files', 'Git', 'mingw64', 'bin', 'openssl.exe')]
+      : ['openssl'];
+    let generated = false;
+    for (const executable of candidates) {
+      try {
+        await (options.openssl ?? exec)(executable, args,
+          { timeout: 10000, windowsHide: true, maxBuffer: 8192 });
+        generated = true;
+        break;
+      } catch (error) {
+        if (error?.code !== 'ENOENT') break;
+      }
+    }
+    if (!generated) throw new Error('No fue posible generar el certificado. Instala OpenSSL para habilitar TLS.');
     const cert = await fs.readFile(certPath, 'utf8');
     const actualKey = new X509Certificate(cert).publicKey
       .export({ type: 'spki', format: 'der' }).toString('base64url');
@@ -166,7 +178,7 @@ export async function pingSecure(store, { host, port = 4392, peerId } = {}) {
   return { connected: true, peerId: response.deviceId, encrypted: true, memoryAccess: false };
 }
 export async function pullSecure(store, { host, port = 4392, peerId, project,
-  remoteStore = remoteSnapshotStore(peerId), requester = requestSecure } = {}) {
+  remoteStore = null, requester = requestSecure } = {}) {
   const scope = validateProjectScope(project);
   const base = { host, port, peerId };
   const manifest = await requester(store, { ...base, request: { op: 'manifest', project: scope } });
@@ -184,8 +196,10 @@ export async function pullSecure(store, { host, port = 4392, peerId, project,
     offset = next;
   }
   checkDownloadedSnapshot(manifest, memories);
-  const result = await remoteStore.actualizar({ proyecto: scope, memorias: memories });
+  const result = remoteStore
+    ? await remoteStore.actualizar({ proyecto: scope, memorias: memories })
+    : { nuevas: 0, actualizadas: 0, eliminadasLogicas: 0 };
   return { peerId, project: scope, count: memories.length, etag: manifest.etag,
     added: result.nuevas, updated: result.actualizadas, deleted: result.eliminadasLogicas,
-    storedLocally: true, importedIntoEngram: false };
+    storedLocally: remoteStore !== null, importedIntoEngram: false };
 }

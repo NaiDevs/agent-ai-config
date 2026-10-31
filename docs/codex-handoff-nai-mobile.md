@@ -1,5 +1,14 @@
 # Handoff a Codex - Nai Mobile / Nai Bridge
 
+## Avance Windows (2026-10-30)
+
+- Node 22.21.1 y Engram 3.4.0 disponibles. OpenSSL 3.5.4 está instalado con Git en `C:\Program Files\Git\usr\bin`, pero no está en `PATH`; Nai Bridge ahora lo detecta en esa ruta estándar.
+- `nai-bridge`: 65/65 pruebas locales pasan, incluidas TLS 1.3, permisos por proyecto, revocación y la ruta de comandos `transport pull` / `transport serve --lan --memory`. Se corrigió el fixture TLS que omitía la versión de identidad.
+- `transport pull` ahora valida manifiesto, páginas y digest sin persistir datos por defecto. La persistencia de memorias remotas queda reservada a pruebas sintéticas con un destino temporal explícito, hasta implementar cifrado local.
+- `flutter doctor -v`: Flutter 3.47.6 y Android SDK 36 presentes. Faltan Android cmdline-tools y el estado de licencias es desconocido. ADB no detectó teléfono Android.
+- El workflow Flutter ahora sube el APK debug como artefacto de la ejecución durante siete días. Verificar CI y descarga después de publicar el commit.
+- Sigue prohibida la importación de memorias privadas a SQLite sin cifrado local. Las pruebas Android–Windows requieren un teléfono visible por ADB y emparejamiento físico.
+
 ## Meta del proyecto
 Crear un cliente Android Flutter offline-first para consumir, y mas adelante sincronizar de forma segura, memorias de Engram entre una PC Windows, una laptop y un telefono Android, sin depender de Engram Cloud. El usuario utiliza Claude Code y Codex, y el repositorio `NaiDevs/agent-ai-config` ya contiene configuraciones y otros componentes de Nai. Las memorias son datos privados: **no subir bases Engram, snapshots, tokens, claves privadas ni secretos a GitHub**.
 
