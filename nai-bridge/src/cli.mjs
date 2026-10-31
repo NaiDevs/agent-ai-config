@@ -3,6 +3,7 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { escucharSoloLocal } from "./server.mjs";
 import { inspeccionarEngramPorProyecto } from "./engram.mjs";
+import { actualizarDesdeEngram } from "./snapshot.mjs";
 const ejecutar = promisify(execFile);
 async function versionEngram() {
   for (const args of [["--version"], ["version"]]) {
@@ -32,6 +33,12 @@ async function principal() {
     process.stdout.write(`${JSON.stringify(await inspeccionarEngramPorProyecto(args[1]), null, 2)}\n`);
     return;
   }
+  if (comando === "snapshot") {
+    const args = process.argv.slice(3);
+    if (args.length !== 2 || args[0] !== "--project") throw new Error("Uso: nai-bridge snapshot --project NOMBRE");
+    process.stdout.write(`${JSON.stringify(await actualizarDesdeEngram(args[1]), null, 2)}\n`);
+    return;
+  }
   if (comando === "serve") {
     const puerto = valorPuerto === undefined ? 4391 : Number(valorPuerto);
     const servidor = await escucharSoloLocal(puerto);
@@ -40,7 +47,7 @@ async function principal() {
     process.stdout.write(`Nai Bridge: http://127.0.0.1:${puertoReal}/v1/health (sin acceso a memorias)\n`);
     return;
   }
-  throw new Error("Uso: nai-bridge doctor | inspect --project NOMBRE | serve [puerto]");
+  throw new Error("Uso: nai-bridge doctor | inspect --project NOMBRE | snapshot --project NOMBRE | serve [puerto]");
 }
 principal().catch(error => {
   process.stderr.write(`${error instanceof Error ? error.message : String(error)}\n`);
