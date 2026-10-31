@@ -95,3 +95,10 @@ pruebas Android–Windows. No existe importación a Engram nativo.
 
 Validación: vector SHA-256 calculado con Node 22, tests Node y Dart
 publicados pero suite completa sin ejecutar aquí; Flutter SDK ausente.
+
+
+## Diagnóstico TLS desde la app y CI
+
+La pantalla `lib/sync_connection_page.dart`, accesible desde el ícono de dispositivos en la barra superior, recupera únicamente el host cuyo ACK fue validado en el emparejamiento. Permite indicar IP local, puerto TLS y nombre de proyecto, hacer `ping` autenticado o consultar el manifiesto (cantidad de memorias). NO ejecuta `pullProject` ni escribe memorias, porque SQLite todavía no tiene cifrado de aplicación propio y la conexión Android-Windows aún no pasó pruebas de hardware.
+
+GitHub Actions `.github/workflows/nai-mobile.yml` intenta generar los archivos nativos con `flutter create`, resolver dependencias, ejecutar `flutter analyze`, `flutter test` y compilar APK debug. La creación del workflow no implica que haya pasado el CI. Consultar los resultados antes de instalar o habilitar funciones sensibles. Para probar contra PC: emparejar y verificar ACK en ambos dispositivos, autorizar proyecto desde Nai Bridge y activar `transport serve --lan --memory`; con datos sintéticos, consultar primero `ping` y luego manifiesto.
