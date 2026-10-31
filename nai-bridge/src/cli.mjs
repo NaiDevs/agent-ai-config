@@ -2,6 +2,7 @@
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { escucharSoloLocal } from "./server.mjs";
+import { inspeccionarEngramPorProyecto } from "./engram.mjs";
 const ejecutar = promisify(execFile);
 async function versionEngram() {
   for (const args of [["--version"], ["version"]]) {
@@ -21,8 +22,14 @@ async function principal() {
       node: process.version,
       engram: await versionEngram(),
       estado: "solo-diagnostico",
-      advertencia: "No lee ni exporta la base Engram; sin endpoints de memoria en LAN"
+      advertencia: "Inspect exporta temporalmente un proyecto Engram; sin endpoints de memoria en LAN"
     }, null, 2)}\n`);
+    return;
+  }
+  if (comando === "inspect") {
+    const args = process.argv.slice(3);
+    if (args.length !== 2 || args[0] !== "--project") throw new Error("Uso: nai-bridge inspect --project NOMBRE");
+    process.stdout.write(`${JSON.stringify(await inspeccionarEngramPorProyecto(args[1]), null, 2)}\n`);
     return;
   }
   if (comando === "serve") {
@@ -33,7 +40,7 @@ async function principal() {
     process.stdout.write(`Nai Bridge: http://127.0.0.1:${puertoReal}/v1/health (sin acceso a memorias)\n`);
     return;
   }
-  throw new Error("Uso: nai-bridge doctor | serve [puerto]");
+  throw new Error("Uso: nai-bridge doctor | inspect --project NOMBRE | serve [puerto]");
 }
 principal().catch(error => {
   process.stderr.write(`${error instanceof Error ? error.message : String(error)}\n`);
