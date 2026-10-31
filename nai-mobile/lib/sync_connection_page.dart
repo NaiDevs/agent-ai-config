@@ -59,7 +59,7 @@ class _SyncConnectionPageState extends State<SyncConnectionPage> {
         : {'op': 'ping'});
       if (mounted) setState(() => message = manifest
         ? 'Proyecto autorizado. Memorias: ' + data['count'].toString() +
-          '. Descarga bloqueada hasta cifrar SQLite.'
+          '. Descarga bloqueada hasta validar cifrado local en Android.'
         : 'Conexion TLS autentica. Descarga deshabilitada.');
     } catch (_) {
       if (mounted) setState(() => message =
@@ -90,8 +90,8 @@ class _SyncConnectionPageState extends State<SyncConnectionPage> {
       const SizedBox(height: 12),
       Text(message),
       const SizedBox(height: 20),
-      const Text('La sincronizacion y el guardado estan deshabilitados hasta '
-        'completar cifrado local y pruebas Android-Windows.'),
+      const Text('La descarga está deshabilitada hasta validar SQLCipher, '
+        'migración y pruebas Android-Windows.'),
     ]),
   );
 }

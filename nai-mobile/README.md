@@ -2,7 +2,7 @@
 
 Cliente Flutter Android offline-first de Nai Bridge.
 
-La app permite explorar memorias locales, importar snapshots JSON de prueba, completar el emparejamiento firmado por QR y diagnosticar TLS con `ping` y manifiesto. La descarga automática todavía no está conectada a la pantalla, y SQLite permanece sin cifrado propio. Usar únicamente datos sintéticos hasta implementar cifrado local y validar el enlace con un Android real.
+La app permite explorar memorias locales, importar snapshots JSON de prueba, completar el emparejamiento firmado por QR y diagnosticar TLS con `ping` y manifiesto. La base nueva usa SQLCipher con una clave de 256 bits protegida por Android Keystore. Si existe la base anterior en texto claro, la app conserva los datos y bloquea la apertura hasta implementar una migración verificada. La descarga automática todavía no está conectada a la pantalla: usar únicamente datos sintéticos hasta probar el cifrado y el enlace con un Android real.
 
 Para inicializar Android, dentro del directorio `nai-mobile`:
 

@@ -9,7 +9,8 @@
 - El workflow Flutter ahora sube el APK debug como artefacto de la ejecución durante siete días.
 - CI del commit `78f9bbc`: el build y `Upload debug APK` finalizaron correctamente en https://github.com/NaiDevs/agent-ai-config/actions/runs/41157788999 . Artefacto `nai-mobile-debug-apk` confirmado por API de GitHub (90.7 MB, vigente).
 - `node nai-bridge/src/cli.mjs pair invite --qr` genera un SVG temporal de la invitación firmada para escanear desde Android; el archivo solo contiene el token público y caduca con la invitación.
-- Sigue prohibida la importación de memorias privadas a SQLite sin cifrado local. Las pruebas Android–Windows requieren un teléfono visible por ADB y emparejamiento físico.
+- La base nueva usa `sqflite_sqlcipher` 3.4.1 y una clave aleatoria de 256 bits guardada por `flutter_secure_storage`. Si existe la base SQLite anterior en texto claro o falta la clave de una base cifrada, la app falla cerrada y conserva los archivos. La migración segura de la base anterior sigue pendiente de prueba en Android real.
+- El manifiesto Android bloquea Auto Backup, transferencia de datos entre dispositivos y tráfico claro. La descarga real permanece deshabilitada hasta verificar SQLCipher y TLS en un teléfono.
 
 ## Meta del proyecto
 Crear un cliente Android Flutter offline-first para consumir, y mas adelante sincronizar de forma segura, memorias de Engram entre una PC Windows, una laptop y un telefono Android, sin depender de Engram Cloud. El usuario utiliza Claude Code y Codex, y el repositorio `NaiDevs/agent-ai-config` ya contiene configuraciones y otros componentes de Nai. Las memorias son datos privados: **no subir bases Engram, snapshots, tokens, claves privadas ni secretos a GitHub**.

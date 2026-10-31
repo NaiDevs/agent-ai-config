@@ -7,9 +7,17 @@ import 'sync_connection_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final store=await MemoryStore.open();
-  runApp(MaterialApp(title:'Nai Mobile',debugShowCheckedModeBanner:false,
-    theme:ThemeData.dark(useMaterial3:true),home:MemoryHome(store:store)));
+  try {
+    final store=await MemoryStore.open();
+    runApp(MaterialApp(title:'Nai Mobile',debugShowCheckedModeBanner:false,
+      theme:ThemeData.dark(useMaterial3:true),home:MemoryHome(store:store)));
+  } catch (_) {
+    runApp(MaterialApp(title:'Nai Mobile',debugShowCheckedModeBanner:false,
+      theme:ThemeData.dark(useMaterial3:true),home:const Scaffold(
+        body:Center(child:Padding(padding:EdgeInsets.all(24),child:Text(
+          'La base local no se pudo abrir de forma segura. Los datos existentes se conservaron. '
+          'La sincronización está bloqueada hasta completar una migración segura.'))))));
+  }
 }
 class MemoryHome extends StatefulWidget {
   final MemoryStore store;

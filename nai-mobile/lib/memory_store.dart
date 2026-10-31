@@ -1,13 +1,22 @@
+import 'dart:io';
 import 'package:path/path.dart' as p;
-import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_sqlcipher/sqflite.dart';
+import 'database_key_storage.dart';
 import 'memory.dart';
 
 class MemoryStore {
   final Database db;
   MemoryStore(this.db);
   static Future<MemoryStore> open() async {
-    final path = p.join(await getDatabasesPath(), 'nai-mobile.db');
-    final database = await openDatabase(path, version: 2, onUpgrade: (db, oldVersion, newVersion) async {
+    final directory = await getDatabasesPath();
+    final legacyPath = p.join(directory, 'nai-mobile.db');
+    if (await File(legacyPath).exists()) {
+      throw StateError('Base anterior en texto claro detectada. Datos conservados; requiere migración segura.');
+    }
+    final path = p.join(directory, 'nai-mobile-encrypted.db');
+    final key = await DatabaseKeyStorage.onDevice()
+      .getOrCreate(databaseExists: await File(path).exists());
+    final database = await openDatabase(path, password: key, version: 2, onUpgrade: (db, oldVersion, newVersion) async {
       if (oldVersion < 2) {
         await db.execute("ALTER TABLE memory RENAME TO memory_legacy");
         await db.execute("CREATE TABLE memory (source TEXT NOT NULL, id TEXT NOT NULL, project TEXT NOT NULL, revision TEXT NOT NULL, content TEXT NOT NULL, deleted INTEGER NOT NULL, PRIMARY KEY(source,id))");
@@ -19,6 +28,12 @@ class MemoryStore {
       await db.execute('CREATE TABLE memory (source TEXT NOT NULL, id TEXT NOT NULL, project TEXT NOT NULL, revision TEXT NOT NULL, content TEXT NOT NULL, deleted INTEGER NOT NULL, PRIMARY KEY(source,id))');
       await db.execute('CREATE INDEX idx_memory_project_source ON memory(project,source,deleted)');
     });
+    final cipher = await database.rawQuery('PRAGMA cipher_version');
+    if (cipher.isEmpty || cipher.first.values.first is! String) {
+      await database.close();
+      throw StateError('SQLCipher no está disponible. La base no se usará.');
+    }
+    await database.execute('PRAGMA secure_delete = ON');
     return MemoryStore(database);
   }
   Future<Map<String,int>> importSnapshot(Snapshot snapshot, {String source='local'}) => db.transaction((tx) async {
