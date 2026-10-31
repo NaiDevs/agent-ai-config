@@ -15,11 +15,13 @@ export async function runDeviceCommand(args, store = new DeviceStore()) {
     const peers = await store.peers();
     return { peers: peers.map(p => ({ deviceId: p.deviceId, name: p.name, permissions: p.permissions, revokedAt: p.revokedAt })) };
   }
+  if (action === 'grant-read' && rest.length >= 2) return store.grantRead(rest[0], rest.slice(1).join(' '));
+  if (action === 'deny-read' && rest.length >= 2) return store.denyRead(rest[0], rest.slice(1).join(' '));
   if (action === 'revoke' && rest.length === 1) {
     await store.revoke(rest[0]);
     return { revoked: rest[0] };
   }
-  throw new Error('Uso: device init NOMBRE | device info | device peers | device revoke DEVICE_ID');
+  throw new Error('Uso: device init NOMBRE | device info | device peers | device revoke DEVICE_ID | device grant-read DEVICE_ID PROJECT | device deny-read DEVICE_ID PROJECT');
 }
 export async function runPairCommand(args, store = new DeviceStore(), now = () => Date.now()) {
   const pairing = new PairSession(store, now);
