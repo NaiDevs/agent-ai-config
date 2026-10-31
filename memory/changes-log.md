@@ -702,3 +702,4 @@
 - 2026-10-31 | agent-ai-config | commit | Corrige cierre del ACK y diagnostica fallo TLS m├│vil (master)
 - 2026-10-31 | agent-ai-config | commit | Agrega transporte TLS m├│vil con autenticaci├│n Ed25519 (master)
 - 2026-10-31 | agent-ai-config | commit | Habilita descarga manual autenticada a SQLCipher (master)
+- 2026-10-31 | agent-ai-config | commit | Documenta sincronizaci├│n cifrada probada en Android (master)
