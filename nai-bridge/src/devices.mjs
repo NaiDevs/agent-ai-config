@@ -14,6 +14,16 @@ function validFilename(name) {
   }
   return name;
 }
+export function validateProjectScope(project) {
+  if (typeof project !== 'string' || !project.trim() || project.length > 160 || /[\r\n\0]/u.test(project)) {
+    throw new Error('Nombre de proyecto invalido.');
+  }
+  return project.trim();
+}
+export function canReadProject(peer, project) {
+  return peer?.revokedAt == null && Array.isArray(peer?.permissions) &&
+    peer.permissions.some(p => p?.action === 'memory.read' && p.project === project);
+}
 export class DeviceStore {
   constructor(root = join(homedir(), '.nai', 'devices')) { this.root = root; }
   async ensureDir() {
@@ -92,6 +102,25 @@ export class DeviceStore {
     if (exists?.publicKey !== undefined && exists.publicKey !== peer.publicKey) throw new Error('Clave del dispositivo cambiada.');
     if (exists && !exists.revokedAt) throw new Error('El dispositivo ya esta emparejado.');
     await this.write('peers.json', { version: 1, peers: [...peers.filter(p => p.deviceId !== peer.deviceId), peer] });
+  }
+  async grantRead(id, project) {
+    const scope = validateProjectScope(project);
+    const peers = await this.peers();
+    const peer = peers.find(p => p.deviceId === id && p.revokedAt == null);
+    if (!peer) throw new Error('Solo se autorizan dispositivos emparejados y activos.');
+    if (canReadProject(peer, scope)) return { deviceId: id, project: scope, granted: false };
+    await this.write('peers.json', { version: 1, peers: peers.map(p =>
+      p.deviceId === id ? { ...p, permissions: [...p.permissions, { action: 'memory.read', project: scope }] } : p) });
+    return { deviceId: id, project: scope, granted: true };
+  }
+  async denyRead(id, project) {
+    const scope = validateProjectScope(project);
+    const peers = await this.peers();
+    const peer = peers.find(p => p.deviceId === id && p.revokedAt == null);
+    if (!peer) throw new Error('Dispositivo activo no encontrado.');
+    await this.write('peers.json', { version: 1, peers: peers.map(p =>
+      p.deviceId === id ? { ...p, permissions: p.permissions.filter(x => !(x?.action === 'memory.read' && x.project === scope)) } : p) });
+    return { deviceId: id, project: scope, allowed: false };
   }
   async revoke(id) {
     const peers = await this.peers();
