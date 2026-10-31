@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'memory.dart';
 import 'memory_store.dart';
 import 'pairing_scanner.dart';
+import 'sync_connection_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,6 +49,7 @@ class _MemoryHomeState extends State<MemoryHome> {
   }
   @override Widget build(BuildContext context)=>Scaffold(
     appBar:AppBar(title:const Text('Nai Mobile'),actions:[
+      IconButton(tooltip:'Conexion TLS segura',onPressed:()=>Navigator.of(context).push(MaterialPageRoute<void>(builder:(_)=>const SyncConnectionPage())),icon:const Icon(Icons.devices)),
       IconButton(tooltip:'Escanear invitación QR',onPressed:()=>Navigator.of(context).push(MaterialPageRoute<void>(builder:(_)=>const PairingScannerPage())),icon:const Icon(Icons.qr_code_scanner)),
       IconButton(onPressed:refresh,icon:const Icon(Icons.refresh))]),
     floatingActionButton:FloatingActionButton.extended(
