@@ -62,3 +62,43 @@ La verificación contra la instalación real de Engram en Windows sigue pendient
 **Advertencia:** la caché contiene textos de memorias sin cifrado propio;
 mantenerla solamente en el dispositivo de confianza y no sincronizarla a Git.
 El bridge sigue escuchando únicamente en localhost.
+
+
+## Iteración 4 — identidades y emparejamiento firmado (offline)
+
+Se añadió `nai-bridge/src/pairing.mjs`, `devices.mjs`,
+`pair-session.mjs` y `device-commands.mjs`.
+
+Los pares usan claves Ed25519 persistentes, invitaciones firmadas que caducan
+en tres minutos, respuestas ligadas a cada invitación, comprobación humana de
+un código de ocho dígitos, confirmación firmada, consumo del estado pendiente
+y revocación. El registro empieza con `permissions: []`: vincular un dispositivo
+NO le concede acceso a memorias ni ejecución de agentes.
+
+Comandos locales de ejemplo:
+```powershell
+cd nai-bridge
+node src/cli.mjs device init "Mi PC"
+node src/cli.mjs device info
+node src/cli.mjs pair invite
+# En otro equipo con Nai Bridge:
+node src/cli.mjs device init "Laptop"
+node src/cli.mjs pair respond "TOKEN_DE_INVITACION"
+# Comparar codigo visible en ambos equipos antes de confirmar
+node src/cli.mjs pair confirm "TOKEN_RESPUESTA" "CODIGO"
+node src/cli.mjs pair finalize "TOKEN_CONFIRMACION" "CODIGO"
+node src/cli.mjs device peers
+node src/cli.mjs device revoke "device:ID"
+```
+
+La aplicación Android, intercambio QR visual, autenticación mutua de transporte,
+canal TLS/Wi-Fi y autorización por proyecto siguen pendientes. Este protocolo
+de identidad por sí solo **no cifra el contenido transportado ni habilita la LAN**.
+
+Las claves privadas quedan en `~/.nai/devices/identity.json`; proteger la cuenta
+local, el disco y respaldos. En Windows comprobar ACL del perfil, en POSIX se
+establecen modos privados. No subir esa carpeta a GitHub. El CLI emite únicamente
+identificadores públicos, tokens de vínculo y códigos temporales.
+
+Pruebas locales en Node 22: 18 tests de emparejamiento superados; integrada con
+el bridge existente, la suite completa pasó con 43 tests en el entorno aislado.
