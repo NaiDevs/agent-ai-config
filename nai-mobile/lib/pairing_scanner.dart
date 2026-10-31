@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'pairing_invitation.dart';
+import 'pairing_reply_page.dart';
 
 class PairingScannerPage extends StatefulWidget {
   const PairingScannerPage({super.key});
@@ -34,8 +35,8 @@ class _PairingScannerPageState extends State<PairingScannerPage> {
       SelectableText(invitation!.deviceId),
       Text('Vence: ${invitation!.expiry.toLocal()}'),
       const SizedBox(height:20),
-      const Text('La invitación tiene formato válido, pero su firma todavía NO ha sido verificada. '
-          'No se ha emparejado ni autorizado ningún dispositivo.'),
+      const Text('El siguiente paso verificará criptográficamente la firma Ed25519 antes de responder.'),
+      FilledButton(onPressed:()=>Navigator.of(context).push(MaterialPageRoute<void>(builder:(_)=>PairingReplyPage(invitation:invitation!))),child:const Text('Verificar firma y generar respuesta')),
       const SizedBox(height:12),
       FilledButton(onPressed:()=>Clipboard.setData(ClipboardData(text:invitation!.deviceId)),
         child:const Text('Copiar ID público')),
