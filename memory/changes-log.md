@@ -692,3 +692,7 @@
 - 2026-10-30 | YALO-SKILLS | commit | docs: integra plugin de lectura POS en skill de base de datos (docs/yalo-pos-readonly-mcp)
 - 2026-10-30 | YALO-PLUGINS | commit | feat: agrega plugin MCP de lectura de producci├│n POS (feat/yalo-pos-readonly-mcp)
 - 2026-10-30 | agent-ai-config | commit | fix: instalar plugin YALO desde setup (feat/yalo-pos-readonly-mcp)
+- 2026-10-30 | agent-ai-config | commit | feat(nai): prepara APK Android y corrige transporte seguro en Windows (master)
+- 2026-10-30 | agent-ai-config | commit | feat(nai-bridge): genera QR temporal para emparejar Android (master)
+- 2026-10-30 | agent-ai-config | commit | feat(nai-mobile): cifra bases nuevas y bloquea datos legacy sin migrar (master)
+- 2026-10-30 | agent-ai-config | commit | docs(nai): registra APK verificado y pasos de prueba f├¡sica (master)
