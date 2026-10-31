@@ -696,3 +696,5 @@
 - 2026-10-30 | agent-ai-config | commit | feat(nai-bridge): genera QR temporal para emparejar Android (master)
 - 2026-10-30 | agent-ai-config | commit | feat(nai-mobile): cifra bases nuevas y bloquea datos legacy sin migrar (master)
 - 2026-10-30 | agent-ai-config | commit | docs(nai): registra APK verificado y pasos de prueba f├¡sica (master)
+- 2026-10-30 | agent-ai-config | commit | fix(nai-mobile): registra fase segura de apertura de base (master)
+- 2026-10-30 | agent-ai-config | commit | fix(nai-mobile): evita PRAGMA incompatible al abrir SQLCipher (master)
