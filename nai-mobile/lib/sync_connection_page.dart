@@ -5,9 +5,12 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'mobile_identity_storage.dart';
 import 'pairing_crypto.dart';
 import 'nai_tls_client.dart';
+import 'nai_sync_client.dart';
+import 'memory_store.dart';
 
 class SyncConnectionPage extends StatefulWidget {
-  const SyncConnectionPage({super.key});
+  final MemoryStore store;
+  const SyncConnectionPage({super.key, required this.store});
   @override State<SyncConnectionPage> createState() => _SyncConnectionPageState();
 }
 class _SyncConnectionPageState extends State<SyncConnectionPage> {
@@ -59,9 +62,8 @@ class _SyncConnectionPageState extends State<SyncConnectionPage> {
         ? {'op': 'manifest', 'project': scope}
         : {'op': 'ping'});
       if (mounted) setState(() => message = manifest
-        ? 'Proyecto autorizado. Memorias: ' + data['count'].toString() +
-          '. Descarga bloqueada hasta validar cifrado local en Android.'
-        : 'Conexion TLS autentica. Descarga deshabilitada.');
+        ? 'Proyecto autorizado. Memorias: ${data['count']}. Descarga manual disponible.'
+        : 'Conexión TLS auténtica. Sin descarga automática.');
     } catch (error) {
       final reason = switch (error) {
         HandshakeException() => 'handshake ${error.osError?.errorCode ?? 0}',
@@ -75,11 +77,50 @@ class _SyncConnectionPageState extends State<SyncConnectionPage> {
       if (mounted) setState(() => busy = false);
     }
   }
+  Future<void> pull() async {
+    if (busy || peer == null) return;
+    final address = host.text.trim();
+    final number = int.tryParse(port.text);
+    final scope = project.text.trim();
+    if (address.isEmpty || address.contains(RegExp(r'[\s/]')) ||
+        number == null || number < 1 || number > 65535 ||
+        scope.isEmpty || scope.length > 160) {
+      setState(() => message = 'Dirección, puerto o proyecto incorrecto.');
+      return;
+    }
+    final approved = await showDialog<bool>(context: context, builder: (dialog) => AlertDialog(
+      title: const Text('Descarga manual cifrada'),
+      content: Text('Se copiarán las memorias autorizadas de "$scope" a la base cifrada de este teléfono.'),
+      actions: [
+        TextButton(onPressed: () => Navigator.pop(dialog, false), child: const Text('Cancelar')),
+        FilledButton(onPressed: () => Navigator.pop(dialog, true), child: const Text('Descargar')),
+      ],
+    ));
+    if (approved != true || !mounted) return;
+    setState(() { busy = true; message = 'Verificando y descargando proyecto'; });
+    try {
+      final identity = await storage.getOrCreate();
+      final client = NaiTlsClient(identity: identity, host: address,
+        port: number, pinnedServerSpki: peer!.publicKey);
+      if (await client.peerId != peer!.deviceId) {
+        throw const FormatException('La PC no coincide con el par verificado.');
+      }
+      final stats = await NaiSyncClient(client, widget.store).pullProject(scope);
+      if (mounted) setState(() => message =
+        'Proyecto verificado e importado a SQLCipher: ${stats['added']} nuevas, '
+        '${stats['updated']} actualizadas, ${stats['unchanged']} sin cambios.');
+    } catch (_) {
+      if (mounted) setState(() => message =
+        'Descarga rechazada. Revisa la conexión, permiso e integridad del proyecto.');
+    } finally {
+      if (mounted) setState(() => busy = false);
+    }
+  }
   @override Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: const Text('Conectar con PC')),
     body: ListView(padding: const EdgeInsets.all(20), children: [
       const Icon(Icons.devices, size: 48),
-      const Text('Solo diagnostico: no descarga memorias.'),
+      const Text('Conexión autenticada y descarga manual a SQLCipher.'),
       if (peer != null) SelectableText(peer!.deviceId),
       TextField(controller: host, decoration: const InputDecoration(
         labelText: 'IP local de la PC', hintText: '192.168.1.10')),
@@ -93,12 +134,14 @@ class _SyncConnectionPageState extends State<SyncConnectionPage> {
         child: const Text('Probar TLS')),
       OutlinedButton(onPressed: busy || peer == null ? null : () => check(true),
         child: const Text('Consultar cantidad de memorias')),
+      OutlinedButton(onPressed: busy || peer == null ? null : pull,
+        child: const Text('Descargar proyecto a base cifrada')),
       if (busy) const LinearProgressIndicator(),
       const SizedBox(height: 12),
       Text(message),
       const SizedBox(height: 20),
-      const Text('La descarga está deshabilitada hasta validar SQLCipher, '
-        'migración y pruebas Android-Windows.'),
+      const Text('Solo proyectos autorizados y descarga manual. '
+        'La base antigua sin cifrar permanece bloqueada hasta una migración segura.'),
     ]),
   );
 }
