@@ -35,3 +35,29 @@ Validación local en Node 22: **13 pruebas pasan** (10 del protocolo, 3 del serv
 ## Seguridad
 
 No agregar memorias privadas, bases Engram, tokens o credenciales al repo público. `sync.ps1` es sincronización Git de Markdown y no debe transportarse automáticamente como memoria P2P. Los endpoints actuales no permiten ejecutar comandos ni descargar memorias.
+
+
+## Iteración 2 — lector Engram en modo lectura
+
+El código oficial de Engram admite `engram export FILE --project NAME`.
+`nai-bridge/src/engram.mjs` interpreta `observations[]` con IDs `sync_id`,
+fechas, títulos, contenido y borrados; ignora sesiones y prompts para la salida.
+**No accede ni modifica la BD directamente y no expone memorias en HTTP**.
+Usa una carpeta temporal privada y la elimina incluso si falla la exportación.
+
+En Windows:
+```powershell
+cd nai-bridge
+node src/cli.mjs doctor
+node src/cli.mjs inspect --project "NOMBRE_REAL_EN_ENGRAM"
+npm test
+```
+
+`inspect` solamente muestra conteos; no imprime el contenido.
+Hay diez pruebas nuevas de parsing, filtrado y seguridad, superadas con fixtures
+sintéticos (más las 13 anteriores: **23/23 pruebas locales**). La ejecución
+real contra Engram en Windows sigue pendiente; respaldar datos antes de probar.
+
+**Limitación causal:** las revisiones hash derivadas de snapshots no incorporan
+ancestros reales de Engram. Hasta implementar un journal/checkpoint seguro,
+no deben enviarse directamente al planificador bidireccional existente.
