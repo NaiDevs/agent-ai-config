@@ -12,7 +12,7 @@ class SyncConnectionPage extends StatefulWidget {
 }
 class _SyncConnectionPageState extends State<SyncConnectionPage> {
   final host = TextEditingController();
-  final port = TextEditingController(text: '4392');
+  final port = TextEditingController(text: '4393');
   final project = TextEditingController();
   final storage = MobileIdentityStorage(const FlutterSecureStorage(), PairingCrypto());
   VerifiedHost? peer;

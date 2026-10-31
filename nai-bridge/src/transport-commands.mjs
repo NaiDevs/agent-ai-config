@@ -1,5 +1,6 @@
 import { DeviceStore } from './devices.mjs';
 import { listenSecure, pingSecure, pullSecure } from './secure-transport.mjs';
+import { listenMobileSecure } from './mobile-transport.mjs';
 
 function parsePort(items, fallback = 4392) {
   const idx = items.indexOf('--port');
@@ -11,19 +12,22 @@ function parsePort(items, fallback = 4392) {
   return port;
 }
 
-export async function runTransportCommand(args, store = new DeviceStore(), transport = { listenSecure, pingSecure, pullSecure }) {
+export async function runTransportCommand(args, store = new DeviceStore(), transport = { listenSecure, listenMobileSecure, pingSecure, pullSecure }) {
   const [action, ...rest] = args;
   if (action === 'serve') {
     const lan = rest.includes('--lan');
     const memory = rest.includes('--memory');
-    const unknown = rest.filter((item, index) => item !== '--lan' && item !== '--memory' && item !== '--port' && rest[index - 1] !== '--port');
-    if (unknown.length || rest.filter(item => item === '--port').length > 1 || rest.filter(item => item === '--lan').length > 1 || rest.filter(item => item === '--memory').length > 1) {
-      throw new Error('Uso: transport serve [--lan] [--memory] [--port 4392]');
+    const mobile = rest.includes('--mobile');
+    const unknown = rest.filter((item, index) => item !== '--lan' && item !== '--memory' && item !== '--mobile' && item !== '--port' && rest[index - 1] !== '--port');
+    if (unknown.length || rest.filter(item => item === '--port').length > 1 || rest.filter(item => item === '--lan').length > 1 || rest.filter(item => item === '--memory').length > 1 || rest.filter(item => item === '--mobile').length > 1) {
+      throw new Error('Uso: transport serve [--mobile] [--lan] [--memory] [--port N]');
     }
-    const port = parsePort(rest);
+    const port = parsePort(rest, mobile ? 4393 : 4392);
     const host = lan ? '0.0.0.0' : '127.0.0.1';
-    const server = await transport.listenSecure(store, { port, host, allowLan: lan, allowMemory: memory });
+    const server = await (mobile ? transport.listenMobileSecure : transport.listenSecure)(store,
+      { port, host, allowLan: lan, allowMemory: memory });
     return { listening: true, tls: '1.3', host, port: server.address().port,
+      protocol: mobile ? 'nai-transport-v2' : 'nai-transport-v1',
       operations: memory ? ['ping','manifest','page'] : ['ping'], memorySync: memory, note: 'Solo dispositivos emparejados; sin acceso a memorias.' };
   }
   if (action === 'ping') {

@@ -33,4 +33,15 @@ void main() {
     expect(response.code,'21456053');
     expect(response.digest,'a34234a70484ad5af29d186a0551617fe5b0c95f333b5f17c2d9d6386bb1ae0c');
   });
+  test('firma de transporte liga nonces y certificado TLS', () async {
+    final identity = await crypto.identityFromSeed('Android Demo', List<int>.filled(32, 0x22));
+    final fields = <Object?>[identity.deviceId, identity.deviceId, 'a' * 32,
+      'b' * 32, 'c' * 64, 'ping', null, null, null];
+    final signature = await crypto.signTransportRequest(identity, fields);
+    await crypto.verifyTransportSignature(identity.publicKey, signature, 'request', fields);
+    final modified = [...fields];
+    modified[4] = 'd' * 64;
+    await expectLater(crypto.verifyTransportSignature(identity.publicKey, signature,
+      'request', modified), throwsFormatException);
+  });
 }

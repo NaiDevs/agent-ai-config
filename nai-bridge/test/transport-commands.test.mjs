@@ -32,6 +32,18 @@ test('transport serve --lan --memory expone solo las operaciones habilitadas', a
   assert.equal(result.memorySync, true);
 });
 
+test('transport serve --mobile usa TLS compatible en puerto separado y sin memorias', async () => {
+  let received;
+  const transport = { listenMobileSecure: async (_, options) => {
+    received = options;
+    return { address: () => ({ port: 4393 }) };
+  } };
+  const result = await runTransportCommand(['serve', '--mobile'], {}, transport);
+  assert.deepEqual(received, { port: 4393, host: '127.0.0.1', allowLan: false, allowMemory: false });
+  assert.equal(result.protocol, 'nai-transport-v2');
+  assert.deepEqual(result.operations, ['ping']);
+});
+
 test('transport rechaza argumentos ambiguos antes de abrir el servidor', async () => {
   const transport = { listenSecure: async () => { throw new Error('No debe escucharse'); } };
   for (const args of [

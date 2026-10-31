@@ -6,6 +6,7 @@ import 'pairing_invitation.dart';
 // Node.js Ed25519 SPKI DER: 302a300506032b6570032100 + 32 bytes.
 const _spkiPrefix = <int>[0x30, 0x2a, 0x30, 0x05, 0x06, 0x03, 0x2b, 0x65, 0x70, 0x03, 0x21, 0x00];
 const _domain = 'nai-pair-v1';
+const _transportDomain = 'nai-transport-v2';
 const _tokenPrefix = 'nai-pair-v1:';
 
 String _hex(List<int> bytes) => bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
@@ -52,6 +53,23 @@ class PairResponse {
 class PairingCrypto {
   final Ed25519 _ed = Ed25519();
   final Sha256 _sha = Sha256();
+
+  Future<void> verifyTransportSignature(String spki, String signature,
+      String kind, List<Object?> fields) async {
+    final signed = Signature(_decodeCanonical(signature, 64),
+      publicKey: SimplePublicKey(_rawPublicKey(spki), type: KeyPairType.ed25519));
+    if (!await _ed.verify(utf8.encode(jsonEncode([_transportDomain, kind, ...fields])),
+        signature: signed)) {
+      throw const FormatException('Firma de transporte invalida.');
+    }
+  }
+
+  Future<String> signTransportRequest(MobileIdentity identity,
+      List<Object?> fields) async {
+    final signed = await _ed.sign(utf8.encode(jsonEncode(
+      [_transportDomain, 'request', ...fields])), keyPair: identity.keyPair);
+    return _b64(signed.bytes);
+  }
 
   Future<String> _shaHex(List<Object?> elements) async {
     final hash = await _sha.hash(utf8.encode(jsonEncode([_domain, ...elements])));
