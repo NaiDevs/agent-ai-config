@@ -700,3 +700,5 @@
 - 2026-10-30 | agent-ai-config | commit | fix(nai-mobile): evita PRAGMA incompatible al abrir SQLCipher (master)
 - 2026-10-31 | agent-ai-config | commit | Ampl├¡a plazo de vinculaci├│n segura a diez minutos (master)
 - 2026-10-31 | agent-ai-config | commit | Corrige cierre del ACK y diagnostica fallo TLS m├│vil (master)
+- 2026-10-31 | agent-ai-config | commit | Agrega transporte TLS m├│vil con autenticaci├│n Ed25519 (master)
+- 2026-10-31 | agent-ai-config | commit | Habilita descarga manual autenticada a SQLCipher (master)
