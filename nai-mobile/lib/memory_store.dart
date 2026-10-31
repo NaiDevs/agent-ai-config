@@ -40,8 +40,6 @@ class MemoryStore {
       await database.close();
       throw StateError('SQLCipher no está disponible. La base no se usará.');
     }
-    phase = 'secure-delete';
-    await database.execute('PRAGMA secure_delete = ON');
     return MemoryStore(database);
     } catch (_) {
       debugPrint('Nai Mobile: apertura de base bloqueada en $phase');
