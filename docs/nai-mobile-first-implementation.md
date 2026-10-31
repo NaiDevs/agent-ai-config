@@ -146,3 +146,46 @@ ni la ejecución de la suite histórica completa después de estos commits.
 **Ningún endpoint entrega memorias, archivos ni comandos por TLS.** El
 emparejamiento solo acredita identidad; falta autorización por proyecto antes
 de activar cualquier transferencia.
+
+
+## Iteración 6 — Permisos por proyecto y descarga cifrada (solo lectura)
+
+Se agregaron `nai-bridge/src/snapshot-wire.mjs` y la operación de transporte
+`manifest` / `page`: se descargan snapshots de memoria mediante TLS 1.3,
+paginados, con hash SHA-256 de integridad y comprobación de identidad. Cada
+solicitud exige un dispositivo activo y autorización `memory.read` para el
+proyecto exacto. Al terminar la lectura se comprueba otra vez que el permiso
+no haya sido revocado. No se sincronizan sesiones, secretos ni prompts de Engram.
+
+**Por defecto, los dispositivos NO pueden descargar memorias aunque estén
+emparejados.** Se requiere tanto habilitar explícitamente el servidor con
+`--memory` como autorizar al dispositivo remoto con `device grant-read`.
+
+```powershell
+# PC con Engram y Nai Bridge (primero generar cache de proyecto)
+node src/cli.mjs snapshot --project "PROYECTO"
+node src/cli.mjs device grant-read "device:ID_DEL_OTRO_EQUIPO" "PROYECTO"
+node src/cli.mjs transport serve --lan --memory --port 4392
+
+# Segundo equipo emparejado
+node src/cli.mjs transport pull "IP_DE_PC" "device:ID_DE_PC" --project "PROYECTO" --port 4392
+
+# Quitar acceso desde PC
+node src/cli.mjs device deny-read "device:ID_DEL_OTRO_EQUIPO" "PROYECTO"
+```
+
+La descarga se guarda en `~/.nai/remote-memories/<device-id>/` del equipo receptor,
+no en la base nativa de Engram. Los snapshots conservan datos en claro localmente
+y se deben proteger con el cifrado y permisos del equipo. El receptor exige
+páginas consecutivas y valida el hash completo antes de persistir datos;
+no acepta automáticamente datos de otros proyectos ni versiones inconsistentes.
+Las ausencias por exportación parcial no borran memorias locales.
+
+**Validación:** 64 pruebas pasaron en el entorno aislado para la implementación
+correspondiente (incluidas 12 de transferencia y permisos). Se añadió un conjunto
+de pruebas de integración al repositorio para revalidación mediante `npm test`
+tras checkout; no se ha verificado CI remoto ni equipos Windows y Android reales.
+
+**Pendientes:** aplicación Android, UI de QR, discovery Wi-Fi, sincronización
+bidireccional/importación Engram, control de conflictos entre varios pares,
+cifrado local en reposo y validación de seguridad del transporte con hardware.
