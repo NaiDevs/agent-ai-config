@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'memory.dart';
 import 'memory_store.dart';
+import 'pairing_scanner.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,6 +48,7 @@ class _MemoryHomeState extends State<MemoryHome> {
   }
   @override Widget build(BuildContext context)=>Scaffold(
     appBar:AppBar(title:const Text('Nai Mobile'),actions:[
+      IconButton(tooltip:'Escanear invitación QR',onPressed:()=>Navigator.of(context).push(MaterialPageRoute<void>(builder:(_)=>const PairingScannerPage())),icon:const Icon(Icons.qr_code_scanner)),
       IconButton(onPressed:refresh,icon:const Icon(Icons.refresh))]),
     floatingActionButton:FloatingActionButton.extended(
       onPressed:busy?null:importFile,icon:const Icon(Icons.file_open),label:const Text('Importar JSON')),
