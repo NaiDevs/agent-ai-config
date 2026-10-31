@@ -4,8 +4,8 @@
 
 - Samsung SM-S921U1, Android 16: emparejamiento PC–Android completo y transporte TLS 1.3 v2 autenticado con identidades Ed25519. El APK debug de CI `41220075374` esta instalado con firma local estable y conserva datos entre actualizaciones.
 - `transport live agent-ai-config` exporto Engram solo tras validar el permiso de lectura del telefono. Android obtuvo un manifiesto de 14 memorias y descargo las 14 a SQLCipher por USB (`adb reverse tcp:4393 tcp:4393`): `14 nuevas, 0 actualizadas, 0 sin cambios`. Tras `am force-stop` y reapertura, las memorias permanecieron visibles. La cabecera de la base comienza `32 11 7b 95`, no `SQLite format 3`.
-- Al terminar, `device deny-read` retiro el permiso; `device peers` confirmo `permissions: []` y el servidor se detuvo. No hay servidor de memoria activo ni permiso de lectura persistente. Suite Bridge 74/74 y Flutter 25/25.
-- Pendiente: LAN directa (la red Wi-Fi no resuelve ARP entre telefono y PC), migracion segura de una base antigua sin cifrar, pruebas de corte durante paginas y revocacion durante transferencia, y firma de una APK de distribucion. Mantener la descarga manual y la base cifrada; no habilitar sincronizacion automatica o escritura remota todavia.
+- Al terminar, `device deny-read` retiro el permiso; `device peers` confirmo `permissions: []` y el servidor se detuvo. No hay servidor de memoria activo ni permiso de lectura persistente. Suite Bridge 75/75 y Flutter 25/25. Una prueba nueva confirma que Bridge corta la respuesta si el permiso se revoca durante la exportacion.
+- Pendiente: LAN directa (la red Wi-Fi no resuelve ARP entre telefono y PC), migracion segura de una base antigua sin cifrar, prueba Android de corte durante paginas y firma de una APK de distribucion. Mantener la descarga manual y la base cifrada; no habilitar sincronizacion automatica o escritura remota todavia.
 
 ## Avance en Android real (2026-10-31)
 

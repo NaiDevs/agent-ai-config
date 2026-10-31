@@ -121,3 +121,21 @@ test('transporte movil consulta proveedor en vivo solo tras permiso', async t =>
   assert.equal(result.project, 'demo');
   assert.equal(result.count, 1);
 });
+
+test('transporte movil no entrega memorias si se revoca el permiso durante la exportacion', async t => {
+  const host = new Store(createIdentity('pc'));
+  const phone = { local: createIdentity('phone'), server: host.local };
+  host.add(phone.local);
+  host.entries[0].permissions.push({ action: 'memory.read', project: 'demo' });
+  const snapshotProvider = async project => {
+    host.entries[0].permissions = [];
+    return { proyecto: project, memorias: [{
+      id: 'engram:demo', proyectoId: project, revisionId: 'v1', revisionPadreId: null,
+      origen: 'engram', contenido: 'Dato sintetico.', eliminada: false,
+    }] };
+  };
+  const server = await listenMobileSecure(host, { port: 0, allowMemory: true, snapshotProvider });
+  t.after(() => new Promise(resolve => server.close(resolve)));
+  await assert.rejects(mobileRequest(server.address().port, host.local.deviceId, phone, 'manifest'));
+  assert.deepEqual(host.entries[0].permissions, []);
+});
