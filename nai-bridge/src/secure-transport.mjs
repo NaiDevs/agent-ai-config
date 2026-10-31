@@ -170,13 +170,13 @@ export async function pullSecure(store, { host, port = 4392, peerId, project,
   const scope = validateProjectScope(project);
   const base = { host, port, peerId };
   const manifest = await requester(store, { ...base, request: { op: 'manifest', project: scope } });
-  if (manifest?.project !== scope || !Number.isInteger(manifest.count) || manifest.count < 0 ||
+  if (manifest?.project !== scope || manifest?.digestVersion !== 2 || !Number.isInteger(manifest.count) || manifest.count < 0 ||
       manifest.count > 100000 || !/^[a-f0-9]{64}$/.test(manifest.etag ?? '')) throw new Error('Manifiesto invalido.');
   const memories = [];
   let offset = 0;
   while (offset < manifest.count) {
     const page = await requester(store, { ...base, request: { op: 'page', project: scope, etag: manifest.etag, offset } });
-    if (page.project !== scope || page.etag !== manifest.etag || page.offset !== offset ||
+    if (page.project !== scope || page.etag !== manifest.etag || page.digestVersion !== 2 || page.offset !== offset ||
         page.total !== manifest.count || !Array.isArray(page.memories) || !page.memories.length) throw new Error('Pagina invalida.');
     const next = offset + page.memories.length;
     if (next > manifest.count || page.nextOffset !== (next === manifest.count ? null : next)) throw new Error('Cursor invalido.');
