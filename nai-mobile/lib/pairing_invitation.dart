@@ -32,7 +32,7 @@ class PairingInvitation {
       throw const FormatException('Campos de invitación inválidos.');
     }
     final current=(now??DateTime.now()).millisecondsSinceEpoch;
-    if (exp<current || exp-current>180000) {
+    if (exp<current || exp-current>600000) {
       throw const FormatException('La invitación está vencida o fuera de plazo.');
     }
     return PairingInvitation(id,key,name,nonce,sig,exp);

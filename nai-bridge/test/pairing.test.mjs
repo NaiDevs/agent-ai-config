@@ -41,7 +41,7 @@ test('Completa invitacion, respuesta y confirmacion firmadas', () => {
   assert.equal(finalizePairing(guest, invite, response, ack, code, NOW + 3).deviceId, host.deviceId);
 });
 test('Expiracion de invitacion', () => {
-  assert.throws(() => respondToInvitation(guest, createInvitation(host, NOW), NOW + 181000), /expirada/);
+  assert.throws(() => respondToInvitation(guest, createInvitation(host, NOW), NOW + 601000), /expirada/);
 });
 test('Firma modificada en invitacion', () => {
   const invite = createInvitation(host, NOW);

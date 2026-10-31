@@ -16,7 +16,7 @@ void main(){
  test('rechaza invitación vencida',()=>expect(
   ()=>PairingInvitation.decode(token(expiry:now-1),now:DateTime.fromMillisecondsSinceEpoch(now)),throwsFormatException));
  test('rechaza invitación demasiado lejana',()=>expect(
-  ()=>PairingInvitation.decode(token(expiry:now+180001),now:DateTime.fromMillisecondsSinceEpoch(now)),throwsFormatException));
+  ()=>PairingInvitation.decode(token(expiry:now+600001),now:DateTime.fromMillisecondsSinceEpoch(now)),throwsFormatException));
  test('rechaza otro tipo de paquete',()=>expect(
   ()=>PairingInvitation.decode(token(kind:'response'),now:DateTime.fromMillisecondsSinceEpoch(now)),throwsFormatException));
  test('rechaza QR no reconocido',()=>expect(

@@ -105,7 +105,7 @@ class PairingCrypto {
   Future<PairResponse> respond(MobileIdentity identity, PairingInvitation invite,
       {DateTime? now}) async {
     final current = (now ?? DateTime.now()).millisecondsSinceEpoch;
-    if (invite.expiresAt < current || invite.expiresAt - current > 180000) {
+    if (invite.expiresAt < current || invite.expiresAt - current > 600000) {
       throw const FormatException('Invitacion vencida.');
     }
     await verifyInvitation(invite);

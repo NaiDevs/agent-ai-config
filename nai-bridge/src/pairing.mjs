@@ -5,7 +5,7 @@ import {
 
 const PREFIX = 'nai-pair-v1:';
 const MAX_TOKEN = 8000;
-const MAX_TTL_MS = 3 * 60 * 1000;
+const MAX_TTL_MS = 10 * 60 * 1000;
 const DOMAIN = 'nai-pair-v1';
 
 function assertion(ok, message = 'Mensaje de emparejamiento invalido.') {

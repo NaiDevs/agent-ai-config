@@ -1,5 +1,13 @@
 # Handoff a Codex - Nai Mobile / Nai Bridge
 
+## Avance en Android real (2026-10-31)
+
+- Samsung SM-S921U1 (Android 16) conectado por ADB. El APK corregido abre la pantalla principal, crea una base SQLCipher con cabecera cifrada y vuelve a abrir tras reiniciar el proceso. No se importaron memorias privadas.
+- El APK debug de CI se firmó localmente con la misma clave de depuración antes de `adb install -r`; conservar esa firma para próximas actualizaciones sin borrar datos. No publicar la clave.
+- El teléfono verificó la invitación Ed25519 de la PC y generó respuesta QR y código de ocho dígitos. Dos intentos de confirmación en Bridge vencieron durante el intercambio; ninguno quedó finalizado en el teléfono. El par anterior se revocó y no tiene permisos de lectura.
+- El plazo de invitación se amplió de tres a diez minutos en Bridge y Flutter; se mantienen firma, nonce, comparación del código y ACK. Falta instalar el nuevo APK y completar un emparejamiento real.
+- Siguiente prueba: emparejar, verificar ACK en Android, `adb reverse tcp:4392 tcp:4392`, iniciar `transport serve --port 4392` solo en loopback y ejecutar el ping TLS desde la pantalla de sincronización. Mantener deshabilitada la descarga de memorias privadas.
+
 ## Avance Windows (2026-10-30)
 
 - Node 22.21.1 y Engram 3.4.0 disponibles. OpenSSL 3.5.4 está instalado con Git en `C:\Program Files\Git\usr\bin`, pero no está en `PATH`; Nai Bridge ahora lo detecta en esa ruta estándar.
