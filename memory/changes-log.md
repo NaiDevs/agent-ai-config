@@ -703,3 +703,4 @@
 - 2026-10-31 | agent-ai-config | commit | Agrega transporte TLS m├│vil con autenticaci├│n Ed25519 (master)
 - 2026-10-31 | agent-ai-config | commit | Habilita descarga manual autenticada a SQLCipher (master)
 - 2026-10-31 | agent-ai-config | commit | Documenta sincronizaci├│n cifrada probada en Android (master)
+- 2026-10-31 | agent-ai-config | commit | Prueba rechazo de identidad falsa y acceso revocado (master)
