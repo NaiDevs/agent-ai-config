@@ -5,7 +5,7 @@ import 'package:nai_mobile/pairing_invitation.dart';
 const now=1700000000000;
 String token({int expiry=now+60000,String kind='invite',String name='PC'}) {
  final value={'version':1,'kind':kind,'deviceId':'device:${'a'*64}',
- 'publicKey':'AQID','name':name,'nonce':'A'*43,'signature':'A'*86,'expiresAt':expiry};
+ 'publicKey':'AQID','name':name,'nonce':List.filled(43,'A').join(),'signature':List.filled(86,'A').join(),'expiresAt':expiry};
  return 'nai-pair-v1:${base64UrlEncode(utf8.encode(jsonEncode(value))).replaceAll('=','')}';
 }
 void main(){
