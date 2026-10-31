@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'memory.dart';
@@ -36,11 +35,11 @@ class _MemoryHomeState extends State<MemoryHome> {
     if(busy)return;
     setState(()=>busy=true);
     try {
-      final selection=await FilePicker.platform.pickFiles(type:FileType.custom,allowedExtensions:['json']);
-      if(selection==null || selection.files.isEmpty)return;
-      final f=selection.files.single;
-      if(f.size>32*1024*1024 || f.path==null) throw const FormatException('Archivo inaccesible o demasiado grande.');
-      final snapshot=Snapshot.parse(await File(f.path!).readAsBytes());
+      final selected=await FilePicker.pickFile(type:FileType.custom,allowedExtensions:['json']);
+      if(selected==null)return;
+      final size=selected.lengthSync() ?? await selected.length();
+      if(size==null || size>32*1024*1024) throw const FormatException('Archivo inaccesible o demasiado grande.');
+      final snapshot=Snapshot.parse(await selected.readAsBytes());
       final stats=await widget.store.importSnapshot(snapshot);
       await refresh();
       note('Importado: ${stats['added']} nuevas, ${stats['updated']} actualizadas.');

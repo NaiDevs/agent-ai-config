@@ -46,7 +46,7 @@ class NaiTlsClient {
       final wire=jsonEncode({'version':1,...payload,'nonce':nonce});
       if(utf8.encode(wire).length>4095) throw const FormatException('Peticion demasiado grande.');
       socket.write('$wire\n');
-      final raw=await socket
+      final raw=await socket.cast<List<int>>()
         .transform(utf8.decoder)
         .transform(const LineSplitter())
         .first.timeout(const Duration(seconds:8));

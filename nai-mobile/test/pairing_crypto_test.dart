@@ -5,7 +5,6 @@ import 'package:nai_mobile/pairing_invitation.dart';
 
 void main() {
   final crypto=PairingCrypto();
-  const now=1700000000000;
   final invite={
     'version':1,'kind':'invite',
     'deviceId':'device:503d8ee46d581c649966569ae095e27041de83322e8e0480e5539e00d2d5d874',
