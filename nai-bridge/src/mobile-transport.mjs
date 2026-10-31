@@ -90,7 +90,7 @@ function verifyRequest(request, helloNonce, serverNonce, certHash, identity, pee
 }
 
 export async function listenMobileSecure(store, { host = '127.0.0.1', port = 4393, allowLan = false,
-  allowMemory = false, snapshotStore = new AlmacenSnapshots() } = {}) {
+  allowMemory = false, snapshotStore = new AlmacenSnapshots(), snapshotProvider } = {}) {
   assertValid(Number.isInteger(port) && port >= 0 && port <= 65535, 'Puerto TLS invalido.');
   assertValid(['127.0.0.1', '0.0.0.0'].includes(host) && (host !== '0.0.0.0' || allowLan), 'LAN requiere --lan.');
   const identity = await store.identity();
@@ -116,7 +116,9 @@ export async function listenMobileSecure(store, { host = '127.0.0.1', port = 439
         assertValid(allowMemory, 'Lectura de memoria deshabilitada.');
         const project = validateProjectScope(request.project);
         assertValid(canReadProject(peer, project), 'Acceso no autorizado.');
-        const snapshot = await readAvailableSnapshot(snapshotStore, project);
+        const snapshot = snapshotProvider
+          ? await snapshotProvider(project)
+          : await readAvailableSnapshot(snapshotStore, project);
         result = request.op === 'manifest' ? describeSnapshot(snapshot, project) :
           pageSnapshot(snapshot, project, request.etag, request.offset);
       }

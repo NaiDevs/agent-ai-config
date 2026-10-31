@@ -10,3 +10,5 @@ En cada conexión, antes de enviar operaciones o memorias:
 4. La respuesta viaja en el mismo canal TLS y refleja el nonce del cliente y el ID del servidor. Las solicitudes no autenticadas se cierran sin respuesta. El intercambio está limitado a una solicitud por conexión y a tramas de tamaño acotado.
 
 El dominio de firmas es `nai-transport-v2`; los campos firmados se codifican como arreglos JSON UTF-8 en orden fijo. `ping` no da acceso a memorias. `manifest` y `page` requieren `--memory` y permiso `memory.read` para el proyecto. El transporte Node anterior en el puerto 4392 conserva su contrato; el móvil usa `transport serve --mobile` en el puerto 4393.
+
+Para un proyecto Engram real, `transport live PROJECT` limita el servidor a ese nombre y lee Engram en cada solicitud después de comprobar el permiso del peer. El archivo temporal de `engram export` se elimina al terminar cada lectura; Bridge no crea otro snapshot persistente. Si Engram cambia entre manifiesto y página, el etag deja de coincidir y Android no escribe nada.

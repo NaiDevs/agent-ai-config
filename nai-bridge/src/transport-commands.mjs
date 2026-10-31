@@ -1,6 +1,7 @@
-import { DeviceStore } from './devices.mjs';
+import { DeviceStore, validateProjectScope } from './devices.mjs';
 import { listenSecure, pingSecure, pullSecure } from './secure-transport.mjs';
 import { listenMobileSecure } from './mobile-transport.mjs';
+import { leerEngramPorProyecto } from './engram.mjs';
 
 function parsePort(items, fallback = 4392) {
   const idx = items.indexOf('--port');
@@ -30,6 +31,27 @@ export async function runTransportCommand(args, store = new DeviceStore(), trans
       protocol: mobile ? 'nai-transport-v2' : 'nai-transport-v1',
       operations: memory ? ['ping','manifest','page'] : ['ping'], memorySync: memory, note: 'Solo dispositivos emparejados; sin acceso a memorias.' };
   }
+  if (action === 'live') {
+    const [name, ...options] = rest;
+    const project = validateProjectScope(name);
+    const lan = options.includes('--lan');
+    const unknown = options.filter((item, index) => item !== '--lan' && item !== '--port' && options[index - 1] !== '--port');
+    if (unknown.length || options.filter(item => item === '--port').length > 1 || options.filter(item => item === '--lan').length > 1) {
+      throw new Error('Uso: transport live PROJECT [--lan] [--port 4393]');
+    }
+    const port = parsePort(options, 4393);
+    const host = lan ? '0.0.0.0' : '127.0.0.1';
+    const snapshotProvider = async scope => {
+      if (scope !== project) throw new Error('Proyecto fuera de alcance.');
+      return leerEngramPorProyecto(project);
+    };
+    const server = await transport.listenMobileSecure(store, {
+      port, host, allowLan: lan, allowMemory: true, snapshotProvider,
+    });
+    return { listening: true, tls: '1.3', host, port: server.address().port,
+      protocol: 'nai-transport-v2', project, operations: ['ping', 'manifest', 'page'],
+      memorySync: true, note: 'Engram en vivo; solo proyecto autorizado; sin cache persistente adicional.' };
+  }
   if (action === 'ping') {
     if (rest.length < 2 || rest.length > 4 || (rest.length > 2 && (rest[2] !== '--port' || rest.length !== 4))) {
       throw new Error('Uso: transport ping HOST DEVICE_ID [--port 4392]');
@@ -43,5 +65,5 @@ export async function runTransportCommand(args, store = new DeviceStore(), trans
     }
     return transport.pullSecure(store, { host: rest[0], peerId: rest[1], project: rest[3], port: parsePort(rest) });
   }
-  throw new Error('Uso: transport serve [--lan] [--memory] [--port N] | transport ping HOST DEVICE_ID [--port N] | transport pull HOST DEVICE_ID --project NAME [--port N]');
+  throw new Error('Uso: transport serve [--mobile] [--lan] [--memory] [--port N] | transport live PROJECT [--lan] [--port N] | transport ping HOST DEVICE_ID [--port N] | transport pull HOST DEVICE_ID --project NAME [--port N]');
 }

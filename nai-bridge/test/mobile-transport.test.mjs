@@ -104,3 +104,20 @@ test('transporte movil rechaza operacion cambiada despues de firmar', async t =>
   await assert.rejects(mobileRequest(server.address().port, host.local.deviceId,
     phone, 'ping', request => { request.op = 'manifest'; request.project = 'demo'; }));
 });
+
+test('transporte movil consulta proveedor en vivo solo tras permiso', async t => {
+  const host = new Store(createIdentity('pc'));
+  const phone = { local: createIdentity('phone'), server: host.local };
+  host.add(phone.local);
+  const snapshotProvider = async project => ({ proyecto: project, memorias: [{
+    id: 'engram:demo', proyectoId: project, revisionId: 'v1', revisionPadreId: null,
+    origen: 'engram', contenido: 'Dato sintetico.', eliminada: false,
+  }] });
+  const server = await listenMobileSecure(host, { port: 0, allowMemory: true, snapshotProvider });
+  t.after(() => new Promise(resolve => server.close(resolve)));
+  await assert.rejects(mobileRequest(server.address().port, host.local.deviceId, phone, 'manifest'));
+  host.entries[0].permissions.push({ action: 'memory.read', project: 'demo' });
+  const result = await mobileRequest(server.address().port, host.local.deviceId, phone, 'manifest');
+  assert.equal(result.project, 'demo');
+  assert.equal(result.count, 1);
+});

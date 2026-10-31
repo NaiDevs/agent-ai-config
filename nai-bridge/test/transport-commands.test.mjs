@@ -44,6 +44,21 @@ test('transport serve --mobile usa TLS compatible en puerto separado y sin memor
   assert.deepEqual(result.operations, ['ping']);
 });
 
+test('transport live limita exportacion Engram al proyecto indicado', async () => {
+  let received;
+  const transport = { listenMobileSecure: async (_, options) => {
+    received = options;
+    return { address: () => ({ port: 4393 }) };
+  } };
+  const result = await runTransportCommand(['live', 'agent-ai-config'], {}, transport);
+  assert.equal(result.project, 'agent-ai-config');
+  assert.equal(result.memorySync, true);
+  assert.deepEqual(result.operations, ['ping', 'manifest', 'page']);
+  assert.equal(received.host, '127.0.0.1');
+  assert.equal(received.allowMemory, true);
+  await assert.rejects(received.snapshotProvider('otro-proyecto'), /fuera de alcance/);
+});
+
 test('transport rechaza argumentos ambiguos antes de abrir el servidor', async () => {
   const transport = { listenSecure: async () => { throw new Error('No debe escucharse'); } };
   for (const args of [
