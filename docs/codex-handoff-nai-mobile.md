@@ -5,8 +5,11 @@
 - Samsung SM-S921U1 (Android 16) conectado por ADB. El APK corregido abre la pantalla principal, crea una base SQLCipher con cabecera cifrada y vuelve a abrir tras reiniciar el proceso. No se importaron memorias privadas.
 - El APK debug de CI se firmó localmente con la misma clave de depuración antes de `adb install -r`; conservar esa firma para próximas actualizaciones sin borrar datos. No publicar la clave.
 - El teléfono verificó la invitación Ed25519 de la PC y generó respuesta QR y código de ocho dígitos. Dos intentos de confirmación en Bridge vencieron durante el intercambio; ninguno quedó finalizado en el teléfono. El par anterior se revocó y no tiene permisos de lectura.
-- El plazo de invitación se amplió de tres a diez minutos en Bridge y Flutter; se mantienen firma, nonce, comparación del código y ACK. Falta instalar el nuevo APK y completar un emparejamiento real.
-- Siguiente prueba: emparejar, verificar ACK en Android, `adb reverse tcp:4392 tcp:4392`, iniciar `transport serve --port 4392` solo en loopback y ejecutar el ping TLS desde la pantalla de sincronización. Mantener deshabilitada la descarga de memorias privadas.
+- El plazo de invitación se amplió de tres a diez minutos en Bridge y Flutter; CI `41216500019` pasó y se instaló el nuevo APK con firma local estable. La app abrió la base cifrada existente sin error.
+- Emparejamiento real completado: Android verificó invitación Ed25519, Bridge verificó respuesta y código `05515667`, y Android guardó el ACK firmado. Tras reiniciar, la pantalla de conexión muestra la PC vinculada. El peer PC no tiene permisos de lectura.
+- Al cerrar el diálogo de ACK apareció una aserción Flutter (`framework.dart`, `_children.contains(child)`), aunque el host quedó persistido. Se cambió el ciclo de vida del controlador y se evitó cerrar la página durante la transición del diálogo; falta verificar el arreglo en el siguiente APK.
+- `adb reverse tcp:4392 tcp:4392` y `transport serve --port 4392` (loopback, solo ping, sin memoria) funcionaron, pero el primer ping Android mostró un error genérico de autenticación. Se agregó diagnóstico sin contenidos privados para identificar si falla el socket, el handshake o la verificación local. Falta repetir TLS con el APK actualizado.
+- Mantener deshabilitada la descarga de memorias privadas; la migración de bases antiguas en texto claro sigue pendiente de diseño y prueba.
 
 ## Avance Windows (2026-10-30)
 

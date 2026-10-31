@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -61,9 +62,15 @@ class _SyncConnectionPageState extends State<SyncConnectionPage> {
         ? 'Proyecto autorizado. Memorias: ' + data['count'].toString() +
           '. Descarga bloqueada hasta validar cifrado local en Android.'
         : 'Conexion TLS autentica. Descarga deshabilitada.');
-    } catch (_) {
+    } catch (error) {
+      final reason = switch (error) {
+        HandshakeException() => 'handshake ${error.osError?.errorCode ?? 0}',
+        SocketException() => 'socket ${error.osError?.errorCode ?? 0}',
+        FormatException() => 'verificación local',
+        _ => error.runtimeType.toString(),
+      };
       if (mounted) setState(() => message =
-        'No se pudo autenticar la PC o no tienes permiso de lectura.');
+        'No se pudo autenticar la PC o no tienes permiso de lectura ($reason).');
     } finally {
       if (mounted) setState(() => busy = false);
     }

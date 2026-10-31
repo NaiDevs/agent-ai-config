@@ -16,8 +16,10 @@ class _PairingReplyPageState extends State<PairingReplyPage> {
   String? error;
   bool busy=true;
   final crypto=PairingCrypto();
+  final ackController=TextEditingController();
   late final storage=MobileIdentityStorage(const FlutterSecureStorage(),crypto);
   @override void initState(){super.initState();prepare();}
+  @override void dispose(){ackController.dispose();super.dispose();}
   Future<void> prepare() async {
     try {
       final identity=await storage.getOrCreate();
@@ -28,15 +30,14 @@ class _PairingReplyPageState extends State<PairingReplyPage> {
   Future<void> confirm() async {
     final r=response;
     if(r==null)return;
-    final controller=TextEditingController();
+    ackController.clear();
     final ack=await showDialog<String>(context:context,builder:(context)=>AlertDialog(
       title:const Text('Confirmación de PC'),
-      content:TextField(controller:controller,decoration:const InputDecoration(
+      content:TextField(controller:ackController,decoration:const InputDecoration(
         labelText:'Token de confirmación (ACK)'),maxLines:3),
       actions:[TextButton(onPressed:()=>Navigator.pop(context),child:const Text('Cancelar')),
-        FilledButton(onPressed:()=>Navigator.pop(context,controller.text.trim()),
+        FilledButton(onPressed:()=>Navigator.pop(context,ackController.text.trim()),
           child:const Text('Verificar'))]));
-    controller.dispose();
     if(ack==null || ack.isEmpty)return;
     try {
       final identity=await storage.getOrCreate();
@@ -44,8 +45,7 @@ class _PairingReplyPageState extends State<PairingReplyPage> {
       await storage.saveVerifiedHost(widget.invitation.deviceId,widget.invitation.publicKey);
       if(!mounted)return;
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content:Text('Confirmación autenticada. Falta integrar TLS Android.')));
-      Navigator.pop(context);
+        content:Text('Confirmación autenticada. Ya puedes probar TLS.')));
     }catch(e){if(mounted)setState(()=>error='$e');}
   }
   @override Widget build(BuildContext context)=>Scaffold(appBar:AppBar(title:const Text('Vinculación segura')),
