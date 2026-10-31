@@ -105,7 +105,7 @@ class _SyncConnectionPageState extends State<SyncConnectionPage> {
       if (await client.peerId != peer!.deviceId) {
         throw const FormatException('La PC no coincide con el par verificado.');
       }
-      final stats = await NaiSyncClient(client, widget.store).pullProject(scope);
+      final stats = await NaiSyncClient(client, widget.store.importSnapshot).pullProject(scope);
       if (mounted) setState(() => message =
         'Proyecto verificado e importado a SQLCipher: ${stats['added']} nuevas, '
         '${stats['updated']} actualizadas, ${stats['unchanged']} sin cambios.');

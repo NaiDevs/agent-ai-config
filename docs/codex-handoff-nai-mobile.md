@@ -17,6 +17,7 @@
 - Queda por probar LAN directa, revocación de peer durante transferencia, interrupción a mitad de páginas, migración segura de la base antigua sin cifrar y sincronización de un proyecto Engram real autorizado. No habilitar sincronización automática ni escritura remota sin diseñar esos casos.
 - Prueba Android de identidad falsa completada: un servidor TLS P-256 efímero en `127.0.0.1:4393` con otra identidad Ed25519 fue rechazado por la app en la verificación local, aun con certificado TLS válido. El servidor falso se detuvo. Pruebas Node adicionales de peer revocado y operación alterada tras firmar pasan; suite Bridge 72/72.
 - LAN directa sigue pendiente: Windows usa Wi-Fi `192.168.1.42` con perfil público y el teléfono estaba solo en datos móviles (`rmnet_data0`, sin Wi-Fi). Se pidió conectar Android a la misma Wi-Fi; no abrir `--lan` hasta poder comprobar la ruta con ping sin memorias.
+- Se inyectó un escritor en `NaiSyncClient` para probar el límite de persistencia sin base real. Pruebas Flutter nuevas confirman que digest incorrecto y página incompleta rechazan la descarga antes de llamar a la escritura; suite Flutter 25/25 y análisis sin errores.
 - Mantener deshabilitada la descarga de memorias privadas; la migración de bases antiguas en texto claro sigue pendiente de diseño y prueba.
 
 ## Avance Windows (2026-10-30)

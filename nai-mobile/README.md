@@ -16,7 +16,7 @@ La descarga valida permiso, identidad de la PC, manifiesto, páginas y digest SH
 ## Verificación
 
 - `cd nai-bridge; npm test`: 72 pruebas, incluidas TLS real, permiso, peer revocado y rechazo de operación alterada.
-- `cd nai-mobile; flutter analyze --no-fatal-infos; flutter test`: análisis sin errores y 22 pruebas.
+- `cd nai-mobile; flutter analyze --no-fatal-infos; flutter test`: análisis sin errores y 25 pruebas, incluidas páginas incompletas y digest incorrecto sin escritura local.
 - GitHub Actions `nai-mobile.yml` ejecución `41220075374`: análisis, pruebas, APK debug y artefacto en verde.
 - Samsung SM-S921U1, Android 16: emparejamiento y ACK firmados; ping TLS móvil real por USB; manifiesto de una memoria sintética; revocación del permiso comprobada; descarga manual de esa memoria a SQLCipher, persistencia tras reiniciar e idempotencia (`0` nuevas, `1` sin cambios). La cabecera de la base tras importar no es `SQLite format 3`.
 - El teléfono rechazó un servidor TLS con certificado P-256 válido pero identidad Ed25519 distinta de la PC emparejada.

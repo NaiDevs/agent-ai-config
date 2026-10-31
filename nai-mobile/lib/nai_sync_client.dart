@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'memory.dart';
 import 'snapshot_digest.dart';
-import 'memory_store.dart';
 import 'nai_tls_client.dart';
+
+typedef SnapshotWriter = Future<Map<String, int>> Function(Snapshot snapshot, {String source});
 
 class NaiSyncClient {
   final NaiTlsClient transport;
-  final MemoryStore store;
-  const NaiSyncClient(this.transport,this.store);
+  final SnapshotWriter writeSnapshot;
+  const NaiSyncClient(this.transport,this.writeSnapshot);
 
   Future<Map<String,int>> pullProject(String project) async {
     if(project.trim().isEmpty || project.length>160) {
@@ -45,6 +46,6 @@ class NaiSyncClient {
       'version': 1, 'proyecto': project, 'memorias': records,
     });
     final snapshot = Snapshot.parse(utf8.encode(snapshotJson));
-    return store.importSnapshot(snapshot, source: await transport.peerId);
+    return writeSnapshot(snapshot, source: await transport.peerId);
   }
 }
