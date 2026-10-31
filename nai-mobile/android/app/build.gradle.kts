@@ -4,6 +4,15 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+val releaseStoreFile = System.getenv("NAI_ANDROID_RELEASE_STORE_FILE")
+val releaseStorePassword = System.getenv("NAI_ANDROID_RELEASE_STORE_PASSWORD")
+val releaseKeyPassword = System.getenv("NAI_ANDROID_RELEASE_KEY_PASSWORD")
+val releaseRequested = gradle.startParameter.taskNames.any { it.contains("Release", ignoreCase = true) }
+if (releaseRequested && (releaseStoreFile.isNullOrBlank() ||
+        releaseStorePassword.isNullOrBlank() || releaseKeyPassword.isNullOrBlank())) {
+    throw GradleException("La compilacion release requiere la clave local NAI_ANDROID_RELEASE_*.")
+}
+
 android {
     namespace = "tech.naidevs.nai_mobile"
     compileSdk = flutter.compileSdkVersion
@@ -29,14 +38,24 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        if (!releaseStoreFile.isNullOrBlank() && !releaseStorePassword.isNullOrBlank() &&
+            !releaseKeyPassword.isNullOrBlank()) {
+            create("naiRelease") {
+                keyAlias = "nai-mobile-release"
+                keyPassword = releaseKeyPassword
+                storeFile = file(releaseStoreFile)
+                storePassword = releaseStorePassword
+            }
+        }
+    }
+
     buildTypes {
         getByName("debug") {
             proguardFiles("proguard-rules.pro")
         }
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.findByName("naiRelease")
             proguardFiles("proguard-rules.pro")
         }
     }

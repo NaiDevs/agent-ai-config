@@ -1,5 +1,13 @@
 # Nai Mobile
 
+## APK de distribución
+
+La versión `0.2.0+2` tiene un APK release instalable en `nai-mobile/build/release/nai-mobile-0.2.0+2.apk` en esta PC. El archivo se genera localmente y está ignorado por Git. Para futuras versiones en Windows, ejecutar `powershell -NoProfile -ExecutionPolicy Bypass -File nai-mobile/scripts/build-release.ps1` desde la raíz del repositorio. El build release falla si falta la clave local; nunca usa la clave debug como sustituto.
+
+La clave release, contraseña y linaje de firma están en `%LOCALAPPDATA%\NaiMobileSigning`, con acceso limitado al usuario y SYSTEM. **Guardar una copia de esa carpeta en un medio seguro fuera del repositorio**: perder la clave impide firmar actualizaciones compatibles. No subir la carpeta ni el APK de transición a GitHub. La firma release tiene SHA-256 `74566ddbc41427c632a397f0af3802928dcfdfbffae1bc30b8c51129e39817b9`.
+
+El Samsung que tenía una instalación debug se actualizó una vez con un APK de transición firmado con linaje Android v3.1. Después aceptó el APK release normal con `adb install -r` y conservó las memorias cifradas. Para instalaciones nuevas, usar solo el APK release normal. El APK de transición se genera únicamente con `-IncludeDebugUpgrade` cuando sea necesario actualizar otra instalación con la firma debug original.
+
 Cliente Flutter Android para consultar memorias offline y descargarlas manualmente desde Nai Bridge. La base nueva usa SQLCipher con clave aleatoria de 256 bits guardada mediante Android Keystore. Si existe la base anterior sin cifrar o falta la clave de una base cifrada, la app conserva los archivos y bloquea la apertura; la migración segura de esa base sigue pendiente.
 
 ## Flujo actual
@@ -17,10 +25,10 @@ La descarga valida permiso, identidad de la PC, manifiesto, páginas y digest SH
 
 ## Verificación
 
-- `cd nai-bridge; npm test`: 72 pruebas, incluidas TLS real, permiso, peer revocado y rechazo de operación alterada.
-- `cd nai-mobile; flutter analyze --no-fatal-infos; flutter test`: análisis sin errores y 25 pruebas, incluidas páginas incompletas y digest incorrecto sin escritura local.
-- GitHub Actions `nai-mobile.yml` ejecución `41220075374`: análisis, pruebas, APK debug y artefacto en verde.
-- Samsung SM-S921U1, Android 16: emparejamiento y ACK firmados; ping TLS móvil real por USB; manifiesto de una memoria sintética; revocación del permiso comprobada; descarga manual de esa memoria a SQLCipher, persistencia tras reiniciar e idempotencia (`0` nuevas, `1` sin cambios). La cabecera de la base tras importar no es `SQLite format 3`.
+- `cd nai-bridge; npm test`: 75 pruebas, incluidas TLS real, permiso, peer revocado y rechazo de operación alterada.
+- `cd nai-mobile; flutter analyze --no-fatal-infos; flutter test`: análisis sin errores y 27 pruebas, incluidas interrupción entre páginas y detección de restos de la base antigua.
+- GitHub Actions `nai-mobile.yml` ejecución `41224806675`: análisis, pruebas, APK debug y artefacto en verde. El APK release `0.2.0+2` se compiló y verificó localmente.
+- Samsung SM-S921U1, Android 16: emparejamiento y ACK firmados; TLS 1.3 real por USB y Wi-Fi directo; importación de 14 memorias Engram a SQLCipher, corte sin escritura parcial, reintento de 25 memorias sintéticas e idempotencia. La base permaneció cifrada y los datos sobrevivieron a la transición de firma y a la instalación del APK release normal.
 - El teléfono rechazó un servidor TLS con certificado P-256 válido pero identidad Ed25519 distinta de la PC emparejada.
 
-Los APK debug de CI reciben una firma distinta por ejecución. Para actualizar una instalación con datos, firmar cada artefacto localmente con la **misma** clave de depuración antes de `adb install -r`. No publicar esa clave ni bases, snapshots o tokens privados. La LAN directa quedó pendiente porque Android no pudo resolver ARP hacia la PC aun estando en la misma subred; la prueba por USB sí pasó. La migración de la base antigua sigue pendiente; usar un proyecto sintético para nuevas pruebas de transporte.
+Los APK debug de CI son solo para pruebas. La migración de una base antigua sin cifrar sigue pendiente; en el Samsung actual solo existe la base SQLCipher. No publicar claves, bases, snapshots ni tokens privados.
