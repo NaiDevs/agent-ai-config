@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as p;
 import 'package:sqflite_sqlcipher/sqflite.dart';
 import 'database_key_storage.dart';
@@ -8,14 +9,19 @@ class MemoryStore {
   final Database db;
   MemoryStore(this.db);
   static Future<MemoryStore> open() async {
+    var phase = 'path';
+    try {
     final directory = await getDatabasesPath();
     final legacyPath = p.join(directory, 'nai-mobile.db');
+    phase = 'legacy-check';
     if (await File(legacyPath).exists()) {
       throw StateError('Base anterior en texto claro detectada. Datos conservados; requiere migración segura.');
     }
     final path = p.join(directory, 'nai-mobile-encrypted.db');
+    phase = 'key';
     final key = await DatabaseKeyStorage.onDevice()
       .getOrCreate(databaseExists: await File(path).exists());
+    phase = 'open';
     final database = await openDatabase(path, password: key, version: 2, onUpgrade: (db, oldVersion, newVersion) async {
       if (oldVersion < 2) {
         await db.execute("ALTER TABLE memory RENAME TO memory_legacy");
@@ -28,13 +34,19 @@ class MemoryStore {
       await db.execute('CREATE TABLE memory (source TEXT NOT NULL, id TEXT NOT NULL, project TEXT NOT NULL, revision TEXT NOT NULL, content TEXT NOT NULL, deleted INTEGER NOT NULL, PRIMARY KEY(source,id))');
       await db.execute('CREATE INDEX idx_memory_project_source ON memory(project,source,deleted)');
     });
+    phase = 'cipher-check';
     final cipher = await database.rawQuery('PRAGMA cipher_version');
     if (cipher.isEmpty || cipher.first.values.first is! String) {
       await database.close();
       throw StateError('SQLCipher no está disponible. La base no se usará.');
     }
+    phase = 'secure-delete';
     await database.execute('PRAGMA secure_delete = ON');
     return MemoryStore(database);
+    } catch (_) {
+      debugPrint('Nai Mobile: apertura de base bloqueada en $phase');
+      rethrow;
+    }
   }
   Future<Map<String,int>> importSnapshot(Snapshot snapshot, {String source='local'}) => db.transaction((tx) async {
     if (source != 'local' && !(source.startsWith('device:') && source.length == 71)) {
