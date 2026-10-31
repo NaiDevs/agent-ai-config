@@ -62,3 +62,12 @@ ni descarga memorias por red. Guardar la identidad del servidor tras verificar
 ACK no equivale a autorizar sincronización. El almacenamiento seguro Android
 depende de las protecciones reales del equipo; no garantiza una clave no
 exportable por hardware.
+
+
+## Iteración TLS Android — implementación experimental
+
+Se añadieron `mobile_client_certificate.dart` (certificado X509 Ed25519 local asociado a la clave de emparejamiento y lectura de SPKI), `nai_tls_client.dart` (cliente TLS 1.3 con pinning estricto del certificado del servidor, nonce de solicitud y validación de respuesta) y `nai_sync_client.dart` (estructura de descarga `manifest`/`page`).
+
+**Bloqueo explícito:** `NaiSyncClient.pullProject()` no escribe memorias en SQLite y falla cerrado hasta implementar y comprobar un hash canónico de snapshots idéntico entre Dart y Node. El cliente TLS tampoco está conectado todavía a un botón de la UI. La generación X509 y el handshake deben verificarse en Flutter y en Android real antes de confiar en ellos; no hay Flutter/Dart SDK en el entorno actual. No afirmar que Android–PC sincroniza todavía.
+
+**Siguiente:** instalar Flutter, ejecutar análisis y pruebas; comprobar certificado Ed25519 con OpenSSL y Node; definir representación canónica y digest SHA-256 interoperables, añadir casos de prueba contra cambios de orden y campos; completar descarga atómica en SQLite por peer/proyecto, permisos y UI.
