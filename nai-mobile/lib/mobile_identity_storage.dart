@@ -2,6 +2,12 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'pairing_crypto.dart';
 
+class VerifiedHost {
+  final String deviceId;
+  final String publicKey;
+  const VerifiedHost({required this.deviceId, required this.publicKey});
+}
+
 class MobileIdentityStorage {
   final FlutterSecureStorage storage;
   final PairingCrypto crypto;
@@ -38,4 +44,25 @@ class MobileIdentityStorage {
     }
     await storage.write(key:peerKey,value:jsonEncode({'deviceId':deviceId,'publicKey':publicKey}));
   }
+  /// Solo recupera identidades que pasaron la verificación de ACK firmado.
+  Future<VerifiedHost?> verifiedHost() async {
+    final raw = await storage.read(key: peerKey);
+    if (raw == null) return null;
+    try {
+      final value = jsonDecode(raw);
+      if (value is! Map<String, dynamic> ||
+          value['deviceId'] is! String || value['publicKey'] is! String) {
+        throw const FormatException('Registro de host invalido.');
+      }
+      final id = value['deviceId'] as String;
+      final publicKey = value['publicKey'] as String;
+      if (await crypto.deviceIdFromPublic(publicKey) != id) {
+        throw const FormatException('Identidad del host inconsistente.');
+      }
+      return VerifiedHost(deviceId: id, publicKey: publicKey);
+    } catch (_) {
+      throw StateError('La identidad de la PC guardada es invalida. No se conectara.');
+    }
+  }
+
 }
