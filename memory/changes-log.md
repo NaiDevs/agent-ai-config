@@ -706,3 +706,5 @@
 - 2026-10-31 | agent-ai-config | commit | Prueba rechazo de identidad falsa y acceso revocado (master)
 - 2026-10-31 | agent-ai-config | commit | Impide escritura local ante descarga incompleta o corrupta (master)
 - 2026-10-31 | agent-ai-config | commit | Permitir lectura segura de Engram en vivo por proyecto (master)
+- 2026-10-31 | agent-ai-config | commit | Registrar sincronizacion Engram real en Android cifrado (master)
+- 2026-10-31 | agent-ai-config | commit | Probar revocacion durante exportacion movil (master)
