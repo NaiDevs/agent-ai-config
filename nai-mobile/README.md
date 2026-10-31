@@ -34,3 +34,31 @@ flutter_secure_storage); esta iteración del escáner no guarda todavía claves
 privadas ni ejecuta operaciones criptográficas. Flutter SDK no está instalado
 en el entorno de construcción actual: `flutter pub get`, `flutter analyze`,
 `flutter test` y `flutter run` siguen pendientes en un equipo con Flutter.
+
+
+## Iteración — Firma real de emparejamiento en Android
+
+Se añadieron `lib/pairing_crypto.dart`, `lib/mobile_identity_storage.dart`
+y `lib/pairing_reply_page.dart`.
+
+- Identidad persistente Ed25519 basada en una semilla de 32 bytes guardada
+  con `flutter_secure_storage`; nunca se imprime ni se incluye en los QR.
+- Validación criptográfica de la invitación de Nai Bridge con Ed25519,
+  certificado SPKI (DER) y correspondencia del ID de dispositivo.
+- Generación de una respuesta firmada `nai-pair-v1` y código humano de
+  ocho dígitos compatible con el protocolo Node.
+- QR de respuesta para mostrar a la PC y verificación de un ACK firmado
+  antes de guardar la identidad del servidor.
+- Test con vectores deterministas derivados de la implementación Node.
+
+**No se han ejecutado pruebas Flutter, Dart ni APK en este entorno.** Ejecutar
+`flutter pub get`, `flutter analyze` y `flutter test` en Windows y revisar
+la interoperabilidad del vector de firma antes de validar la fase.
+Se requiere escaneo de la respuesta desde PC o copiar el token al CLI, y
+copiar la confirmación de vuelta a Android.
+
+**Límites vigentes:** el sistema todavía no realiza TLS mutuo desde Android,
+ni descarga memorias por red. Guardar la identidad del servidor tras verificar
+ACK no equivale a autorizar sincronización. El almacenamiento seguro Android
+depende de las protecciones reales del equipo; no garantiza una clave no
+exportable por hardware.
