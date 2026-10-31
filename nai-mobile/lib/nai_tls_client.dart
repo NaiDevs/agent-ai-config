@@ -14,6 +14,11 @@ class NaiTlsClient {
   const NaiTlsClient({required this.identity,required this.pinnedServerSpki,
     required this.host,this.port=4392});
 
+  Future<String> get peerId async {
+    final bytes = base64Url.decode(base64Url.normalize(pinnedServerSpki));
+    final hash = await Sha256().hash(bytes);
+    return 'device:' + hash.bytes.map((n) => n.toRadixString(16).padLeft(2, '0')).join();
+  }
   Future<Map<String,dynamic>> request(Map<String,Object?> payload) async {
     if (host.isEmpty || host.contains(RegExp(r'[\s/]')) || port<1 || port>65535) {
       throw const FormatException('Direccion del bridge invalida.');
