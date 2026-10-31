@@ -35,3 +35,30 @@ Validación local en Node 22: **13 pruebas pasan** (10 del protocolo, 3 del serv
 ## Seguridad
 
 No agregar memorias privadas, bases Engram, tokens o credenciales al repo público. `sync.ps1` es sincronización Git de Markdown y no debe transportarse automáticamente como memoria P2P. Los endpoints actuales no permiten ejecutar comandos ni descargar memorias.
+
+
+## Iteración 3 — snapshots locales incrementales
+
+Se agregó `nai-bridge/src/snapshot.mjs` y el comando:
+
+```powershell
+cd nai-bridge
+node src/cli.mjs snapshot --project "NOMBRE_REAL_DEL_PROYECTO"
+```
+
+Este comando realiza una exportación local temporal por proyecto y mantiene un
+snapshot privado en `~/.nai/engram-snapshots/` (fuera de Git). Guarda solo
+el último estado conocido de cada memoria y un vínculo con la revisión anterior
+observada, **no** el historial causal completo de Engram. No escribe en Engram.
+
+Reporta cantidades de memorias nuevas, actualizadas, eliminadas explícitamente,
+sin cambios y ausentes. Una ausencia nunca implica eliminación automática.
+No muestra texto de memorias en la consola. Los archivos se escriben mediante
+temporal + rename, tienen límite de tamaño, bloqueo contra escrituras concurrentes
+y validaciones de aislamiento por proyecto.
+
+Se agregaron 12 pruebas adicionales, validadas localmente en Node 22.
+La verificación contra la instalación real de Engram en Windows sigue pendiente.
+**Advertencia:** la caché contiene textos de memorias sin cifrado propio;
+mantenerla solamente en el dispositivo de confianza y no sincronizarla a Git.
+El bridge sigue escuchando únicamente en localhost.
