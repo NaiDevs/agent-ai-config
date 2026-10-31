@@ -29,7 +29,7 @@ function frame(socket) {
     socket.on('data', data); socket.once('close', close); socket.once('error', error);
   });
 }
-async function mobileRequest(port, serverId, client, operation = 'ping') {
+async function mobileRequest(port, serverId, client, operation = 'ping', alter) {
   const socket = tls.connect({ host: '127.0.0.1', port, rejectUnauthorized: false,
     minVersion: 'TLSv1.3', maxVersion: 'TLSv1.3' });
   await once(socket, 'secureConnect');
@@ -56,6 +56,7 @@ async function mobileRequest(port, serverId, client, operation = 'ping') {
       clientNonce, serverNonce, certHash, op: operation,
       ...(project && { project }),
       signature: sign(null, signed('request', fields), createPrivateKey(client.local.privateKey)).toString('base64url') };
+    if (alter) alter(request);
     const pendingReply = frame(socket);
     socket.write(JSON.stringify(request) + '\n');
     return await pendingReply;
@@ -82,4 +83,24 @@ test('transporte movil rechaza cliente desconocido y lectura sin bandera', async
   await assert.rejects(mobileRequest(server.address().port, host.local.deviceId, phone));
   host.add(phone.local);
   await assert.rejects(mobileRequest(server.address().port, host.local.deviceId, phone, 'manifest'));
+});
+
+test('transporte movil corta acceso de par revocado', async t => {
+  const host = new Store(createIdentity('pc'));
+  const phone = { local: createIdentity('phone'), server: host.local };
+  host.add(phone.local);
+  const server = await listenMobileSecure(host, { port: 0 });
+  t.after(() => new Promise(resolve => server.close(resolve)));
+  host.entries[0].revokedAt = Date.now();
+  await assert.rejects(mobileRequest(server.address().port, host.local.deviceId, phone));
+});
+
+test('transporte movil rechaza operacion cambiada despues de firmar', async t => {
+  const host = new Store(createIdentity('pc'));
+  const phone = { local: createIdentity('phone'), server: host.local };
+  host.add(phone.local);
+  const server = await listenMobileSecure(host, { port: 0 });
+  t.after(() => new Promise(resolve => server.close(resolve)));
+  await assert.rejects(mobileRequest(server.address().port, host.local.deviceId,
+    phone, 'ping', request => { request.op = 'manifest'; request.project = 'demo'; }));
 });
