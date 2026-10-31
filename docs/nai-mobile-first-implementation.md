@@ -102,3 +102,47 @@ identificadores públicos, tokens de vínculo y códigos temporales.
 
 Pruebas locales en Node 22: 18 tests de emparejamiento superados; integrada con
 el bridge existente, la suite completa pasó con 43 tests en el entorno aislado.
+
+## Iteración 5 — transporte TLS de pares
+
+Se añadió `nai-bridge/src/secure-transport.mjs`, `transport-commands.mjs`
+y la suite `test/secure-transport.test.mjs`.
+
+- Canal TLS 1.3 con certificados Ed25519 autofirmados **vinculados a las mismas
+  claves públicas utilizadas en el emparejamiento**.
+- No se confía genéricamente en certificados autofirmados: se comprueba la
+  clave SPKI contra el registro local de pares y el ID esperado.
+- Para cada mensaje, se vuelve a verificar que el dispositivo siga autorizado
+  y no haya sido revocado.
+- Comandos `transport serve` y `transport ping` (solo conectividad, ninguna
+  operación de memoria ni ejecución remota).
+- El servicio escucha por defecto en `127.0.0.1:4392`. Escuchar en toda la
+  LAN requiere el parámetro explícito `--lan`.
+- Límites de mensajes (4 KiB), plazo de espera, límite de conexiones y
+  autenticación mutua de pares.
+
+```powershell
+cd nai-bridge
+node src/cli.mjs device init "Mi PC"  # solo una vez, si no existe identidad
+node src/cli.mjs transport serve
+# Para LAN explícita después de emparejar otro dispositivo y revisar firewall:
+node src/cli.mjs transport serve --lan --port 4392
+
+# Desde un segundo equipo emparejado:
+node src/cli.mjs transport ping "IP_DE_LA_PC" "device:ID_DE_LA_PC" --port 4392
+```
+
+**Dependencia:** OpenSSL instalado en el equipo, usado para emitir certificados
+temporales de 30 días que utilizan la clave Ed25519 local; la clave temporal se
+elimina del directorio de generación al completar o fallar. El certificado se
+recrea al iniciar el servicio. El almacén local de identidades sigue siendo
+sensible y debe permanecer protegido.
+
+**Estado y limitaciones:** se probaron nueve casos del transporte de forma
+aislada con Node 22 y OpenSSL en Linux (incluyendo desconocidos, revocación,
+identidad distinta y TLS 1.2). No se verificó todavía el hardware Windows/Android
+ni la ejecución de la suite histórica completa después de estos commits.
+
+**Ningún endpoint entrega memorias, archivos ni comandos por TLS.** El
+emparejamiento solo acredita identidad; falta autorización por proyecto antes
+de activar cualquier transferencia.
