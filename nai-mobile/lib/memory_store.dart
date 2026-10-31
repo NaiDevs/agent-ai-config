@@ -5,6 +5,16 @@ import 'package:sqflite_sqlcipher/sqflite.dart';
 import 'database_key_storage.dart';
 import 'memory.dart';
 
+Future<bool> hasLegacyDatabaseArtifacts(String directory) async {
+  await for (final entry in Directory(directory).list(followLinks: false)) {
+    final name = p.basename(entry.path);
+    if (name == 'nai-mobile.db' || name.startsWith('nai-mobile.db-')) {
+      return true;
+    }
+  }
+  return false;
+}
+
 class MemoryStore {
   final Database db;
   MemoryStore(this.db);
@@ -12,9 +22,8 @@ class MemoryStore {
     var phase = 'path';
     try {
     final directory = await getDatabasesPath();
-    final legacyPath = p.join(directory, 'nai-mobile.db');
     phase = 'legacy-check';
-    if (await File(legacyPath).exists()) {
+    if (await hasLegacyDatabaseArtifacts(directory)) {
       throw StateError('Base anterior en texto claro detectada. Datos conservados; requiere migración segura.');
     }
     final path = p.join(directory, 'nai-mobile-encrypted.db');
