@@ -45,6 +45,6 @@ class NaiSyncClient {
       'version': 1, 'proyecto': project, 'memorias': records,
     });
     final snapshot = Snapshot.parse(utf8.encode(snapshotJson));
-    return store.importSnapshot(snapshot, source: transport.peerId);
+    return store.importSnapshot(snapshot, source: await transport.peerId);
   }
 }
