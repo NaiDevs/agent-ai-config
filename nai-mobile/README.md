@@ -71,3 +71,27 @@ Se añadieron `mobile_client_certificate.dart` (certificado X509 Ed25519 local a
 **Bloqueo explícito:** `NaiSyncClient.pullProject()` no escribe memorias en SQLite y falla cerrado hasta implementar y comprobar un hash canónico de snapshots idéntico entre Dart y Node. El cliente TLS tampoco está conectado todavía a un botón de la UI. La generación X509 y el handshake deben verificarse en Flutter y en Android real antes de confiar en ellos; no hay Flutter/Dart SDK en el entorno actual. No afirmar que Android–PC sincroniza todavía.
 
 **Siguiente:** instalar Flutter, ejecutar análisis y pruebas; comprobar certificado Ed25519 con OpenSSL y Node; definir representación canónica y digest SHA-256 interoperables, añadir casos de prueba contra cambios de orden y campos; completar descarga atómica en SQLite por peer/proyecto, permisos y UI.
+
+
+## Integridad compartida v2 y caché multi-origen
+
+El backend Nai Bridge publica manifiestos y páginas con `digestVersion: 2`.
+El hash SHA-256 usa texto ASCII `NAI-SNAPSHOT-V2\n`, orden ordinal
+por `id`, seis campos en Base64url sin padding (NULL como `~`) y
+un indicador de borrado. `snapshot_digest.dart` genera la misma
+representación. Se incluyen vectores de prueba idénticos en Node y Dart.
+
+`NaiSyncClient.pullProject()` ahora valida la versión del manifiesto y
+cada página, comprueba el digest completo antes de convertir registros
+a snapshot y envía la importación a SQLite mediante una transacción.
+La base migra de la versión 1 a la versión 2 y utiliza una clave
+compuesta `(source,id)`: dos PCs que tengan la misma ID de Engram no
+se sobrescriben. El origen local anterior se preserva como `local`.
+
+La descarga aún **no está conectada a la UI**, y el handshake TLS Android
+no se ha validado físicamente. SQLite no está cifrado por la aplicación:
+NO usar memorias privadas hasta contar con almacenamiento cifrado y
+pruebas Android–Windows. No existe importación a Engram nativo.
+
+Validación: vector SHA-256 calculado con Node 22, tests Node y Dart
+publicados pero suite completa sin ejecutar aquí; Flutter SDK ausente.
