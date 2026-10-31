@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nai_mobile/memory.dart';
 import 'package:nai_mobile/nai_sync_client.dart';
@@ -14,6 +15,28 @@ class FakeTransport extends NaiTlsClient {
   @override Future<String> get peerId async => 'device:${'b' * 64}';
   @override Future<Map<String, dynamic>> request(Map<String, Object?> payload) async =>
     payload['op'] == 'manifest' ? manifest : page;
+}
+
+class PagedTransport extends NaiTlsClient {
+  final Map<String, dynamic> manifest;
+  final Map<int, Map<String, dynamic>> pages;
+  final bool interruptLastPage;
+  PagedTransport(MobileIdentity identity, this.manifest, this.pages,
+      {this.interruptLastPage = false})
+      : super(identity: identity, pinnedServerSpki: identity.publicKey, host: '127.0.0.1');
+
+  @override Future<String> get peerId async => 'device:${'b' * 64}';
+  @override Future<Map<String, dynamic>> request(Map<String, Object?> payload) async {
+    if (payload['op'] == 'manifest') return manifest;
+    final offset = payload['offset'];
+    if (offset is! int || !pages.containsKey(offset)) {
+      throw const FormatException('Cursor inesperado.');
+    }
+    if (interruptLastPage && offset > 0) {
+      throw const SocketException('Conexion interrumpida.');
+    }
+    return pages[offset]!;
+  }
 }
 
 void main() {
@@ -76,5 +99,40 @@ void main() {
     }
     await expectLater(NaiSyncClient(transport, writer).pullProject('demo'), throwsFormatException);
     expect(calls, 0);
+  });
+
+  test('corte tras primera pagina no escribe y reintento importa todo', () async {
+    final (identity, _) = await fixture();
+    final records = List<Map<String, dynamic>>.generate(25, (index) => {
+      ...record,
+      'id': 'engram:demo-$index',
+    });
+    final etag = await snapshotDigestV2(records);
+    final manifest = <String, dynamic>{
+      'project': 'demo', 'count': records.length, 'digestVersion': 2, 'etag': etag,
+    };
+    final pages = <int, Map<String, dynamic>>{
+      0: {'project': 'demo', 'etag': etag, 'total': records.length,
+        'digestVersion': 2, 'offset': 0, 'memories': records.take(24).toList(),
+        'nextOffset': 24},
+      24: {'project': 'demo', 'etag': etag, 'total': records.length,
+        'digestVersion': 2, 'offset': 24, 'memories': records.skip(24).toList(),
+        'nextOffset': null},
+    };
+    var calls = 0;
+    Future<Map<String, int>> writer(Snapshot snapshot, {String source = 'local'}) async {
+      calls++;
+      expect(snapshot.items.length, 25);
+      return {'added': 25, 'updated': 0, 'unchanged': 0};
+    }
+    final interrupted = PagedTransport(identity, manifest, pages, interruptLastPage: true);
+    await expectLater(NaiSyncClient(interrupted, writer).pullProject('demo'),
+      throwsA(isA<SocketException>()));
+    expect(calls, 0);
+
+    final recovered = PagedTransport(identity, manifest, pages);
+    final result = await NaiSyncClient(recovered, writer).pullProject('demo');
+    expect(result['added'], 25);
+    expect(calls, 1);
   });
 }
