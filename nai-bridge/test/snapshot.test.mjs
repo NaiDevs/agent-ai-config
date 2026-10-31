@@ -1,0 +1,20 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { promises as fs } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { AlmacenSnapshots, calcularDeltaSnapshot } from '../src/snapshot.mjs';
+const memo=(id,revisionId='r1',eliminada=false,contenido='decision',proyectoId='ejemplo')=>({id,revisionId,revisionPadreId:null,origen:'engram',proyectoId,contenido,eliminada});
+async function contexto(t){const dir=await fs.mkdtemp(join(tmpdir(),'nai-cache-test-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));return new AlmacenSnapshots(join(dir,'datos'));}
+test('persiste tras reinicio',async t=>{const a=await contexto(t);assert.equal((await a.actualizar({proyecto:'ejemplo',memorias:[memo('a')]})).nuevas,1);assert.equal((await new AlmacenSnapshots(a.directorio).cargar('ejemplo')).memorias.length,1);});
+test('idempotencia',async t=>{const a=await contexto(t);await a.actualizar({proyecto:'ejemplo',memorias:[memo('a')]});assert.equal((await a.actualizar({proyecto:'ejemplo',memorias:[memo('a')]})).sinCambios,1);});
+test('actualizacion con padre',async t=>{const a=await contexto(t);await a.actualizar({proyecto:'ejemplo',memorias:[memo('a')]});await a.actualizar({proyecto:'ejemplo',memorias:[memo('a','r2',false,'nuevo')]});assert.equal((await a.cargar('ejemplo')).memorias[0].revisionPadreId,'r1');});
+test('borrado explicito',async t=>{const a=await contexto(t);await a.actualizar({proyecto:'ejemplo',memorias:[memo('a')]});assert.equal((await a.actualizar({proyecto:'ejemplo',memorias:[memo('a','r2',true,'')]})).eliminadasLogicas,1);});
+test('ausente no borrado',async t=>{const a=await contexto(t);await a.actualizar({proyecto:'ejemplo',memorias:[memo('a')]});assert.equal((await a.actualizar({proyecto:'ejemplo',memorias:[]})).ausentes,1);assert.equal((await a.cargar('ejemplo')).memorias.length,1);});
+test('aislamiento por proyecto',async t=>{const a=await contexto(t);await a.actualizar({proyecto:'../otro',memorias:[memo('a','r1',false,'x','../otro')]});assert.equal((await a.cargar('ejemplo')).memorias.length,0);});
+test('rechazo de otro proyecto',async t=>{const a=await contexto(t);await assert.rejects(a.actualizar({proyecto:'ejemplo',memorias:[memo('x','r1',false,'x','otro')]}),/otro proyecto/);});
+test('conflicto revision igual',()=>assert.throws(()=>calcularDeltaSnapshot([memo('a')],[memo('a','r1',false,'otro')]),/Conflicto/));
+test('cache corrupta no se sobreescribe',async t=>{const a=await contexto(t);await a.asegurarDirectorio();await fs.writeFile(a.ruta('ejemplo'),'corrupta');await assert.rejects(a.actualizar({proyecto:'ejemplo',memorias:[memo('a')]}),/corrupta/);assert.equal(await fs.readFile(a.ruta('ejemplo'),'utf8'),'corrupta');});
+test('bloqueo escritura',async t=>{const a=await contexto(t);await a.asegurarDirectorio();await fs.writeFile(a.ruta('ejemplo')+'.lock','lock');await assert.rejects(a.actualizar({proyecto:'ejemplo',memorias:[memo('a')]}),/bloqueo pendiente/);});
+test('IDs duplicados',async t=>{const a=await contexto(t);await assert.rejects(a.actualizar({proyecto:'ejemplo',memorias:[memo('a'),memo('a')]}),/duplicados/);});
+test('permisos POSIX',async t=>{const a=await contexto(t);await a.actualizar({proyecto:'ejemplo',memorias:[memo('a')]});if(process.platform!=='win32')assert.equal((await fs.stat(a.ruta('ejemplo'))).mode&0o077,0);});

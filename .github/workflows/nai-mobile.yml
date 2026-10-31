@@ -1,0 +1,36 @@
+name: Nai Mobile Flutter checks
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'nai-mobile/**'
+      - '.github/workflows/nai-mobile.yml'
+  workflow_dispatch:
+
+jobs:
+  flutter-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Generate native Android project
+        working-directory: nai-mobile
+        run: flutter create --platforms=android --project-name=nai_mobile --org=tech.naidevs .
+      - name: Resolve dependencies
+        working-directory: nai-mobile
+        run: flutter pub get
+      - name: Analyze Dart
+        working-directory: nai-mobile
+        run: flutter analyze --no-fatal-infos
+      - name: Unit tests
+        working-directory: nai-mobile
+        run: flutter test
+      - name: Build debug APK
+        working-directory: nai-mobile
+        run: flutter build apk --debug
