@@ -716,3 +716,4 @@
 - 2026-10-31 | agent-ai-config | commit | Preparar APK Android release con firma estable y transici├│n segura (master)
 - 2026-11-01 | agent-ai-config | commit | Migrar bases locales antiguas a SQLCipher con verificaci├│n y recuperaci├│n (master)
 - 2026-11-01 | agent-ai-config | commit | Corregir advertencias Dart en migraci├│n cifrada (master)
+- 2026-11-02 | yalo spc delasa | commit | perf(sync): agrega hash a todos los catálogos para evitar upserts innecesarios
