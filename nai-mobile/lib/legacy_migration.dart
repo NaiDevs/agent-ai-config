@@ -55,8 +55,9 @@ Future<int> migrateLegacyDatabase() async {
     if (version != 1 && version != 2) {
       throw StateError('Versión de base anterior no compatible.');
     }
+    final legacyVersion = version!;
     final columns = await old.rawQuery('PRAGMA table_info(memory)');
-    if (!_matchesLegacySchema(columns, version!)) {
+    if (!_matchesLegacySchema(columns, legacyVersion)) {
       throw StateError('Esquema de base anterior no compatible.');
     }
     await _requireIntegrity(old);
@@ -108,7 +109,7 @@ Future<int> migrateLegacyDatabase() async {
       await encrypted.transaction((tx) async {
         await tx.delete('memory');
         for (var offset = 0; ; offset += 200) {
-          final rows = await _readRows(old!, version!, offset);
+          final rows = await _readRows(old!, legacyVersion, offset);
           if (rows.isEmpty) break;
           for (final row in rows) {
             _validateRow(row);
@@ -127,7 +128,7 @@ Future<int> migrateLegacyDatabase() async {
     );
     if (count != copied) throw StateError('El total cifrado no coincide.');
     for (var offset = 0; offset < copied; offset += 200) {
-      final sourceRows = await _readRows(old, version!, offset);
+      final sourceRows = await _readRows(old, legacyVersion, offset);
       final targetRows = await encrypted.rawQuery(
         'SELECT source,id,project,revision,content,deleted FROM memory '
         'ORDER BY source,id LIMIT 200 OFFSET ?',
