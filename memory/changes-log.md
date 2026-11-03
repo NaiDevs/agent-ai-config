@@ -3,6 +3,7 @@
 ## Session 84ee29d2-08e4-4345-ad73-d36dc53bb5de
 
 - 2026-10-25 | yalo agendo | commit | feat(workspace): agrega script de inicio orquestado para workspace local
+- 2026-11-03 | yalo agendo | commit | fix(federation): corrige selección de manifest usando localFederation en lugar de production
 - 2026-10-29 | yalo-trackeo-desktop | commit | feat(updater): chequea actualizaciones al sincronizar, no solo al arranque
 - 2026-10-29 | yalo-trackeo-desktop | commit | feat(timer): acumula tiempo de tickets igual que tareas en el desktop
 - 2026-10-25 | yalo agendo api | commit | feat(certificados): implementa módulo completo de certificados
