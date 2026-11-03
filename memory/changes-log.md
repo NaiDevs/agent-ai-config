@@ -2,6 +2,7 @@
 
 ## Session 84ee29d2-08e4-4345-ad73-d36dc53bb5de
 
+- 2026-11-03 | yalo agendo | commit | feat(agenda): conecta módulo al API Core — reemplaza mock por datos reales
 - 2026-11-03 | yalo agendo api | commit | fix(agenda): corrige DateTime incompatible con timestamp without time zone en AgendaRepository
 - 2026-10-25 | yalo agendo | commit | feat(workspace): agrega script de inicio orquestado para workspace local
 - 2026-11-03 | yalo agendo | commit | fix(federation): corrige selección de manifest usando localFederation en lugar de production
