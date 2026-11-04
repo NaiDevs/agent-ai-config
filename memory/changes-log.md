@@ -10,6 +10,7 @@
 - 2026-10-29 | yalo-trackeo-desktop | commit | feat(timer): acumula tiempo de tickets igual que tareas en el desktop
 - 2026-11-03 | yalo agendo api | commit | feat(agenda): agrega campo Monto con precio de producto en ReservaDto
 - 2026-11-03 | yalo agendo | commit | feat(agenda): muestra monto real de reservas en saldos pendientes
+- 2026-11-04 | yalo agendo | commit | estilo(layout): oculta sync, estado de conexion y selector de caja en topbar
 - 2026-10-25 | yalo agendo api | commit | feat(certificados): implementa módulo completo de certificados
 - 2026-10-25 | yalo mfe catalogo inventario | commit | feat(recursos): conecta módulo con la API real de Yalo Agendo
 - 2026-10-25 | yalo agendo api | commit | feat(recursos): agrega módulo completo de recursos a la API
