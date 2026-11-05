@@ -2,6 +2,7 @@
 
 ## Session 84ee29d2-08e4-4345-ad73-d36dc53bb5de
 
+- 2026-11-05 | labodega ecommerce | commit | fix(badges): muestra etiqueta de descuento desde campos numéricos cuando promotions viene vacío
 - 2026-11-05 | labodega ecommerce | commit | fix(catalogo,modal): etiqueta de descuento en catálogo y login desde modal de bienvenida
 - 2026-11-05 | labodega ecommerce | commit | fix(catalogo): corrige precio con descuento no aplicado al agregar desde catálogo
 - 2026-11-05 | labodega ecommerce | commit | fix(carrito): impide incrementar cantidad de items de reward
