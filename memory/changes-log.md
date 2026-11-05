@@ -2,6 +2,7 @@
 
 ## Session 84ee29d2-08e4-4345-ad73-d36dc53bb5de
 
+- 2026-11-05 | labodega ecommerce | commit | fix(catalogo): corrige precio con descuento no aplicado al agregar desde catálogo
 - 2026-11-05 | labodega ecommerce | commit | fix(carrito): impide incrementar cantidad de items de reward
 - 2026-11-05 | labodega ecommerce | commit | fix(carrito): corrige descuentos de promoción y lógica de items gratis
 - 2026-11-03 | yalo agendo | commit | feat(agenda): conecta módulo al API Core — reemplaza mock por datos reales
