@@ -8,6 +8,8 @@
 - 2026-11-05 | labodega ecommerce | commit | fix(catalogo): corrige precio con descuento no aplicado al agregar desde catálogo
 - 2026-11-05 | labodega ecommerce | commit | fix(carrito): impide incrementar cantidad de items de reward
 - 2026-11-05 | labodega ecommerce | commit | fix(carrito): corrige descuentos de promoción y lógica de items gratis
+- 2026-11-05 | labodega ecommerce | commit | fix(carrito): agrega props de descuento al badge en breakpoint desktop
+- 2026-11-05 | yalo-api-externalservice | commit | fix(pedidos): aplica descuento de producto (PagDescuentos) en BuildCartAsync
 - 2026-11-03 | yalo agendo | commit | feat(agenda): conecta módulo al API Core — reemplaza mock por datos reales
 - 2026-11-03 | yalo agendo api | commit | fix(agenda): corrige DateTime incompatible con timestamp without time zone en AgendaRepository
 - 2026-10-25 | yalo agendo | commit | feat(workspace): agrega script de inicio orquestado para workspace local
