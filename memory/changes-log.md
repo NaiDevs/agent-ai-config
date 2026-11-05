@@ -8,6 +8,7 @@
 - 2026-11-03 | yalo agendo | commit | fix(federation): corrige selección de manifest usando localFederation en lugar de production
 - 2026-10-29 | yalo-trackeo-desktop | commit | feat(updater): chequea actualizaciones al sincronizar, no solo al arranque
 - 2026-10-29 | yalo-trackeo-desktop | commit | feat(timer): acumula tiempo de tickets igual que tareas en el desktop
+- 2026-11-05 | YALO_API_Administrator | commit | fix(reportes): corrige hora de emisión en PDF usando timeZone UTC
 - 2026-11-05 | YALO_API_Administrator | commit | feat(facturas): agrega soporte USD con método de pago y tasa de cambio en reportes
 - 2026-11-05 | YaloConsole | commit | feat(facturas): UI en USD, método de pago, edición y formato de moneda corregidos
 - 2026-11-03 | yalo agendo api | commit | feat(agenda): agrega campo Monto con precio de producto en ReservaDto
