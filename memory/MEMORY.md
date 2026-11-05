@@ -34,3 +34,4 @@
 - [Errores → Slack DM](feedback-slack-errores.md) — ante cualquier error (por mínimo que sea), DM a U07LLJ00WDR en Slack
 - [YALO-API-Soporte](projects-yalo-api-soporte.md) — API interna soporte POS: .NET 10, 4 capas, 3 PostgreSQL + DynamoDB, Read Replica interceptor, tickets SAC↔Jira, Slack, deploy ECS+Terraform
 - [CPA overflow INTEGER clientid](bug-cpa-integer-overflow-clientid.md) — empresa 17 con IDs ~4B explota `::integer` en procesar_ventas; fix: INTEGER→BIGINT en 5 puntos de BD + C#
+- [Cierre de caja YALO POS — arquitectura](decision-yalo-pos-cierre-caja-arquitectura.md) — flujo completo POS vs BO; 2 modos (POST legacy / PUT avanzado), mismo resultado; campos multimoneda ya en DB+API pero no en FE; feature dólares pendiente (8 cambios: BD→API→FE→impresión)
