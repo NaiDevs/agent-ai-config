@@ -752,3 +752,4 @@
 - 2026-11-06 | YaloConsole | commit | feat(organizaciones): integra usuarios en el detalle (development)
 - 2026-11-06 | YaloConsole | commit | mejora(organizaciones): ordena establecimientos y cajas (development)
 - 2026-11-06 | YaloConsole | commit | feat(organizaciones): muestra usuarios por establecimiento (development)
+- 2026-11-06 | YaloConsole | commit | Agrega acciones a dispositivos y usuarios de organizaciones (development)
