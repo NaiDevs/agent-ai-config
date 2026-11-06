@@ -743,3 +743,7 @@
 - 2026-11-02 | yalo spc delasa | commit | perf(sync): persiste token de auth en disco para sobrevivir reciclos de IIS
 - 2026-11-03 | yalo-agendo-api | commit | feat(agenda): agrega módulo de reservas sobre Core DB (YaloCobro)
 - 2026-11-06 | safe.directory=* | commit | fix(sac): restaura el encabezado compartido en main (fix/sac-header-main)
+- 2026-11-06 | YALO_API_Administrator | commit | feat(permisos): agrega acceso a monitoreo en Console (development)
+- 2026-11-06 | YaloConsole | commit | feat(monitoreo): migra panel a Yalo Console (development)
+- 2026-11-06 | yalo console api | commit | feat(permisos): agrega acceso a monitoreo en Console
+- 2026-11-06 | yalo console | commit | feat(monitoreo): migra panel a Yalo Console
