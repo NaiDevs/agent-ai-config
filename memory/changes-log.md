@@ -9,6 +9,7 @@
 - 2026-11-05 | YALO-API-Soporte | commit | feat(sac): agrega endpoints de subida masiva para clientes, productos y materia prima
 - 2026-11-05 | labodega ecommerce | commit | fix(badges): muestra etiqueta de descuento desde campos numéricos cuando promotions viene vacío
 - 2026-11-06 | YaloConsole | commit | feat(sac): corrige subida masiva y agrega dark mode en YaloCobro
+- 2026-11-06 | YALO-API-Soporte | commit | fix(subida-masiva-productos): agrega Venderproducto y Mostrarpos en INSERT
 - 2026-11-05 | labodega ecommerce | commit | fix(catalogo,modal): etiqueta de descuento en catálogo y login desde modal de bienvenida
 - 2026-11-05 | labodega ecommerce | commit | fix(catalogo): corrige precio con descuento no aplicado al agregar desde catálogo
 - 2026-11-05 | labodega ecommerce | commit | fix(carrito): impide incrementar cantidad de items de reward
