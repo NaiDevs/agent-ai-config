@@ -754,3 +754,4 @@
 - 2026-11-06 | YaloConsole | commit | feat(organizaciones): muestra usuarios por establecimiento (development)
 - 2026-11-06 | YaloConsole | commit | Agrega acciones a dispositivos y usuarios de organizaciones (development)
 - 2026-11-06 | YaloConsole | commit | Corrige fondo de men├║s de acciones en organizaciones (development)
+- 2026-11-06 | YaloConsole | commit | Quita pesta├▒a de usuarios del detalle de organizaciones (development)
