@@ -4,6 +4,8 @@
 
 - 2026-11-05 | labodega ecommerce | commit | fix(badges): deriva monto de descuento desde diferencia de precios cuando API omite total_fixed_discount
 - 2026-11-05 | YaloConsole | commit | feat(sac/subida-masiva): agrega 3 tickets de carga masiva (clientes, productos, materia prima)
+- 2026-11-05 | YALO-API-Soporte | commit | feat(ordenes-compra): agrega endpoint para cambiar estado de ordenes de compra
+- 2026-11-05 | YaloConsole | commit | feat(sac/ordenes-compra): agrega ticket cambiar estado de ordenes de compra
 - 2026-11-05 | YALO-API-Soporte | commit | feat(sac): agrega endpoints de subida masiva para clientes, productos y materia prima
 - 2026-11-05 | labodega ecommerce | commit | fix(badges): muestra etiqueta de descuento desde campos numéricos cuando promotions viene vacío
 - 2026-11-05 | labodega ecommerce | commit | fix(catalogo,modal): etiqueta de descuento en catálogo y login desde modal de bienvenida
