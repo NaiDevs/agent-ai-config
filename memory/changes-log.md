@@ -751,3 +751,4 @@
 - 2026-11-06 | YaloConsole | commit | fix(cotizaciones): muestra descripci├│n de equipos en Console (development)
 - 2026-11-06 | YaloConsole | commit | feat(organizaciones): integra usuarios en el detalle (development)
 - 2026-11-06 | YaloConsole | commit | mejora(organizaciones): ordena establecimientos y cajas (development)
+- 2026-11-06 | YaloConsole | commit | feat(organizaciones): muestra usuarios por establecimiento (development)
