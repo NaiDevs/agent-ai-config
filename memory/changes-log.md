@@ -742,3 +742,4 @@
 - 2026-11-02 | yalo spc delasa | commit | perf(sync): agrega hash a todos los catálogos para evitar upserts innecesarios
 - 2026-11-02 | yalo spc delasa | commit | perf(sync): persiste token de auth en disco para sobrevivir reciclos de IIS
 - 2026-11-03 | yalo-agendo-api | commit | feat(agenda): agrega módulo de reservas sobre Core DB (YaloCobro)
+- 2026-11-06 | safe.directory=* | commit | fix(sac): restaura el encabezado compartido en main (fix/sac-header-main)
