@@ -750,3 +750,4 @@
 - 2026-11-06 | YALO_API_Administrator | commit | fix(cotizaciones): muestra descripci├│n de equipos en el reporte (development)
 - 2026-11-06 | YaloConsole | commit | fix(cotizaciones): muestra descripci├│n de equipos en Console (development)
 - 2026-11-06 | YaloConsole | commit | feat(organizaciones): integra usuarios en el detalle (development)
+- 2026-11-06 | YaloConsole | commit | mejora(organizaciones): ordena establecimientos y cajas (development)
