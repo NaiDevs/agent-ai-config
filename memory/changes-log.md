@@ -3,6 +3,7 @@
 ## Session 84ee29d2-08e4-4345-ad73-d36dc53bb5de
 
 - 2026-11-05 | labodega ecommerce | commit | fix(badges): deriva monto de descuento desde diferencia de precios cuando API omite total_fixed_discount
+- 2026-11-07 | labodega ecommerce | commit | fix(checkout): bloquea finalizar con carrito solo-premio y corrige reset de método en modal
 - 2026-11-07 | yalo-trackeo | commit | feat(portal): agrega votos funcionales y modal de sugerencia en portal público
 - 2026-11-07 | yalo-trackeo | commit | fix(triage): corrige asignación de responsable en bandeja de solicitudes
 - 2026-11-07 | yalo-trackeo | commit | fix(settings): corrige config de API que no guardaba hasta el segundo intento
