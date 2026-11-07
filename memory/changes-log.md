@@ -3,6 +3,8 @@
 ## Session 84ee29d2-08e4-4345-ad73-d36dc53bb5de
 
 - 2026-11-05 | labodega ecommerce | commit | fix(badges): deriva monto de descuento desde diferencia de precios cuando API omite total_fixed_discount
+- 2026-11-07 | yalo-trackeo | commit | fix(triage): corrige asignación de responsable en bandeja de solicitudes
+- 2026-11-07 | yalo-trackeo | commit | fix(settings): corrige config de API que no guardaba hasta el segundo intento
 - 2026-11-05 | YaloConsole | commit | feat(sac/subida-masiva): agrega 3 tickets de carga masiva (clientes, productos, materia prima)
 - 2026-11-05 | YALO-API-Soporte | commit | feat(ordenes-compra): agrega endpoint para cambiar estado de ordenes de compra
 - 2026-11-05 | YaloConsole | commit | feat(sac/ordenes-compra): agrega ticket cambiar estado de ordenes de compra
