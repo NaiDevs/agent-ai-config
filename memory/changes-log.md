@@ -8,6 +8,7 @@
 - 2026-11-07 | yalo-trackeo | commit | feat(portal): agrega votos funcionales y modal de sugerencia en portal público
 - 2026-11-07 | yalo-trackeo | commit | fix(triage): corrige asignación de responsable en bandeja de solicitudes
 - 2026-11-07 | yalo-trackeo | commit | fix(settings): corrige config de API que no guardaba hasta el segundo intento
+- 2026-11-10 | labodega ecommerce | commit | fix(card-product): corrige TypeError al leer establishments del response de stock
 - 2026-11-07 | YALO_API_Administrator | commit | feat(contingencias): agrega endpoints de pedidos sin mesa para herramienta SAC
 - 2026-11-07 | YaloConsole | commit | feat(sac): agrega contingencia Limpiar Pedidos Sin Mesa en YaloCobro
 - 2026-11-07 | YaloConsole | commit | feat(org): agrega diagnóstico de dispositivos POS en detalle de establecimiento
