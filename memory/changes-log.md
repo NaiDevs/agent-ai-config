@@ -7,6 +7,7 @@
 - 2026-11-13 | yalo bo api | commit | chore(dev): elimina override de Endpoints:Reporteria en desarrollo
 - 2026-11-13 | yalo bo | commit | fix(ajustes-multimoneda): corrige conversión string→int y carga de tasa como array
 - 2026-11-13 | yalo bo | commit | feat(metodos-pago): agrega moneda de cobro por método de pago con layout compacto
+- 2026-11-13 | yalo bo | commit | feat(ajustes-basicos): agrega pantalla Monedas y tasa de cambio a Configuración general
 - 2026-11-05 | labodega ecommerce | commit | fix(badges): deriva monto de descuento desde diferencia de precios cuando API omite total_fixed_discount
 - 2026-11-12 | yalo trackeo | commit | fix(slack): corrige modal y distribución del botón Tomar caso
 - 2026-11-12 | yalo trackeo | commit | feat(ticket-ingest): soporta multiples canales de Slack para Tomar caso
