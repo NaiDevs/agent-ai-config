@@ -2,6 +2,11 @@
 
 ## Session 84ee29d2-08e4-4345-ad73-d36dc53bb5de
 
+- 2026-11-13 | yalo bo api | commit | fix(multimoneda): corrige GET TasaCambio para retornar lista y buscar por par de monedas
+- 2026-11-13 | yalo bo api | commit | feat(metodos-pago): agrega campo codmoneda a formas de pago
+- 2026-11-13 | yalo bo api | commit | chore(dev): elimina override de Endpoints:Reporteria en desarrollo
+- 2026-11-13 | yalo bo | commit | fix(ajustes-multimoneda): corrige conversión string→int y carga de tasa como array
+- 2026-11-13 | yalo bo | commit | feat(metodos-pago): agrega moneda de cobro por método de pago con layout compacto
 - 2026-11-05 | labodega ecommerce | commit | fix(badges): deriva monto de descuento desde diferencia de precios cuando API omite total_fixed_discount
 - 2026-11-12 | yalo trackeo | commit | fix(slack): corrige modal y distribución del botón Tomar caso
 - 2026-11-12 | yalo trackeo | commit | feat(ticket-ingest): soporta multiples canales de Slack para Tomar caso
