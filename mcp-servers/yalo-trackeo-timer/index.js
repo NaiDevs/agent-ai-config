@@ -18,8 +18,8 @@ function ytPath() {
 
   // dev build: busca relativo al proyecto yalo-trackeo-desktop
   const devBases = [
-    'C:\\Users\\naide\\OneDrive\\Documentos\\Proyectos\\yalo-trackeo-desktop\\src-tauri\\target\\debug\\yt.exe',
-    'C:\\Users\\naide\\OneDrive\\Documentos\\Proyectos\\yalo-trackeo-desktop\\src-tauri\\target\\release\\yt.exe',
+    'C:\\Users\\naide\\OneDrive\\Documentos\\Proyectos\\YALO\\yalo-trackeo-desktop\\src-tauri\\target\\debug\\yt.exe',
+    'C:\\Users\\naide\\OneDrive\\Documentos\\Proyectos\\YALO\\yalo-trackeo-desktop\\src-tauri\\target\\release\\yt.exe',
   ]
   for (const p of devBases) {
     if (existsSync(p)) return p
