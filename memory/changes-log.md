@@ -3,6 +3,7 @@
 ## Session 84ee29d2-08e4-4345-ad73-d36dc53bb5de
 
 - 2026-11-13 | yalo bo api | commit | fix(multimoneda): corrige GET TasaCambio para retornar lista y buscar por par de monedas
+- 2026-11-16 | yalo trackeo | commit | feat(tiempo): modal tipo reporte + resumen mensual + tools MCP subtareas
 - 2026-11-13 | yalo bo api | commit | feat(metodos-pago): agrega campo codmoneda a formas de pago
 - 2026-11-13 | yalo bo api | commit | chore(dev): elimina override de Endpoints:Reporteria en desarrollo
 - 2026-11-13 | yalo bo | commit | fix(ajustes-multimoneda): corrige conversión string→int y carga de tasa como array
