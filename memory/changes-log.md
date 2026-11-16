@@ -4,6 +4,7 @@
 
 - 2026-11-13 | yalo bo api | commit | fix(multimoneda): corrige GET TasaCambio para retornar lista y buscar por par de monedas
 - 2026-11-16 | yalo fe pos | commit | fix(apertura): muestra mensaje cuando no hay turno anterior — YACO-590 Fase 1
+- 2026-11-16 | yalo fe pos | commit | feat(cierre-caja): agrega step "Cuadre por moneda" al wizard multimoneda — YACO-591 Fase 2
 - 2026-11-16 | yalo trackeo | commit | feat(tiempo): modal tipo reporte + resumen mensual + tools MCP subtareas
 - 2026-11-16 | yalo trackeo | commit | feat(desktop): detecta plataforma para descarga correcta por OS
 - 2026-11-16 | yalo trackeo | commit | fix(storage): corrige extensión duplicada en key de S3
