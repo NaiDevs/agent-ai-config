@@ -5,6 +5,7 @@
 - 2026-11-13 | yalo bo api | commit | fix(multimoneda): corrige GET TasaCambio para retornar lista y buscar por par de monedas
 - 2026-11-16 | yalo trackeo | commit | feat(tiempo): modal tipo reporte + resumen mensual + tools MCP subtareas
 - 2026-11-16 | yalo trackeo | commit | feat(desktop): detecta plataforma para descarga correcta por OS
+- 2026-11-16 | yalo trackeo | commit | fix(storage): corrige extensión duplicada en key de S3
 - 2026-11-13 | yalo bo api | commit | feat(metodos-pago): agrega campo codmoneda a formas de pago
 - 2026-11-13 | yalo bo api | commit | chore(dev): elimina override de Endpoints:Reporteria en desarrollo
 - 2026-11-13 | yalo bo | commit | fix(ajustes-multimoneda): corrige conversión string→int y carga de tasa como array
