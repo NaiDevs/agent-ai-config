@@ -779,3 +779,5 @@
 - 2026-11-06 | YaloConsole | commit | Agrega acciones a dispositivos y usuarios de organizaciones (development)
 - 2026-11-06 | YaloConsole | commit | Corrige fondo de men├║s de acciones en organizaciones (development)
 - 2026-11-06 | YaloConsole | commit | Quita pesta├▒a de usuarios del detalle de organizaciones (development)
+
+- 2026-11-17 | yalo api pos | commit | feat(pagos): agrega campos multimoneda en pag_formapagoxfactura — YACO-592 Fase 3 Task 1
