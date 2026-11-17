@@ -781,3 +781,5 @@
 - 2026-11-06 | YaloConsole | commit | Quita pesta├▒a de usuarios del detalle de organizaciones (development)
 
 - 2026-11-17 | yalo api pos | commit | feat(pagos): agrega campos multimoneda en pag_formapagoxfactura — YACO-592 Fase 3 Task 1
+
+- 2026-11-17 | yalo fe pos | commit | feat(pagos): muestra moneda del método y equivalentes USD en cobro — YACO-592 Fase 3 Task 2
