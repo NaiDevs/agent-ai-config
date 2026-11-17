@@ -783,3 +783,5 @@
 - 2026-11-17 | yalo api pos | commit | feat(pagos): agrega campos multimoneda en pag_formapagoxfactura — YACO-592 Fase 3 Task 1
 
 - 2026-11-17 | yalo fe pos | commit | feat(pagos): muestra moneda del método y equivalentes USD en cobro — YACO-592 Fase 3 Task 2
+
+- 2026-11-17 | yalo api pos | commit | feat(facturas): deriva codmoneda del pago desde pag_formaspago — YACO-592 Fase 3 Task 2
