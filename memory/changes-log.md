@@ -793,3 +793,6 @@
 - 2026-11-18 | YALO-API-DataReporteria | commit | fix(docker): usa SDK 9 para compilar reporter├¡a (fix/docker-sdk9-reporteria)
 - 2026-11-18 | yalo reporteria | commit | fix(docker): usa SDK 9 para compilar reportería
 - 2026-11-18 | yalo reporteria | pr | Corrige SDK de compilación en Docker para reportería (#71)
+- 2026-11-18 | YALO-API-DataReporteria | commit | fix(docker): alinea puerto HTTP con ECS (fix/health-port-reporteria)
+- 2026-11-18 | yalo reporteria | commit | fix(docker): alinea puerto HTTP con ECS
+- 2026-11-18 | yalo reporteria | pr | Corrige puerto de escucha de reportería en ECS (#72)
