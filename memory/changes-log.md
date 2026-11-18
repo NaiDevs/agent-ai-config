@@ -10,6 +10,7 @@
 - 2026-11-18 | yalo api pos | commit | fix(formapagos): ordena métodos de pago con Contado primero en GET
 - 2026-11-13 | yalo bo api | commit | fix(multimoneda): corrige GET TasaCambio para retornar lista y buscar por par de monedas
 - 2026-11-17 | yalo fe pos | commit | feat(pagos): YACO-592 Fase 3 — rediseño multimoneda en pantallas de pago
+- 2026-11-18 | yalo fe pos | commit | feat(multimoneda): tasa de cambio en header y equivalentes en cierre de caja
 - 2026-11-16 | yalo fe pos | commit | fix(apertura): muestra mensaje cuando no hay turno anterior — YACO-590 Fase 1
 - 2026-11-16 | yalo fe pos | commit | feat(cierre-caja): agrega step "Cuadre por moneda" al wizard multimoneda — YACO-591 Fase 2
 - 2026-11-16 | yalo trackeo | commit | feat(tiempo): modal tipo reporte + resumen mensual + tools MCP subtareas
