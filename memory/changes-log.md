@@ -802,3 +802,4 @@
 - 2026-11-18 | LaBodegaEcommerce | commit | tarea(home): comenta la secci├│n de productos favoritos (temp/naidelyn/fixes)
 - 2026-11-18 | bodega ecommerce | commit | tarea(home): comenta la sección de productos favoritos
 - 2026-11-18 | bodega bo | commit | tarea(home): comenta la sección de ofertas
+- 2026-11-18 | yalo bo | commit | feat(multimoneda): columna facturado sec. en cierre-caja y fix metodos-pago BO
