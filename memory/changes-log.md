@@ -806,3 +806,5 @@
 - 2026-11-20 | YALO-FE-POS | commit | feat(pos): muestra equivalencia y tasa junto al agregador (feat/naidelyn/pagos-multimoneda)
 - 2026-11-20 | yalo-trackeo | commit | feat(trackeo): mejora ciclos, reportes y carga de datos (feat-mcp-servidor)
 - 2026-11-20 | yalo-trackeo | commit | feat(trackeo): mejora ciclos, reportes y carga de datos
+- 2026-11-20 | yalo-trackeo | commit | fix(trackeo): conserva filtros y scroll; admite documentos en QA (feat-mcp-servidor)
+- 2026-11-20 | yalo-trackeo | commit | fix(trackeo): conserva filtros y scroll; admite documentos en QA
