@@ -804,3 +804,5 @@
 - 2026-11-18 | bodega bo | commit | tarea(home): comenta la sección de ofertas
 - 2026-11-18 | yalo bo | commit | feat(multimoneda): columna facturado sec. en cierre-caja y fix metodos-pago BO
 - 2026-11-20 | YALO-FE-POS | commit | feat(pos): muestra equivalencia y tasa junto al agregador (feat/naidelyn/pagos-multimoneda)
+- 2026-11-20 | yalo-trackeo | commit | feat(trackeo): mejora ciclos, reportes y carga de datos (feat-mcp-servidor)
+- 2026-11-20 | yalo-trackeo | commit | feat(trackeo): mejora ciclos, reportes y carga de datos
