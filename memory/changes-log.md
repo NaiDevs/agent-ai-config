@@ -808,3 +808,5 @@
 - 2026-11-20 | yalo-trackeo | commit | feat(trackeo): mejora ciclos, reportes y carga de datos
 - 2026-11-20 | yalo-trackeo | commit | fix(trackeo): conserva filtros y scroll; admite documentos en QA (feat-mcp-servidor)
 - 2026-11-20 | yalo-trackeo | commit | fix(trackeo): conserva filtros y scroll; admite documentos en QA
+- 2026-11-20 | yalo-trackeo | commit | fix(tareas): conserva posici├│n al volver y cambiar estado (feat-mcp-servidor)
+- 2026-11-20 | yalo-trackeo | commit | fix(tareas): conserva posición al volver y cambiar estado
