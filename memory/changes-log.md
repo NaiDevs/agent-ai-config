@@ -8,6 +8,8 @@
 - 2026-11-18 | yalo fe pos | commit | feat(pagos): agrega soporte Efectivo EUR en pantalla de métodos y cobro
 - 2026-11-18 | yalo bo | commit | fix(metodos-pago): corrige creación y orden de Efectivo secundario en BO
 - 2026-11-18 | yalo bo api | commit | fix(multimoneda): auto-crea Efectivo EUR copiando campos del Efectivo primario
+- 2026-11-21 | yalo console | commit | feat(metabase): rediseña módulo de reportes y corrige flujo de compartir
+- 2026-11-21 | yalo api administrator | commit | feat(metabase): reemplaza export xlsx con ExcelJS y agrega endpoint subscriptions
 - 2026-11-18 | yalo api pos | commit | fix(formapagos): ordena métodos de pago con Contado primero en GET
 - 2026-11-13 | yalo bo api | commit | fix(multimoneda): corrige GET TasaCambio para retornar lista y buscar por par de monedas
 - 2026-11-17 | yalo fe pos | commit | feat(pagos): YACO-592 Fase 3 — rediseño multimoneda en pantallas de pago
