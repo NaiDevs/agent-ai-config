@@ -811,3 +811,4 @@
 - 2026-11-20 | yalo-trackeo | commit | fix(trackeo): conserva filtros y scroll; admite documentos en QA
 - 2026-11-20 | yalo-trackeo | commit | fix(tareas): conserva posici├│n al volver y cambiar estado (feat-mcp-servidor)
 - 2026-11-20 | yalo-trackeo | commit | fix(tareas): conserva posición al volver y cambiar estado
+- 2026-11-21 | YALO-FE-POS | commit | feat(pos): actualiza administraci├│n, historial y devoluciones (feat/naidelyn/pagos-multimoneda)
