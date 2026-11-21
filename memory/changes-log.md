@@ -816,3 +816,5 @@
 - 2026-11-21 | YALO-FE-POS | commit | feat(pos): actualiza administraci├│n, historial y devoluciones (feat/naidelyn/pagos-multimoneda)
 - 2026-11-21 | YALO-API-POS | commit | feat(multimoneda): agrega egresos por divisa y totales de cierres (feat/naidelyn/pagos-multimoneda)
 - 2026-11-21 | YALO-FE-POS | commit | fix(pagos): corrige pago dividido y unifica cobros parciales (feat/naidelyn/pagos-multimoneda)
+- 2026-11-21 | YaloConsole | commit | fix(sac): corrige carga incompleta de productos en 3 componentes
+
