@@ -821,3 +821,8 @@
 
 - 2026-11-21 | YALO-API-Soporte | commit | feat(transferencia): admite origen eliminado y resuelve conflictos de precios (feat/naidelyn)
 - 2026-11-21 | YaloConsole | commit | feat(console): mejora transferencia y adapta establecimientos al modo oscuro (development)
+- 2026-11-22 | YALO_API_Administrator | commit | fix(diagn├│stico): propaga l├¡mite de consultas de Soporte (feat/naidelyn/diagnostico)
+- 2026-11-22 | YALO-API-SignalR | commit | feat(diagn├│stico): registra POS y despacha consultas dirigidas (feat/naidelyn/diagnostico)
+- 2026-11-22 | YALO-API-Soporte | commit | feat(diagn├│stico): agrega contrato, persistencia y API para POS (feat/naidelyn/diagnostico)
+- 2026-11-22 | YaloConsole | commit | fix(diagn├│stico): distingue puntos de emisi├│n de POS f├¡sicos (feat/naidelyn/diagnostico)
+- 2026-11-22 | YALO-FE-POS | commit | feat(diagn├│stico): responde consultas dirigidas desde el POS (feat/naidelyn/diagnostico)
