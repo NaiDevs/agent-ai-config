@@ -826,3 +826,8 @@
 - 2026-11-22 | YALO-API-Soporte | commit | feat(diagn├│stico): agrega contrato, persistencia y API para POS (feat/naidelyn/diagnostico)
 - 2026-11-22 | YaloConsole | commit | fix(diagn├│stico): distingue puntos de emisi├│n de POS f├¡sicos (feat/naidelyn/diagnostico)
 - 2026-11-22 | YALO-FE-POS | commit | feat(diagn├│stico): responde consultas dirigidas desde el POS (feat/naidelyn/diagnostico)
+- 2026-11-22 | YALO-API-Soporte | commit | fix(diagnostico): reutiliza token existente para SignalR (feat/naidelyn/diagnostico)
+- 2026-11-22 | YALO-API-SignalR | commit | fix(diagnostico): protege despacho con token existente (feat/naidelyn/diagnostico)
+- 2026-11-22 | YALO-FE-POS | commit | fix(diagnostico): ajusta contrato del comando SignalR (feat/naidelyn/diagnostico)
+- 2026-11-22 | YALO_API_Administrator | commit | fix(diagnostico): reutiliza clave de Soporte de Console (feat/naidelyn/diagnostico)
+- 2026-11-22 | YaloConsole | commit | fix(diagnostico): reutiliza clave existente de Soporte (feat/naidelyn/diagnostico)
