@@ -819,3 +819,5 @@
 - 2026-11-21 | YaloConsole | commit | fix(sac): corrige carga incompleta de productos en 3 componentes
 - 2026-11-21 | YaloConsole | commit | fix(sac): pasa pageSize=10000 a /api/Empresa para superar límite de 100
 
+- 2026-11-21 | YALO-API-Soporte | commit | feat(transferencia): admite origen eliminado y resuelve conflictos de precios (feat/naidelyn)
+- 2026-11-21 | YaloConsole | commit | feat(console): mejora transferencia y adapta establecimientos al modo oscuro (development)
