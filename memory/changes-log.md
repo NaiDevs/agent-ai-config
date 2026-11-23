@@ -8,6 +8,7 @@
 - 2026-11-18 | yalo fe pos | commit | feat(pagos): agrega soporte Efectivo EUR en pantalla de métodos y cobro
 - 2026-11-18 | yalo bo | commit | fix(metodos-pago): corrige creación y orden de Efectivo secundario en BO
 - 2026-11-18 | yalo bo api | commit | fix(multimoneda): auto-crea Efectivo EUR copiando campos del Efectivo primario
+- 2026-11-23 | yalo-trackeo | commit | feat(equipo): límite diario de tareas por rol, budget de horas y roles al invitar
 - 2026-11-23 | yalo fe pos | commit | fix(multimoneda): corrige conversión L→USD y mejoras de cierre de caja
 - 2026-11-21 | yalo console | commit | feat(metabase): rediseña módulo de reportes y corrige flujo de compartir
 - 2026-11-21 | yalo api administrator | commit | feat(metabase): reemplaza export xlsx con ExcelJS y agrega endpoint subscriptions
