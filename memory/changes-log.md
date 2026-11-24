@@ -833,3 +833,4 @@
 - 2026-11-22 | YALO-FE-POS | commit | fix(diagnostico): ajusta contrato del comando SignalR (feat/naidelyn/diagnostico)
 - 2026-11-22 | YALO_API_Administrator | commit | fix(diagnostico): reutiliza clave de Soporte de Console (feat/naidelyn/diagnostico)
 - 2026-11-22 | YaloConsole | commit | fix(diagnostico): reutiliza clave existente de Soporte (feat/naidelyn/diagnostico)
+- 2026-11-23 | yalo-trackeo | commit | fix(tiempo+tareas): conserva filtros de Tiempo y abre tarea al crearla
