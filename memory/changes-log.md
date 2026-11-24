@@ -837,3 +837,7 @@
 - 2026-11-23 | yalo-trackeo | commit | fix(tiempo+tareas): conserva filtros de Tiempo y abre tarea al crearla
 
 - 2026-11-24 | yalo reporteria | commit | fix(liquidaciones-pdf): ajusta PDF a carta, pie por repartidor y firma en ultima pagina
+- 2026-11-24 | yalo-trackeo | commit | fix(cuentas): limita consultas repetidas a la API (feat-mcp-servidor)
+- 2026-11-24 | yalo-trackeo | commit | fix(qa): permite completar casos sin adjuntar evidencia (feat-mcp-servidor)
+- 2026-11-24 | yalo trackeo | commit | fix(cuentas): limita consultas repetidas a la API
+- 2026-11-24 | yalo trackeo | commit | fix(qa): permite completar casos sin adjuntar evidencia
