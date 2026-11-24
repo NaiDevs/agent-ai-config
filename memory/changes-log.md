@@ -3,6 +3,7 @@
 ## Session 84ee29d2-08e4-4345-ad73-d36dc53bb5de
 
 - 2026-11-18 | yalo api pos | commit | feat(multimoneda): agrega tabla y endpoint de denominaciones por moneda
+- 2026-11-24 | yalo bo api | commit | fix(liquidaciones,pedidos): corrige estados y sync de ruta al liquidar y cancelar
 - 2026-11-20 | agent-ai-config | commit | feat(commands): agrega skill ticketero para resolver orgs desde tickets SAC
 - 2026-11-18 | yalo fe pos | commit | feat(cierre-caja): consume denominaciones desde BD en lugar de arrays hardcodeados
 - 2026-11-18 | yalo fe pos | commit | feat(pagos): agrega soporte Efectivo EUR en pantalla de métodos y cobro
