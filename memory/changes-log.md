@@ -848,3 +848,4 @@
 - 2026-11-25 | yalo reporteria | commit | fix(facturas): muestra equivalencia del pago en segunda moneda
 - 2026-11-25 | YALO-API-DataReporteria | commit | fix(facturas): alinea simbolos con moneda principal del POS (fix/health-port-reporteria)
 - 2026-11-25 | yalo reporteria | commit | fix(facturas): alinea simbolos con moneda principal del POS
+- 2026-11-25 | YALO-API-DataReporteria | commit | fix(facturas): corrige total y cambio en moneda secundaria (fix/health-port-reporteria)
