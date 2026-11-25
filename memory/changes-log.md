@@ -849,3 +849,7 @@
 - 2026-11-25 | YALO-API-DataReporteria | commit | fix(facturas): alinea simbolos con moneda principal del POS (fix/health-port-reporteria)
 - 2026-11-25 | yalo reporteria | commit | fix(facturas): alinea simbolos con moneda principal del POS
 - 2026-11-25 | YALO-API-DataReporteria | commit | fix(facturas): corrige total y cambio en moneda secundaria (fix/health-port-reporteria)
+- 2026-11-25 | YALO-FE-POS | commit | fix(cierres): corrige efectivo y s├¡mbolos por moneda (feat/naidelyn/ticket-cierres)
+- 2026-11-25 | YALO-FE-POS | commit | fix(facturas): corrige equivalencias y env├¡o por WhatsApp (feat/naidelyn/ticket-cierres)
+- 2026-11-25 | YALO-FE-POS | commit | fix(pagos): unifica tarjetas del cobro adicional (feat/naidelyn/ticket-cierres)
+- 2026-11-25 | YALO-FE-POS | commit | fix(devtools): conserva logs del POS en el panel (feat/naidelyn/ticket-cierres)
