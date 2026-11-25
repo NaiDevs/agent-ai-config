@@ -842,3 +842,7 @@
 - 2026-11-24 | yalo trackeo | commit | fix(cuentas): limita consultas repetidas a la API
 - 2026-11-24 | yalo trackeo | commit | fix(qa): permite completar casos sin adjuntar evidencia
 - 2026-11-24 | yalo-trackeo | commit | feat(mcp): conecta cada usuario y comparte token entre workspaces (feat-mcp-servidor)
+- 2026-11-25 | YALO-API-DataReporteria | commit | fix(cierres): corrige desglose multimoneda del cierre de caja (fix/health-port-reporteria)
+- 2026-11-25 | yalo reporteria | commit | fix(cierres): corrige desglose multimoneda del cierre de caja
+- 2026-11-25 | YALO-API-DataReporteria | commit | fix(facturas): muestra equivalencia del pago en segunda moneda (fix/health-port-reporteria)
+- 2026-11-25 | yalo reporteria | commit | fix(facturas): muestra equivalencia del pago en segunda moneda
