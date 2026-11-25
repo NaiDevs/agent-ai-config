@@ -846,3 +846,5 @@
 - 2026-11-25 | yalo reporteria | commit | fix(cierres): corrige desglose multimoneda del cierre de caja
 - 2026-11-25 | YALO-API-DataReporteria | commit | fix(facturas): muestra equivalencia del pago en segunda moneda (fix/health-port-reporteria)
 - 2026-11-25 | yalo reporteria | commit | fix(facturas): muestra equivalencia del pago en segunda moneda
+- 2026-11-25 | YALO-API-DataReporteria | commit | fix(facturas): alinea simbolos con moneda principal del POS (fix/health-port-reporteria)
+- 2026-11-25 | yalo reporteria | commit | fix(facturas): alinea simbolos con moneda principal del POS
