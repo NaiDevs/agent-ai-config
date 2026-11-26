@@ -859,3 +859,7 @@
 - 2026-11-26 | YaloConsole | commit | feat(bitacoras): describir eventos de pedido en lenguaje claro (YA-143) (fix/naidelyn/contingencias-yalovendo)
 - 2026-11-26 | YALO_API_Administrator | commit | refactor(contingencias): retirar endpoints de actualizaci├│n de clientes (YA-144) (feat/naidelyn/contingencias-yalovendo)
 - 2026-11-26 | YaloConsole | commit | refactor(contingencias): retirar edici├│n de clientes de la consola (YA-144) (fix/naidelyn/contingencias-yalovendo)
+- 2026-11-26 | YaloPOSBackofficeAPI | commit | feat(multimoneda): guarda moneda de cierre y factura por c├│digo (feat/naidelyn/cierres)
+- 2026-11-26 | YALO-API-POS | commit | feat(multimoneda): expone configuraci├│n y moneda de pagos (feat/naidelyn/pagos-multimoneda)
+- 2026-11-26 | YaloPOSBackoffice | commit | feat(multimoneda): configura moneda de cierres y facturas (feat/naidelyn/cierres)
+- 2026-11-26 | YALO-FE-POS | commit | feat(multimoneda): muestra pagos seg├║n moneda configurada (feat/naidelyn/ticket-cierres)
