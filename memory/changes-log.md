@@ -867,3 +867,5 @@
 - 2026-11-26 | yalo api pos | commit | feat(multimoneda): expone configuración y moneda de pagos (a931c6e)
 - 2026-11-26 | yalo bo | commit | feat(multimoneda): configura moneda de cierres y facturas (24233db0)
 - 2026-11-26 | yalo fe pos | commit | feat(multimoneda): muestra pagos según moneda configurada (3f76e4dc0)
+- 2026-11-26 | YaloPOSBackoffice | commit | fix(cierres): ampl├¡a y ajusta vista previa del cierre (feat/naidelyn/cierres)
+- 2026-11-26 | yalo bo | commit | fix(cierres): amplía y ajusta vista previa del cierre (db5d7dcb)
