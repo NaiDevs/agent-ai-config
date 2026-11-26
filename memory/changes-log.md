@@ -855,3 +855,5 @@
 - 2026-11-25 | YALO-FE-POS | commit | fix(devtools): conserva logs del POS en el panel (feat/naidelyn/ticket-cierres)
 - 2026-11-26 | YALO_API_Administrator | commit | feat(contingencias): paginar pedidos del cliente y validar actualizaci├│n (YA-143, YA-144) (feat/naidelyn/contingencias-yalovendo)
 - 2026-11-26 | YaloConsole | commit | feat(contingencias): completar bit├ícora y edici├│n de clientes (YA-143, YA-144) (fix/naidelyn/contingencias-yalovendo)
+- 2026-11-26 | YALO_API_Administrator | commit | fix(contingencias): corregir tablas de clientes en consultas (YA-144) (feat/naidelyn/contingencias-yalovendo)
+- 2026-11-26 | YaloConsole | commit | feat(bitacoras): describir eventos de pedido en lenguaje claro (YA-143) (fix/naidelyn/contingencias-yalovendo)
