@@ -36,3 +36,4 @@
 - [CPA overflow INTEGER clientid](bug-cpa-integer-overflow-clientid.md) — empresa 17 con IDs ~4B explota `::integer` en procesar_ventas; fix: INTEGER→BIGINT en 5 puntos de BD + C#
 - [Cierre de caja YALO POS — arquitectura](decision-yalo-pos-cierre-caja-arquitectura.md) — flujo completo POS vs BO; 2 modos (POST legacy / PUT avanzado), mismo resultado; campos multimoneda ya en DB+API pero no en FE; feature dólares pendiente (8 cambios: BD→API→FE→impresión)
 - [Bug pedidos offline CIMA](bug-cima-pedidos-offline.md) — 3 causas raíz: GET devuelve objeto mínimo para eliminados, PUT retorna payload del cliente en vez del server, getPedidosUpdate ignora Sync=0; fix pendiente en API y FE
+- [Cierre avanzado YALO POS — hallazgos y diseño](decision-yalo-pos-cierre-avanzado-diseno.md) — fondo apertura no entra al esperado (sobrante siempre = fondo); diseño falta diferencia por método + fondo; H1-H5 para Diseño, D1-D2 para dev
