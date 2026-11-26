@@ -857,3 +857,5 @@
 - 2026-11-26 | YaloConsole | commit | feat(contingencias): completar bit├ícora y edici├│n de clientes (YA-143, YA-144) (fix/naidelyn/contingencias-yalovendo)
 - 2026-11-26 | YALO_API_Administrator | commit | fix(contingencias): corregir tablas de clientes en consultas (YA-144) (feat/naidelyn/contingencias-yalovendo)
 - 2026-11-26 | YaloConsole | commit | feat(bitacoras): describir eventos de pedido en lenguaje claro (YA-143) (fix/naidelyn/contingencias-yalovendo)
+- 2026-11-26 | YALO_API_Administrator | commit | refactor(contingencias): retirar endpoints de actualizaci├│n de clientes (YA-144) (feat/naidelyn/contingencias-yalovendo)
+- 2026-11-26 | YaloConsole | commit | refactor(contingencias): retirar edici├│n de clientes de la consola (YA-144) (fix/naidelyn/contingencias-yalovendo)
