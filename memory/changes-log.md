@@ -8,6 +8,9 @@
 - 2026-11-18 | yalo fe pos | commit | feat(cierre-caja): consume denominaciones desde BD en lugar de arrays hardcodeados
 - 2026-11-18 | yalo fe pos | commit | feat(pagos): agrega soporte Efectivo EUR en pantalla de métodos y cobro
 - 2026-11-18 | yalo bo | commit | fix(metodos-pago): corrige creación y orden de Efectivo secundario en BO
+- 2026-11-27 | yalo-api-stripe | commit | fix(prorroga): limitar días de trial y exigir agente/motivo (COBRO-159)
+- 2026-11-27 | yalo-api-stripe | commit | fix(correlativo): bloquear fila con SELECT FOR UPDATE al generar número de factura (COBRO-162)
+- 2026-11-27 | yalo-api-stripe | commit | fix(sp-validacion): excluir active del caso vencido por ciclo (COBRO-163)
 - 2026-11-26 | yalo trackeo | commit | feat(qa): centraliza notificaciones de Slack al canal fijo C0CMD9KAUVA
 - 2026-11-18 | yalo bo api | commit | fix(multimoneda): auto-crea Efectivo EUR copiando campos del Efectivo primario
 - 2026-11-23 | yalo-trackeo | commit | feat(equipo): límite diario de tareas por rol, budget de horas y roles al invitar
