@@ -101,6 +101,7 @@
 - 2026-10-19 | yalo console api | commit | feat(pagos-parciales): implementa flujo de acumulaciÃ³n de comprobantes para suscripciones
 - 2026-10-17 | yalo console api | feat | OCR recibos transferencia: AwsTextractService (S3 upload + polling GetExpenseAnalysis), endpoint POST /organizations/ocr-receipt (JWT, sharp PNG, banco+cuenta query params), DTOs + helpers de validaciÃ³n, script SQL para systemrootconfig(terminosClaveValidarRecibo). Fix: Blocks en GetExpenseAnalysis vienen en ExpenseDocument.Blocks no a nivel raÃ­z. Credenciales AWS vienen de Secrets Manager secreto yalocore/keys (igual que bo api).
 - 2026-10-17 | yalo console fe | feat | OCR disparado bidireccional: ngOnInit subscribe a cambios de banco + fileUpload subscribe a cambios de imagen â€” OCR se ejecuta cuando ambos valores estÃ¡n presentes (bank selected + file loaded). Imports: `distinctUntilChanged` agregado a RxJS operators para evitar emisiones duplicadas en confirm-payment.component.ts. Cambios compilados sin errores; ng serve reloading automÃ¡ticamente.
+- 2026-11-27 | yalo stripe | commit | feat(webhook): agrega verificación de firma Stripe en endpoint de entrada
 
 ## Session 0b465d39-b776-4e81-a1a8-6aefaa6c0645
 
