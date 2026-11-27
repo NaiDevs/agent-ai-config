@@ -15,6 +15,7 @@
 - 2026-11-27 | yalo-api-stripe | commit | feat(alerta-factura): notifica en Slack cuando factura fiscal no se emite tras pago (COBRO-165)
 - 2026-11-27 | yalo-api-stripe | commit | feat(diagnostico): agrega endpoint de diagnóstico de suscripción por org (COBRO-166)
 - 2026-11-27 | yalo-api-stripe | commit | fix(cancelacion): omitir alerta y bitacora si hay prorroga activa al eliminar suscripcion (COBRO-167)
+- 2026-11-27 | yalo bo api | commit | fix(facturas): proteger endpoints de modificacion con [Authorize] y leer correo/rol del JWT (COBRO-161)
 - 2026-11-26 | yalo trackeo | commit | feat(qa): centraliza notificaciones de Slack al canal fijo C0CMD9KAUVA
 - 2026-11-18 | yalo bo api | commit | fix(multimoneda): auto-crea Efectivo EUR copiando campos del Efectivo primario
 - 2026-11-23 | yalo-trackeo | commit | feat(equipo): límite diario de tareas por rol, budget de horas y roles al invitar
