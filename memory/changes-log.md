@@ -880,3 +880,4 @@
 - 2026-11-26 | yalo fe pos | commit | feat(multimoneda): muestra pagos según moneda configurada (3f76e4dc0)
 - 2026-11-26 | YaloPOSBackoffice | commit | fix(cierres): ampl├¡a y ajusta vista previa del cierre (feat/naidelyn/cierres)
 - 2026-11-26 | yalo bo | commit | fix(cierres): amplía y ajusta vista previa del cierre (db5d7dcb)
+- 2026-11-28 | yalo fe pos | commit | fix(multimoneda): preserva moneda y tasa en pagos con tarjeta y edición de facturas (02d0bf786)
